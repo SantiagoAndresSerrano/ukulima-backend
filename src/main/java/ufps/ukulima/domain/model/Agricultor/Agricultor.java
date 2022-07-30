@@ -1,0 +1,190 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ufps.ukulima.domain.model.Agricultor;
+
+import ufps.ukulima.domain.model.Finca.Finca;
+import ufps.ukulima.domain.model.TipoIdentificacion;
+
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+/**
+ *
+ * @author santi
+ */
+@Entity
+@Table(name = "agricultor")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Agricultor.findAll", query = "SELECT a FROM Agricultor a"),
+    @NamedQuery(name = "Agricultor.findByIdentifiacion", query = "SELECT a FROM Agricultor a WHERE a.identifiacion = :identifiacion"),
+    @NamedQuery(name = "Agricultor.findByNombres", query = "SELECT a FROM Agricultor a WHERE a.nombres = :nombres"),
+    @NamedQuery(name = "Agricultor.findByApellidos", query = "SELECT a FROM Agricultor a WHERE a.apellidos = :apellidos"),
+    @NamedQuery(name = "Agricultor.findByTelefono", query = "SELECT a FROM Agricultor a WHERE a.telefono = :telefono"),
+    @NamedQuery(name = "Agricultor.findByFechaNacimiento", query = "SELECT a FROM Agricultor a WHERE a.fechaNacimiento = :fechaNacimiento"),
+    @NamedQuery(name = "Agricultor.findByEmail", query = "SELECT a FROM Agricultor a WHERE a.email = :email")})
+public class Agricultor implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "identifiacion")
+    private Integer identifiacion;
+    @Basic(optional = false)
+    @Column(name = "nombres")
+    private String nombres;
+    @Basic(optional = false)
+    @Column(name = "apellidos")
+    private String apellidos;
+    @Column(name = "telefono")
+    private String telefono;
+    @Basic(optional = false)
+    @Column(name = "fecha_nacimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "password")
+    private String password;
+    @Column(name = "email")
+    private String email;
+    @JoinColumn(name = "id_tipo_identificacion", referencedColumnName = "id_tipo")
+    @ManyToOne(optional = false)
+    private TipoIdentificacion idTipoIdentificacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgricultor")
+    private Collection<Finca> fincaCollection;
+
+    public Agricultor() {
+    }
+
+    public Agricultor(Integer identifiacion) {
+        this.identifiacion = identifiacion;
+    }
+
+    public Agricultor(Integer identifiacion, String nombres, String apellidos, Date fechaNacimiento, String password) {
+        this.identifiacion = identifiacion;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
+        this.password = password;
+    }
+
+    public Integer getIdentifiacion() {
+        return identifiacion;
+    }
+
+    public void setIdentifiacion(Integer identifiacion) {
+        this.identifiacion = identifiacion;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public TipoIdentificacion getIdTipoIdentificacion() {
+        return idTipoIdentificacion;
+    }
+
+    public void setIdTipoIdentificacion(TipoIdentificacion idTipoIdentificacion) {
+        this.idTipoIdentificacion = idTipoIdentificacion;
+    }
+
+    @XmlTransient
+    public Collection<Finca> getFincaCollection() {
+        return fincaCollection;
+    }
+
+    public void setFincaCollection(Collection<Finca> fincaCollection) {
+        this.fincaCollection = fincaCollection;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (identifiacion != null ? identifiacion.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Agricultor)) {
+            return false;
+        }
+        Agricultor other = (Agricultor) object;
+        if ((this.identifiacion == null && other.identifiacion != null) || (this.identifiacion != null && !this.identifiacion.equals(other.identifiacion))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ejercicios.pkgfinal.Agricultor[ identifiacion=" + identifiacion + " ]";
+    }
+    
+}

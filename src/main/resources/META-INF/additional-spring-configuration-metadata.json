@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "uribackend",
+      "type": "java.lang.String",
+      "description": "Description for uribackend."
+  }
+] }

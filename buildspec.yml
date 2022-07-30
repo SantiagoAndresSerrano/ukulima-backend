@@ -1,0 +1,11 @@
+version: 0.2
+web: java -Dfile.encoding=UTF-8 -Xms2g -Xmx2g -jar ukulima-0.0.1-SNAPSHOT.jar
+artifacts:
+  files:
+    - '**/*'
+server:
+  port: 5000
+cloud:
+  aws:
+    region:
+      static: N. Virginia
