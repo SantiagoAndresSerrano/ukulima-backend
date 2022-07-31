@@ -7,6 +7,6 @@ import java.util.List;
 public interface DistanciaSiembraService {
     public DistanciaSiembra getDistanciaSiembraById(int idDistanciaSiembra);
     public List<DistanciaSiembra> getAllDistanciaSiembra();
-    public void updateDistanciaSiembra(DistanciaSiembra distanciaSiembra);
+    public void saveDistanciaSiembra(DistanciaSiembra distanciaSiembra);
 
 }

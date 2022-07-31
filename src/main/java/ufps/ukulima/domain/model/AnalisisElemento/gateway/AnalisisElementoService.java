@@ -8,6 +8,6 @@ public interface AnalisisElementoService {
 
     public AnalisisElemento getAnalisisElementoById(int id);
     public List<AnalisisElemento> getAllAnalisisElemento();
-    public void updateAnalisisElemento(AnalisisElemento analisisElemento);
+    public void saveAnalisisElemento(AnalisisElemento analisisElemento);
 
 }

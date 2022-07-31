@@ -8,7 +8,7 @@ import java.util.List;
 public interface CorregimientoService {
     public Corregimiento getCorregimientoById(int idCorregimiento);
     public List<Corregimiento> getAllCorregimiento();
-    public void updateCorregimiento(Corregimiento corregimiento);
+    public void saveCorregimiento(Corregimiento corregimiento);
     public List<Finca> getAllFinca(Corregimiento corregimiento);
 
 }

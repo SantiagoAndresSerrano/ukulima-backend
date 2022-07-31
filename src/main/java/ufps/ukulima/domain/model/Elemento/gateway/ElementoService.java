@@ -7,5 +7,5 @@ import java.util.List;
 public interface ElementoService {
     public Elemento getElementoById(int idElemento);
     public List<Elemento> getAllElemento();
-    public void updateElemento(Elemento elemento);
+    public void saveElemento(Elemento elemento);
 }

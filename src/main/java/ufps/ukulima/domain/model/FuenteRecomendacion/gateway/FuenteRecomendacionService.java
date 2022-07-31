@@ -7,7 +7,7 @@ import java.util.List;
 public interface FuenteRecomendacionService {
     public FuenteRecomendacion getFuenteRecomendacionById(int idFuenteRecomendacion);
     public List<FuenteRecomendacion> getAllFuenteRecomendacion();
-    public void updateFuenteRecomendacion(FuenteRecomendacion FuenteRecomendacion);
+    public void saveFuenteRecomendacion(FuenteRecomendacion FuenteRecomendacion);
     public void deleteFuenteRecomendacion(FuenteRecomendacion FuenteRecomendacion);
 
 }

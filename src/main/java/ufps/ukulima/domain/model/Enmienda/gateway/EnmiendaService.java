@@ -7,7 +7,7 @@ import java.util.List;
 public interface EnmiendaService {
     public Enmienda getEnmiendaById(int idEnmienda);
     public List<Enmienda> getAllEnmienda();
-    public void updateEnmienda(Enmienda Enmienda);
+    public void saveEnmienda(Enmienda Enmienda);
     public void disableEnmienda(Enmienda Enmienda);
 
 }

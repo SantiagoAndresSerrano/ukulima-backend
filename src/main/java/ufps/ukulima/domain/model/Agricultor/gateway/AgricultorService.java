@@ -9,6 +9,6 @@ public interface AgricultorService {
     public Agricultor getAgricultorByEmail(String email);
     public Agricultor getAgricultorByTelefono(String telefono);
     public List<Agricultor> getAllAgricultor();
-    public void updateAgricultor(Agricultor agricultor);
+    public void saveAgricultor(Agricultor agricultor);
 
 }

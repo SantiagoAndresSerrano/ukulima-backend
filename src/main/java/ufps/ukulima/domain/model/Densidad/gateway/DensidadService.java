@@ -7,5 +7,5 @@ import java.util.List;
 public interface DensidadService {
     public Densidad getDensidadById(int idDensidad);
     public List<Densidad> getAllDensidad();
-    public void updateDensidad(Densidad densidad);
+    public void saveDensidad(Densidad densidad);
 }

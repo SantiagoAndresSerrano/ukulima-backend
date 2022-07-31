@@ -2,6 +2,7 @@ package ufps.ukulima.infrastructure.driven_adapters.jpa.AbonoOrganicoRecomendaci
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.gateway.AbonoOrganicoRecomendacionService;
 
@@ -14,17 +15,20 @@ public class AbonoOrganicoRecomendacionServiceImp implements AbonoOrganicoRecome
     AbonoOrganicoRecomendacionRepository abonoOrganicoRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public AbonoOrganicoRecomendacion getAbonoOrganicoRecomendacionById(int id) {
         return abonoOrganicoRepository.getById(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<AbonoOrganicoRecomendacion> getAllAbonoOrganicoRecomendacion() {
         return abonoOrganicoRepository.findAll();
     }
 
     @Override
-    public void updateAbonoOrganicoRecomendacion(AbonoOrganicoRecomendacion abonoOrganico) {
+    @Transactional
+    public void saveAbonoOrganicoRecomendacion(AbonoOrganicoRecomendacion abonoOrganico) {
         abonoOrganicoRepository.save(abonoOrganico);
     }
 }

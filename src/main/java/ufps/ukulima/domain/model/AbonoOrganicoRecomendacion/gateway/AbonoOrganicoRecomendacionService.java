@@ -8,6 +8,6 @@ public interface AbonoOrganicoRecomendacionService {
 
     public AbonoOrganicoRecomendacion getAbonoOrganicoRecomendacionById(int id);
     public List<AbonoOrganicoRecomendacion> getAllAbonoOrganicoRecomendacion();
-    public void updateAbonoOrganicoRecomendacion(AbonoOrganicoRecomendacion abonoOrganico);
+    public void saveAbonoOrganicoRecomendacion(AbonoOrganicoRecomendacion abonoOrganico);
 
 }
