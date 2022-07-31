@@ -23,7 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ufps.ukulima.config.Spring.security.jwt.JwtEntryPoint;
 import ufps.ukulima.config.Spring.security.jwt.JwtTokenFilter;
-import ufps.ukulima.config.Spring.security.servicio.UserDetailServiceImp;
+import ufps.ukulima.config.Spring.security.service.UserDetailServiceImp;
 
 @Configuration
 @EnableWebSecurity

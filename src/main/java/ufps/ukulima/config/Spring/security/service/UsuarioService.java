@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufps.ukulima.security.servicio;
+package ufps.ukulima.config.Spring.security.service;
 
 /**
  *
@@ -14,8 +14,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ufps.ukulima.security.dao.UsuarioRepository;
-import ufps.ukulima.security.model.Usuario;
+import ufps.ukulima.config.Spring.security.repository.UsuarioRepository;
+import ufps.ukulima.config.Spring.security.model.Usuario;
 
 import java.util.Optional;
 
@@ -34,7 +34,7 @@ public class UsuarioService {
     }
 
     public Usuario findByConfirmationToken(String token){ return usuarioRepository.findUsuarioByConfirmationToken(token);}
-    public Usuario findByResetPassword(String token){ return usuarioRepository.encontrarUsuarioPorToken(token);}
+//    public Usuario findByResetPassword(String token){ return usuarioRepository.encontrarUsuarioPorToken(token);}
     public boolean existsByEmail(String email){
         return usuarioRepository.existsByEmail(email);
     }

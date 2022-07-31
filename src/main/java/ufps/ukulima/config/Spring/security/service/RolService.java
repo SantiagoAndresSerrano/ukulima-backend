@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufps.ukulima.config.Spring.security.servicio;
+package ufps.ukulima.config.Spring.security.service;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ufps.ukulima.config.Spring.security.dao.RolRepository;
+import ufps.ukulima.config.Spring.security.repository.RolRepository;
 import ufps.ukulima.config.Spring.security.model.Rol;
 
 import java.util.Optional;

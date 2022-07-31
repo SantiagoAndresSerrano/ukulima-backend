@@ -16,7 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ufps.ukulima.config.Spring.security.servicio.UserDetailServiceImp;
+import ufps.ukulima.config.Spring.security.service.UserDetailServiceImp;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

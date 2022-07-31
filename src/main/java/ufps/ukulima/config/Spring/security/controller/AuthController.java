@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufps.ukulima.config.Spring.security.controlador;
+package ufps.ukulima.config.Spring.security.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -28,8 +28,8 @@ import ufps.ukulima.config.Spring.security.dto.NuevoUsuario;
 import ufps.ukulima.config.Spring.security.jwt.JwtProvider;
 import ufps.ukulima.config.Spring.security.model.Rol;
 import ufps.ukulima.config.Spring.security.model.Usuario;
-import ufps.ukulima.config.Spring.security.servicio.RolService;
-import ufps.ukulima.config.Spring.security.servicio.UsuarioService;
+import ufps.ukulima.config.Spring.security.service.RolService;
+import ufps.ukulima.config.Spring.security.service.UsuarioService;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
