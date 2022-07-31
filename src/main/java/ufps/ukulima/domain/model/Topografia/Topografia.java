@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufps.ukulima.domain.model.Enmienda;
+package ufps.ukulima.domain.model.Topografia;
 
-import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
+import ufps.ukulima.domain.model.Cultivo.Cultivo;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -13,8 +13,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,34 +26,33 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author santi
  */
 @Entity
-@Table(name = "enmienda")
+@Table(name = "topografia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Enmienda.findAll", query = "SELECT e FROM Enmienda e"),
-    @NamedQuery(name = "Enmienda.findById", query = "SELECT e FROM Enmienda e WHERE e.id = :id"),
-    @NamedQuery(name = "Enmienda.findByDescripcion", query = "SELECT e FROM Enmienda e WHERE e.descripcion = :descripcion")})
-public class Enmienda implements Serializable {
+    @NamedQuery(name = "Topografia.findAll", query = "SELECT t FROM Topografia t"),
+    @NamedQuery(name = "Topografia.findById", query = "SELECT t FROM Topografia t WHERE t.id = :id"),
+    @NamedQuery(name = "Topografia.findByDescripcion", query = "SELECT t FROM Topografia t WHERE t.descripcion = :descripcion")})
+public class Topografia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEnmienda")
-    private Collection<Recomendacion> recomendacionCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTopografia")
+    private Collection<Cultivo> cultivoCollection;
 
-    public Enmienda() {
+    public Topografia() {
     }
 
-    public Enmienda(Integer id) {
+    public Topografia(Integer id) {
         this.id = id;
     }
 
-    public Enmienda(Integer id, String descripcion) {
+    public Topografia(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
@@ -77,12 +74,12 @@ public class Enmienda implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Recomendacion> getRecomendacionCollection() {
-        return recomendacionCollection;
+    public Collection<Cultivo> getCultivoCollection() {
+        return cultivoCollection;
     }
 
-    public void setRecomendacionCollection(Collection<Recomendacion> recomendacionCollection) {
-        this.recomendacionCollection = recomendacionCollection;
+    public void setCultivoCollection(Collection<Cultivo> cultivoCollection) {
+        this.cultivoCollection = cultivoCollection;
     }
 
     @Override
@@ -95,10 +92,10 @@ public class Enmienda implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Enmienda)) {
+        if (!(object instanceof Topografia)) {
             return false;
         }
-        Enmienda other = (Enmienda) object;
+        Topografia other = (Topografia) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -107,7 +104,7 @@ public class Enmienda implements Serializable {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.Enmienda[ id=" + id + " ]";
+        return "ejercicios.pkgfinal.Topografia[ id=" + id + " ]";
     }
     
 }

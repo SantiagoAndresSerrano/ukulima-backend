@@ -10,7 +10,7 @@ import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
-import ufps.ukulima.domain.model.Recomendacion;
+import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 
 import java.io.Serializable;
 import java.util.Collection;

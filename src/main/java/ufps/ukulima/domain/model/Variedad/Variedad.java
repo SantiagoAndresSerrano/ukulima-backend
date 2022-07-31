@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufps.ukulima.domain.model.Enmienda;
+package ufps.ukulima.domain.model.Variedad;
 
-import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
+import ufps.ukulima.domain.model.Cultivo.Cultivo;
+import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -16,6 +17,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,13 +31,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author santi
  */
 @Entity
-@Table(name = "enmienda")
+@Table(name = "variedad")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Enmienda.findAll", query = "SELECT e FROM Enmienda e"),
-    @NamedQuery(name = "Enmienda.findById", query = "SELECT e FROM Enmienda e WHERE e.id = :id"),
-    @NamedQuery(name = "Enmienda.findByDescripcion", query = "SELECT e FROM Enmienda e WHERE e.descripcion = :descripcion")})
-public class Enmienda implements Serializable {
+    @NamedQuery(name = "Variedad.findAll", query = "SELECT v FROM Variedad v"),
+    @NamedQuery(name = "Variedad.findById", query = "SELECT v FROM Variedad v WHERE v.id = :id"),
+    @NamedQuery(name = "Variedad.findByDescripcion", query = "SELECT v FROM Variedad v WHERE v.descripcion = :descripcion")})
+public class Variedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,17 +48,20 @@ public class Enmienda implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEnmienda")
-    private Collection<Recomendacion> recomendacionCollection;
+    @JoinColumn(name = "id_tipo_cultivo", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private TipoCultivo idTipoCultivo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVariedad")
+    private Collection<Cultivo> cultivoCollection;
 
-    public Enmienda() {
+    public Variedad() {
     }
 
-    public Enmienda(Integer id) {
+    public Variedad(Integer id) {
         this.id = id;
     }
 
-    public Enmienda(Integer id, String descripcion) {
+    public Variedad(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
@@ -76,13 +82,21 @@ public class Enmienda implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<Recomendacion> getRecomendacionCollection() {
-        return recomendacionCollection;
+    public TipoCultivo getIdTipoCultivo() {
+        return idTipoCultivo;
     }
 
-    public void setRecomendacionCollection(Collection<Recomendacion> recomendacionCollection) {
-        this.recomendacionCollection = recomendacionCollection;
+    public void setIdTipoCultivo(TipoCultivo idTipoCultivo) {
+        this.idTipoCultivo = idTipoCultivo;
+    }
+
+    @XmlTransient
+    public Collection<Cultivo> getCultivoCollection() {
+        return cultivoCollection;
+    }
+
+    public void setCultivoCollection(Collection<Cultivo> cultivoCollection) {
+        this.cultivoCollection = cultivoCollection;
     }
 
     @Override
@@ -95,10 +109,10 @@ public class Enmienda implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Enmienda)) {
+        if (!(object instanceof Variedad)) {
             return false;
         }
-        Enmienda other = (Enmienda) object;
+        Variedad other = (Variedad) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -107,7 +121,7 @@ public class Enmienda implements Serializable {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.Enmienda[ id=" + id + " ]";
+        return "ejercicios.pkgfinal.Variedad[ id=" + id + " ]";
     }
     
 }

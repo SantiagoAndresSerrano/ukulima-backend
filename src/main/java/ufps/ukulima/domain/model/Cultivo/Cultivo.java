@@ -5,11 +5,12 @@
  */
 package ufps.ukulima.domain.model.Cultivo;
 
-import ufps.ukulima.domain.model.*;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.DistanciaSiembra.DistanciaSiembra;
 import ufps.ukulima.domain.model.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.model.Finca.Finca;
+import ufps.ukulima.domain.model.Topografia.Topografia;
+import ufps.ukulima.domain.model.Variedad.Variedad;
 
 import java.io.Serializable;
 import java.util.Collection;

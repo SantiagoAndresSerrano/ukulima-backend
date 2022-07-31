@@ -6,7 +6,7 @@
 package ufps.ukulima.domain.model.AbonoOrganicoRecomendacion;
 
 import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
-import ufps.ukulima.domain.model.Recomendacion;
+import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

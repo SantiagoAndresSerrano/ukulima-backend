@@ -9,7 +9,7 @@ import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Municipio.Municipio;
-import ufps.ukulima.domain.model.Vereda;
+import ufps.ukulima.domain.model.Vereda.Vereda;
 
 import java.io.Serializable;
 import java.util.Collection;

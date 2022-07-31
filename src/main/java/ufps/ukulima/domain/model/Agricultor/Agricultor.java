@@ -6,7 +6,7 @@
 package ufps.ukulima.domain.model.Agricultor;
 
 import ufps.ukulima.domain.model.Finca.Finca;
-import ufps.ukulima.domain.model.TipoIdentificacion;
+import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -44,7 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Agricultor.findByFechaNacimiento", query = "SELECT a FROM Agricultor a WHERE a.fechaNacimiento = :fechaNacimiento"),
     @NamedQuery(name = "Agricultor.findByEmail", query = "SELECT a FROM Agricultor a WHERE a.email = :email")})
 public class Agricultor implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

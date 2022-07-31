@@ -7,7 +7,7 @@ package ufps.ukulima.domain.model.FuenteRecomendacion;
 
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Fuente.Fuente;
-import ufps.ukulima.domain.model.Recomendacion;
+import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

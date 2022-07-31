@@ -17,6 +17,7 @@
         <datasource-mapping>
           <factory-entry name="ahp" />
           <factory-entry name="entityManagerFactory" />
+          <factory-entry name="ukulima" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
