@@ -8,7 +8,7 @@ import java.util.List;
 public class RecomendacionServiceImp implements RecomendacionService {
     @Override
     public void saveRecomendacion(Recomendacion recomendacion) {
-        
+
     }
 
     @Override
