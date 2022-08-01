@@ -83,17 +83,10 @@ public class AuthController {
         usuario.setFecha(new Date());
         usuario.setCelular(nuevoUsuario.getCelular());
         usuario.setEmail(nuevoUsuario.getEmail());
-        usuario.setEmpresa(nuevoUsuario.getEmpresa());
         usuario.setNombre(nuevoUsuario.getNombre());
-        usuario.setProfesion(nuevoUsuario.getProfesion());
-        usuario.setEmail(nuevoUsuario.getEmail());
         usuario.setConfirmationToken(UUID.randomUUID().toString());
 
-//       Decisor decisor = decisorService.buscarPorEmail(nuevoUsuario.getEmail()); // Busco si antes de ser usuario participo como decisor
-//        if(decisor!=null){
-//            usuario.setDecisor(decisor);
-//        }
-//
+
 //        usuarioService.guardar(usuario);
 //        emailServiceImp.enviarEmail("Confirmación de cuenta ",
 //                "<!DOCTYPE html>\n" +

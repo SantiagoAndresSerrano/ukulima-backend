@@ -18,14 +18,14 @@ public class NuevoUsuario {
 
     @Email
     private String email;
+
     @NotBlank
     private String password;
     private Set<String> roles = new HashSet<>();
 
     private String celular;
     private String nombre;
-    private String empresa;
-    private String profesion;
+
 
     public String getPassword() {
         return password;
@@ -33,22 +33,6 @@ public class NuevoUsuario {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getProfesion() {
-        return profesion;
-    }
-
-    public void setProfesion(String profesion) {
-        this.profesion = profesion;
-    }
-
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
     }
 
     public String getNombre() {

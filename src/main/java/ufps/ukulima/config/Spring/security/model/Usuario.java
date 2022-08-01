@@ -36,16 +36,6 @@ public class Usuario implements Serializable {
     private String nombre;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "empresa")
-    private String empresa;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "profesion")
-    private String profesion;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
@@ -119,22 +109,6 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getProfesion() {
-        return profesion;
-    }
-
-    public void setProfesion(String profesion) {
-        this.profesion = profesion;
-    }
-
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
     }
 
     public String getNombre() {
