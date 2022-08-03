@@ -17,12 +17,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ufps.ukulima.config.Spring.security.model.Usuario;
 import ufps.ukulima.config.Spring.security.model.UsuarioPrincipal;
+import ufps.ukulima.config.Spring.security.service.imp.UsuarioServiceImp;
+import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
 
 @Service
 public class UserDetailServiceImp implements UserDetailsService {
 
     @Autowired
-    UsuarioService usuarioService;
+    UsuarioServiceImp usuarioService;
+
+    @Autowired
+    AgricultorService agricultorService;
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException {

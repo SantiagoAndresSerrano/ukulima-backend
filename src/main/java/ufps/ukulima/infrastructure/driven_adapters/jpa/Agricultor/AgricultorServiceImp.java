@@ -30,10 +30,22 @@ public class AgricultorServiceImp implements AgricultorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Agricultor getAgricultorByTelefono(String telefono) {
-        return agricultorRepository.findAgricultorByTelefono(telefono);
+    public Agricultor getAgricultorByPhone(String phone) {
+        return agricultorRepository.findAgricultorByTelefono(phone);
+
     }
+
+
+    @Override
+    public boolean existByEmail(String email) {
+        return agricultorRepository.existsAgricultorByEmail(email);
+    }
+
+    @Override
+    public boolean existByPhone(String email) {
+        return agricultorRepository.existsAgricultorByEmail(email);
+    }
+
 
     @Override
     @Transactional(readOnly = true)

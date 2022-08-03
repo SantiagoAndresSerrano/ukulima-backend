@@ -8,5 +8,8 @@ public interface AgricultorRepository extends JpaRepository<Agricultor, Integer>
 
     public Agricultor findAgricultorByEmail(String email);
     public Agricultor findAgricultorByTelefono(String telefono);
+    public boolean existsAgricultorByEmail(String email);
+    public boolean existsAgricultorByTelefono(String telefono);
+
 
 }
