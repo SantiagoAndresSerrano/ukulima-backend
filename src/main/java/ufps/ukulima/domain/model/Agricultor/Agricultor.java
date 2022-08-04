@@ -183,7 +183,15 @@ public class Agricultor implements Serializable {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.Agricultor[ identifiacion=" + identifiacion + " ]";
+        return "Agricultor{" +
+                "identifiacion=" + identifiacion +
+                ", nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", idTipoIdentificacion=" + idTipoIdentificacion +
+                '}';
     }
-    
 }

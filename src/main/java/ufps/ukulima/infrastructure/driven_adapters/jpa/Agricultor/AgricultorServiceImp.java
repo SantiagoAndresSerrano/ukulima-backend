@@ -35,6 +35,16 @@ public class AgricultorServiceImp implements AgricultorService {
 
     }
 
+    @Override
+    public Agricultor getAgricultorByPhoneOrEmail(String phone) {
+        return agricultorRepository.findAgricultorByTelefonoOrEmail(phone);
+    }
+
+    @Override
+    public boolean existById(int id) {
+        return agricultorRepository.existsAgricultorByIdentifiacion(id);
+    }
+
 
     @Override
     public boolean existByEmail(String email) {
@@ -54,7 +64,7 @@ public class AgricultorServiceImp implements AgricultorService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void saveAgricultor(Agricultor agricultor) {
         agricultorRepository.save(agricultor);
     }

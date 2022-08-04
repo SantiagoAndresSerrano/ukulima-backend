@@ -32,13 +32,17 @@ public class UsuarioServiceImp implements UsuarioService {
     public Optional<Usuario> getById(int id){
         return usuarioRepository.findById(id);
     }
-    public Usuario findByConfirmationToken(String token){ return usuarioRepository.findUsuarioByConfirmationToken(token);}
     public boolean existsByEmail(String email){
         return usuarioRepository.existsByEmail(email);
     }
     @Transactional
     public Usuario findByEmail(String email) {
         return usuarioRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public Usuario findByEmailOrPhone(String email) {
+        return null;
     }
 
     @Transactional

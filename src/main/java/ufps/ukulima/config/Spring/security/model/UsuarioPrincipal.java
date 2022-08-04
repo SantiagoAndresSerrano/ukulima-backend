@@ -12,19 +12,21 @@ package ufps.ukulima.config.Spring.security.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ufps.ukulima.domain.model.Agricultor.Agricultor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UsuarioPrincipal implements UserDetails {
     
-    private String email;
+    private String emailOrPhone;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
     public UsuarioPrincipal(String email, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.email = email;
+        this.emailOrPhone = email;
         this.password = password;
         this.authorities = authorities;
     }
@@ -35,6 +37,13 @@ public class UsuarioPrincipal implements UserDetails {
                         rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors.toList()
                     );
         return new UsuarioPrincipal(usuario.getEmail(), usuario.getPassword(), authorities);
+    }
+
+    public static UsuarioPrincipal build(Agricultor agricultor , String emailOrTelefono){
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        return new UsuarioPrincipal(emailOrTelefono, agricultor.getPassword(), authorities);
     }
 
     @Override
@@ -49,7 +58,7 @@ public class UsuarioPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return emailOrPhone;
     }
 
     @Override

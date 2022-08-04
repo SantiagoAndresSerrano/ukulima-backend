@@ -25,6 +25,7 @@ import ufps.ukulima.config.Spring.email.service.imp.EmailServiceImp;
 import ufps.ukulima.config.Spring.security.dto.*;
 import ufps.ukulima.config.Spring.security.jwt.JwtProvider;
 import ufps.ukulima.config.Spring.security.model.Rol;
+//import ufps.ukulima.config.Spring.security.model.Usuario;
 import ufps.ukulima.config.Spring.security.model.Usuario;
 import ufps.ukulima.config.Spring.security.service.RolService;
 import ufps.ukulima.config.Spring.security.service.UsuarioService;
@@ -41,7 +42,7 @@ import java.util.*;
  * @author santi
  */
 @RestController
-@RequestMapping(value="/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
 @Slf4j
 public class AuthController {
@@ -70,7 +71,7 @@ public class AuthController {
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) throws MessagingException {
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
-        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
+        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()) || agricultorService.existByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
 
         Usuario usuario =
@@ -83,12 +84,9 @@ public class AuthController {
         roles.add(rolService.getByRolNombre(Rol.RolNombre.ROLE_ADMIN).get());
 
         usuario.setRoles(roles);
-        usuario.setFecha(new Date());
-        usuario.setCelular(nuevoUsuario.getCelular());
         usuario.setEmail(nuevoUsuario.getEmail());
-        usuario.setNombre(nuevoUsuario.getNombre());
-        usuario.setConfirmationToken(UUID.randomUUID().toString());
-
+        usuario.setNombres(nuevoUsuario.getNombres());
+        usuario.setApellidos(nuevoUsuario.getApellidos());
 
         usuarioService.guardar(usuario);
         return ResponseEntity.ok(usuario);
@@ -101,9 +99,11 @@ public class AuthController {
 
         Agricultor agricultor = new Agricultor();
 
-        if (nuevoAgricultor.getEmail()!=null){
-            if(agricultorService.existByEmail(nuevoAgricultor.getEmail()))
+        if (nuevoAgricultor.getEmail()!=null){                          //TODO: || usuarioService.existsByEmail(nuevoAgricultor.getEmail()) pendiente
+            if(agricultorService.existByEmail(nuevoAgricultor.getEmail()) )
                 return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
+            if(agricultorService.existById(nuevoAgricultor.getIdentificacion()) )
+                return new ResponseEntity(new Mensaje("esa identificacion ya existe"), HttpStatus.BAD_REQUEST);
             agricultor.setEmail(nuevoAgricultor.getEmail());
 
         }else{
@@ -112,12 +112,13 @@ public class AuthController {
             agricultor.setTelefono(agricultor.getTelefono());
         }
 
-
+        agricultor.setIdentifiacion(nuevoAgricultor.getIdentificacion());
+        agricultor.setIdTipoIdentificacion(nuevoAgricultor.getIdTipoIdentificacion());
         agricultor.setApellidos(nuevoAgricultor.getApellidos());
         agricultor.setNombres(nuevoAgricultor.getNombres());
         agricultor.setFechaNacimiento(nuevoAgricultor.getFechaNacimiento());
         agricultor.setIdTipoIdentificacion(nuevoAgricultor.getIdTipoIdentificacion());
-        agricultor.setPassword(nuevoAgricultor.getPassword());
+        agricultor.setPassword(passwordEncoder.encode(nuevoAgricultor.getPassword()));
 
         agricultorService.saveAgricultor(agricultor);
         return ResponseEntity.ok(agricultor);
@@ -287,49 +288,39 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
+        if(bindingResult.hasErrors()){
             return new ResponseEntity(new Mensaje("campos mal puestos"), HttpStatus.BAD_REQUEST);
-
-        if(loginUsuario.getPhone()!=null){
-            Agricultor agricultor = usuarioService.getByEmail(loginUsuario.getEmail()).orElse(null);
-
-            if(usuario == null){
-                return new ResponseEntity(new Mensaje("El nombre de usuario no existe"), HttpStatus.NOT_FOUND);
-            }
-
-            if(!usuario.isEstado()){
-                return new ResponseEntity(new Mensaje("El usuario se encuentra deshabilitado"), HttpStatus.NOT_FOUND);
-            }
-
-            Authentication authentication =
-                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), loginUsuario.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            String jwt = jwtProvider.generateToken(authentication);
-            UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-            JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
-
-            return new ResponseEntity(jwtDto, HttpStatus.OK);
-        }else{
-            Usuario usuario = usuarioService.getByEmail(loginUsuario.getEmail()).orElse(null);
-
-            if(usuario == null){
-                return new ResponseEntity(new Mensaje("El nombre de usuario no existe"), HttpStatus.NOT_FOUND);
-            }
-
-            if(!usuario.isEstado()){
-                return new ResponseEntity(new Mensaje("El usuario se encuentra deshabilitado"), HttpStatus.NOT_FOUND);
-            }
-
-            Authentication authentication =
-                    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), loginUsuario.getPassword()));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            String jwt = jwtProvider.generateToken(authentication);
-            UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-            JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
-
-            return new ResponseEntity(jwtDto, HttpStatus.OK);
         }
+
+        Usuario usuario = usuarioService.getByEmail(loginUsuario.getEmailOrPhone()).orElse(null);
+
+        if(usuario == null){
+            Agricultor agricultor= agricultorService.getAgricultorByPhoneOrEmail(loginUsuario.getEmailOrPhone());
+
+            if(agricultor!=null){
+                Authentication authentication =
+                        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getEmailOrPhone(), loginUsuario.getPassword()));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                String jwt = jwtProvider.generateToken(authentication);
+                UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+                JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+
+                return new ResponseEntity(jwtDto, HttpStatus.OK);
+            }else{
+                return new ResponseEntity(new Mensaje("No existe usuario ni agricultor asociado a "+loginUsuario.getEmailOrPhone()),
+                        HttpStatus.NOT_FOUND);
+            }
+        }
+
+
+        Authentication authentication =
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), loginUsuario.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtProvider.generateToken(authentication);
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+
+        return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 }

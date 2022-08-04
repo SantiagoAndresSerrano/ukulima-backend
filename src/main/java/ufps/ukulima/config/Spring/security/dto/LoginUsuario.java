@@ -12,25 +12,16 @@ package ufps.ukulima.config.Spring.security.dto;
 import javax.validation.constraints.NotBlank;
 
 public class LoginUsuario {
-    private String email;
-    private String phone;
+    private String emailOrPhone;
     @NotBlank
     private String password;
 
-    public String getPhone() {
-        return phone;
+    public String getEmailOrPhone() {
+        return emailOrPhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailOrPhone(String email) {
+        this.emailOrPhone = email;
     }
 
     public String getPassword() {

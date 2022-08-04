@@ -11,6 +11,9 @@ public interface UsuarioService {
 
     public Usuario findByEmail(String email);
 
+    public Usuario findByEmailOrPhone(String email);
+
+
     public Usuario guardar(Usuario usuario);
 
     public Optional<Usuario> encontrar(int id);
