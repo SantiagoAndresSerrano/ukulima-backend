@@ -7,6 +7,7 @@ import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomen
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.gateway.AbonoOrganicoRecomendacionService;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.AgricultorEntityMapper;
 
 import java.util.List;
 
@@ -16,11 +17,14 @@ public class AgricultorServiceImp implements AgricultorService {
     @Autowired
     AgricultorRepository agricultorRepository;
 
+    @Autowired
+    AgricultorEntityMapper agricultorEntityMapper;
+
 
     @Override
     @Transactional(readOnly = true)
     public Agricultor getAgricultorById(int id) {
-        return agricultorRepository.getById(id);
+        return agricultorEntityMapper.toDomain(agricultorRepository.getById(id));
     }
 
     @Override
@@ -60,12 +64,12 @@ public class AgricultorServiceImp implements AgricultorService {
     @Override
     @Transactional(readOnly = true)
     public List<Agricultor> getAllAgricultor() {
-        return agricultorRepository.findAll();
+        return agricultorEntityMapper.AgricultorToDomain(agricultorRepository.findAll());
     }
 
     @Override
     @Transactional
     public void saveAgricultor(Agricultor agricultor) {
-        agricultorRepository.save(agricultor);
+        agricultorRepository.save(agricultorEntityMapper.toEntity(agricultor));
     }
 }

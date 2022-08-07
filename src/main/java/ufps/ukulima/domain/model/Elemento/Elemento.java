@@ -8,51 +8,19 @@ package ufps.ukulima.domain.model.Elemento;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "elemento")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Elemento.findAll", query = "SELECT e FROM Elemento e"),
-    @NamedQuery(name = "Elemento.findById", query = "SELECT e FROM Elemento e WHERE e.id = :id"),
-    @NamedQuery(name = "Elemento.findByNombre", query = "SELECT e FROM Elemento e WHERE e.nombre = :nombre"),
-    @NamedQuery(name = "Elemento.findByUnidad", query = "SELECT e FROM Elemento e WHERE e.unidad = :unidad")})
-public class Elemento implements Serializable {
+public class Elemento  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "nombre")
     private String nombre;
-    @Basic(optional = false)
-    @Column(name = "unidad")
     private String unidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idElemento")
     private Collection<AnalisisElemento> analisisElementoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idElemento")
     private Collection<FuenteRecomendacion> fuenteRecomendacionCollection;
 
     public Elemento() {

@@ -7,45 +7,16 @@ package ufps.ukulima.domain.model.TipoCultivo;
 
 import ufps.ukulima.domain.model.Variedad.Variedad;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "tipo_cultivo")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "TipoCultivo.findAll", query = "SELECT t FROM TipoCultivo t"),
-    @NamedQuery(name = "TipoCultivo.findById", query = "SELECT t FROM TipoCultivo t WHERE t.id = :id"),
-    @NamedQuery(name = "TipoCultivo.findByDescripcion", query = "SELECT t FROM TipoCultivo t WHERE t.descripcion = :descripcion")})
-public class TipoCultivo implements Serializable {
+public class TipoCultivo  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoCultivo")
     private Collection<Variedad> variedadCollection;
 
     public TipoCultivo() {
@@ -76,7 +47,6 @@ public class TipoCultivo implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
     public Collection<Variedad> getVariedadCollection() {
         return variedadCollection;
     }

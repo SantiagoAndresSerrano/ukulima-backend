@@ -7,45 +7,17 @@ package ufps.ukulima.domain.model.Departamento;
 
 import ufps.ukulima.domain.model.Municipio.Municipio;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "departamento")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d"),
-    @NamedQuery(name = "Departamento.findByIdDepto", query = "SELECT d FROM Departamento d WHERE d.idDepto = :idDepto"),
-    @NamedQuery(name = "Departamento.findByNombre", query = "SELECT d FROM Departamento d WHERE d.nombre = :nombre")})
-public class Departamento implements Serializable {
+public class Departamento  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_depto")
     private Integer idDepto;
-    @Basic(optional = false)
-    @Column(name = "nombre")
     private int nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDepartamento")
     private Collection<Municipio> municipioCollection;
 
     public Departamento() {

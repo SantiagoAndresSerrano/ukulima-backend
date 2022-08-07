@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
 import ufps.ukulima.domain.model.TipoCultivo.gateway.TipoCultivoService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.CultivoEntityMapper;
+import ufps.ukulima.infrastructure.db.springdata.mapper.TipoCultivoEntityMapper;
+import ufps.ukulima.infrastructure.db.springdata.mapper.TipoIdentificacionEntityMapper;
 
 import java.util.List;
 
@@ -14,21 +17,25 @@ public class TipoCultivoServiceImp implements TipoCultivoService {
     @Autowired
     TipoCultivoRepository cultivoRepository;
 
+    @Autowired
+    TipoCultivoEntityMapper cultivoEntityMapper;
+
+
     @Override
     @Transactional
     public void saveTipoCultivo(TipoCultivo tipoCultivo) {
-        cultivoRepository.save(tipoCultivo);
+        cultivoRepository.save(cultivoEntityMapper.toEntity(tipoCultivo));
     }
 
     @Override
     @Transactional(readOnly = true)
     public TipoCultivo findTipoCultivoById(int id) {
-        return cultivoRepository.getById(id);
+        return cultivoEntityMapper.toDomain(cultivoRepository.getById(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TipoCultivo> findByAllTipoCultivo() {
-        return cultivoRepository.findAll();
+        return cultivoEntityMapper.abonosOrganicosRecomendacionToDomain(cultivoRepository.findAll());
     }
 }

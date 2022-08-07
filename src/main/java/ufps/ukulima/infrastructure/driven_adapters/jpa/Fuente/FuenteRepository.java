@@ -1,7 +1,7 @@
 package ufps.ukulima.infrastructure.driven_adapters.jpa.Fuente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ufps.ukulima.domain.model.Fuente.Fuente;
+import ufps.ukulima.infrastructure.db.springdata.entity.Fuente.FuenteEntity;
 
-public interface FuenteRepository extends JpaRepository<Fuente, Integer> {
+public interface FuenteRepository extends JpaRepository<FuenteEntity, Integer> {
 }

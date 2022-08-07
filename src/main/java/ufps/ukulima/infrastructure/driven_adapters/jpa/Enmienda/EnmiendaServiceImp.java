@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.Enmienda.gateway.EnmiendaService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.EnmiendaEntityMapper;
 
 import java.util.List;
 @Service
@@ -12,23 +13,25 @@ public class EnmiendaServiceImp implements EnmiendaService {
 
     @Autowired
     EnmiendaRepository enmiendaRepository;
+    @Autowired
+    EnmiendaEntityMapper enmiendaEntityMapper;
 
     @Override
     @Transactional(readOnly = true)
     public Enmienda getEnmiendaById(int idEnmienda) {
-        return enmiendaRepository.getById(idEnmienda);
+        return enmiendaEntityMapper.toDomain(enmiendaRepository.getById(idEnmienda));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Enmienda> getAllEnmienda() {
-        return enmiendaRepository.findAll();
+        return enmiendaEntityMapper.abonosOrganicosRecomendacionToDomain(enmiendaRepository.findAll());
     }
 
     @Override
     @Transactional
     public void saveEnmienda(Enmienda Enmienda) {
-         enmiendaRepository.save(Enmienda);
+         enmiendaRepository.save(enmiendaEntityMapper.toEntity(Enmienda));
     }
 
     @Override

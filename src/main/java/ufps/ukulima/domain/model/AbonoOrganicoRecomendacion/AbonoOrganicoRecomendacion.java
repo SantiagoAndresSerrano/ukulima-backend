@@ -8,47 +8,15 @@ package ufps.ukulima.domain.model.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "abono_organico_recomendacion")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "AbonoOrganicoRecomendacion.findAll", query = "SELECT a FROM AbonoOrganicoRecomendacion a"),
-    @NamedQuery(name = "AbonoOrganicoRecomendacion.findById", query = "SELECT a FROM AbonoOrganicoRecomendacion a WHERE a.id = :id"),
-    @NamedQuery(name = "AbonoOrganicoRecomendacion.findByCantidad", query = "SELECT a FROM AbonoOrganicoRecomendacion a WHERE a.cantidad = :cantidad")})
-public class AbonoOrganicoRecomendacion implements Serializable {
+public class AbonoOrganicoRecomendacion  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "cantidad")
     private float cantidad;
-    @JoinColumn(name = "id_abono_organico", referencedColumnName = "id")
-    @ManyToOne(optional = false)
     private AbonoOrganico idAbonoOrganico;
-    @JoinColumn(name = "id_recomendacion", referencedColumnName = "id")
-    @ManyToOne(optional = false)
     private Recomendacion idRecomendacion;
 
     public AbonoOrganicoRecomendacion() {

@@ -6,46 +6,17 @@
 package ufps.ukulima.domain.model.DistanciaSiembra;
 
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
-
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "distancia_siembra")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "DistanciaSiembra.findAll", query = "SELECT d FROM DistanciaSiembra d"),
-    @NamedQuery(name = "DistanciaSiembra.findById", query = "SELECT d FROM DistanciaSiembra d WHERE d.id = :id"),
-    @NamedQuery(name = "DistanciaSiembra.findByDescripcion", query = "SELECT d FROM DistanciaSiembra d WHERE d.descripcion = :descripcion")})
-public class DistanciaSiembra implements Serializable {
+public class DistanciaSiembra  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDistanciaSiembra")
     private Collection<Cultivo> cultivoCollection;
 
     public DistanciaSiembra() {

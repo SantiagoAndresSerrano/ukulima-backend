@@ -8,69 +8,22 @@ package ufps.ukulima.domain.model.Agricultor;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "agricultor")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Agricultor.findAll", query = "SELECT a FROM Agricultor a"),
-    @NamedQuery(name = "Agricultor.findByIdentifiacion", query = "SELECT a FROM Agricultor a WHERE a.identifiacion = :identifiacion"),
-    @NamedQuery(name = "Agricultor.findByNombres", query = "SELECT a FROM Agricultor a WHERE a.nombres = :nombres"),
-    @NamedQuery(name = "Agricultor.findByApellidos", query = "SELECT a FROM Agricultor a WHERE a.apellidos = :apellidos"),
-    @NamedQuery(name = "Agricultor.findByTelefono", query = "SELECT a FROM Agricultor a WHERE a.telefono = :telefono"),
-    @NamedQuery(name = "Agricultor.findByFechaNacimiento", query = "SELECT a FROM Agricultor a WHERE a.fechaNacimiento = :fechaNacimiento"),
-    @NamedQuery(name = "Agricultor.findByEmail", query = "SELECT a FROM Agricultor a WHERE a.email = :email")})
-public class Agricultor implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "identifiacion")
+public class Agricultor  {
     private Integer identifiacion;
-    @Basic(optional = false)
-    @Column(name = "nombres")
     private String nombres;
-    @Basic(optional = false)
-    @Column(name = "apellidos")
     private String apellidos;
-    @Column(name = "telefono")
     private String telefono;
-    @Basic(optional = false)
-    @Column(name = "fecha_nacimiento")
-    @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
-    @Basic(optional = false)
-    @Lob
-    @Column(name = "password")
     private String password;
-    @Column(name = "email")
     private String email;
-    @JoinColumn(name = "id_tipo_identificacion", referencedColumnName = "id_tipo")
-    @ManyToOne(optional = false)
     private TipoIdentificacion idTipoIdentificacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgricultor")
     private Collection<Finca> fincaCollection;
 
     public Agricultor() {
@@ -152,7 +105,6 @@ public class Agricultor implements Serializable {
         this.idTipoIdentificacion = idTipoIdentificacion;
     }
 
-    @XmlTransient
     public Collection<Finca> getFincaCollection() {
         return fincaCollection;
     }

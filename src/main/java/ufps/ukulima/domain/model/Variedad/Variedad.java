@@ -30,28 +30,11 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author santi
  */
-@Entity
-@Table(name = "variedad")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Variedad.findAll", query = "SELECT v FROM Variedad v"),
-    @NamedQuery(name = "Variedad.findById", query = "SELECT v FROM Variedad v WHERE v.id = :id"),
-    @NamedQuery(name = "Variedad.findByDescripcion", query = "SELECT v FROM Variedad v WHERE v.descripcion = :descripcion")})
-public class Variedad implements Serializable {
+public class Variedad  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "descripcion")
     private String descripcion;
-    @JoinColumn(name = "id_tipo_cultivo", referencedColumnName = "id")
-    @ManyToOne(optional = false)
     private TipoCultivo idTipoCultivo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVariedad")
     private Collection<Cultivo> cultivoCollection;
 
     public Variedad() {

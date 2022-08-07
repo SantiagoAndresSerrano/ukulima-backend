@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.gateway.AbonoOrganicoRecomendacionService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.AbonoOrganicoEntityMapper;
+import ufps.ukulima.infrastructure.db.springdata.mapper.AbonoOrganicoRecomendacionEntityMapper;
 
 import java.util.List;
 
@@ -14,21 +16,24 @@ public class AbonoOrganicoRecomendacionServiceImp implements AbonoOrganicoRecome
     @Autowired
     AbonoOrganicoRecomendacionRepository abonoOrganicoRepository;
 
+    @Autowired
+    AbonoOrganicoRecomendacionEntityMapper abonoOrganicoRecomendacionEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
     public AbonoOrganicoRecomendacion getAbonoOrganicoRecomendacionById(int id) {
-        return abonoOrganicoRepository.getById(id);
+        return abonoOrganicoRecomendacionEntityMapper.toDomain(abonoOrganicoRepository.getById(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<AbonoOrganicoRecomendacion> getAllAbonoOrganicoRecomendacion() {
-        return abonoOrganicoRepository.findAll();
+        return abonoOrganicoRecomendacionEntityMapper.abonosOrganicosRecomendacionToDomain(abonoOrganicoRepository.findAll());
     }
 
     @Override
     @Transactional
     public void saveAbonoOrganicoRecomendacion(AbonoOrganicoRecomendacion abonoOrganico) {
-        abonoOrganicoRepository.save(abonoOrganico);
+        abonoOrganicoRepository.save(abonoOrganicoRecomendacionEntityMapper.toEntity(abonoOrganico));
     }
 }

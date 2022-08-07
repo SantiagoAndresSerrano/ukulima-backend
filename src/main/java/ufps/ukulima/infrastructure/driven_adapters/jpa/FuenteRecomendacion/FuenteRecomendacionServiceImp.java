@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Fuente.gateway.FuenteService;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 import ufps.ukulima.domain.model.FuenteRecomendacion.gateway.FuenteRecomendacionService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.FuenteRecomendacionEntityMapper;
 import ufps.ukulima.infrastructure.driven_adapters.jpa.Fuente.FuenteRepository;
 
 import java.util.List;
@@ -16,22 +17,25 @@ public class FuenteRecomendacionServiceImp implements FuenteRecomendacionService
     @Autowired
     FuenteRecomendacionRepository fuenteRecomendacionRepository;
 
+    @Autowired
+    FuenteRecomendacionEntityMapper fuenteRecomendacionEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
     public FuenteRecomendacion getFuenteRecomendacionById(int idFuenteRecomendacion) {
-        return fuenteRecomendacionRepository.getById(idFuenteRecomendacion);
+        return fuenteRecomendacionEntityMapper.toDomain(fuenteRecomendacionRepository.getById(idFuenteRecomendacion));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<FuenteRecomendacion> getAllFuenteRecomendacion() {
-        return fuenteRecomendacionRepository.findAll();
+        return fuenteRecomendacionEntityMapper.abonosOrganicosRecomendacionToDomain(fuenteRecomendacionRepository.findAll());
     }
 
     @Override
     @Transactional
     public void saveFuenteRecomendacion(FuenteRecomendacion FuenteRecomendacion) {
-        fuenteRecomendacionRepository.save(FuenteRecomendacion);
+        fuenteRecomendacionRepository.save(fuenteRecomendacionEntityMapper.toEntity(FuenteRecomendacion));
     }
 
     @Override

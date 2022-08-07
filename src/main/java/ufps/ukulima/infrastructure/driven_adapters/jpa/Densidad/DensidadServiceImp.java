@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Densidad.gateway.DensidadService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.DensidadEntityMapper;
 
 import java.util.List;
 @Service
@@ -13,21 +14,24 @@ public class DensidadServiceImp implements DensidadService {
     @Autowired
     DensidadRepository densidadRepository;
 
+    @Autowired
+    DensidadEntityMapper densidadEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
     public Densidad getDensidadById(int idDensidad) {
-        return densidadRepository.getById(idDensidad);
+        return densidadEntityMapper.toDomain(densidadRepository.getById(idDensidad));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Densidad> getAllDensidad() {
-        return densidadRepository.findAll();
+        return densidadEntityMapper.abonosOrganicosRecomendacionToDomain(densidadRepository.findAll());
     }
 
     @Override
     @Transactional
     public void saveDensidad(Densidad densidad) {
-        densidadRepository.save(densidad);
+        densidadRepository.save(densidadEntityMapper.toEntity(densidad));
     }
 }

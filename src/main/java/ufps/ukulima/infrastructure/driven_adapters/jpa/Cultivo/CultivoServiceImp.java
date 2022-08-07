@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Cultivo.gateway.CultivoService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.CultivoEntityMapper;
 
 import java.util.List;
 
@@ -13,21 +14,24 @@ public class CultivoServiceImp implements CultivoService {
     @Autowired
     CultivoRepository cultivoRepository;
 
+    @Autowired
+    CultivoEntityMapper cultivoEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
     public Cultivo getCultivoById(int idCultivo) {
-        return cultivoRepository.getById(idCultivo);
+        return cultivoEntityMapper.toDomain(cultivoRepository.getById(idCultivo));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Cultivo> getAllCultivo() {
-        return cultivoRepository.findAll();
+        return cultivoEntityMapper.abonosOrganicosRecomendacionToDomain(cultivoRepository.findAll());
     }
 
     @Override
     @Transactional
     public void saveCultivo(Cultivo cultivo) {
-        cultivoRepository.save(cultivo);
+        cultivoRepository.save(cultivoEntityMapper.toEntity(cultivo));
     }
 }

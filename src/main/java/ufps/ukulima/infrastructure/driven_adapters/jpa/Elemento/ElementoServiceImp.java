@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Elemento.gateway.ElementoService;
+import ufps.ukulima.infrastructure.db.springdata.mapper.ElementoEntityMapper;
 
 import java.util.List;
 @Service
@@ -12,23 +13,24 @@ public class ElementoServiceImp implements ElementoService {
 
     @Autowired
     ElementoRepository elementoRepository;
-
+    @Autowired
+    ElementoEntityMapper elementoEntityMapper;
     @Override
     @Transactional(readOnly = true)
 
     public Elemento getElementoById(int idElemento) {
-        return elementoRepository.getById(idElemento);
+        return elementoEntityMapper.toDomain(elementoRepository.getById(idElemento));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Elemento> getAllElemento() {
-        return elementoRepository.findAll();
+        return elementoEntityMapper.abonosOrganicosRecomendacionToDomain(elementoRepository.findAll());
     }
 
     @Override
     @Transactional(readOnly = true)
     public void saveElemento(Elemento elemento) {
-        elementoRepository.save(elemento);
+        elementoRepository.save(elementoEntityMapper.toEntity(elemento));
     }
 }

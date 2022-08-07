@@ -8,45 +8,17 @@ package ufps.ukulima.domain.model.Densidad;
 
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "densidad")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Densidad.findAll", query = "SELECT d FROM Densidad d"),
-    @NamedQuery(name = "Densidad.findByIdDensidad", query = "SELECT d FROM Densidad d WHERE d.idDensidad = :idDensidad"),
-    @NamedQuery(name = "Densidad.findByValor", query = "SELECT d FROM Densidad d WHERE d.valor = :valor")})
-public class Densidad implements Serializable {
+public class Densidad  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_densidad")
     private Integer idDensidad;
-    @Basic(optional = false)
-    @Column(name = "valor")
     private float valor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDensidad")
     private Collection<AnalisisSuelo> analisisSueloCollection;
 
     public Densidad() {

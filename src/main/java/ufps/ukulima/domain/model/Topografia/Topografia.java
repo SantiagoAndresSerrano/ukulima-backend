@@ -25,24 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author santi
  */
-@Entity
-@Table(name = "topografia")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Topografia.findAll", query = "SELECT t FROM Topografia t"),
-    @NamedQuery(name = "Topografia.findById", query = "SELECT t FROM Topografia t WHERE t.id = :id"),
-    @NamedQuery(name = "Topografia.findByDescripcion", query = "SELECT t FROM Topografia t WHERE t.descripcion = :descripcion")})
-public class Topografia implements Serializable {
+public class Topografia  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTopografia")
     private Collection<Cultivo> cultivoCollection;
 
     public Topografia() {

@@ -7,45 +7,17 @@ package ufps.ukulima.domain.model.ProfundidadMuestra;
 
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "profundidad_muestra")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "ProfundidadMuestra.findAll", query = "SELECT p FROM ProfundidadMuestra p"),
-    @NamedQuery(name = "ProfundidadMuestra.findByIdProfundidadMuestra", query = "SELECT p FROM ProfundidadMuestra p WHERE p.idProfundidadMuestra = :idProfundidadMuestra"),
-    @NamedQuery(name = "ProfundidadMuestra.findByProfundidad", query = "SELECT p FROM ProfundidadMuestra p WHERE p.profundidad = :profundidad")})
-public class ProfundidadMuestra implements Serializable {
+public class ProfundidadMuestra  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_profundidad_muestra")
     private Integer idProfundidadMuestra;
-    @Basic(optional = false)
-    @Column(name = "profundidad")
     private int profundidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfundidad")
     private Collection<AnalisisSuelo> analisisSueloCollection;
 
     public ProfundidadMuestra() {

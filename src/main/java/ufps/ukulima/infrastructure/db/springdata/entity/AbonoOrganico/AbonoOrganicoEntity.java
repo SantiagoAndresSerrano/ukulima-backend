@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufps.ukulima.domain.model.EtapaFenologica;
+package ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganico;
 
-import ufps.ukulima.domain.model.Cultivo.Cultivo;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -20,21 +19,20 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacionEntity;
 
 /**
  *
  * @author santi
  */
 @Entity
-@Table(name = "etapa_fenologica")
-@XmlRootElement
+@Table(name = "abono_organico")
 @NamedQueries({
-    @NamedQuery(name = "EtapaFenologica.findAll", query = "SELECT e FROM EtapaFenologica e"),
-    @NamedQuery(name = "EtapaFenologica.findById", query = "SELECT e FROM EtapaFenologica e WHERE e.id = :id"),
-    @NamedQuery(name = "EtapaFenologica.findByDescripcion", query = "SELECT e FROM EtapaFenologica e WHERE e.descripcion = :descripcion")})
-public class EtapaFenologica implements Serializable {
+    @NamedQuery(name = "AbonoOrganico.findAll", query = "SELECT a FROM AbonoOrganicoEntity a"),
+    @NamedQuery(name = "AbonoOrganico.findById", query = "SELECT a FROM AbonoOrganicoEntity a WHERE a.id = :id"),
+    @NamedQuery(name = "AbonoOrganico.findByDescripcion", query = "SELECT a FROM AbonoOrganicoEntity a WHERE a.descripcion = :descripcion")})
+public class AbonoOrganicoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,17 +43,16 @@ public class EtapaFenologica implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEtapaFenologica")
-    private Collection<Cultivo> cultivoCollection;
-
-    public EtapaFenologica() {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAbonoOrganico")
+    private Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection;
+    public AbonoOrganicoEntity() {
     }
 
-    public EtapaFenologica(Integer id) {
+    public AbonoOrganicoEntity(Integer id) {
         this.id = id;
     }
 
-    public EtapaFenologica(Integer id, String descripcion) {
+    public AbonoOrganicoEntity(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
@@ -76,13 +73,12 @@ public class EtapaFenologica implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<Cultivo> getCultivoCollection() {
-        return cultivoCollection;
+    public Collection<AbonoOrganicoRecomendacionEntity> aOrganicoRecomendacionCollection() {
+        return abonoOrganicoRecomendacionCollection;
     }
 
-    public void setCultivoCollection(Collection<Cultivo> cultivoCollection) {
-        this.cultivoCollection = cultivoCollection;
+    public void setAbonoOrganicoRecomendacionCollection(Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection) {
+        this.abonoOrganicoRecomendacionCollection = abonoOrganicoRecomendacionCollection;
     }
 
     @Override
@@ -95,10 +91,10 @@ public class EtapaFenologica implements Serializable {
     @Override
     public boolean equals(Object object) {
         
-        if (!(object instanceof EtapaFenologica)) {
+        if (!(object instanceof AbonoOrganicoEntity)) {
             return false;
         }
-        EtapaFenologica other = (EtapaFenologica) object;
+        AbonoOrganicoEntity other = (AbonoOrganicoEntity) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -107,7 +103,7 @@ public class EtapaFenologica implements Serializable {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.EtapaFenologica[ id=" + id + " ]";
+        return "ejercicios.pkgfinal.AbonoOrganico[ id=" + id + " ]";
     }
     
 }

@@ -1,6 +1,6 @@
 package ufps.ukulima.infrastructure.driven_adapters.jpa.TipoCultivo;
 import org.springframework.data.jpa.repository.JpaRepository;
-import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
+import ufps.ukulima.infrastructure.db.springdata.entity.TipoCultivo.TipoCultivoEntity;
 
-public interface TipoCultivoRepository extends JpaRepository<TipoCultivo, Integer> {
+public interface TipoCultivoRepository extends JpaRepository<TipoCultivoEntity, Integer> {
 }

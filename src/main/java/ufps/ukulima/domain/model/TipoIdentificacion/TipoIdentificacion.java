@@ -7,45 +7,17 @@ package ufps.ukulima.domain.model.TipoIdentificacion;
 
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "tipo_identificacion")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "TipoIdentificacion.findAll", query = "SELECT t FROM TipoIdentificacion t"),
-    @NamedQuery(name = "TipoIdentificacion.findByIdTipo", query = "SELECT t FROM TipoIdentificacion t WHERE t.idTipo = :idTipo"),
-    @NamedQuery(name = "TipoIdentificacion.findByNombre", query = "SELECT t FROM TipoIdentificacion t WHERE t.nombre = :nombre")})
-public class TipoIdentificacion implements Serializable {
+public class TipoIdentificacion {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_tipo")
     private Integer idTipo;
-    @Basic(optional = false)
-    @Column(name = "nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTipoIdentificacion")
     private Collection<Agricultor> agricultorCollection;
 
     public TipoIdentificacion() {

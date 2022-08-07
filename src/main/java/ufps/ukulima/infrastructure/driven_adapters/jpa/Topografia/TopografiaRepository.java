@@ -1,7 +1,7 @@
 package ufps.ukulima.infrastructure.driven_adapters.jpa.Topografia;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ufps.ukulima.domain.model.Topografia.Topografia;
+import ufps.ukulima.infrastructure.db.springdata.entity.Topografia.TopografiaEntity;
 
-public interface TopografiaRepository extends JpaRepository<Topografia, Integer> {
+public interface TopografiaRepository extends JpaRepository<TopografiaEntity, Integer> {
 }

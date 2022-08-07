@@ -1,6 +1,6 @@
-package ufps.ukulima.domain.model.EtapaFenologica.gateway;
+package ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.gateway;
 
-import ufps.ukulima.domain.model.EtapaFenologica.EtapaFenologica;
+import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.EtapaFenologica;
 
 import java.util.List;
 

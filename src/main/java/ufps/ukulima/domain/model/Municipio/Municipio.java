@@ -9,48 +9,17 @@ import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Departamento.Departamento;
 import ufps.ukulima.domain.model.Finca.Finca;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "municipio")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Municipio.findAll", query = "SELECT m FROM Municipio m"),
-    @NamedQuery(name = "Municipio.findByIdMunicipio", query = "SELECT m FROM Municipio m WHERE m.idMunicipio = :idMunicipio")})
-public class Municipio implements Serializable {
+public class Municipio  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_municipio")
     private Integer idMunicipio;
-    @JoinColumn(name = "id_departamento", referencedColumnName = "id_depto")
-    @ManyToOne(optional = false)
     private Departamento idDepartamento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMunicipio")
     private Collection<Corregimiento> corregimientoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMunicipio")
     private Collection<Finca> fincaCollection;
 
     public Municipio() {
@@ -76,7 +45,6 @@ public class Municipio implements Serializable {
         this.idDepartamento = idDepartamento;
     }
 
-    @XmlTransient
     public Collection<Corregimiento> getCorregimientoCollection() {
         return corregimientoCollection;
     }
@@ -85,7 +53,6 @@ public class Municipio implements Serializable {
         this.corregimientoCollection = corregimientoCollection;
     }
 
-    @XmlTransient
     public Collection<Finca> getFincaCollection() {
         return fincaCollection;
     }

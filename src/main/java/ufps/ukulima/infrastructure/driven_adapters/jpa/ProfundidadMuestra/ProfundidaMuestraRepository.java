@@ -1,7 +1,7 @@
 package ufps.ukulima.infrastructure.driven_adapters.jpa.ProfundidadMuestra;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
+import ufps.ukulima.infrastructure.db.springdata.entity.ProfundidadMuestra.ProfundidadMuestraEntity;
 
-public interface ProfundidaMuestraRepository extends JpaRepository<ProfundidadMuestra, Integer> {
+public interface ProfundidaMuestraRepository extends JpaRepository<ProfundidadMuestraEntity, Integer> {
 }

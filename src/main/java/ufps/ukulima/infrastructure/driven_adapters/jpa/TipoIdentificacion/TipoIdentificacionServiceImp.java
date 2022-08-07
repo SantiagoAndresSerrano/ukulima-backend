@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 import ufps.ukulima.domain.model.TipoIdentificacion.gateway.TipoIdentificacionService;
+import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoIdentificacionEntity;
+import ufps.ukulima.infrastructure.db.springdata.mapper.TipoIdentificacionEntityMapper;
 
 import java.util.List;
 
@@ -14,15 +16,18 @@ public class TipoIdentificacionServiceImp implements TipoIdentificacionService {
     @Autowired
     TipoIdentificacionRepository tipoIdentificacionRepository;
 
+    @Autowired
+    TipoIdentificacionEntityMapper tipoIdentificacionEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
     public List<TipoIdentificacion> getAllTipoIdentificacion() {
-        return tipoIdentificacionRepository.findAll();
+        return tipoIdentificacionEntityMapper.abonosOrganicosRecomendacionToDomain(tipoIdentificacionRepository.findAll());
     }
 
     @Override
     @Transactional(readOnly = true)
     public TipoIdentificacion getTipoIdentificacionByid(int idTipoIdentificacion) {
-        return tipoIdentificacionRepository.getById(idTipoIdentificacion);
+        return tipoIdentificacionEntityMapper.toDomain(tipoIdentificacionRepository.getById(idTipoIdentificacion));
     }
 }

@@ -7,45 +7,17 @@ package ufps.ukulima.domain.model.Enmienda;
 
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-@Entity
-@Table(name = "enmienda")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Enmienda.findAll", query = "SELECT e FROM Enmienda e"),
-    @NamedQuery(name = "Enmienda.findById", query = "SELECT e FROM Enmienda e WHERE e.id = :id"),
-    @NamedQuery(name = "Enmienda.findByDescripcion", query = "SELECT e FROM Enmienda e WHERE e.descripcion = :descripcion")})
-public class Enmienda implements Serializable {
+public class Enmienda  {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEnmienda")
     private Collection<Recomendacion> recomendacionCollection;
 
     public Enmienda() {
