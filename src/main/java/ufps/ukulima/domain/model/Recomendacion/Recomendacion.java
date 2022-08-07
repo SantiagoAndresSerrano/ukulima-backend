@@ -7,8 +7,8 @@ package ufps.ukulima.domain.model.Recomendacion;
 
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
-import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
+import ufps.ukulima.domain.model.Enmienda.Enmienda;
 
 import java.util.Collection;
 

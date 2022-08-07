@@ -1,10 +1,7 @@
 package ufps.ukulima.infrastructure.db.springdata.mapper;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Service;
 import ufps.ukulima.domain.model.Topografia.Topografia;
-import ufps.ukulima.domain.model.Topografia.Topografia;
-import ufps.ukulima.infrastructure.db.springdata.entity.Topografia.TopografiaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Topografia.TopografiaEntity;
 
 import java.util.List;

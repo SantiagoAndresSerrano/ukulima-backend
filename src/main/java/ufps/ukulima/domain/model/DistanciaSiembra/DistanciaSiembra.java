@@ -6,6 +6,7 @@
 package ufps.ukulima.domain.model.DistanciaSiembra;
 
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
+
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
 

@@ -1,10 +1,7 @@
 package ufps.ukulima.infrastructure.db.springdata.mapper;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Service;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
-import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
-import ufps.ukulima.infrastructure.db.springdata.entity.FuenteRecomendacion.FuenteRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.FuenteRecomendacion.FuenteRecomendacionEntity;
 
 import java.util.List;

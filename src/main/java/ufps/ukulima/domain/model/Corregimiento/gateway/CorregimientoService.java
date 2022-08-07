@@ -1,7 +1,6 @@
 package ufps.ukulima.domain.model.Corregimiento.gateway;
 
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
-import ufps.ukulima.domain.model.Finca.Finca;
 
 import java.util.List;
 

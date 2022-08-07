@@ -1,10 +1,7 @@
 package ufps.ukulima.infrastructure.db.springdata.mapper;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Service;
 import ufps.ukulima.domain.model.Fuente.Fuente;
-import ufps.ukulima.domain.model.Fuente.Fuente;
-import ufps.ukulima.infrastructure.db.springdata.entity.Fuente.FuenteEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Fuente.FuenteEntity;
 
 import java.util.List;

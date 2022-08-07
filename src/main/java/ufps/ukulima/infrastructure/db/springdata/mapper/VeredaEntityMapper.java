@@ -1,10 +1,7 @@
 package ufps.ukulima.infrastructure.db.springdata.mapper;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Service;
 import ufps.ukulima.domain.model.Vereda.Vereda;
-import ufps.ukulima.domain.model.Vereda.Vereda;
-import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 import java.util.List;

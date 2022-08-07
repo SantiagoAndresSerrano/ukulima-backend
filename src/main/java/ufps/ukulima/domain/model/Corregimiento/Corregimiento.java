@@ -7,6 +7,7 @@ package ufps.ukulima.domain.model.Corregimiento;
 
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Municipio.Municipio;
+
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
 

@@ -1,10 +1,7 @@
 package ufps.ukulima.infrastructure.db.springdata.mapper;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Service;
 import ufps.ukulima.domain.model.Departamento.Departamento;
-import ufps.ukulima.domain.model.Departamento.Departamento;
-import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.DepartamentoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.DepartamentoEntity;
 
 import java.util.List;

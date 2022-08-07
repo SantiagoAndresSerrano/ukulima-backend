@@ -1,9 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: ufps.ukulima.UkulimaApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.883 s <<< FAILURE! - in ufps.ukulima.UkulimaApplicationTests
-contextLoads  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.DuplicateMappingException: Duplicate query mapping Enmienda.findAll
-Caused by: org.hibernate.DuplicateMappingException: Duplicate query mapping Enmienda.findAll
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.472 s - in ufps.ukulima.UkulimaApplicationTests

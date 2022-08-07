@@ -5,8 +5,8 @@
  */
 package ufps.ukulima.domain.model.Agricultor;
 
-import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
+import ufps.ukulima.domain.model.Finca.Finca;
 
 import java.util.Collection;
 import java.util.Date;

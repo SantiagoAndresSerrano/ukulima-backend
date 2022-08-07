@@ -28,7 +28,7 @@ public class AbonoOrganicoServiceImp implements AbonoOrganicoService {
     @Override
     @Transactional(readOnly = true)
     public List<AbonoOrganico> getAllAbonoOrganicos() {
-        return abonoOrganicoEntityMapper.abonosOrganicosToDomain(abonoOrganicoRepository.findAll());
+        return abonoOrganicoEntityMapper.toDomain(abonoOrganicoRepository.findAll());
     }
 
     @Override

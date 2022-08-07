@@ -5,6 +5,7 @@
  */
 package ufps.ukulima.domain.model.ClaseTextural;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
+
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
 
