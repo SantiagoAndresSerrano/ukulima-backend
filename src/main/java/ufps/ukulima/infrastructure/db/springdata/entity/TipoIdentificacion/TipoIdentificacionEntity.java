@@ -80,11 +80,11 @@ public class TipoIdentificacionEntity implements Serializable {
         this.nombre = nombre;
     }
 
-    public Collection<AgricultorEntity> getAgricultorCollection() {
+    public Collection<AgricultorEntity> agricultorCollection() {
         return agricultorCollection;
     }
 
-    public void setAgricultorCollection(Collection<AgricultorEntity> agricultorCollection) {
+    public void agricultorCollection(Collection<AgricultorEntity> agricultorCollection) {
         this.agricultorCollection = agricultorCollection;
     }
 

@@ -85,7 +85,11 @@ public class AbonoOrganicoRecomendacion  {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.AbonoOrganicoRecomendacion[ id=" + id + " ]";
+        return "AbonoOrganicoRecomendacion{" +
+                "id=" + id +
+                ", cantidad=" + cantidad +
+                ", idAbonoOrganico=" + idAbonoOrganico +
+                ", idRecomendacion=" + idRecomendacion +
+                '}';
     }
-    
 }

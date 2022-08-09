@@ -16,4 +16,5 @@ public interface AgricultorService {
     public List<Agricultor> getAllAgricultor();
     public void saveAgricultor(Agricultor agricultor);
 
+    Agricultor findByResetPassword(String token);
 }

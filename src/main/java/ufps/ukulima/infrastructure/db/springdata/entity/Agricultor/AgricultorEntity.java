@@ -5,7 +5,9 @@
  */
 package ufps.ukulima.infrastructure.db.springdata.entity.Agricultor;
 
+import ufps.ukulima.domain.model.PasswordResetToken.PasswordResetToken;
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.PasswordResetToken.PasswordResetTokenEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoIdentificacionEntity;
 
 import java.io.Serializable;
@@ -25,6 +27,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -67,11 +71,21 @@ public class AgricultorEntity implements Serializable {
     private String password;
     @Column(name = "email")
     private String email;
+
+    private Boolean estado;
     @JoinColumn(name = "id_tipo_identificacion", referencedColumnName = "id_tipo")
     @ManyToOne(optional = false)
     private TipoIdentificacionEntity idTipoIdentificacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgricultor")
     private Collection<FincaEntity> fincaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agricultor")
+    private Collection<PasswordResetTokenEntity> passwordResetTokenCollection;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 16777215)
+    @Column(name = "confirmation_token")
+    private String confirmationToken;
 
     public AgricultorEntity() {
     }
@@ -86,6 +100,30 @@ public class AgricultorEntity implements Serializable {
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.password = password;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Collection<PasswordResetTokenEntity> getPasswordResetTokenCollection() {
+        return passwordResetTokenCollection;
+    }
+
+    public void setPasswordResetTokenCollection(Collection<PasswordResetTokenEntity> passwordResetTokenCollection) {
+        this.passwordResetTokenCollection = passwordResetTokenCollection;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
     }
 
     public Integer getIdentifiacion() {
@@ -152,12 +190,11 @@ public class AgricultorEntity implements Serializable {
         this.idTipoIdentificacion = idTipoIdentificacion;
     }
 
-    @XmlTransient
-    public Collection<FincaEntity> getFincaCollection() {
+    public Collection<FincaEntity> fincaCollection() {
         return fincaCollection;
     }
 
-    public void setFincaCollection(Collection<FincaEntity> fincaCollection) {
+    public void fincaCollection(Collection<FincaEntity> fincaCollection) {
         this.fincaCollection = fincaCollection;
     }
 

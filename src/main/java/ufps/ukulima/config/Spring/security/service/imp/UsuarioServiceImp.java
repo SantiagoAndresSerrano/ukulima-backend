@@ -27,7 +27,7 @@ public class UsuarioServiceImp implements UsuarioService {
     UsuarioRepository usuarioRepository;
 
     public Optional<Usuario> getByEmail(String email){
-        return usuarioRepository.findByEmail(email);
+        return usuarioRepository.findUsuarioByEmail(email);
     }
     public Optional<Usuario> getById(int id){
         return usuarioRepository.findById(id);
@@ -37,7 +37,7 @@ public class UsuarioServiceImp implements UsuarioService {
     }
     @Transactional
     public Usuario findByEmail(String email) {
-        return usuarioRepository.findByEmail(email).orElse(null);
+        return usuarioRepository.findUsuarioByEmail(email).orElse(null);
     }
 
     @Override

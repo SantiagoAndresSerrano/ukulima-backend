@@ -5,6 +5,7 @@
  */
 package ufps.ukulima.domain.model.Agricultor;
 
+import ufps.ukulima.domain.model.PasswordResetToken.PasswordResetToken;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 import ufps.ukulima.domain.model.Finca.Finca;
 
@@ -23,8 +24,12 @@ public class Agricultor  {
     private Date fechaNacimiento;
     private String password;
     private String email;
+
+    private Boolean estado;
     private TipoIdentificacion idTipoIdentificacion;
     private Collection<Finca> fincaCollection;
+
+    private Collection<PasswordResetToken> passwordResetTokens;
 
     public Agricultor() {
     }
@@ -39,6 +44,22 @@ public class Agricultor  {
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.password = password;
+    }
+
+    public Collection<PasswordResetToken> getPasswordResetTokens() {
+        return passwordResetTokens;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public void setPasswordResetTokens(Collection<PasswordResetToken> passwordResetTokens) {
+        this.passwordResetTokens = passwordResetTokens;
     }
 
     public Integer getIdentifiacion() {

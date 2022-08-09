@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganico.AbonoOrgan
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-07T13:46:32-0500",
+    date = "2022-08-09T00:03:06-0500",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
 )
 @Component

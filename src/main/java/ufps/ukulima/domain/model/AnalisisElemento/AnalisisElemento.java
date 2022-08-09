@@ -85,7 +85,12 @@ public class AnalisisElemento  {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.AnalisisElemento[ id=" + id + " ]";
+        return "AnalisisElemento{" +
+                "id=" + id +
+                ", valor=" + valor +
+                ", idAnalisisSuelo=" + idAnalisisSuelo +
+                ", idElemento=" + idElemento +
+                '}';
     }
-    
+
 }

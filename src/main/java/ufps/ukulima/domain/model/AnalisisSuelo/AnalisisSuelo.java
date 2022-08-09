@@ -24,6 +24,7 @@ public class AnalisisSuelo  {
 
     private Integer idAnalisisSuelo;
     private float porcentArena;
+
     private float porcentLimos;
     private float porcentArcilla;
     private Date fecha;
@@ -146,10 +147,21 @@ public class AnalisisSuelo  {
         return hash;
     }
 
-
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.AnalisisSuelo[ idAnalisisSuelo=" + idAnalisisSuelo + " ]";
+        return "AnalisisSuelo{" +
+                "idAnalisisSuelo=" + idAnalisisSuelo +
+                ", porcentArena=" + porcentArena +
+                ", porcentLimos=" + porcentLimos +
+                ", porcentArcilla=" + porcentArcilla +
+                ", fecha=" + fecha +
+                ", recomendacionCollection=" + recomendacionCollection +
+                ", analisisElementoCollection=" + analisisElementoCollection +
+                ", idClaseTexturalEntity=" + idClaseTexturalEntity +
+                ", idCultivo=" + idCultivo +
+                ", idDensidad=" + idDensidad +
+                ", idProfundidad=" + idProfundidad +
+                '}';
     }
-    
+
 }

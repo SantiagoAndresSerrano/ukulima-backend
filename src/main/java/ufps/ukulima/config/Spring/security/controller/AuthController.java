@@ -6,6 +6,10 @@
 package ufps.ukulima.config.Spring.security.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,13 +29,13 @@ import ufps.ukulima.config.Spring.email.service.imp.EmailServiceImp;
 import ufps.ukulima.config.Spring.security.dto.*;
 import ufps.ukulima.config.Spring.security.jwt.JwtProvider;
 import ufps.ukulima.config.Spring.security.model.Rol;
-//import ufps.ukulima.config.Spring.security.model.Usuario;
 import ufps.ukulima.config.Spring.security.model.Usuario;
 import ufps.ukulima.config.Spring.security.service.RolService;
 import ufps.ukulima.config.Spring.security.service.UsuarioService;
-import ufps.ukulima.config.Spring.security.service.imp.UsuarioServiceImp;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
+import ufps.ukulima.domain.model.PasswordResetToken.PasswordResetToken;
+import ufps.ukulima.domain.model.PasswordResetToken.gateway.PasswordResetTokenService;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -44,8 +48,8 @@ import java.util.*;
 @RestController
 @RequestMapping(value="/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
-@Slf4j
 public class AuthController {
+    private static Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -64,7 +68,14 @@ public class AuthController {
     @Autowired
     JwtProvider jwtProvider;
 
+    @Autowired
+    PasswordResetTokenService passwordResetTokenService;
+
+    @Autowired
     EmailServiceImp emailServiceImp;
+
+    @Value("${urifrontend}")
+    String urlFrontend;
 
 
     @PostMapping("/nuevo")
@@ -125,16 +136,15 @@ public class AuthController {
     }
 
 
- /*
     @GetMapping("/solicitudPassword/{email}")
     public ResponseEntity<?> recuperarPassword(@PathVariable String email) throws MessagingException {
-        Usuario u = usuarioService.findByEmail(email);
+        Agricultor u = agricultorService.getAgricultorByEmail(email);
 
         if(u==null)
             return new ResponseEntity(new Mensaje("El email no existe"), HttpStatus.NOT_FOUND);
 
-        if(u.passwordResetTokenCollection().size()>0){
-            PasswordResetToken passwordResetToken = u.passwordResetTokenCollection().iterator().next();
+        if(u.getPasswordResetTokens().size()>0){
+            PasswordResetToken passwordResetToken = u.getPasswordResetTokens().iterator().next();
             if(passwordResetToken.getFechaExpiracion().before(new Date())){
                 passwordResetTokenService.eliminarByToken(passwordResetToken.getToken());
             }else{
@@ -163,7 +173,8 @@ public class AuthController {
                         "            <img style=\"margin-top: 3rem; width: 190px\"\n" +
                         "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n" +
                         "            <p style=\"margin: 1rem 0; font-size: 25px;\">Cambio de contraseña</p>\n" +
-                        "            <p style=\"color: #424242;\">Hola, <b>"+u.getNombre()+"</b>, has solicitado cambiar tu contraseña, <br> para cambiar tu contraseña ingresa al siguiente link:  \n" +
+                        "            <p style=\"color: #424242;\">Hola, <b>"+u.getNombres()+"</b>, has solicitado " +
+                        "cambiar tu contraseña, <br> para cambiar tu contraseña ingresa al siguiente link:  \n" +
                         "            </p>\n" +
                         "            <div style=\"margin: 2rem auto; width: 120px; background-color: #4f46e5; padding: 8px; border-radius: 6px; \">\n" +
                         "                <a style=\"color: #ffffff; text-decoration: none\" href=\""+urlFrontend+"password-reset/confirmation/"+passwordResetToken.getToken()+"\">Continuar</a>\n" +
@@ -184,7 +195,7 @@ public class AuthController {
     }
 
 
- *    @GetMapping("/recuperar/{token}") //petición que recibe el backend de parte del frontend, recordar cambiar el link de la linea 131 a un URL del frontend
+     @GetMapping("/recuperar/{token}") //petición que recibe el backend de parte del frontend, recordar cambiar el link de la linea 131 a un URL del frontend
     public ResponseEntity<?>confirmarRecuperarPassword(@PathVariable String token){
 
         PasswordResetToken passwordResetToken = passwordResetTokenService.buscarToken(token);
@@ -202,7 +213,7 @@ public class AuthController {
     public ResponseEntity<?>cambiarPassword(@PathVariable String token, @RequestBody LoginUsuario loginUsuario) throws MessagingException {
 
         PasswordResetToken passwordResetToken = passwordResetTokenService.buscarToken(token);
-        Usuario uToken = usuarioService.findByResetPassword(token);
+        Agricultor uToken = agricultorService.findByResetPassword(token);
 
         if(passwordResetToken == null)
             return new ResponseEntity(new Mensaje("El token no existe"), HttpStatus.NOT_FOUND);
@@ -210,9 +221,9 @@ public class AuthController {
         if(passwordResetToken.getFechaExpiracion().before(new Date()))
             return new ResponseEntity(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
 
-        loginUsuario.setEmail(passwordResetToken.getUsuario().getEmail());
+        loginUsuario.setEmailOrPhone(passwordResetToken.getAgricultor().getEmail());
 
-        Usuario u = usuarioService.findByEmail(loginUsuario.getEmail());
+        Usuario u = usuarioService.findByEmail(loginUsuario.getEmailOrPhone());
 
         if(u==null){
             return new ResponseEntity(new Mensaje("El correo no existe"), HttpStatus.BAD_REQUEST);
@@ -228,7 +239,7 @@ public class AuthController {
         }
 
         log.info(loginUsuario.getPassword());
-        log.info(passwordResetToken.getUsuario().getEmail());
+        log.info(passwordResetToken.getAgricultor().getEmail());
         log.info(uToken.getEmail());
 
         u.setPassword(passwordEncoder.encode(loginUsuario.getPassword()));
@@ -251,7 +262,8 @@ public class AuthController {
                         "            <img style=\"margin-top: 3rem; width: 190px\"\n" +
                         "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n" +
                         "            <p style=\"margin: 1rem 0; font-size: 25px;\">Cambio de contraseña</p>\n" +
-                        "            <p style=\"color: #424242;\">Hola, <b>"+u.getNombre()+"</b>, se ha cambiado tu contraseña en el sistema.  \n" +
+                        "            <p style=\"color: #424242;\">Hola, <b>"+u.getNombres()+"</b>, se ha cambiado tu " +
+                        "contraseña en el sistema.  \n" +
                         "            </p>\n" +
                         "            <div style=\"width: 100%; border-top: 2px solid #a5b4fc; padding: 1rem 0\">\n" +
                         "                <p>Copyright © 2022 Analytic Hierarchy Process <br> Todos los derechos reservados.</p>\n" +
@@ -272,28 +284,24 @@ public class AuthController {
 
     @GetMapping("/confirmacion/{token}")
     public ResponseEntity<?> confirmarToken(@PathVariable String token){
-        Usuario usuario = usuarioService.findByConfirmationToken(token);
+        Agricultor agricultor = agricultorService.findByResetPassword(token);
 
-        if(usuario==null){
+        if(agricultor==null){
             return new ResponseEntity(new Mensaje("Error, Token no encontrado"), HttpStatus.NOT_FOUND);
         }
 
-        usuario.setEstado(true);
-        usuarioService.guardar(usuario);
+        agricultor.setEstado(true);
+        agricultorService.saveAgricultor(agricultor);
 
         return ResponseEntity.ok(new Mensaje("Usuario verificado correctamente"));
     }
- *
- * */
 
     @PostMapping("/login")
     public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return new ResponseEntity(new Mensaje("campos mal puestos"), HttpStatus.BAD_REQUEST);
         }
-
         Usuario usuario = usuarioService.getByEmail(loginUsuario.getEmailOrPhone()).orElse(null);
-
         if(usuario == null){
             Agricultor agricultor= agricultorService.getAgricultorByPhoneOrEmail(loginUsuario.getEmailOrPhone());
 

@@ -89,7 +89,11 @@ public class Corregimiento  {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.Corregimiento[ idCorregimiento=" + idCorregimiento + " ]";
+        return "Corregimiento{" +
+                "idCorregimiento=" + idCorregimiento +
+                ", nombre='" + nombre + '\'' +
+                ", idMunicipio=" + idMunicipio +
+                ", fincaCollection=" + fincaCollection +
+                '}';
     }
-    
 }

@@ -88,7 +88,12 @@ public class ClaseTextural  {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.ClaseTextural[ idClaseTextural=" + idClaseTextural + " ]";
+        return "ClaseTextural{" +
+                "idClaseTextural=" + idClaseTextural +
+                ", nombre='" + nombre + '\'' +
+                ", sigla='" + sigla + '\'' +
+                ", analisisSueloCollection=" + analisisSueloCollection +
+                '}';
     }
-    
+
 }

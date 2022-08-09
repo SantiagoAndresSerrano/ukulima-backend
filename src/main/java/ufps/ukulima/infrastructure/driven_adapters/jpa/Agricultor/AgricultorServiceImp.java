@@ -30,32 +30,36 @@ public class AgricultorServiceImp implements AgricultorService {
     @Override
     @Transactional(readOnly = true)
     public Agricultor getAgricultorByEmail(String email) {
-        return agricultorRepository.findAgricultorByEmail(email);
+        return agricultorEntityMapper.toDomain(agricultorRepository.findAgricultorByEmail(email));
     }
 
     @Override
     public Agricultor getAgricultorByPhone(String phone) {
-        return agricultorRepository.findAgricultorByTelefono(phone);
+        return agricultorEntityMapper.toDomain(agricultorRepository.findAgricultorByTelefono(phone));
 
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Agricultor getAgricultorByPhoneOrEmail(String phone) {
-        return agricultorRepository.findAgricultorByTelefonoOrEmail(phone);
+        return agricultorEntityMapper.toDomain(agricultorRepository.findAgricultorsByTelefonoOrEmail(phone));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existById(int id) {
         return agricultorRepository.existsAgricultorByIdentifiacion(id);
     }
 
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existByEmail(String email) {
         return agricultorRepository.existsAgricultorByEmail(email);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existByPhone(String email) {
         return agricultorRepository.existsAgricultorByEmail(email);
     }
@@ -71,5 +75,10 @@ public class AgricultorServiceImp implements AgricultorService {
     @Transactional
     public void saveAgricultor(Agricultor agricultor) {
         agricultorRepository.save(agricultorEntityMapper.toEntity(agricultor));
+    }
+
+    @Override
+    public Agricultor findByResetPassword(String token) {
+        return null;
     }
 }
