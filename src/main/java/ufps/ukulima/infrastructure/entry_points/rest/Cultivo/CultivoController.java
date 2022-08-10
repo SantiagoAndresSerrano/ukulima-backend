@@ -55,10 +55,8 @@ public class CultivoController {
 
     @PostMapping
     public ResponseEntity<?> saveCultivo(@RequestBody Cultivo cultivo){
-        DistanciaSiembra distanciaSiembra=
-                distanciaSiembraService.getDistanciaSiembraById(cultivo.getIdDistanciaSiembra().getId());
-        EtapaFenologica etapaFenologica=
-                etapaFenologicaService.getEtapaFenologicaById(cultivo.getIdEtapaFenologica().getId());
+        DistanciaSiembra distanciaSiembra=distanciaSiembraService.getDistanciaSiembraById(cultivo.getIdDistanciaSiembra().getId());
+        EtapaFenologica etapaFenologica=etapaFenologicaService.getEtapaFenologicaById(cultivo.getIdEtapaFenologica().getId());
         Topografia topografia = topografiaService.findTopografiaById(cultivo.getIdTopografia().getId());
         Variedad variedad = variedadService.findVariedadById(cultivo.getIdVariedad().getId());
         Finca finca= fincaService.getFincaById(cultivo.getIdFinca().getIdFinca());
@@ -68,7 +66,6 @@ public class CultivoController {
         cultivo.setIdVariedad(variedad);
         cultivo.setIdDistanciaSiembra(distanciaSiembra);
         cultivo.setIdEtapaFenologica(etapaFenologica);
-
         cultivoService.saveCultivo(cultivo);
 
         return ResponseEntity.ok("Cultivo agregado a la finca "+finca.getNombre());
@@ -87,6 +84,21 @@ public class CultivoController {
         Topografia topografia = topografiaService.findTopografiaById(cultivo.getIdTopografia().getId());
         Variedad variedad = variedadService.findVariedadById(cultivo.getIdVariedad().getId());
         Finca finca= fincaService.getFincaById(cultivo.getIdFinca().getIdFinca());
+
+        if(distanciaSiembra==null)
+            return new ResponseEntity<>("distanciaSiembra no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);      
+
+        if(etapaFenologica==null)
+            return new ResponseEntity<>("etapaFenologica no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
+
+        if(topografia==null)
+            return new ResponseEntity<>("topografia no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
+
+        if(variedad==null)
+            return new ResponseEntity<>("variedad no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
+
+        if(finca==null)
+            return new ResponseEntity<>("finca no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
 
         cultivo.setIdFinca(finca);
         cultivo.setIdTopografia(topografia);
@@ -107,8 +119,8 @@ public class CultivoController {
             return new ResponseEntity<>("El agricultor con telefono o email "+emailOrPhone+", no existe",
                     HttpStatus.NOT_FOUND);
         }
-        List<Finca> fincas = (List)(agricultor.getFincaCollection());
+        List<Finca> fincas = (List<Finca>)(agricultor.getFincaCollection());
         return  ResponseEntity.ok(fincas.get(0).getCultivoCollection());
     }
-
+    
     }

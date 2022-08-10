@@ -13,8 +13,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoI
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-09T19:16:52-0500",
-    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
+    date = "2022-08-10T10:56:11-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class PasswordResetTokenEntityMapperImpl implements PasswordResetTokenEntityMapper {
@@ -27,10 +27,10 @@ public class PasswordResetTokenEntityMapperImpl implements PasswordResetTokenEnt
 
         PasswordResetToken passwordResetToken = new PasswordResetToken();
 
-        passwordResetToken.setToken( passwordResetTokenEntity.getToken() );
-        passwordResetToken.setFechaExpiracion( passwordResetTokenEntity.getFechaExpiracion() );
         passwordResetToken.setAgricultor( agricultorEntityToAgricultor( passwordResetTokenEntity.getAgricultor() ) );
+        passwordResetToken.setFechaExpiracion( passwordResetTokenEntity.getFechaExpiracion() );
         passwordResetToken.setId( passwordResetTokenEntity.getId() );
+        passwordResetToken.setToken( passwordResetTokenEntity.getToken() );
 
         return passwordResetToken;
     }
@@ -43,10 +43,10 @@ public class PasswordResetTokenEntityMapperImpl implements PasswordResetTokenEnt
 
         PasswordResetTokenEntity passwordResetTokenEntity = new PasswordResetTokenEntity();
 
-        passwordResetTokenEntity.setToken( passwordResetToken.getToken() );
-        passwordResetTokenEntity.setFechaExpiracion( passwordResetToken.getFechaExpiracion() );
         passwordResetTokenEntity.setAgricultor( agricultorToAgricultorEntity( passwordResetToken.getAgricultor() ) );
+        passwordResetTokenEntity.setFechaExpiracion( passwordResetToken.getFechaExpiracion() );
         passwordResetTokenEntity.setId( passwordResetToken.getId() );
+        passwordResetTokenEntity.setToken( passwordResetToken.getToken() );
 
         return passwordResetTokenEntity;
     }
@@ -85,16 +85,16 @@ public class PasswordResetTokenEntityMapperImpl implements PasswordResetTokenEnt
 
         Agricultor agricultor = new Agricultor();
 
+        agricultor.setApellidos( agricultorEntity.getApellidos() );
         agricultor.setConfirmationToken( agricultorEntity.getConfirmationToken() );
+        agricultor.setEmail( agricultorEntity.getEmail() );
         agricultor.setEstado( agricultorEntity.getEstado() );
+        agricultor.setFechaNacimiento( agricultorEntity.getFechaNacimiento() );
+        agricultor.setIdTipoIdentificacion( tipoIdentificacionEntityToTipoIdentificacion( agricultorEntity.getIdTipoIdentificacion() ) );
         agricultor.setIdentifiacion( agricultorEntity.getIdentifiacion() );
         agricultor.setNombres( agricultorEntity.getNombres() );
-        agricultor.setApellidos( agricultorEntity.getApellidos() );
-        agricultor.setTelefono( agricultorEntity.getTelefono() );
-        agricultor.setFechaNacimiento( agricultorEntity.getFechaNacimiento() );
         agricultor.setPassword( agricultorEntity.getPassword() );
-        agricultor.setEmail( agricultorEntity.getEmail() );
-        agricultor.setIdTipoIdentificacion( tipoIdentificacionEntityToTipoIdentificacion( agricultorEntity.getIdTipoIdentificacion() ) );
+        agricultor.setTelefono( agricultorEntity.getTelefono() );
 
         return agricultor;
     }
@@ -119,16 +119,16 @@ public class PasswordResetTokenEntityMapperImpl implements PasswordResetTokenEnt
 
         AgricultorEntity agricultorEntity = new AgricultorEntity();
 
-        agricultorEntity.setEstado( agricultor.getEstado() );
+        agricultorEntity.setApellidos( agricultor.getApellidos() );
         agricultorEntity.setConfirmationToken( agricultor.getConfirmationToken() );
+        agricultorEntity.setEmail( agricultor.getEmail() );
+        agricultorEntity.setEstado( agricultor.getEstado() );
+        agricultorEntity.setFechaNacimiento( agricultor.getFechaNacimiento() );
+        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( agricultor.getIdTipoIdentificacion() ) );
         agricultorEntity.setIdentifiacion( agricultor.getIdentifiacion() );
         agricultorEntity.setNombres( agricultor.getNombres() );
-        agricultorEntity.setApellidos( agricultor.getApellidos() );
-        agricultorEntity.setTelefono( agricultor.getTelefono() );
-        agricultorEntity.setFechaNacimiento( agricultor.getFechaNacimiento() );
         agricultorEntity.setPassword( agricultor.getPassword() );
-        agricultorEntity.setEmail( agricultor.getEmail() );
-        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( agricultor.getIdTipoIdentificacion() ) );
+        agricultorEntity.setTelefono( agricultor.getTelefono() );
 
         return agricultorEntity;
     }

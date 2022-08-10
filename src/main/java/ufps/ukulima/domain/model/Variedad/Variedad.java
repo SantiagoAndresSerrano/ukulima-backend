@@ -7,7 +7,6 @@ package ufps.ukulima.domain.model.Variedad;
 
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
-
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
 

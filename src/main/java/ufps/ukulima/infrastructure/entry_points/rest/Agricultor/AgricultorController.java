@@ -58,6 +58,7 @@ public class AgricultorController {
                 }
             }
         }else{
+            
             if(!agricultor1.getTelefono().equals(agricultor.getTelefono())){
                 Agricultor agricultor2= agricultorService.getAgricultorByPhone(agricultor.getTelefono());
                 if(agricultor2 != null){

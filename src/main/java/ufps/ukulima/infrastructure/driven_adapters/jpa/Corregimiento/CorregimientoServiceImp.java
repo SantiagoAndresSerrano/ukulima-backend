@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Corregimiento.gateway.CorregimientoService;
-import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.infrastructure.db.springdata.mapper.CorregimientoEntityMapper;
 
 import java.util.List;

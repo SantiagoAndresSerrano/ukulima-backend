@@ -3,7 +3,6 @@ package ufps.ukulima.infrastructure.driven_adapters.jpa.Agricultor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 
 public interface AgricultorRepository extends JpaRepository<AgricultorEntity, Integer> {

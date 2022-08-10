@@ -2,10 +2,10 @@ package ufps.ukulima.domain.model.ClaseTextural.gateway;
 
 import java.util.List;
 
-import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
+import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 
 public interface ClaseTexturalService {
-    public ClaseTexturalEntity getClaseTexturalById(int idClaseTextural);
-    public List<ClaseTexturalEntity> getAllClaseTextural();
-    public void saveClaseTextural(ClaseTexturalEntity claseTexturalEntity);
+    public ClaseTextural getClaseTexturalById(int idClaseTextural);
+    public List<ClaseTextural> getAllClaseTextural();
+    public void saveClaseTextural(ClaseTextural claseTextural);
 }

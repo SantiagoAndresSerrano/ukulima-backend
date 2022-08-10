@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.AnalisisElemento.gateway.AnalisisElementoService;
 import ufps.ukulima.infrastructure.db.springdata.mapper.AnalisisElementoEntityMapper;
-import ufps.ukulima.infrastructure.db.springdata.mapper.AnalisisSueloEntityMapper;
 
 import java.util.List;
 @Service

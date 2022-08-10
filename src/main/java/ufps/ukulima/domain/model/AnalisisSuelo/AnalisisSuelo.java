@@ -6,6 +6,7 @@
 package ufps.ukulima.domain.model.AnalisisSuelo;
 
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
+import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
@@ -24,13 +25,12 @@ public class AnalisisSuelo  {
 
     private Integer idAnalisisSuelo;
     private float porcentArena;
-
     private float porcentLimos;
     private float porcentArcilla;
     private Date fecha;
     private Collection<Recomendacion> recomendacionCollection;
     private Collection<AnalisisElemento> analisisElementoCollection;
-    private ClaseTexturalEntity idClaseTexturalEntity;
+    private ClaseTextural idClaseTextural;
     private Cultivo idCultivo;
     private Densidad idDensidad;
     private ProfundidadMuestra idProfundidad;
@@ -108,12 +108,12 @@ public class AnalisisSuelo  {
         this.analisisElementoCollection = analisisElementoCollection;
     }
 
-    public ClaseTexturalEntity getIdClaseTextural() {
-        return idClaseTexturalEntity;
+    public ClaseTextural getIdClaseTextural() {
+        return idClaseTextural;
     }
 
-    public void setIdClaseTextural(ClaseTexturalEntity idClaseTexturalEntity) {
-        this.idClaseTexturalEntity = idClaseTexturalEntity;
+    public void setIdClaseTextural(ClaseTextural idClaseTextural) {
+        this.idClaseTextural = idClaseTextural;
     }
 
     public Cultivo getIdCultivo() {
@@ -157,7 +157,7 @@ public class AnalisisSuelo  {
                 ", fecha=" + fecha +
                 ", recomendacionCollection=" + recomendacionCollection +
                 ", analisisElementoCollection=" + analisisElementoCollection +
-                ", idClaseTexturalEntity=" + idClaseTexturalEntity +
+                ", idClaseTextural=" + idClaseTextural +
                 ", idCultivo=" + idCultivo +
                 ", idDensidad=" + idDensidad +
                 ", idProfundidad=" + idProfundidad +

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ClaseTextural.gateway.ClaseTexturalService;
-import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
+import ufps.ukulima.infrastructure.db.springdata.mapper.ClaseTexturalEntityMapper;
 
 import java.util.List;
 @Service
@@ -13,22 +14,25 @@ public class ClaseTexturalServiceImp implements ClaseTexturalService {
     
     @Autowired
     ClaseTexturalRepository claseTexturalRepository;
+
+    @Autowired
+    ClaseTexturalEntityMapper claseTexturalEntityMapper;
     
     @Override
     @Transactional(readOnly = true)
-    public ClaseTexturalEntity getClaseTexturalById(int idClaseTextural) {
-        return claseTexturalRepository.getById(idClaseTextural);
+    public ClaseTextural getClaseTexturalById(int idClaseTextural) {
+        return claseTexturalEntityMapper.toDomain(claseTexturalRepository.getById(idClaseTextural));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ClaseTexturalEntity> getAllClaseTextural() {
-        return claseTexturalRepository.findAll();
+    public List<ClaseTextural> getAllClaseTextural() {
+        return claseTexturalEntityMapper.abonosOrganicosRecomendacionToDomain(claseTexturalRepository.findAll());
     }
 
     @Override
     @Transactional
-    public void saveClaseTextural(ClaseTexturalEntity claseTexturalEntity) {
-         claseTexturalRepository.save(claseTexturalEntity);
+    public void saveClaseTextural(ClaseTextural claseTextural) {
+         claseTexturalRepository.save(claseTexturalEntityMapper.toEntity(claseTextural));
     }
 }

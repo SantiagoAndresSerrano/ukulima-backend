@@ -6,9 +6,7 @@
 package ufps.ukulima.domain.model.Vereda;
 
 import ufps.ukulima.domain.model.Finca.Finca;
-
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
