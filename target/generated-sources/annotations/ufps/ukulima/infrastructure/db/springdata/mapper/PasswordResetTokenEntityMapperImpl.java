@@ -13,7 +13,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoI
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-09T00:03:12-0500",
+    date = "2022-08-09T19:16:52-0500",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
 )
 @Component
@@ -85,6 +85,7 @@ public class PasswordResetTokenEntityMapperImpl implements PasswordResetTokenEnt
 
         Agricultor agricultor = new Agricultor();
 
+        agricultor.setConfirmationToken( agricultorEntity.getConfirmationToken() );
         agricultor.setEstado( agricultorEntity.getEstado() );
         agricultor.setIdentifiacion( agricultorEntity.getIdentifiacion() );
         agricultor.setNombres( agricultorEntity.getNombres() );
@@ -119,6 +120,7 @@ public class PasswordResetTokenEntityMapperImpl implements PasswordResetTokenEnt
         AgricultorEntity agricultorEntity = new AgricultorEntity();
 
         agricultorEntity.setEstado( agricultor.getEstado() );
+        agricultorEntity.setConfirmationToken( agricultor.getConfirmationToken() );
         agricultorEntity.setIdentifiacion( agricultor.getIdentifiacion() );
         agricultorEntity.setNombres( agricultor.getNombres() );
         agricultorEntity.setApellidos( agricultor.getApellidos() );

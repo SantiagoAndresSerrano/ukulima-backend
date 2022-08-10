@@ -11,7 +11,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoI
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-09T00:03:09-0500",
+    date = "2022-08-09T19:16:50-0500",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
 )
 @Component
@@ -25,6 +25,7 @@ public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
 
         Agricultor agricultor = new Agricultor();
 
+        agricultor.setConfirmationToken( AgricultorEntity.getConfirmationToken() );
         agricultor.setEstado( AgricultorEntity.getEstado() );
         agricultor.setIdentifiacion( AgricultorEntity.getIdentifiacion() );
         agricultor.setNombres( AgricultorEntity.getNombres() );
@@ -47,6 +48,7 @@ public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
         AgricultorEntity agricultorEntity = new AgricultorEntity();
 
         agricultorEntity.setEstado( Agricultor.getEstado() );
+        agricultorEntity.setConfirmationToken( Agricultor.getConfirmationToken() );
         agricultorEntity.setIdentifiacion( Agricultor.getIdentifiacion() );
         agricultorEntity.setNombres( Agricultor.getNombres() );
         agricultorEntity.setApellidos( Agricultor.getApellidos() );

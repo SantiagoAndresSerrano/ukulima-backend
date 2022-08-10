@@ -130,6 +130,8 @@ public class AuthController {
         agricultor.setFechaNacimiento(nuevoAgricultor.getFechaNacimiento());
         agricultor.setIdTipoIdentificacion(nuevoAgricultor.getIdTipoIdentificacion());
         agricultor.setPassword(passwordEncoder.encode(nuevoAgricultor.getPassword()));
+        agricultor.setConfirmationToken(UUID.randomUUID().toString());
+        agricultor.setEstado(false);
 
         agricultorService.saveAgricultor(agricultor);
         return ResponseEntity.ok(agricultor);

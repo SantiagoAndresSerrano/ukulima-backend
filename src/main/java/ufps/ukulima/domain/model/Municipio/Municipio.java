@@ -45,15 +45,15 @@ public class Municipio  {
         this.idDepartamento = idDepartamento;
     }
 
-    public Collection<Corregimiento> getCorregimientoCollection() {
+    public Collection<Corregimiento> corregimientoCollection() {
         return corregimientoCollection;
     }
 
-    public void setCorregimientoCollection(Collection<Corregimiento> corregimientoCollection) {
+    public void corregimientoCollection(Collection<Corregimiento> corregimientoCollection) {
         this.corregimientoCollection = corregimientoCollection;
     }
 
-    public Collection<Finca> getFincaCollection() {
+    public Collection<Finca> fincaCollection() {
         return fincaCollection;
     }
 

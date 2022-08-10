@@ -5,7 +5,10 @@
  */
 package ufps.ukulima.domain.model.Finca;
 
+import ufps.ukulima.domain.model.Agricultor.Agricultor;
+import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
+import ufps.ukulima.domain.model.Municipio.Municipio;
 import ufps.ukulima.domain.model.Vereda.Vereda;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
@@ -24,9 +27,9 @@ public class Finca {
     private int areaTotal;
     private int areaEnUso;
     private String geolocalizacion;
-    private AgricultorEntity idAgricultor;
-    private CorregimientoEntity idCorregimiento;
-    private MunicipioEntity idMunicipio;
+    private Agricultor idAgricultor;
+    private Corregimiento idCorregimiento;
+    private Municipio idMunicipio;
     private Vereda idVereda;
     private Collection<Cultivo> cultivoCollection;
 
@@ -84,27 +87,27 @@ public class Finca {
         this.geolocalizacion = geolocalizacion;
     }
 
-    public AgricultorEntity getIdAgricultor() {
+    public Agricultor getIdAgricultor() {
         return idAgricultor;
     }
 
-    public void setIdAgricultor(AgricultorEntity idAgricultor) {
+    public void setIdAgricultor(Agricultor idAgricultor) {
         this.idAgricultor = idAgricultor;
     }
 
-    public CorregimientoEntity getIdCorregimiento() {
+    public Corregimiento getIdCorregimiento() {
         return idCorregimiento;
     }
 
-    public void setIdCorregimiento(CorregimientoEntity idCorregimiento) {
+    public void setIdCorregimiento(Corregimiento idCorregimiento) {
         this.idCorregimiento = idCorregimiento;
     }
 
-    public MunicipioEntity getIdMunicipio() {
+    public Municipio getIdMunicipio() {
         return idMunicipio;
     }
 
-    public void setIdMunicipio(MunicipioEntity idMunicipio) {
+    public void setIdMunicipio(Municipio idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
 

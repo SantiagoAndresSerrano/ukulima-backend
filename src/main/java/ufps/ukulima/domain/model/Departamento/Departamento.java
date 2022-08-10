@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Departamento  {
 
     private Integer idDepto;
-    private int nombre;
+    private String nombre;
     private Collection<Municipio> municipioCollection;
 
     public Departamento() {
@@ -27,7 +27,7 @@ public class Departamento  {
         this.idDepto = idDepto;
     }
 
-    public Departamento(Integer idDepto, int nombre) {
+    public Departamento(Integer idDepto, String nombre) {
         this.idDepto = idDepto;
         this.nombre = nombre;
     }
@@ -40,20 +40,19 @@ public class Departamento  {
         this.idDepto = idDepto;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    public Collection<Municipio> getMunicipioCollection() {
+    public Collection<Municipio> municipioCollection() {
         return municipioCollection;
     }
 
-    public void setMunicipioCollection(Collection<Municipio> municipioCollection) {
+    public void municipioCollection(Collection<Municipio> municipioCollection) {
         this.municipioCollection = municipioCollection;
     }
 

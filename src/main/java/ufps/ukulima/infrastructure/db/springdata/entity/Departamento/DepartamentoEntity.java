@@ -43,7 +43,7 @@ public class DepartamentoEntity implements Serializable {
     private Integer idDepto;
     @Basic(optional = false)
     @Column(name = "nombre")
-    private int nombre;
+    private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idDepartamento")
     private Collection<MunicipioEntity> municipioCollection;
 
@@ -54,7 +54,7 @@ public class DepartamentoEntity implements Serializable {
         this.idDepto = idDepto;
     }
 
-    public DepartamentoEntity(Integer idDepto, int nombre) {
+    public DepartamentoEntity(Integer idDepto, String nombre) {
         this.idDepto = idDepto;
         this.nombre = nombre;
     }
@@ -67,19 +67,19 @@ public class DepartamentoEntity implements Serializable {
         this.idDepto = idDepto;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public Collection<MunicipioEntity> getMunicipioCollection() {
+    public Collection<MunicipioEntity> municipioCollection() {
         return municipioCollection;
     }
 
-    public void setMunicipioCollection(Collection<MunicipioEntity> municipioCollection) {
+    public void municipioCollection(Collection<MunicipioEntity> municipioCollection) {
         this.municipioCollection = municipioCollection;
     }
 

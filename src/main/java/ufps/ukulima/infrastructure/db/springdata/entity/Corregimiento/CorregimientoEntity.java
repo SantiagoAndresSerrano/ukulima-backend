@@ -89,11 +89,11 @@ public class CorregimientoEntity implements Serializable {
         this.idMunicipio = idMunicipio;
     }
 
-    public Collection<FincaEntity> getFincaCollection() {
+    public Collection<FincaEntity> fincaCollection() {
         return fincaCollection;
     }
 
-    public void setFincaCollection(Collection<FincaEntity> fincaCollection) {
+    public void fincaCollection(Collection<FincaEntity> fincaCollection) {
         this.fincaCollection = fincaCollection;
     }
 

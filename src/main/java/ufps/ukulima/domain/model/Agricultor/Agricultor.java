@@ -25,11 +25,15 @@ public class Agricultor  {
     private String password;
     private String email;
 
+    private String confirmationToken;
+
     private Boolean estado;
     private TipoIdentificacion idTipoIdentificacion;
     private Collection<Finca> fincaCollection;
 
     private Collection<PasswordResetToken> passwordResetTokens;
+
+
 
     public Agricultor() {
     }
@@ -44,6 +48,14 @@ public class Agricultor  {
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
         this.password = password;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
     }
 
     public Collection<PasswordResetToken> getPasswordResetTokens() {

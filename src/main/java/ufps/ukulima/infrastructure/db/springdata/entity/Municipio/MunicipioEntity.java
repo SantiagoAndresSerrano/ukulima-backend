@@ -80,19 +80,19 @@ public class MunicipioEntity implements Serializable {
         this.idDepartamento = idDepartamento;
     }
 
-    public Collection<CorregimientoEntity> getCorregimientoCollection() {
+    public Collection<CorregimientoEntity> corregimientoCollection() {
         return corregimientoCollection;
     }
 
-    public void setCorregimientoCollection(Collection<CorregimientoEntity> corregimientoCollection) {
+    public void corregimientoCollection(Collection<CorregimientoEntity> corregimientoCollection) {
         this.corregimientoCollection = corregimientoCollection;
     }
 
-    public Collection<FincaEntity> getFincaCollection() {
+    public Collection<FincaEntity> fincaCollection() {
         return fincaCollection;
     }
 
-    public void setFincaCollection(Collection<FincaEntity> fincaCollection) {
+    public void fincaCollection(Collection<FincaEntity> fincaCollection) {
         this.fincaCollection = fincaCollection;
     }
 

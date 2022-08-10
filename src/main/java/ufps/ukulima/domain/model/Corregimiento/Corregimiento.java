@@ -58,12 +58,11 @@ public class Corregimiento  {
         this.idMunicipio = idMunicipio;
     }
 
-    @XmlTransient
-    public Collection<Finca> getFincaCollection() {
+    public Collection<Finca> fincaCollection() {
         return fincaCollection;
     }
 
-    public void setFincaCollection(Collection<Finca> fincaCollection) {
+    public void fincaCollection(Collection<Finca> fincaCollection) {
         this.fincaCollection = fincaCollection;
     }
 
