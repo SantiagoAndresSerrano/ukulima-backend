@@ -10,6 +10,7 @@ import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomen
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
+import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Densidad.Densidad;
@@ -34,6 +35,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendaci
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Cultivo.CultivoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Densidad.DensidadEntity;
@@ -56,7 +58,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-10T10:50:44-0500",
+    date = "2022-08-11T10:18:00-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -427,6 +429,21 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
         return collection1;
     }
 
+    protected ClaseTexturalEntity claseTexturalToClaseTexturalEntity(ClaseTextural claseTextural) {
+        if ( claseTextural == null ) {
+            return null;
+        }
+
+        ClaseTexturalEntity claseTexturalEntity = new ClaseTexturalEntity();
+
+        claseTexturalEntity.setIdClaseTextural( claseTextural.getIdClaseTextural() );
+        claseTexturalEntity.setNombre( claseTextural.getNombre() );
+        claseTexturalEntity.setSigla( claseTextural.getSigla() );
+        claseTexturalEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( claseTextural.getAnalisisSueloCollection() ) );
+
+        return claseTexturalEntity;
+    }
+
     protected DensidadEntity densidadToDensidadEntity(Densidad densidad) {
         if ( densidad == null ) {
             return null;
@@ -469,7 +486,7 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
         analisisSueloEntity.setFecha( analisisSuelo.getFecha() );
         analisisSueloEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( analisisSuelo.getRecomendacionCollection() ) );
         analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( analisisSuelo.getAnalisisElementoCollection() ) );
-        analisisSueloEntity.setIdClaseTextural( analisisSuelo.getIdClaseTextural() );
+        analisisSueloEntity.setIdClaseTextural( claseTexturalToClaseTexturalEntity( analisisSuelo.getIdClaseTextural() ) );
         analisisSueloEntity.setIdCultivo( cultivoToCultivoEntity( analisisSuelo.getIdCultivo() ) );
         analisisSueloEntity.setIdDensidad( densidadToDensidadEntity( analisisSuelo.getIdDensidad() ) );
         analisisSueloEntity.setIdProfundidad( profundidadMuestraToProfundidadMuestraEntity( analisisSuelo.getIdProfundidad() ) );

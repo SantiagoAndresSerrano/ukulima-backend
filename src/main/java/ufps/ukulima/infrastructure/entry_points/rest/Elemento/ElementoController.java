@@ -21,12 +21,12 @@ public class ElementoController{
     @Autowired
     ElementoService elementoService;
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<?> saveElemento(@RequestBody Elemento elemento){
         elementoService.saveElemento(elemento);
         return ResponseEntity.ok("Elemento registrado con éxito :" + elemento.getNombre());
     }
-
+    @GetMapping
     public ResponseEntity<?> getAllElemento(){
         return ResponseEntity.ok(elementoService.getAllElemento());
     }

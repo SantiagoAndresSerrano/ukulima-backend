@@ -58,7 +58,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-10T10:50:46-0500",
+    date = "2022-08-11T10:18:05-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -563,7 +563,7 @@ public class ClaseTexturalEntityMapperImpl implements ClaseTexturalEntityMapper 
         analisisSuelo.setFecha( analisisSueloEntity.getFecha() );
         analisisSuelo.setRecomendacionCollection( recomendacionEntityCollectionToRecomendacionCollection( analisisSueloEntity.getRecomendacionCollection() ) );
         analisisSuelo.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( analisisSueloEntity.getAnalisisElementoCollection() ) );
-        analisisSuelo.setIdClaseTextural( analisisSueloEntity.getIdClaseTextural() );
+        analisisSuelo.setIdClaseTextural( toDomain( analisisSueloEntity.getIdClaseTextural() ) );
         analisisSuelo.setIdCultivo( cultivoEntityToCultivo( analisisSueloEntity.getIdCultivo() ) );
         analisisSuelo.setIdDensidad( densidadEntityToDensidad( analisisSueloEntity.getIdDensidad() ) );
         analisisSuelo.setIdProfundidad( profundidadMuestraEntityToProfundidadMuestra( analisisSueloEntity.getIdProfundidad() ) );
@@ -1025,7 +1025,7 @@ public class ClaseTexturalEntityMapperImpl implements ClaseTexturalEntityMapper 
         analisisSueloEntity.setFecha( analisisSuelo.getFecha() );
         analisisSueloEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( analisisSuelo.getRecomendacionCollection() ) );
         analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( analisisSuelo.getAnalisisElementoCollection() ) );
-        analisisSueloEntity.setIdClaseTextural( analisisSuelo.getIdClaseTextural() );
+        analisisSueloEntity.setIdClaseTextural( toEntity( analisisSuelo.getIdClaseTextural() ) );
         analisisSueloEntity.setIdCultivo( cultivoToCultivoEntity( analisisSuelo.getIdCultivo() ) );
         analisisSueloEntity.setIdDensidad( densidadToDensidadEntity( analisisSuelo.getIdDensidad() ) );
         analisisSueloEntity.setIdProfundidad( profundidadMuestraToProfundidadMuestraEntity( analisisSuelo.getIdProfundidad() ) );
