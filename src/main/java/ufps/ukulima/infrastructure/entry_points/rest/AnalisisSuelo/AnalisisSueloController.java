@@ -24,7 +24,7 @@ import org.springframework.http.ResponseEntity;
 
 
 @RestController
-@RequestMapping(value="/api/agricultor",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/analisissuelo",produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
 public class AnalisisSueloController {
 
@@ -77,7 +77,7 @@ public class AnalisisSueloController {
         return ResponseEntity.ok("Analisis suelo agregado");
     }
 
-    @PostMapping
+    @GetMapping("/recomendaciones")
     public ResponseEntity<?> getAllRecomendaciones(@RequestBody AnalisisSuelo analisisSuelo){
         AnalisisSuelo analisisSueloR = analisisSueloService.getAnalisisSueloById(analisisSuelo.getIdAnalisisSuelo());
         if(analisisSueloR == null){

@@ -14,7 +14,7 @@ import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Elemento.gateway.ElementoService;
 
 @RestController
-@RequestMapping(value="/api/agricultor",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value="/api/analisiselemento",produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
 public class AnalisisElementoController {
     @Autowired
