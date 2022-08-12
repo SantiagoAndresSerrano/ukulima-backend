@@ -45,7 +45,8 @@ public class AgricultorController {
             return new ResponseEntity<List<ObjectError>>(br.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         if(agricultor.getIdentifiacion()==null)
-            return new ResponseEntity<>("Debe proporcionar un ID si desea actualizar", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("Debe proporcionar un ID si desea actualizar"),
+                    HttpStatus.BAD_REQUEST);
 
         Agricultor agricultor1 = agricultorService.getAgricultorById(agricultor.getIdentifiacion());
 
@@ -53,7 +54,7 @@ public class AgricultorController {
             if(!agricultor1.getEmail().equals(agricultor.getEmail())){ // se actualice un email de agricultor ya existente
                 Agricultor agricultor2= agricultorService.getAgricultorByEmail(agricultor.getEmail());
                 if(agricultor2 != null){
-                    return new ResponseEntity<>("El email que desea actualizar ya existe { "+agricultor.getEmail()+"}",
+                    return new ResponseEntity<>(new Mensaje("El email que desea actualizar ya existe { "+agricultor.getEmail()+"}"),
                             HttpStatus.BAD_REQUEST);
                 }
             }
@@ -62,14 +63,14 @@ public class AgricultorController {
             if(!agricultor1.getTelefono().equals(agricultor.getTelefono())){
                 Agricultor agricultor2= agricultorService.getAgricultorByPhone(agricultor.getTelefono());
                 if(agricultor2 != null){
-                    return new ResponseEntity<>("El telefono que desea actualizar ya existe { "+agricultor.getTelefono()+
-                            "}",
+                    return new ResponseEntity<>(new Mensaje("El telefono que desea actualizar ya existe { "+agricultor.getTelefono()+
+                            "}"),
                             HttpStatus.BAD_REQUEST);
                 }
             }
         }
         agricultorService.saveAgricultor(agricultor);
-        return ResponseEntity.ok("Agricultor actualizado");
+        return ResponseEntity.ok(new Mensaje("Agricultor actualizado"));
     }
 
 }

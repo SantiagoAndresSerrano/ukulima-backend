@@ -5,6 +5,7 @@
  */
 package ufps.ukulima.domain.model.Vereda;
 
+import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Finca.Finca;
 import java.util.Collection;
 
@@ -15,7 +16,7 @@ import java.util.Collection;
 public class Vereda  {
 
     private Integer idVereda;
-    private int idCorregimiento;
+    private Corregimiento idCorregimiento;
     private String nombre;
     private Collection<Finca> fincaCollection;
 
@@ -26,7 +27,7 @@ public class Vereda  {
         this.idVereda = idVereda;
     }
 
-    public Vereda(Integer idVereda, int idCorregimiento, String nombre) {
+    public Vereda(Integer idVereda, Corregimiento idCorregimiento, String nombre) {
         this.idVereda = idVereda;
         this.idCorregimiento = idCorregimiento;
         this.nombre = nombre;
@@ -40,11 +41,11 @@ public class Vereda  {
         this.idVereda = idVereda;
     }
 
-    public int getIdCorregimiento() {
+    public Corregimiento getIdCorregimiento() {
         return idCorregimiento;
     }
 
-    public void setIdCorregimiento(int idCorregimiento) {
+    public void setIdCorregimiento(Corregimiento idCorregimiento) {
         this.idCorregimiento = idCorregimiento;
     }
 

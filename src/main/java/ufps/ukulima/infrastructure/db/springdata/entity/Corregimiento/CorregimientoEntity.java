@@ -7,6 +7,7 @@ package ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento;
 
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -52,6 +53,8 @@ public class CorregimientoEntity implements Serializable {
     private MunicipioEntity idMunicipio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCorregimiento")
     private Collection<FincaEntity> fincaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCorregimiento")
+    private Collection<VeredaEntity> veredaCollection;
 
     public CorregimientoEntity() {
     }
@@ -63,6 +66,14 @@ public class CorregimientoEntity implements Serializable {
     public CorregimientoEntity(Integer idCorregimiento, String nombre) {
         this.idCorregimiento = idCorregimiento;
         this.nombre = nombre;
+    }
+
+    public Collection<VeredaEntity> veredaCollection() {
+        return veredaCollection;
+    }
+
+    public void veredaCollection(Collection<VeredaEntity> veredaCollection) {
+        this.veredaCollection = veredaCollection;
     }
 
     public Integer getIdCorregimiento() {

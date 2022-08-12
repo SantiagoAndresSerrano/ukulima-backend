@@ -17,6 +17,7 @@ import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Departamento.Departamento;
 import ufps.ukulima.domain.model.DistanciaSiembra.DistanciaSiembra;
 import ufps.ukulima.domain.model.Elemento.Elemento;
+import ufps.ukulima.domain.model.ElementoVariedad.ElementoVariedad;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Fuente.Fuente;
@@ -42,6 +43,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Densidad.DensidadEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.DepartamentoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.DistanciaSiembra.DistanciaSiembraEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.ElementoVariedad.ElementoVariedadEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.EtapaFenologica.EtapaFenologicaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
@@ -58,51 +60,59 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-12T08:47:32-0500",
+    date = "2022-08-12T08:49:11-0500",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
 )
 @Component
-public class DensidadEntityMapperImpl implements DensidadEntityMapper {
+public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityMapper {
 
     @Override
-    public Densidad toDomain(DensidadEntity DensidadEntity) {
-        if ( DensidadEntity == null ) {
+    public ElementoVariedad toDomain(ElementoVariedadEntity elementoVariedadEntity) {
+        if ( elementoVariedadEntity == null ) {
             return null;
         }
 
-        Densidad densidad = new Densidad();
+        ElementoVariedad elementoVariedad = new ElementoVariedad();
 
-        densidad.setIdDensidad( DensidadEntity.getIdDensidad() );
-        densidad.setValor( DensidadEntity.getValor() );
-        densidad.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( DensidadEntity.getAnalisisSueloCollection() ) );
+        elementoVariedad.setIdElementoVariedad( elementoVariedadEntity.getIdElementoVariedad() );
+        elementoVariedad.setNombre( elementoVariedadEntity.getNombre() );
+        elementoVariedad.setValorMinimo( elementoVariedadEntity.getValorMinimo() );
+        elementoVariedad.setValorMaximo( elementoVariedadEntity.getValorMaximo() );
+        elementoVariedad.setIdElemento( elementoEntityToElemento( elementoVariedadEntity.getIdElemento() ) );
+        elementoVariedad.setIdVariedad( variedadEntityToVariedad( elementoVariedadEntity.getIdVariedad() ) );
+        elementoVariedad.setValorOptimo( elementoVariedadEntity.getValorOptimo() );
 
-        return densidad;
+        return elementoVariedad;
     }
 
     @Override
-    public DensidadEntity toEntity(Densidad Densidad) {
-        if ( Densidad == null ) {
+    public ElementoVariedadEntity toEntity(ElementoVariedad elementoVariedad) {
+        if ( elementoVariedad == null ) {
             return null;
         }
 
-        DensidadEntity densidadEntity = new DensidadEntity();
+        ElementoVariedadEntity elementoVariedadEntity = new ElementoVariedadEntity();
 
-        densidadEntity.setIdDensidad( Densidad.getIdDensidad() );
-        densidadEntity.setValor( Densidad.getValor() );
-        densidadEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( Densidad.getAnalisisSueloCollection() ) );
+        elementoVariedadEntity.setIdElementoVariedad( elementoVariedad.getIdElementoVariedad() );
+        elementoVariedadEntity.setNombre( elementoVariedad.getNombre() );
+        elementoVariedadEntity.setValorMinimo( elementoVariedad.getValorMinimo() );
+        elementoVariedadEntity.setValorMaximo( elementoVariedad.getValorMaximo() );
+        elementoVariedadEntity.setValorOptimo( elementoVariedad.getValorOptimo() );
+        elementoVariedadEntity.setIdElemento( elementoToElementoEntity( elementoVariedad.getIdElemento() ) );
+        elementoVariedadEntity.setIdVariedad( variedadToVariedadEntity( elementoVariedad.getIdVariedad() ) );
 
-        return densidadEntity;
+        return elementoVariedadEntity;
     }
 
     @Override
-    public List<Densidad> abonosOrganicosRecomendacionToDomain(List<DensidadEntity> abonoOrganicoEntities) {
-        if ( abonoOrganicoEntities == null ) {
+    public List<ElementoVariedad> elementoVariedadToDomain(List<ElementoVariedadEntity> elementoVariedadEntities) {
+        if ( elementoVariedadEntities == null ) {
             return null;
         }
 
-        List<Densidad> list = new ArrayList<Densidad>( abonoOrganicoEntities.size() );
-        for ( DensidadEntity densidadEntity : abonoOrganicoEntities ) {
-            list.add( toDomain( densidadEntity ) );
+        List<ElementoVariedad> list = new ArrayList<ElementoVariedad>( elementoVariedadEntities.size() );
+        for ( ElementoVariedadEntity elementoVariedadEntity : elementoVariedadEntities ) {
+            list.add( toDomain( elementoVariedadEntity ) );
         }
 
         return list;
@@ -176,34 +186,6 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         return collection1;
     }
 
-    protected AnalisisElemento analisisElementosEntityToAnalisisElemento(AnalisisElementosEntity analisisElementosEntity) {
-        if ( analisisElementosEntity == null ) {
-            return null;
-        }
-
-        AnalisisElemento analisisElemento = new AnalisisElemento();
-
-        analisisElemento.setId( analisisElementosEntity.getId() );
-        analisisElemento.setValor( analisisElementosEntity.getValor() );
-        analisisElemento.setIdAnalisisSuelo( analisisSueloEntityToAnalisisSuelo( analisisElementosEntity.getIdAnalisisSuelo() ) );
-        analisisElemento.setIdElemento( elementoEntityToElemento( analisisElementosEntity.getIdElemento() ) );
-
-        return analisisElemento;
-    }
-
-    protected Collection<AnalisisElemento> analisisElementosEntityCollectionToAnalisisElementoCollection(Collection<AnalisisElementosEntity> collection) {
-        if ( collection == null ) {
-            return null;
-        }
-
-        Collection<AnalisisElemento> collection1 = new ArrayList<AnalisisElemento>( collection.size() );
-        for ( AnalisisElementosEntity analisisElementosEntity : collection ) {
-            collection1.add( analisisElementosEntityToAnalisisElemento( analisisElementosEntity ) );
-        }
-
-        return collection1;
-    }
-
     protected Collection<FuenteRecomendacion> fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection(Collection<FuenteRecomendacionEntity> collection) {
         if ( collection == null ) {
             return null;
@@ -215,22 +197,6 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         }
 
         return collection1;
-    }
-
-    protected Elemento elementoEntityToElemento(ElementoEntity elementoEntity) {
-        if ( elementoEntity == null ) {
-            return null;
-        }
-
-        Elemento elemento = new Elemento();
-
-        elemento.setId( elementoEntity.getId() );
-        elemento.setNombre( elementoEntity.getNombre() );
-        elemento.setUnidad( elementoEntity.getUnidad() );
-        elemento.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( elementoEntity.getAnalisisElementoCollection() ) );
-        elemento.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( elementoEntity.getFuenteRecomendacionCollection() ) );
-
-        return elemento;
     }
 
     protected Fuente fuenteEntityToFuente(FuenteEntity fuenteEntity) {
@@ -279,6 +245,19 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         recomendacion.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( recomendacionEntity.getFuenteRecomendacionCollection() ) );
 
         return recomendacion;
+    }
+
+    protected Collection<AnalisisElemento> analisisElementosEntityCollectionToAnalisisElementoCollection(Collection<AnalisisElementosEntity> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AnalisisElemento> collection1 = new ArrayList<AnalisisElemento>( collection.size() );
+        for ( AnalisisElementosEntity analisisElementosEntity : collection ) {
+            collection1.add( analisisElementosEntityToAnalisisElemento( analisisElementosEntity ) );
+        }
+
+        return collection1;
     }
 
     protected Collection<AnalisisSuelo> analisisSueloEntityCollectionToAnalisisSueloCollection(Collection<AnalisisSueloEntity> collection) {
@@ -534,6 +513,20 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         return cultivo;
     }
 
+    protected Densidad densidadEntityToDensidad(DensidadEntity densidadEntity) {
+        if ( densidadEntity == null ) {
+            return null;
+        }
+
+        Densidad densidad = new Densidad();
+
+        densidad.setIdDensidad( densidadEntity.getIdDensidad() );
+        densidad.setValor( densidadEntity.getValor() );
+        densidad.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( densidadEntity.getAnalisisSueloCollection() ) );
+
+        return densidad;
+    }
+
     protected ProfundidadMuestra profundidadMuestraEntityToProfundidadMuestra(ProfundidadMuestraEntity profundidadMuestraEntity) {
         if ( profundidadMuestraEntity == null ) {
             return null;
@@ -564,10 +557,41 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         analisisSuelo.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( analisisSueloEntity.getAnalisisElementoCollection() ) );
         analisisSuelo.setIdClaseTextural( claseTexturalEntityToClaseTextural( analisisSueloEntity.getIdClaseTextural() ) );
         analisisSuelo.setIdCultivo( cultivoEntityToCultivo( analisisSueloEntity.getIdCultivo() ) );
-        analisisSuelo.setIdDensidad( toDomain( analisisSueloEntity.getIdDensidad() ) );
+        analisisSuelo.setIdDensidad( densidadEntityToDensidad( analisisSueloEntity.getIdDensidad() ) );
         analisisSuelo.setIdProfundidad( profundidadMuestraEntityToProfundidadMuestra( analisisSueloEntity.getIdProfundidad() ) );
 
         return analisisSuelo;
+    }
+
+    protected AnalisisElemento analisisElementosEntityToAnalisisElemento(AnalisisElementosEntity analisisElementosEntity) {
+        if ( analisisElementosEntity == null ) {
+            return null;
+        }
+
+        AnalisisElemento analisisElemento = new AnalisisElemento();
+
+        analisisElemento.setId( analisisElementosEntity.getId() );
+        analisisElemento.setValor( analisisElementosEntity.getValor() );
+        analisisElemento.setIdAnalisisSuelo( analisisSueloEntityToAnalisisSuelo( analisisElementosEntity.getIdAnalisisSuelo() ) );
+        analisisElemento.setIdElemento( elementoEntityToElemento( analisisElementosEntity.getIdElemento() ) );
+
+        return analisisElemento;
+    }
+
+    protected Elemento elementoEntityToElemento(ElementoEntity elementoEntity) {
+        if ( elementoEntity == null ) {
+            return null;
+        }
+
+        Elemento elemento = new Elemento();
+
+        elemento.setId( elementoEntity.getId() );
+        elemento.setNombre( elementoEntity.getNombre() );
+        elemento.setUnidad( elementoEntity.getUnidad() );
+        elemento.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( elementoEntity.getAnalisisElementoCollection() ) );
+        elemento.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( elementoEntity.getFuenteRecomendacionCollection() ) );
+
+        return elemento;
     }
 
     protected Collection<RecomendacionEntity> recomendacionCollectionToRecomendacionEntityCollection(Collection<Recomendacion> collection) {
@@ -638,34 +662,6 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         return collection1;
     }
 
-    protected AnalisisElementosEntity analisisElementoToAnalisisElementosEntity(AnalisisElemento analisisElemento) {
-        if ( analisisElemento == null ) {
-            return null;
-        }
-
-        AnalisisElementosEntity analisisElementosEntity = new AnalisisElementosEntity();
-
-        analisisElementosEntity.setId( analisisElemento.getId() );
-        analisisElementosEntity.setValor( analisisElemento.getValor() );
-        analisisElementosEntity.setIdAnalisisSuelo( analisisSueloToAnalisisSueloEntity( analisisElemento.getIdAnalisisSuelo() ) );
-        analisisElementosEntity.setIdElemento( elementoToElementoEntity( analisisElemento.getIdElemento() ) );
-
-        return analisisElementosEntity;
-    }
-
-    protected Collection<AnalisisElementosEntity> analisisElementoCollectionToAnalisisElementosEntityCollection(Collection<AnalisisElemento> collection) {
-        if ( collection == null ) {
-            return null;
-        }
-
-        Collection<AnalisisElementosEntity> collection1 = new ArrayList<AnalisisElementosEntity>( collection.size() );
-        for ( AnalisisElemento analisisElemento : collection ) {
-            collection1.add( analisisElementoToAnalisisElementosEntity( analisisElemento ) );
-        }
-
-        return collection1;
-    }
-
     protected Collection<FuenteRecomendacionEntity> fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection(Collection<FuenteRecomendacion> collection) {
         if ( collection == null ) {
             return null;
@@ -677,22 +673,6 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         }
 
         return collection1;
-    }
-
-    protected ElementoEntity elementoToElementoEntity(Elemento elemento) {
-        if ( elemento == null ) {
-            return null;
-        }
-
-        ElementoEntity elementoEntity = new ElementoEntity();
-
-        elementoEntity.setId( elemento.getId() );
-        elementoEntity.setNombre( elemento.getNombre() );
-        elementoEntity.setUnidad( elemento.getUnidad() );
-        elementoEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( elemento.getAnalisisElementoCollection() ) );
-        elementoEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( elemento.getFuenteRecomendacionCollection() ) );
-
-        return elementoEntity;
     }
 
     protected FuenteEntity fuenteToFuenteEntity(Fuente fuente) {
@@ -741,6 +721,19 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         recomendacionEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( recomendacion.getFuenteRecomendacionCollection() ) );
 
         return recomendacionEntity;
+    }
+
+    protected Collection<AnalisisElementosEntity> analisisElementoCollectionToAnalisisElementosEntityCollection(Collection<AnalisisElemento> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AnalisisElementosEntity> collection1 = new ArrayList<AnalisisElementosEntity>( collection.size() );
+        for ( AnalisisElemento analisisElemento : collection ) {
+            collection1.add( analisisElementoToAnalisisElementosEntity( analisisElemento ) );
+        }
+
+        return collection1;
     }
 
     protected Collection<AnalisisSueloEntity> analisisSueloCollectionToAnalisisSueloEntityCollection(Collection<AnalisisSuelo> collection) {
@@ -997,6 +990,20 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         return cultivoEntity;
     }
 
+    protected DensidadEntity densidadToDensidadEntity(Densidad densidad) {
+        if ( densidad == null ) {
+            return null;
+        }
+
+        DensidadEntity densidadEntity = new DensidadEntity();
+
+        densidadEntity.setIdDensidad( densidad.getIdDensidad() );
+        densidadEntity.setValor( densidad.getValor() );
+        densidadEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( densidad.getAnalisisSueloCollection() ) );
+
+        return densidadEntity;
+    }
+
     protected ProfundidadMuestraEntity profundidadMuestraToProfundidadMuestraEntity(ProfundidadMuestra profundidadMuestra) {
         if ( profundidadMuestra == null ) {
             return null;
@@ -1027,9 +1034,40 @@ public class DensidadEntityMapperImpl implements DensidadEntityMapper {
         analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( analisisSuelo.getAnalisisElementoCollection() ) );
         analisisSueloEntity.setIdClaseTextural( claseTexturalToClaseTexturalEntity( analisisSuelo.getIdClaseTextural() ) );
         analisisSueloEntity.setIdCultivo( cultivoToCultivoEntity( analisisSuelo.getIdCultivo() ) );
-        analisisSueloEntity.setIdDensidad( toEntity( analisisSuelo.getIdDensidad() ) );
+        analisisSueloEntity.setIdDensidad( densidadToDensidadEntity( analisisSuelo.getIdDensidad() ) );
         analisisSueloEntity.setIdProfundidad( profundidadMuestraToProfundidadMuestraEntity( analisisSuelo.getIdProfundidad() ) );
 
         return analisisSueloEntity;
+    }
+
+    protected AnalisisElementosEntity analisisElementoToAnalisisElementosEntity(AnalisisElemento analisisElemento) {
+        if ( analisisElemento == null ) {
+            return null;
+        }
+
+        AnalisisElementosEntity analisisElementosEntity = new AnalisisElementosEntity();
+
+        analisisElementosEntity.setId( analisisElemento.getId() );
+        analisisElementosEntity.setValor( analisisElemento.getValor() );
+        analisisElementosEntity.setIdAnalisisSuelo( analisisSueloToAnalisisSueloEntity( analisisElemento.getIdAnalisisSuelo() ) );
+        analisisElementosEntity.setIdElemento( elementoToElementoEntity( analisisElemento.getIdElemento() ) );
+
+        return analisisElementosEntity;
+    }
+
+    protected ElementoEntity elementoToElementoEntity(Elemento elemento) {
+        if ( elemento == null ) {
+            return null;
+        }
+
+        ElementoEntity elementoEntity = new ElementoEntity();
+
+        elementoEntity.setId( elemento.getId() );
+        elementoEntity.setNombre( elemento.getNombre() );
+        elementoEntity.setUnidad( elemento.getUnidad() );
+        elementoEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( elemento.getAnalisisElementoCollection() ) );
+        elementoEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( elemento.getFuenteRecomendacionCollection() ) );
+
+        return elementoEntity;
     }
 }

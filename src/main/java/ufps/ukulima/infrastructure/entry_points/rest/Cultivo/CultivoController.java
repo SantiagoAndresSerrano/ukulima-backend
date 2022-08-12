@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
@@ -68,14 +69,15 @@ public class CultivoController {
         cultivo.setIdEtapaFenologica(etapaFenologica);
         cultivoService.saveCultivo(cultivo);
 
-        return ResponseEntity.ok("Cultivo agregado a la finca "+finca.getNombre());
+        return ResponseEntity.ok(new Mensaje("Cultivo agregado a la finca "+finca.getNombre()));
 
     }
 
     @PutMapping
     public ResponseEntity<?> updateCultivo(@RequestBody Cultivo cultivo){
         if (cultivo.getIdCultivo()==null)
-            return new ResponseEntity<>("Debe proporcionar un ID si desea actualizar", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("Debe proporcionar un ID si desea actualizar"),
+                    HttpStatus.BAD_REQUEST);
 
         DistanciaSiembra distanciaSiembra=
                 distanciaSiembraService.getDistanciaSiembraById(cultivo.getIdDistanciaSiembra().getId());
@@ -86,19 +88,24 @@ public class CultivoController {
         Finca finca= fincaService.getFincaById(cultivo.getIdFinca().getIdFinca());
 
         if(distanciaSiembra==null)
-            return new ResponseEntity<>("distanciaSiembra no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);      
+            return new ResponseEntity<>(new Mensaje("distanciaSiembra no puede estar vacio al guardar cultivo"),
+                    HttpStatus.BAD_REQUEST);
 
         if(etapaFenologica==null)
-            return new ResponseEntity<>("etapaFenologica no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("etapaFenologica no puede estar vacio al guardar cultivo"),
+                    HttpStatus.BAD_REQUEST);
 
         if(topografia==null)
-            return new ResponseEntity<>("topografia no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("topografia no puede estar vacio al guardar cultivo"),
+                    HttpStatus.BAD_REQUEST);
 
         if(variedad==null)
-            return new ResponseEntity<>("variedad no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("variedad no puede estar vacio al guardar cultivo"),
+                    HttpStatus.BAD_REQUEST);
 
         if(finca==null)
-            return new ResponseEntity<>("finca no puede estar vacio al guardar cultivo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("finca no puede estar vacio al guardar cultivo"),
+                    HttpStatus.BAD_REQUEST);
 
         cultivo.setIdFinca(finca);
         cultivo.setIdTopografia(topografia);
@@ -108,7 +115,7 @@ public class CultivoController {
 
         cultivoService.saveCultivo(cultivo);
 
-        return ResponseEntity.ok("Cultivo actualizado");
+        return ResponseEntity.ok(new Mensaje("Cultivo actualizado"));
 
     }
 
@@ -116,7 +123,7 @@ public class CultivoController {
     public ResponseEntity<?> getAllCultivoAgricultor(@PathVariable String emailOrPhone){
         Agricultor agricultor = agricultorService.getAgricultorByPhoneOrEmail(emailOrPhone);
         if(agricultor==null){
-            return new ResponseEntity<>("El agricultor con telefono o email "+emailOrPhone+", no existe",
+            return new ResponseEntity<>(new Mensaje("El agricultor con telefono o email "+emailOrPhone+", no existe"),
                     HttpStatus.NOT_FOUND);
         }
         List<Finca> fincas = (List<Finca>)(agricultor.getFincaCollection());

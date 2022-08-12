@@ -35,6 +35,7 @@ C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\u
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\domain\model\Municipio\Municipio.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\Densidad\DensidadServiceImp.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\config\Spring\security\repository\RolRepository.java
+C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\ElementoVariedad\ElementoVariedadRepository.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\Departamento\DepartamentoRepository.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\config\Spring\email\service\imp\EmailServiceImp.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\domain\model\TipoIdentificacion\gateway\TipoIdentificacionService.java
@@ -44,6 +45,7 @@ C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\u
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\entry_points\rest\EtapaFenologica\EtapaFenologicaController.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\db\springdata\mapper\FuenteRecomendacionEntityMapper.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\domain\model\TipoCultivo\gateway\TipoCultivoService.java
+C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\domain\model\ElementoVariedad\gateway\ElementoVariedadService.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\db\springdata\entity\Densidad\DensidadEntity.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\db\springdata\mapper\AnalisisElementoEntityMapper.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\config\Spring\security\model\Usuario.java
@@ -78,6 +80,7 @@ C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\u
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\TipoIdentificacion\TipoIdentificacionServiceImp.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\AnalisisSuelo\AnalisisSueloRepository.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\db\springdata\entity\ElementoVariedad\ElementoVariedadEntity.java
+C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\ElementoVariedad\ElementoVariedadServiceImp.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\db\springdata\mapper\ProfundidadMuestraEntityMapper.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\db\springdata\entity\FuenteRecomendacion\FuenteRecomendacionEntity.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\AbonoOrganico\AbonoOrganicoRepository.java
@@ -113,6 +116,7 @@ C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\u
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\config\Spring\security\model\UsuarioPrincipal.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\entry_points\rest\Departamento\DepartamentoController.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\domain\model\Corregimiento\Corregimiento.java
+C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\db\springdata\mapper\ElementoVariedadEntityMapper.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\Variedad\VariedadRepository.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\domain\model\Recomendacion\EtapaFenologica\EtapaFenologica.java
 C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa\Fuente\FuenteServiceImp.java

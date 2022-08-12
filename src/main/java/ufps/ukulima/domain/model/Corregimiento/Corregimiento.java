@@ -7,6 +7,7 @@ package ufps.ukulima.domain.model.Corregimiento;
 
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Municipio.Municipio;
+import ufps.ukulima.domain.model.Vereda.Vereda;
 
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
@@ -21,6 +22,8 @@ public class Corregimiento  {
     private String nombre;
     private Municipio idMunicipio;
     private Collection<Finca> fincaCollection;
+
+    private Collection<Vereda> veredaCollection;
 
     public Corregimiento() {
     }
@@ -64,6 +67,14 @@ public class Corregimiento  {
 
     public void fincaCollection(Collection<Finca> fincaCollection) {
         this.fincaCollection = fincaCollection;
+    }
+
+    public Collection<Vereda> veredaCollection() {
+        return veredaCollection;
+    }
+
+    public void veredaCollection(Collection<Vereda> veredaCollection) {
+        this.veredaCollection = veredaCollection;
     }
 
     @Override

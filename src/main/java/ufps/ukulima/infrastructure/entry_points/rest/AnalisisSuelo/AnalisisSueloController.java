@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.AnalisisSuelo.gateway.AnalisisSueloService;
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
@@ -56,16 +57,20 @@ public class AnalisisSueloController {
         ProfundidadMuestra muestra= muestraService.findProfundidadMuestraById(analisisSuelo.getIdProfundidad().getIdProfundidadMuestra());
 
         if(claseTextural==null)
-            return new ResponseEntity<>("Clase textural no puede estar vacio al guardar analisis suelo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("Clase textural no puede estar vacio al guardar analisis suelo"),
+                    HttpStatus.BAD_REQUEST);
 
         if(cultivo==null)
-            return new ResponseEntity<>("cultivo no puede estar vacio al guardar analisis suelo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("cultivo no puede estar vacio al guardar analisis suelo"),
+                    HttpStatus.BAD_REQUEST);
 
         if(densidad==null)
-            return new ResponseEntity<>("densidad no puede estar vacio al guardar analisis suelo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("densidad no puede estar vacio al guardar analisis suelo"),
+                    HttpStatus.BAD_REQUEST);
         
         if(muestra==null)
-            return new ResponseEntity<>("profundidad muestra no puede estar vacio al guardar analisis suelo", HttpStatus.BAD_REQUEST);       
+            return new ResponseEntity<>(new Mensaje("profundidad muestra no puede estar vacio al guardar analisis " +
+                    "suelo"), HttpStatus.BAD_REQUEST);
 
         analisisSuelo.setIdClaseTextural(claseTextural);
         analisisSuelo.setIdCultivo(cultivo);
@@ -74,14 +79,15 @@ public class AnalisisSueloController {
 
         analisisSueloService.saveAnalisisSuelo(analisisSuelo);
 
-        return ResponseEntity.ok("Analisis suelo agregado");
+        return ResponseEntity.ok(new Mensaje("Analisis suelo agregado"));
     }
 
     @GetMapping("/recomendaciones")
     public ResponseEntity<?> getAllRecomendaciones(@RequestBody AnalisisSuelo analisisSuelo){
         AnalisisSuelo analisisSueloR = analisisSueloService.getAnalisisSueloById(analisisSuelo.getIdAnalisisSuelo());
         if(analisisSueloR == null){
-            return new ResponseEntity<>("Análisis suelo ingresado no se encuentra registrado", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("Análisis suelo ingresado no se encuentra registrado"),
+                    HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(analisisSueloR.getRecomendacionCollection());
     }

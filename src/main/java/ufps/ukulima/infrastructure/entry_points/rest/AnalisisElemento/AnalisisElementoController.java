@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.AnalisisElemento.gateway.AnalisisElementoService;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
@@ -33,14 +34,15 @@ public class AnalisisElementoController {
         Elemento elemento = elementoService.getElementoById(analisisElemento.getIdElemento().getId());
 
         if( analisisSuelo == null)
-            return new ResponseEntity<>("Analisis suelo no puede estar vacio al registrar analisis elemento",
+            return new ResponseEntity<>(new Mensaje("Analisis suelo no puede estar vacio al registrar analisis " +
+                    "elemento"),
                     HttpStatus.BAD_REQUEST);
         if( elemento == null)
-            return new ResponseEntity<>("Elemento no puede estar vacio al registrar elemento",
+            return new ResponseEntity<>(new Mensaje("Elemento no puede estar vacio al registrar elemento"),
                     HttpStatus.BAD_REQUEST);
 
         analisisElementoService.saveAnalisisElemento(analisisElemento);
-        return ResponseEntity.ok("Analisis elemento guardado con exito");
+        return ResponseEntity.ok(new Mensaje("Analisis elemento guardado con exito"));
     }
 
     @GetMapping

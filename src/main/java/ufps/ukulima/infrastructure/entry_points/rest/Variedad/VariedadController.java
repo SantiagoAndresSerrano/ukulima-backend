@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
 import ufps.ukulima.domain.model.TipoCultivo.gateway.TipoCultivoService;
 import ufps.ukulima.domain.model.Variedad.Variedad;
@@ -33,9 +34,10 @@ public class VariedadController {
         variedad.setIdTipoCultivo(tipoCultivo);
         variedadService.saveVariedad(variedad);
 		if( tipoCultivo == null)
-			return new ResponseEntity<>("El tipo de cultivo no puede estar vacio al registrar la variedad", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new Mensaje("El tipo de cultivo no puede estar vacio al registrar la ") +
+                    "variedad", HttpStatus.BAD_REQUEST);
 
-        return ResponseEntity.ok("Variedad agregada con éxito " + variedad.getDescripcion());
+        return ResponseEntity.ok(new Mensaje("Variedad agregada con éxito ") + variedad.getDescripcion());
 	}
 
     @GetMapping

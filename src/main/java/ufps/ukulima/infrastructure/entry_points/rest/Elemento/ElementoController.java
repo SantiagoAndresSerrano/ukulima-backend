@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Elemento.gateway.ElementoService;
 
@@ -24,7 +25,7 @@ public class ElementoController{
     @PostMapping
     public ResponseEntity<?> saveElemento(@RequestBody Elemento elemento){
         elementoService.saveElemento(elemento);
-        return ResponseEntity.ok("Elemento registrado con éxito :" + elemento.getNombre());
+        return ResponseEntity.ok(new Mensaje("Elemento registrado con éxito :" + elemento.getNombre()));
     }
     @GetMapping
     public ResponseEntity<?> getAllElemento(){

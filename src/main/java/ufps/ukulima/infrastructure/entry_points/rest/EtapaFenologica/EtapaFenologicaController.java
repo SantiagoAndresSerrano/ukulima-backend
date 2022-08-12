@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.gateway.EtapaFenologicaService;
 
@@ -26,7 +27,8 @@ public class EtapaFenologicaController {
     public ResponseEntity<?> getEtapaById(@PathVariable int idEtapa){
        EtapaFenologica etapaFenologica= etapaFenologicaService.getEtapaFenologicaById(idEtapa);
         if(etapaFenologica==null)
-            return new ResponseEntity<>("Etapa fenologica con id"+idEtapa+" no encontrada", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new Mensaje("Etapa fenologica con id"+idEtapa+" no encontrada"),
+                    HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(etapaFenologica);
     }
 

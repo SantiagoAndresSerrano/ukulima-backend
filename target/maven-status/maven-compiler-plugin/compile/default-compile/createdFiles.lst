@@ -48,6 +48,7 @@ ufps\ukulima\infrastructure\db\springdata\mapper\FuenteEntityMapper.class
 ufps\ukulima\infrastructure\db\springdata\mapper\VeredaEntityMapper.class
 ufps\ukulima\infrastructure\db\springdata\entity\TipoCultivo\TipoCultivoEntity.class
 ufps\ukulima\infrastructure\driven_adapters\jpa\Variedad\VariedadRepository.class
+ufps\ukulima\infrastructure\db\springdata\mapper\ElementoVariedadEntityMapperImpl.class
 ufps\ukulima\infrastructure\entry_points\rest\$welcome\WelcomeRest.class
 ufps\ukulima\infrastructure\driven_adapters\jpa\Departamento\DepartamentoServiceImp.class
 ufps\ukulima\infrastructure\db\springdata\mapper\TopografiaEntityMapper.class
@@ -72,6 +73,7 @@ ufps\ukulima\infrastructure\db\springdata\entity\Enmienda\EnmiendaEntity.class
 ufps\ukulima\infrastructure\db\springdata\entity\FuenteRecomendacion\FuenteRecomendacionEntity.class
 ufps\ukulima\infrastructure\driven_adapters\jpa\AbonoOrganico\AbonoOrganicoRepository.class
 ufps\ukulima\infrastructure\db\springdata\entity\TipoIdentificacion\TipoIdentificacionEntity.class
+ufps\ukulima\infrastructure\driven_adapters\jpa\ElementoVariedad\ElementoVariedadServiceImp.class
 ufps\ukulima\domain\model\DistanciaSiembra\gateway\DistanciaSiembraService.class
 ufps\ukulima\infrastructure\driven_adapters\jpa\AbonoOrganico\AbonoOrganicoServiceImp.class
 ufps\ukulima\infrastructure\entry_points\rest\AnalisisSuelo\AnalisisSueloController.class
@@ -95,6 +97,7 @@ ufps\ukulima\config\Spring\security\dto\Mensaje.class
 ufps\ukulima\infrastructure\driven_adapters\jpa\AbonoOrganicoRecomendacion\AbonoOrganicoRecomendacionServiceImp.class
 ufps\ukulima\domain\model\Agricultor\Agricultor.class
 ufps\ukulima\infrastructure\db\springdata\entity\PasswordResetToken\PasswordResetTokenEntity.class
+ufps\ukulima\infrastructure\driven_adapters\jpa\ElementoVariedad\ElementoVariedadRepository.class
 ufps\ukulima\infrastructure\db\springdata\mapper\DensidadEntityMapperImpl.class
 ufps\ukulima\domain\model\Recomendacion\EtapaFenologica\EtapaFenologica.class
 ufps\ukulima\domain\model\Recomendacion\EtapaFenologica\gateway\EtapaFenologicaService.class
@@ -196,6 +199,7 @@ ufps\ukulima\infrastructure\db\springdata\mapper\EtapaFenologicaEntityMapper.cla
 ufps\ukulima\domain\model\FuenteRecomendacion\FuenteRecomendacion.class
 ufps\ukulima\infrastructure\db\springdata\mapper\EtapaFenologicaEntityMapperImpl.class
 ufps\ukulima\infrastructure\db\springdata\entity\Municipio\MunicipioEntity.class
+ufps\ukulima\infrastructure\db\springdata\mapper\ElementoVariedadEntityMapper.class
 ufps\ukulima\infrastructure\db\springdata\mapper\FincaEntityMapper.class
 ufps\ukulima\infrastructure\driven_adapters\jpa\Finca\FincaServiceImp.class
 ufps\ukulima\infrastructure\db\springdata\mapper\CorregimientoEntityMapper.class
@@ -215,6 +219,7 @@ ufps\ukulima\infrastructure\driven_adapters\jpa\DistanciaSiembra\DistanciaSiembr
 ufps\ukulima\infrastructure\entry_points\rest\AnalisisElemento\AnalisisElementoController.class
 ufps\ukulima\domain\model\PasswordResetToken\gateway\PasswordResetTokenService.class
 ufps\ukulima\infrastructure\db\springdata\mapper\CorregimientoEntityMapperImpl.class
+ufps\ukulima\domain\model\ElementoVariedad\gateway\ElementoVariedadService.class
 ufps\ukulima\domain\model\Finca\gateway\FincaService.class
 ufps\ukulima\infrastructure\driven_adapters\jpa\PasswordResetToken\PasswordResetTokenRepository.class
 ufps\ukulima\domain\model\ProfundidadMuestra\ProfundidadMuestra.class
