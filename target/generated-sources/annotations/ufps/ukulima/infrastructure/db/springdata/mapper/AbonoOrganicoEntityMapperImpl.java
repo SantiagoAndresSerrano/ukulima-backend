@@ -9,8 +9,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganico.AbonoOrgan
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-12T08:47:25-0500",
-    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
+    date = "2022-08-26T07:43:55-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class AbonoOrganicoEntityMapperImpl implements AbonoOrganicoEntityMapper {

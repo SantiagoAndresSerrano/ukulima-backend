@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
+import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
+import ufps.ukulima.domain.model.Departamento.Departamento;
+import ufps.ukulima.domain.model.Municipio.Municipio;
 import ufps.ukulima.domain.model.Vereda.Vereda;
+import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.DepartamentoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-12T08:47:24-0500",
-    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
+    date = "2022-08-26T07:43:54-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class VeredaEntityMapperImpl implements VeredaEntityMapper {
@@ -24,7 +30,7 @@ public class VeredaEntityMapperImpl implements VeredaEntityMapper {
         Vereda vereda = new Vereda();
 
         vereda.setIdVereda( VeredaEntity.getIdVereda() );
-        vereda.setIdCorregimiento( VeredaEntity.getIdCorregimiento() );
+        vereda.setIdCorregimiento( corregimientoEntityToCorregimiento( VeredaEntity.getIdCorregimiento() ) );
         vereda.setNombre( VeredaEntity.getNombre() );
 
         return vereda;
@@ -39,7 +45,7 @@ public class VeredaEntityMapperImpl implements VeredaEntityMapper {
         VeredaEntity veredaEntity = new VeredaEntity();
 
         veredaEntity.setIdVereda( Vereda.getIdVereda() );
-        veredaEntity.setIdCorregimiento( Vereda.getIdCorregimiento() );
+        veredaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( Vereda.getIdCorregimiento() ) );
         veredaEntity.setNombre( Vereda.getNombre() );
 
         return veredaEntity;
@@ -57,5 +63,85 @@ public class VeredaEntityMapperImpl implements VeredaEntityMapper {
         }
 
         return list;
+    }
+
+    protected Departamento departamentoEntityToDepartamento(DepartamentoEntity departamentoEntity) {
+        if ( departamentoEntity == null ) {
+            return null;
+        }
+
+        Departamento departamento = new Departamento();
+
+        departamento.setIdDepto( departamentoEntity.getIdDepto() );
+        departamento.setNombre( departamentoEntity.getNombre() );
+
+        return departamento;
+    }
+
+    protected Municipio municipioEntityToMunicipio(MunicipioEntity municipioEntity) {
+        if ( municipioEntity == null ) {
+            return null;
+        }
+
+        Municipio municipio = new Municipio();
+
+        municipio.setIdMunicipio( municipioEntity.getIdMunicipio() );
+        municipio.setIdDepartamento( departamentoEntityToDepartamento( municipioEntity.getIdDepartamento() ) );
+
+        return municipio;
+    }
+
+    protected Corregimiento corregimientoEntityToCorregimiento(CorregimientoEntity corregimientoEntity) {
+        if ( corregimientoEntity == null ) {
+            return null;
+        }
+
+        Corregimiento corregimiento = new Corregimiento();
+
+        corregimiento.setIdCorregimiento( corregimientoEntity.getIdCorregimiento() );
+        corregimiento.setNombre( corregimientoEntity.getNombre() );
+        corregimiento.setIdMunicipio( municipioEntityToMunicipio( corregimientoEntity.getIdMunicipio() ) );
+
+        return corregimiento;
+    }
+
+    protected DepartamentoEntity departamentoToDepartamentoEntity(Departamento departamento) {
+        if ( departamento == null ) {
+            return null;
+        }
+
+        DepartamentoEntity departamentoEntity = new DepartamentoEntity();
+
+        departamentoEntity.setIdDepto( departamento.getIdDepto() );
+        departamentoEntity.setNombre( departamento.getNombre() );
+
+        return departamentoEntity;
+    }
+
+    protected MunicipioEntity municipioToMunicipioEntity(Municipio municipio) {
+        if ( municipio == null ) {
+            return null;
+        }
+
+        MunicipioEntity municipioEntity = new MunicipioEntity();
+
+        municipioEntity.setIdMunicipio( municipio.getIdMunicipio() );
+        municipioEntity.setIdDepartamento( departamentoToDepartamentoEntity( municipio.getIdDepartamento() ) );
+
+        return municipioEntity;
+    }
+
+    protected CorregimientoEntity corregimientoToCorregimientoEntity(Corregimiento corregimiento) {
+        if ( corregimiento == null ) {
+            return null;
+        }
+
+        CorregimientoEntity corregimientoEntity = new CorregimientoEntity();
+
+        corregimientoEntity.setIdCorregimiento( corregimiento.getIdCorregimiento() );
+        corregimientoEntity.setNombre( corregimiento.getNombre() );
+        corregimientoEntity.setIdMunicipio( municipioToMunicipioEntity( corregimiento.getIdMunicipio() ) );
+
+        return corregimientoEntity;
     }
 }

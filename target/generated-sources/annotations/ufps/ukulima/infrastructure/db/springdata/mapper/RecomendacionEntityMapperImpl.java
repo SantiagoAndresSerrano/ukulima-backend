@@ -58,8 +58,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-12T08:47:40-0500",
-    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 11.0.16 (Oracle Corporation)"
+    date = "2022-08-26T07:43:55-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class RecomendacionEntityMapperImpl implements RecomendacionEntityMapper {
@@ -367,7 +367,7 @@ public class RecomendacionEntityMapperImpl implements RecomendacionEntityMapper 
         Vereda vereda = new Vereda();
 
         vereda.setIdVereda( veredaEntity.getIdVereda() );
-        vereda.setIdCorregimiento( veredaEntity.getIdCorregimiento() );
+        vereda.setIdCorregimiento( corregimientoEntityToCorregimiento( veredaEntity.getIdCorregimiento() ) );
         vereda.setNombre( veredaEntity.getNombre() );
 
         return vereda;
@@ -825,7 +825,7 @@ public class RecomendacionEntityMapperImpl implements RecomendacionEntityMapper 
         VeredaEntity veredaEntity = new VeredaEntity();
 
         veredaEntity.setIdVereda( vereda.getIdVereda() );
-        veredaEntity.setIdCorregimiento( vereda.getIdCorregimiento() );
+        veredaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( vereda.getIdCorregimiento() ) );
         veredaEntity.setNombre( vereda.getNombre() );
 
         return veredaEntity;
