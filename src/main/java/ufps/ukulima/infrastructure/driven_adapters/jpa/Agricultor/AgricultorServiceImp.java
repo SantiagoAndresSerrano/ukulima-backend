@@ -3,17 +3,25 @@ package ufps.ukulima.infrastructure.driven_adapters.jpa.Agricultor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import lombok.extern.slf4j.Slf4j;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
+import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
+import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.mapper.AgricultorEntityMapper;
+import ufps.ukulima.infrastructure.driven_adapters.jpa.TipoIdentificacion.TipoIdentificacionRepository;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class AgricultorServiceImp implements AgricultorService {
 
     @Autowired
     AgricultorRepository agricultorRepository;
+    @Autowired
+    TipoIdentificacionRepository tipoIdentificacionRepository;
 
     @Autowired
     AgricultorEntityMapper agricultorEntityMapper;
@@ -46,7 +54,7 @@ public class AgricultorServiceImp implements AgricultorService {
     @Override
     @Transactional(readOnly = true)
     public boolean existById(int id) {
-        return agricultorRepository.existsAgricultorByIdentifiacion(id);
+        return agricultorRepository.existsAgricultorByIdentificacion(id);
     }
 
 
@@ -72,7 +80,10 @@ public class AgricultorServiceImp implements AgricultorService {
     @Override
     @Transactional
     public void saveAgricultor(Agricultor agricultor) {
-        agricultorRepository.save(agricultorEntityMapper.toEntity(agricultor));
+        AgricultorEntity agricultorEntity = agricultorEntityMapper.toEntity(agricultor);
+        agricultorEntity.setIdentifiacion(agricultor.getIdentificacion());
+        agricultorEntity.setIdTipoIdentificacion(tipoIdentificacionRepository.getById(agricultor.getIdTipoidentificacion().getIdTipo()));
+        agricultorRepository.save(agricultorEntity);
     }
 
     @Override

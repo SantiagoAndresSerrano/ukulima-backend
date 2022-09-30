@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Agricultor.findAll", query = "SELECT a FROM AgricultorEntity a"),
-    @NamedQuery(name = "Agricultor.findByIdentifiacion", query = "SELECT a FROM AgricultorEntity a WHERE a.identifiacion = :identifiacion"),
+    @NamedQuery(name = "Agricultor.findByIdentificacion", query = "SELECT a FROM AgricultorEntity a WHERE a.identificacion = :identificacion"),
     @NamedQuery(name = "Agricultor.findByNombres", query = "SELECT a FROM AgricultorEntity a WHERE a.nombres = :nombres"),
     @NamedQuery(name = "Agricultor.findByApellidos", query = "SELECT a FROM AgricultorEntity a WHERE a.apellidos = :apellidos"),
     @NamedQuery(name = "Agricultor.findByTelefono", query = "SELECT a FROM AgricultorEntity a WHERE a.telefono = :telefono"),
@@ -49,8 +49,8 @@ public class AgricultorEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "identifiacion")
-    private Integer identifiacion;
+    @Column(name = "identificacion")
+    private Integer identificacion;
     @Basic(optional = false)
     @Column(name = "nombres")
     private String nombres;
@@ -88,12 +88,12 @@ public class AgricultorEntity implements Serializable {
     public AgricultorEntity() {
     }
 
-    public AgricultorEntity(Integer identifiacion) {
-        this.identifiacion = identifiacion;
+    public AgricultorEntity(Integer identificacion) {
+        this.identificacion = identificacion;
     }
 
-    public AgricultorEntity(Integer identifiacion, String nombres, String apellidos, Date fechaNacimiento, String password) {
-        this.identifiacion = identifiacion;
+    public AgricultorEntity(Integer identificacion, String nombres, String apellidos, Date fechaNacimiento, String password) {
+        this.identificacion = identificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
@@ -125,11 +125,11 @@ public class AgricultorEntity implements Serializable {
     }
 
     public Integer getIdentifiacion() {
-        return identifiacion;
+        return identificacion;
     }
 
-    public void setIdentifiacion(Integer identifiacion) {
-        this.identifiacion = identifiacion;
+    public void setIdentifiacion(Integer identificacion) {
+        this.identificacion = identificacion;
     }
 
     public String getNombres() {
@@ -199,7 +199,7 @@ public class AgricultorEntity implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (identifiacion != null ? identifiacion.hashCode() : 0);
+        hash += (identificacion != null ? identificacion.hashCode() : 0);
         return hash;
     }
 
@@ -210,7 +210,7 @@ public class AgricultorEntity implements Serializable {
             return false;
         }
         AgricultorEntity other = (AgricultorEntity) object;
-        if ((this.identifiacion == null && other.identifiacion != null) || (this.identifiacion != null && !this.identifiacion.equals(other.identifiacion))) {
+        if ((this.identificacion == null && other.identificacion != null) || (this.identificacion != null && !this.identificacion.equals(other.identificacion))) {
             return false;
         }
         return true;
@@ -219,7 +219,7 @@ public class AgricultorEntity implements Serializable {
     @Override
     public String toString() {
         return "Agricultor{" +
-                "identifiacion=" + identifiacion +
+                "identificacion=" + identificacion +
                 ", nombres='" + nombres + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", telefono='" + telefono + '\'' +

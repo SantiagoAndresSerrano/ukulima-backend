@@ -16,7 +16,7 @@ public interface AgricultorRepository extends JpaRepository<AgricultorEntity, In
     AgricultorEntity findAgricultorsByTelefonoOrEmail(@Param("usernameOrEmail") String usernameOrEmail);
     public boolean existsAgricultorByEmail(String email);
     public boolean existsAgricultorByTelefono(String telefono);
-    public boolean existsAgricultorByIdentifiacion(Integer identifiacion);
+    public boolean existsAgricultorByIdentificacion(Integer identificacion);
 
 
 

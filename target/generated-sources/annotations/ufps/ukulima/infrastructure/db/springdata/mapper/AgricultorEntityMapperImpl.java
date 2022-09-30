@@ -11,8 +11,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoI
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-26T07:43:43-0500",
-    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
+    date = "2022-09-29T18:54:26-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220719-0747, environment: Java 17.0.4 (Eclipse Adoptium)"
 )
 @Component
 public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
@@ -27,7 +27,6 @@ public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
 
         agricultor.setConfirmationToken( AgricultorEntity.getConfirmationToken() );
         agricultor.setEstado( AgricultorEntity.getEstado() );
-        agricultor.setIdentifiacion( AgricultorEntity.getIdentifiacion() );
         agricultor.setNombres( AgricultorEntity.getNombres() );
         agricultor.setApellidos( AgricultorEntity.getApellidos() );
         agricultor.setTelefono( AgricultorEntity.getTelefono() );
@@ -49,14 +48,12 @@ public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
 
         agricultorEntity.setEstado( Agricultor.getEstado() );
         agricultorEntity.setConfirmationToken( Agricultor.getConfirmationToken() );
-        agricultorEntity.setIdentifiacion( Agricultor.getIdentifiacion() );
         agricultorEntity.setNombres( Agricultor.getNombres() );
         agricultorEntity.setApellidos( Agricultor.getApellidos() );
         agricultorEntity.setTelefono( Agricultor.getTelefono() );
         agricultorEntity.setFechaNacimiento( Agricultor.getFechaNacimiento() );
         agricultorEntity.setPassword( Agricultor.getPassword() );
         agricultorEntity.setEmail( Agricultor.getEmail() );
-        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( Agricultor.getIdTipoIdentificacion() ) );
 
         return agricultorEntity;
     }
@@ -86,18 +83,5 @@ public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
         tipoIdentificacion.setNombre( tipoIdentificacionEntity.getNombre() );
 
         return tipoIdentificacion;
-    }
-
-    protected TipoIdentificacionEntity tipoIdentificacionToTipoIdentificacionEntity(TipoIdentificacion tipoIdentificacion) {
-        if ( tipoIdentificacion == null ) {
-            return null;
-        }
-
-        TipoIdentificacionEntity tipoIdentificacionEntity = new TipoIdentificacionEntity();
-
-        tipoIdentificacionEntity.setIdTipo( tipoIdentificacion.getIdTipo() );
-        tipoIdentificacionEntity.setNombre( tipoIdentificacion.getNombre() );
-
-        return tipoIdentificacionEntity;
     }
 }

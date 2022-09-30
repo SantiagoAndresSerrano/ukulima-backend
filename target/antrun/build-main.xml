@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima-backend-master\target/ukulima-0.0.1-SNAPSHOT/" overwrite="false">
+    <fileset includes=".ebextensions/**" dir="./"/>
+    <fileset includes="*.jar" dir="C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima-backend-master\target"/>
+  </copy>
+  <zip basedir="C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima-backend-master\target/ukulima-0.0.1-SNAPSHOT" destfile="C:\Users\Santiago\Desktop\Universidad\Tesis\Backend\ukulima-backend-master\target/ukulima-0.0.1-SNAPSHOT.zip"/>
+</target>
+</project>

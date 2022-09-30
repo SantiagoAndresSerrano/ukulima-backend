@@ -44,11 +44,11 @@ public class AgricultorController {
         if (br.hasErrors()) {
             return new ResponseEntity<List<ObjectError>>(br.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
-        if(agricultor.getIdentifiacion()==null)
+        if(agricultor.getIdentificacion()==null)
             return new ResponseEntity<>(new Mensaje("Debe proporcionar un ID si desea actualizar"),
                     HttpStatus.BAD_REQUEST);
 
-        Agricultor agricultor1 = agricultorService.getAgricultorById(agricultor.getIdentifiacion());
+        Agricultor agricultor1 = agricultorService.getAgricultorById(agricultor.getIdentificacion());
 
         if(agricultor1.getEmail()!=null){
             if(!agricultor1.getEmail().equals(agricultor.getEmail())){ // se actualice un email de agricultor ya existente

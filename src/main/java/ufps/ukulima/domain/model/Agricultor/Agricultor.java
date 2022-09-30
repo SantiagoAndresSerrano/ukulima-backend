@@ -17,7 +17,7 @@ import java.util.Date;
  * @author santi
  */
 public class Agricultor  {
-    private Integer identifiacion;
+    private Integer identificacion;
     private String nombres;
     private String apellidos;
     private String telefono;
@@ -28,7 +28,7 @@ public class Agricultor  {
     private String confirmationToken;
 
     private Boolean estado;
-    private TipoIdentificacion idTipoIdentificacion;
+    private TipoIdentificacion idTipoidentificacion;
     private Collection<Finca> fincaCollection;
 
     private Collection<PasswordResetToken> passwordResetTokens;
@@ -38,12 +38,12 @@ public class Agricultor  {
     public Agricultor() {
     }
 
-    public Agricultor(Integer identifiacion) {
-        this.identifiacion = identifiacion;
+    public Agricultor(Integer identificacion) {
+        this.identificacion = identificacion;
     }
 
-    public Agricultor(Integer identifiacion, String nombres, String apellidos, Date fechaNacimiento, String password) {
-        this.identifiacion = identifiacion;
+    public Agricultor(Integer identificacion, String nombres, String apellidos, Date fechaNacimiento, String password) {
+        this.identificacion = identificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.fechaNacimiento = fechaNacimiento;
@@ -74,12 +74,12 @@ public class Agricultor  {
         this.passwordResetTokens = passwordResetTokens;
     }
 
-    public Integer getIdentifiacion() {
-        return identifiacion;
+    public Integer getIdentificacion() {
+        return identificacion;
     }
 
-    public void setIdentifiacion(Integer identifiacion) {
-        this.identifiacion = identifiacion;
+    public void setIdentificacion(Integer identificacion) {
+        this.identificacion = identificacion;
     }
 
     public String getNombres() {
@@ -130,12 +130,12 @@ public class Agricultor  {
         this.email = email;
     }
 
-    public TipoIdentificacion getIdTipoIdentificacion() {
-        return idTipoIdentificacion;
+    public TipoIdentificacion getIdTipoidentificacion() {
+        return idTipoidentificacion;
     }
 
     public void setIdTipoIdentificacion(TipoIdentificacion idTipoIdentificacion) {
-        this.idTipoIdentificacion = idTipoIdentificacion;
+        this.idTipoidentificacion = idTipoIdentificacion;
     }
 
     public Collection<Finca> getFincaCollection() {
@@ -149,7 +149,7 @@ public class Agricultor  {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (identifiacion != null ? identifiacion.hashCode() : 0);
+        hash += (identificacion != null ? identificacion.hashCode() : 0);
         return hash;
     }
 
@@ -160,7 +160,7 @@ public class Agricultor  {
             return false;
         }
         Agricultor other = (Agricultor) object;
-        if ((this.identifiacion == null && other.identifiacion != null) || (this.identifiacion != null && !this.identifiacion.equals(other.identifiacion))) {
+        if ((this.identificacion == null && other.identificacion != null) || (this.identificacion != null && !this.identificacion.equals(other.identificacion))) {
             return false;
         }
         return true;
@@ -169,14 +169,14 @@ public class Agricultor  {
     @Override
     public String toString() {
         return "Agricultor{" +
-                "identifiacion=" + identifiacion +
+                "identificacion=" + identificacion +
                 ", nombres='" + nombres + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", idTipoIdentificacion=" + idTipoIdentificacion +
+                ", idTipoidentificacion=" + idTipoidentificacion +
                 '}';
     }
 }

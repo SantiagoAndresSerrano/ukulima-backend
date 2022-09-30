@@ -32,7 +32,7 @@ public class FincaController {
 
     @PostMapping
     public ResponseEntity<?> saveFinca(@RequestBody Finca finca){
-        Agricultor agricultor = agricultorService.getAgricultorById(finca.getIdAgricultor().getIdentifiacion());
+        Agricultor agricultor = agricultorService.getAgricultorById(finca.getIdAgricultor().getIdentificacion());
         if(agricultor==null){
             return new ResponseEntity<>(new Mensaje("No existe un agricultor con ese ID"), HttpStatus.BAD_REQUEST);
         }
@@ -48,7 +48,7 @@ public class FincaController {
             return new ResponseEntity<>(new Mensaje("Debe proporcionar un ID si desea actualizar"),
                     HttpStatus.BAD_REQUEST);
 
-        Agricultor agricultor = agricultorService.getAgricultorById(finca.getIdAgricultor().getIdentifiacion());
+        Agricultor agricultor = agricultorService.getAgricultorById(finca.getIdAgricultor().getIdentificacion());
         if(agricultor==null){
             return new ResponseEntity<>(new Mensaje("No existe un agricultor con ese ID"), HttpStatus.BAD_REQUEST);
         }

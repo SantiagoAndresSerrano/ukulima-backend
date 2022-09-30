@@ -62,7 +62,7 @@ public class FincaEntity implements Serializable {
     @Lob
     @Column(name = "geolocalizacion")
     private String geolocalizacion;
-    @JoinColumn(name = "id_agricultor", referencedColumnName = "identifiacion")
+    @JoinColumn(name = "id_agricultor", referencedColumnName = "identificacion")
     @ManyToOne(optional = false)
     private AgricultorEntity idAgricultor;
     @JoinColumn(name = "id_corregimiento", referencedColumnName = "id_corregimiento")

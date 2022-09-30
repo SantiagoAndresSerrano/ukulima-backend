@@ -58,8 +58,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-26T07:43:44-0500",
-    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.100.v20220318-0906, environment: Java 17.0.3 (Eclipse Adoptium)"
+    date = "2022-09-29T18:54:27-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220719-0747, environment: Java 17.0.4 (Eclipse Adoptium)"
 )
 @Component
 public class ElementoEntityMapperImpl implements ElementoEntityMapper {
@@ -345,7 +345,6 @@ public class ElementoEntityMapperImpl implements ElementoEntityMapper {
 
         agricultor.setConfirmationToken( agricultorEntity.getConfirmationToken() );
         agricultor.setEstado( agricultorEntity.getEstado() );
-        agricultor.setIdentifiacion( agricultorEntity.getIdentifiacion() );
         agricultor.setNombres( agricultorEntity.getNombres() );
         agricultor.setApellidos( agricultorEntity.getApellidos() );
         agricultor.setTelefono( agricultorEntity.getTelefono() );
@@ -783,19 +782,6 @@ public class ElementoEntityMapperImpl implements ElementoEntityMapper {
         return etapaFenologicaEntity;
     }
 
-    protected TipoIdentificacionEntity tipoIdentificacionToTipoIdentificacionEntity(TipoIdentificacion tipoIdentificacion) {
-        if ( tipoIdentificacion == null ) {
-            return null;
-        }
-
-        TipoIdentificacionEntity tipoIdentificacionEntity = new TipoIdentificacionEntity();
-
-        tipoIdentificacionEntity.setIdTipo( tipoIdentificacion.getIdTipo() );
-        tipoIdentificacionEntity.setNombre( tipoIdentificacion.getNombre() );
-
-        return tipoIdentificacionEntity;
-    }
-
     protected AgricultorEntity agricultorToAgricultorEntity(Agricultor agricultor) {
         if ( agricultor == null ) {
             return null;
@@ -805,14 +791,12 @@ public class ElementoEntityMapperImpl implements ElementoEntityMapper {
 
         agricultorEntity.setEstado( agricultor.getEstado() );
         agricultorEntity.setConfirmationToken( agricultor.getConfirmationToken() );
-        agricultorEntity.setIdentifiacion( agricultor.getIdentifiacion() );
         agricultorEntity.setNombres( agricultor.getNombres() );
         agricultorEntity.setApellidos( agricultor.getApellidos() );
         agricultorEntity.setTelefono( agricultor.getTelefono() );
         agricultorEntity.setFechaNacimiento( agricultor.getFechaNacimiento() );
         agricultorEntity.setPassword( agricultor.getPassword() );
         agricultorEntity.setEmail( agricultor.getEmail() );
-        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( agricultor.getIdTipoIdentificacion() ) );
 
         return agricultorEntity;
     }

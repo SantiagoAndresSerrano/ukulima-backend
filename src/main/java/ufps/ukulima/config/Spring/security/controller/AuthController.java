@@ -103,6 +103,7 @@ public class AuthController {
 
     @PostMapping("/nuevoAgricultor")
     public ResponseEntity<?> nuevoAgricultor(@Valid @RequestBody NuevoAgricultor nuevoAgricultor, BindingResult bindingResult) throws MessagingException {
+
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
 
@@ -121,17 +122,21 @@ public class AuthController {
             agricultor.setTelefono(agricultor.getTelefono());
         }
 
-        agricultor.setIdentifiacion(nuevoAgricultor.getIdentificacion());
+        if(nuevoAgricultor.getTelefono() != null){
+            agricultor.setTelefono(nuevoAgricultor.getTelefono());
+        }
+
+        agricultor.setIdentificacion(nuevoAgricultor.getIdentificacion());
         agricultor.setIdTipoIdentificacion(nuevoAgricultor.getIdTipoIdentificacion());
         agricultor.setApellidos(nuevoAgricultor.getApellidos());
         agricultor.setNombres(nuevoAgricultor.getNombres());
         agricultor.setFechaNacimiento(nuevoAgricultor.getFechaNacimiento());
-        agricultor.setIdTipoIdentificacion(nuevoAgricultor.getIdTipoIdentificacion());
         agricultor.setPassword(passwordEncoder.encode(nuevoAgricultor.getPassword()));
         agricultor.setConfirmationToken(UUID.randomUUID().toString());
         agricultor.setEstado(false);
-
+log.info(agricultor.toString());
         agricultorService.saveAgricultor(agricultor);
+
         return ResponseEntity.ok(agricultor);
     }
 
