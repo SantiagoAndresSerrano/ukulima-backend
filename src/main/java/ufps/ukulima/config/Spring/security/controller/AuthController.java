@@ -134,7 +134,6 @@ public class AuthController {
         agricultor.setPassword(passwordEncoder.encode(nuevoAgricultor.getPassword()));
         agricultor.setConfirmationToken(UUID.randomUUID().toString());
         agricultor.setEstado(false);
-log.info(agricultor.toString());
         agricultorService.saveAgricultor(agricultor);
 
         return ResponseEntity.ok(agricultor);

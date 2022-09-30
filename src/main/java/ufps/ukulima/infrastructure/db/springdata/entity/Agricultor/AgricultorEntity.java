@@ -26,6 +26,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -38,19 +39,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "agricultor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Agricultor.findAll", query = "SELECT a FROM AgricultorEntity a"),
-    @NamedQuery(name = "Agricultor.findByIdentificacion", query = "SELECT a FROM AgricultorEntity a WHERE a.identificacion = :identificacion"),
-    @NamedQuery(name = "Agricultor.findByNombres", query = "SELECT a FROM AgricultorEntity a WHERE a.nombres = :nombres"),
-    @NamedQuery(name = "Agricultor.findByApellidos", query = "SELECT a FROM AgricultorEntity a WHERE a.apellidos = :apellidos"),
-    @NamedQuery(name = "Agricultor.findByTelefono", query = "SELECT a FROM AgricultorEntity a WHERE a.telefono = :telefono"),
-    @NamedQuery(name = "Agricultor.findByFechaNacimiento", query = "SELECT a FROM AgricultorEntity a WHERE a.fechaNacimiento = :fechaNacimiento"),
-    @NamedQuery(name = "Agricultor.findByEmail", query = "SELECT a FROM AgricultorEntity a WHERE a.email = :email")})
+    @NamedQuery(name = "AgricultorEntity.findAll", query = "SELECT a FROM AgricultorEntity a"),
+    @NamedQuery(name = "AgricultorEntity.findByIdentificacion", query = "SELECT a FROM AgricultorEntity a WHERE a.identificacion = :identificacion"),
+    @NamedQuery(name = "AgricultorEntity.findByNombres", query = "SELECT a FROM AgricultorEntity a WHERE a.nombres = :nombres"),
+    @NamedQuery(name = "AgricultorEntity.findByApellidos", query = "SELECT a FROM AgricultorEntity a WHERE a.apellidos = :apellidos"),
+    @NamedQuery(name = "AgricultorEntity.findByTelefono", query = "SELECT a FROM AgricultorEntity a WHERE a.telefono = :telefono"),
+    @NamedQuery(name = "AgricultorEntity.findByFechaNacimiento", query = "SELECT a FROM AgricultorEntity a WHERE a.fechaNacimiento = :fechaNacimiento"),
+    @NamedQuery(name = "AgricultorEntity.findByEmail", query = "SELECT a FROM AgricultorEntity a WHERE a.email = :email")})
 public class AgricultorEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "identificacion")
     private Integer identificacion;
+    @NotNull
+    @NotBlank
     @Basic(optional = false)
     @Column(name = "nombres")
     private String nombres;
@@ -124,11 +127,11 @@ public class AgricultorEntity implements Serializable {
         this.confirmationToken = confirmationToken;
     }
 
-    public Integer getIdentifiacion() {
+    public Integer getIdentificacion() {
         return identificacion;
     }
 
-    public void setIdentifiacion(Integer identificacion) {
+    public void setIdentificacion(Integer identificacion) {
         this.identificacion = identificacion;
     }
 

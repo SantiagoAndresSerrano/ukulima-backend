@@ -81,9 +81,20 @@ public class AgricultorServiceImp implements AgricultorService {
     @Transactional
     public void saveAgricultor(Agricultor agricultor) {
         AgricultorEntity agricultorEntity = agricultorEntityMapper.toEntity(agricultor);
-        agricultorEntity.setIdentifiacion(agricultor.getIdentificacion());
+        agricultorEntity.setIdentificacion(agricultor.getIdentificacion());
         agricultorEntity.setIdTipoIdentificacion(tipoIdentificacionRepository.getById(agricultor.getIdTipoidentificacion().getIdTipo()));
-        agricultorRepository.save(agricultorEntity);
+        agricultorRepository.saveAgricultorEntity(
+            agricultorEntity.getIdentificacion(),
+            agricultorEntity.getNombres(),
+            agricultorEntity.getApellidos(),
+            agricultorEntity.getTelefono(),
+            agricultorEntity.getFechaNacimiento(),
+            agricultorEntity.getPassword(),
+            agricultorEntity.getEmail(),
+            agricultorEntity.getIdTipoIdentificacion().getIdTipo(),
+            agricultorEntity.getConfirmationToken(),
+            agricultorEntity.getEstado()
+            );
     }
 
     @Override

@@ -11,7 +11,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoI
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-29T18:54:26-0500",
+    date = "2022-09-30T08:07:22-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220719-0747, environment: Java 17.0.4 (Eclipse Adoptium)"
 )
 @Component
@@ -25,15 +25,16 @@ public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
 
         Agricultor agricultor = new Agricultor();
 
-        agricultor.setConfirmationToken( AgricultorEntity.getConfirmationToken() );
-        agricultor.setEstado( AgricultorEntity.getEstado() );
-        agricultor.setNombres( AgricultorEntity.getNombres() );
         agricultor.setApellidos( AgricultorEntity.getApellidos() );
-        agricultor.setTelefono( AgricultorEntity.getTelefono() );
-        agricultor.setFechaNacimiento( AgricultorEntity.getFechaNacimiento() );
-        agricultor.setPassword( AgricultorEntity.getPassword() );
+        agricultor.setConfirmationToken( AgricultorEntity.getConfirmationToken() );
         agricultor.setEmail( AgricultorEntity.getEmail() );
+        agricultor.setEstado( AgricultorEntity.getEstado() );
+        agricultor.setFechaNacimiento( AgricultorEntity.getFechaNacimiento() );
         agricultor.setIdTipoIdentificacion( tipoIdentificacionEntityToTipoIdentificacion( AgricultorEntity.getIdTipoIdentificacion() ) );
+        agricultor.setIdentificacion( AgricultorEntity.getIdentificacion() );
+        agricultor.setNombres( AgricultorEntity.getNombres() );
+        agricultor.setPassword( AgricultorEntity.getPassword() );
+        agricultor.setTelefono( AgricultorEntity.getTelefono() );
 
         return agricultor;
     }
@@ -46,14 +47,15 @@ public class AgricultorEntityMapperImpl implements AgricultorEntityMapper {
 
         AgricultorEntity agricultorEntity = new AgricultorEntity();
 
-        agricultorEntity.setEstado( Agricultor.getEstado() );
-        agricultorEntity.setConfirmationToken( Agricultor.getConfirmationToken() );
-        agricultorEntity.setNombres( Agricultor.getNombres() );
         agricultorEntity.setApellidos( Agricultor.getApellidos() );
-        agricultorEntity.setTelefono( Agricultor.getTelefono() );
-        agricultorEntity.setFechaNacimiento( Agricultor.getFechaNacimiento() );
-        agricultorEntity.setPassword( Agricultor.getPassword() );
+        agricultorEntity.setConfirmationToken( Agricultor.getConfirmationToken() );
         agricultorEntity.setEmail( Agricultor.getEmail() );
+        agricultorEntity.setEstado( Agricultor.getEstado() );
+        agricultorEntity.setFechaNacimiento( Agricultor.getFechaNacimiento() );
+        agricultorEntity.setIdentificacion( Agricultor.getIdentificacion() );
+        agricultorEntity.setNombres( Agricultor.getNombres() );
+        agricultorEntity.setPassword( Agricultor.getPassword() );
+        agricultorEntity.setTelefono( Agricultor.getTelefono() );
 
         return agricultorEntity;
     }
