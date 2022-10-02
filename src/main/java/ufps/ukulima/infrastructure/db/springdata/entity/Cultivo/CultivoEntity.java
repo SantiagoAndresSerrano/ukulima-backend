@@ -37,10 +37,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cultivo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cultivo.findAll", query = "SELECT c FROM CultivoEntity c"),
-    @NamedQuery(name = "Cultivo.findByIdCultivo", query = "SELECT c FROM CultivoEntity c WHERE c.idCultivo = :idCultivo"),
-    @NamedQuery(name = "Cultivo.findByDescripcion", query = "SELECT c FROM CultivoEntity c WHERE c.descripcion = :descripcion"),
-    @NamedQuery(name = "Cultivo.findByPlantasPorHectarea", query = "SELECT c FROM CultivoEntity c WHERE c.plantasPorHectarea = :plantasPorHectarea")})
+        @NamedQuery(name = "Cultivo.findAll", query = "SELECT c FROM CultivoEntity c"),
+        @NamedQuery(name = "Cultivo.findByIdCultivo", query = "SELECT c FROM CultivoEntity c WHERE c.idCultivo = :idCultivo"),
+        @NamedQuery(name = "Cultivo.findByDescripcion", query = "SELECT c FROM CultivoEntity c WHERE c.descripcion = :descripcion"),
+        @NamedQuery(name = "Cultivo.findByPlantasPorHectarea", query = "SELECT c FROM CultivoEntity c WHERE c.plantasPorHectarea = :plantasPorHectarea") })
 public class CultivoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class CultivoEntity implements Serializable {
     private Integer idCultivo;
     @Basic(optional = false)
     @Column(name = "descripcion")
-    private int descripcion;
+    private String descripcion;
     @Basic(optional = false)
     @Column(name = "plantas_por_hectarea")
     private int plantasPorHectarea;
@@ -80,7 +80,7 @@ public class CultivoEntity implements Serializable {
         this.idCultivo = idCultivo;
     }
 
-    public CultivoEntity(Integer idCultivo, int descripcion, int plantasPorHectarea) {
+    public CultivoEntity(Integer idCultivo, String descripcion, int plantasPorHectarea) {
         this.idCultivo = idCultivo;
         this.descripcion = descripcion;
         this.plantasPorHectarea = plantasPorHectarea;
@@ -94,11 +94,11 @@ public class CultivoEntity implements Serializable {
         this.idCultivo = idCultivo;
     }
 
-    public int getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(int descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -167,12 +167,13 @@ public class CultivoEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof CultivoEntity)) {
             return false;
         }
         CultivoEntity other = (CultivoEntity) object;
-        if ((this.idCultivo == null && other.idCultivo != null) || (this.idCultivo != null && !this.idCultivo.equals(other.idCultivo))) {
+        if ((this.idCultivo == null && other.idCultivo != null)
+                || (this.idCultivo != null && !this.idCultivo.equals(other.idCultivo))) {
             return false;
         }
         return true;
@@ -182,5 +183,5 @@ public class CultivoEntity implements Serializable {
     public String toString() {
         return "ejercicios.pkgfinal.Cultivo[ idCultivo=" + idCultivo + " ]";
     }
-    
+
 }
