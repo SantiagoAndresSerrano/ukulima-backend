@@ -20,14 +20,14 @@ public class MunicipioController {
     DepartamentoService departamentoService;
 
     @GetMapping
-    public ResponseEntity<?> getAllMunicipio(){
+    public ResponseEntity<?> getAllMunicipio() {
         return ResponseEntity.ok(municipioService.getAllMunicipio());
     }
 
     @GetMapping("/departamento/{idDepartamento}")
-    public ResponseEntity<?> getMunicipiosByDepartamento(@PathVariable int idDepartamento){
-        Departamento departamento=departamentoService.getDepartamentoById(idDepartamento);
-        return ResponseEntity.ok((List)(departamento.municipioCollection()));
+    public ResponseEntity<?> getMunicipiosByDepartamento(@PathVariable int idDepartamento) {
+        Departamento departamento = departamentoService.getDepartamentoById(idDepartamento);
+        return ResponseEntity.ok((List) (departamento.municipioCollection()));
     }
 
 }

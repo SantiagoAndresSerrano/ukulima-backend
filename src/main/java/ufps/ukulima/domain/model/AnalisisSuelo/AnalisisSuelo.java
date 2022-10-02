@@ -15,34 +15,44 @@ import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTextu
 
 import java.util.Collection;
 import java.util.Date;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-public class AnalisisSuelo  {
+public class AnalisisSuelo {
 
     private Integer idAnalisisSuelo;
+    @NotNull(message = "Porcentaje de arena no puede ser vacío")
     private float porcentArena;
+    @NotNull(message = "Porcentaje de limos no puede ser vacío")
     private float porcentLimos;
+    @NotNull(message = "Porcentaje de arcilla no puede ser vacío")
     private float porcentArcilla;
     private Date fecha;
     private Collection<Recomendacion> recomendacionCollection;
     private Collection<AnalisisElemento> analisisElementoCollection;
+    @NotNull(message = "Clase textural no puede ser vacío")
     private ClaseTextural idClaseTextural;
+    @NotNull(message = "Cultivo no puede ser vacío")
     private Cultivo idCultivo;
+    @NotNull(message = "Densidad no puede ser vacío")
     private Densidad idDensidad;
+    @NotNull(message = "Profundidad de muestra no puede ser vacío")
     private ProfundidadMuestra idProfundidad;
 
-    public AnalisisSuelo () {
+    public AnalisisSuelo() {
     }
 
-    public AnalisisSuelo (Integer idAnalisisSuelo) {
+    public AnalisisSuelo(Integer idAnalisisSuelo) {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public AnalisisSuelo (Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla, Date fecha) {
+    public AnalisisSuelo(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla,
+            Date fecha) {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;

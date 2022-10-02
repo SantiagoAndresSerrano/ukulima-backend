@@ -1,6 +1,5 @@
 package ufps.ukulima.infrastructure.entry_points.rest.Agricultor;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
