@@ -82,7 +82,7 @@ public class AgricultorServiceImp implements AgricultorService {
     public void saveAgricultor(Agricultor agricultor) {
         AgricultorEntity agricultorEntity = agricultorEntityMapper.toEntity(agricultor);
         agricultorEntity.setIdentificacion(agricultor.getIdentificacion());
-        agricultorEntity.setIdTipoIdentificacion(tipoIdentificacionRepository.getById(agricultor.getIdTipoidentificacion().getIdTipo()));
+        agricultorEntity.setIdTipoIdentificacion(tipoIdentificacionRepository.getById(agricultor.getIdTipoIdentificacion().getIdTipo()));
         agricultorRepository.saveAgricultorEntity(
             agricultorEntity.getIdentificacion(),
             agricultorEntity.getNombres(),

@@ -130,7 +130,7 @@ public class Agricultor  {
         this.email = email;
     }
 
-    public TipoIdentificacion getIdTipoidentificacion() {
+    public TipoIdentificacion getIdTipoIdentificacion() {
         return idTipoidentificacion;
     }
 

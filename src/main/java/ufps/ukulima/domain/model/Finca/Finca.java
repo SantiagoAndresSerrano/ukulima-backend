@@ -10,11 +10,11 @@ import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Municipio.Municipio;
 import ufps.ukulima.domain.model.Vereda.Vereda;
-import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
-import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
-import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntity;
 
 import java.util.Collection;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -23,10 +23,13 @@ import java.util.Collection;
 public class Finca {
 
     private Integer idFinca;
+    @NotNull(message = "El nombre no puede estar vacío")
+    @NotBlank(message = "El nombre no puede estar en blanco")
     private String nombre;
     private int areaTotal;
     private int areaEnUso;
     private String geolocalizacion;
+    @NotNull(message = "Debe tener asociado un agricultor")
     private Agricultor idAgricultor;
     private Corregimiento idCorregimiento;
     private Municipio idMunicipio;
@@ -136,12 +139,13 @@ public class Finca {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Finca)) {
             return false;
         }
         Finca other = (Finca) object;
-        if ((this.idFinca == null && other.idFinca != null) || (this.idFinca != null && !this.idFinca.equals(other.idFinca))) {
+        if ((this.idFinca == null && other.idFinca != null)
+                || (this.idFinca != null && !this.idFinca.equals(other.idFinca))) {
             return false;
         }
         return true;
@@ -151,5 +155,5 @@ public class Finca {
     public String toString() {
         return "ejercicios.pkgfinal.Finca[ idFinca=" + idFinca + " ]";
     }
-    
+
 }

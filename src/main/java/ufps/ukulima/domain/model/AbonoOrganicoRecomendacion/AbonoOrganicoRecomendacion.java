@@ -5,6 +5,8 @@
  */
 package ufps.ukulima.domain.model.AbonoOrganicoRecomendacion;
 
+import javax.validation.constraints.NotNull;
+
 import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 
@@ -12,11 +14,14 @@ import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
  *
  * @author santi
  */
-public class AbonoOrganicoRecomendacion  {
+public class AbonoOrganicoRecomendacion {
 
     private Integer id;
+    @NotNull(message = "La cantidad no debe ser vacía")
     private float cantidad;
+    @NotNull(message = "El abono orgánico no debe ser vacío")
     private AbonoOrganico idAbonoOrganico;
+    @NotNull(message = "La recomendación no debe ser vacía")
     private Recomendacion idRecomendacion;
 
     public AbonoOrganicoRecomendacion() {
@@ -72,7 +77,7 @@ public class AbonoOrganicoRecomendacion  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof AbonoOrganicoRecomendacion)) {
             return false;
         }

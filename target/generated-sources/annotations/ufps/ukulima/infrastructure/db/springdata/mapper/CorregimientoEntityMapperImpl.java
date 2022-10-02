@@ -13,8 +13,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntit
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-30T06:34:35-0500",
-    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220719-0747, environment: Java 17.0.4 (Eclipse Adoptium)"
+    date = "2022-10-01T22:28:36-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)"
 )
 @Component
 public class CorregimientoEntityMapperImpl implements CorregimientoEntityMapper {

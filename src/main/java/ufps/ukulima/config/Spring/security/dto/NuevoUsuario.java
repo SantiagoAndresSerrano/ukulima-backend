@@ -11,6 +11,8 @@ package ufps.ukulima.config.Spring.security.dto;
  */
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,15 +21,16 @@ public class NuevoUsuario {
     @Email
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "La contraseña no puede estar en blanco")
+    @NotNull(message = "La contraseña no puede estar vacía")
     private String password;
     private Set<String> roles = new HashSet<>();
-
+    @NotBlank(message = "Los nombres no pueden estar en blanco")
+    @NotNull(message = "Los nombres no puede estar vacíos")
     private String nombres;
-
+    @NotBlank(message = "Los apellidos no pueden estar en blanco")
+    @NotNull(message = "Los apellidos no puede estar vacíos")
     private String apellidos;
-
-
 
     public String getPassword() {
         return password;

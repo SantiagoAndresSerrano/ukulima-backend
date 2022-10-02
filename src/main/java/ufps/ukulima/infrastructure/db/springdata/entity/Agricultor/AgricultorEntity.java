@@ -26,6 +26,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -52,12 +53,14 @@ public class AgricultorEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "identificacion")
     private Integer identificacion;
-    @NotNull
-    @NotBlank
+    @NotNull(message = "El nombre no puede estar vacío")
+    @NotBlank(message = "El nombre no puede estar en blanco")
     @Basic(optional = false)
     @Column(name = "nombres")
     private String nombres;
     @Basic(optional = false)
+    @NotNull(message = "El nombre no puede estar vacío")
+    @NotBlank(message = "El nombre no puede estar en blanco")
     @Column(name = "apellidos")
     private String apellidos;
     @Column(name = "telefono")
@@ -68,9 +71,12 @@ public class AgricultorEntity implements Serializable {
     private Date fechaNacimiento;
     @Basic(optional = false)
     @Lob
+    @NotNull(message = "La contraseña no puede estar vacía")
+    @NotBlank(message = "La contraseña no puede estar en blanco")
     @Column(name = "password")
     private String password;
     @Column(name = "email")
+    @Email(message = "El email no tiene formato")
     private String email;
 
     private Boolean estado;

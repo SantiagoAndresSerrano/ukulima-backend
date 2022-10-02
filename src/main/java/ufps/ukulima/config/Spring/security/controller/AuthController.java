@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ufps.ukulima.config.Spring.email.service.imp.EmailServiceImp;
 import ufps.ukulima.config.Spring.security.dto.*;
@@ -32,8 +33,11 @@ import ufps.ukulima.config.Spring.security.service.RolService;
 import ufps.ukulima.config.Spring.security.service.UsuarioService;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
+import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 import ufps.ukulima.domain.model.PasswordResetToken.PasswordResetToken;
 import ufps.ukulima.domain.model.PasswordResetToken.gateway.PasswordResetTokenService;
+import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
+import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -44,7 +48,7 @@ import java.util.*;
  * @author santi
  */
 @RestController
-@RequestMapping(value="/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
 public class AuthController {
     private static Logger log = LoggerFactory.getLogger(AuthController.class);
@@ -75,18 +79,19 @@ public class AuthController {
     @Value("${urifrontend}")
     String urlFrontend;
 
-
     @PostMapping("/nuevo")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) throws MessagingException {
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
-        if(usuarioService.existsByEmail(nuevoUsuario.getEmail()) || agricultorService.existByEmail(nuevoUsuario.getEmail()))
+    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult)
+            throws MessagingException {
+
+        if (bindingResult.hasErrors())
+
+            return new ResponseEntity(new ErrorMapping(bindingResult.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        if (usuarioService.existsByEmail(nuevoUsuario.getEmail())
+                || agricultorService.existByEmail(nuevoUsuario.getEmail()))
             return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
 
-        Usuario usuario =
-                new Usuario(nuevoUsuario.getEmail(),
-                        passwordEncoder.encode(nuevoUsuario.getPassword()));
-
+        Usuario usuario = new Usuario(nuevoUsuario.getEmail(),
+                passwordEncoder.encode(nuevoUsuario.getPassword()));
 
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByRolNombre(Rol.RolNombre.ROLE_USER).get());
@@ -96,38 +101,41 @@ public class AuthController {
         usuario.setEmail(nuevoUsuario.getEmail());
         usuario.setNombres(nuevoUsuario.getNombres());
         usuario.setApellidos(nuevoUsuario.getApellidos());
-
         usuarioService.guardar(usuario);
         return ResponseEntity.ok(usuario);
     }
 
     @PostMapping("/nuevoAgricultor")
-    public ResponseEntity<?> nuevoAgricultor(@Valid @RequestBody NuevoAgricultor nuevoAgricultor, BindingResult bindingResult) throws MessagingException {
+    public ResponseEntity<?> nuevoAgricultor(@Valid @RequestBody NuevoAgricultor nuevoAgricultor,
+            BindingResult bindingResult) throws MessagingException {
 
-        if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
+        log.info(bindingResult.toString());
+        if (bindingResult.hasErrors())
+            return new ResponseEntity(new ErrorMapping(bindingResult.getFieldErrors()), HttpStatus.BAD_REQUEST);
 
         Agricultor agricultor = new Agricultor();
 
-        if (nuevoAgricultor.getEmail()!=null){                          //TODO: || usuarioService.existsByEmail(nuevoAgricultor.getEmail()) pendiente
-            if(agricultorService.existByEmail(nuevoAgricultor.getEmail()) )
+        if (nuevoAgricultor.getEmail() != null) { // TODO: || usuarioService.existsByEmail(nuevoAgricultor.getEmail())
+                                                  // pendiente
+            if (agricultorService.existByEmail(nuevoAgricultor.getEmail()))
                 return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
-            if(agricultorService.existById(nuevoAgricultor.getIdentificacion()) )
+            if (agricultorService.existById(nuevoAgricultor.getIdentificacion()))
                 return new ResponseEntity(new Mensaje("esa identificacion ya existe"), HttpStatus.BAD_REQUEST);
             agricultor.setEmail(nuevoAgricultor.getEmail());
 
-        }else{
-            if(agricultorService.existByPhone(nuevoAgricultor.getTelefono()))
+        } else {
+            if (agricultorService.existByPhone(nuevoAgricultor.getTelefono()))
                 return new ResponseEntity(new Mensaje("ese telefono ya existe"), HttpStatus.BAD_REQUEST);
             agricultor.setTelefono(agricultor.getTelefono());
         }
 
-        if(nuevoAgricultor.getTelefono() != null){
+        if (nuevoAgricultor.getTelefono() != null) {
             agricultor.setTelefono(nuevoAgricultor.getTelefono());
         }
 
         agricultor.setIdentificacion(nuevoAgricultor.getIdentificacion());
-        agricultor.setIdTipoIdentificacion(nuevoAgricultor.getIdTipoIdentificacion());
+        agricultor
+                .setIdTipoIdentificacion(new TipoIdentificacion(nuevoAgricultor.getIdTipoIdentificacion().getIdTipo()));
         agricultor.setApellidos(nuevoAgricultor.getApellidos());
         agricultor.setNombres(nuevoAgricultor.getNombres());
         agricultor.setFechaNacimiento(nuevoAgricultor.getFechaNacimiento());
@@ -139,20 +147,20 @@ public class AuthController {
         return ResponseEntity.ok(agricultor);
     }
 
-
     @GetMapping("/solicitudPassword/{email}")
     public ResponseEntity<?> recuperarPassword(@PathVariable String email) throws MessagingException {
         Agricultor u = agricultorService.getAgricultorByEmail(email);
 
-        if(u==null)
+        if (u == null)
             return new ResponseEntity(new Mensaje("El email no existe"), HttpStatus.NOT_FOUND);
 
-        if(u.getPasswordResetTokens().size()>0){
+        if (u.getPasswordResetTokens().size() > 0) {
             PasswordResetToken passwordResetToken = u.getPasswordResetTokens().iterator().next();
-            if(passwordResetToken.getFechaExpiracion().before(new Date())){
+            if (passwordResetToken.getFechaExpiracion().before(new Date())) {
                 passwordResetTokenService.eliminarByToken(passwordResetToken.getToken());
-            }else{
-                return new ResponseEntity(new Mensaje("Ya hay una solicitud de reestablecimiento pendiente"), HttpStatus.BAD_REQUEST);
+            } else {
+                return new ResponseEntity(new Mensaje("Ya hay una solicitud de reestablecimiento pendiente"),
+                        HttpStatus.BAD_REQUEST);
 
             }
         }
@@ -173,18 +181,24 @@ public class AuthController {
                         "\n" +
                         "<body style=\"width: 800px\">\n" +
                         "    <div style=\"background-color: #a5b4fc; width: 100%; padding: 3rem 0;\">\n" +
-                        "        <div style=\"text-align: center; background-color: #ffffff; margin: 0 auto; width: 80%; border-radius: 8px;\">\n" +
+                        "        <div style=\"text-align: center; background-color: #ffffff; margin: 0 auto; width: 80%; border-radius: 8px;\">\n"
+                        +
                         "            <img style=\"margin-top: 3rem; width: 190px\"\n" +
-                        "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n" +
+                        "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n"
+                        +
                         "            <p style=\"margin: 1rem 0; font-size: 25px;\">Cambio de contraseña</p>\n" +
-                        "            <p style=\"color: #424242;\">Hola, <b>"+u.getNombres()+"</b>, has solicitado " +
+                        "            <p style=\"color: #424242;\">Hola, <b>" + u.getNombres() + "</b>, has solicitado "
+                        +
                         "cambiar tu contraseña, <br> para cambiar tu contraseña ingresa al siguiente link:  \n" +
                         "            </p>\n" +
-                        "            <div style=\"margin: 2rem auto; width: 120px; background-color: #4f46e5; padding: 8px; border-radius: 6px; \">\n" +
-                        "                <a style=\"color: #ffffff; text-decoration: none\" href=\""+urlFrontend+"password-reset/confirmation/"+passwordResetToken.getToken()+"\">Continuar</a>\n" +
+                        "            <div style=\"margin: 2rem auto; width: 120px; background-color: #4f46e5; padding: 8px; border-radius: 6px; \">\n"
+                        +
+                        "                <a style=\"color: #ffffff; text-decoration: none\" href=\"" + urlFrontend
+                        + "password-reset/confirmation/" + passwordResetToken.getToken() + "\">Continuar</a>\n" +
                         "            </div>\n" +
                         "            <div style=\"width: 100%; border-top: 2px solid #a5b4fc; padding: 1rem 0\">\n" +
-                        "                <p>Copyright © 2022 Analytic Hierarchy Process <br> Todos los derechos reservados.</p>\n" +
+                        "                <p>Copyright © 2022 Analytic Hierarchy Process <br> Todos los derechos reservados.</p>\n"
+                        +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </div>\n" +
@@ -198,48 +212,50 @@ public class AuthController {
         return ResponseEntity.ok(new Mensaje("Mensaje de recuperación enviado al correo"));
     }
 
-
-     @GetMapping("/recuperar/{token}") //petición que recibe el backend de parte del frontend, recordar cambiar el link de la linea 131 a un URL del frontend
-    public ResponseEntity<?>confirmarRecuperarPassword(@PathVariable String token){
+    @GetMapping("/recuperar/{token}") // petición que recibe el backend de parte del frontend, recordar cambiar el
+                                      // link de la linea 131 a un URL del frontend
+    public ResponseEntity<?> confirmarRecuperarPassword(@PathVariable String token) {
 
         PasswordResetToken passwordResetToken = passwordResetTokenService.buscarToken(token);
 
-        if(passwordResetToken == null)
+        if (passwordResetToken == null)
             return new ResponseEntity(new Mensaje("El token no existe"), HttpStatus.NOT_FOUND);
 
-        if(passwordResetToken.getFechaExpiracion().before(new Date()))
+        if (passwordResetToken.getFechaExpiracion().before(new Date()))
             return new ResponseEntity(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
 
         return ResponseEntity.ok(new Mensaje("Contraseña cambiada con exito"));
     }
 
     @PostMapping("/recuperar/{token}")
-    public ResponseEntity<?>cambiarPassword(@PathVariable String token, @RequestBody LoginUsuario loginUsuario) throws MessagingException {
+    public ResponseEntity<?> cambiarPassword(@PathVariable String token, @RequestBody LoginUsuario loginUsuario)
+            throws MessagingException {
 
         PasswordResetToken passwordResetToken = passwordResetTokenService.buscarToken(token);
         Agricultor uToken = agricultorService.findByResetPassword(token);
 
-        if(passwordResetToken == null)
+        if (passwordResetToken == null)
             return new ResponseEntity(new Mensaje("El token no existe"), HttpStatus.NOT_FOUND);
 
-        if(passwordResetToken.getFechaExpiracion().before(new Date()))
+        if (passwordResetToken.getFechaExpiracion().before(new Date()))
             return new ResponseEntity(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
 
         loginUsuario.setEmailOrPhone(passwordResetToken.getAgricultor().getEmail());
 
         Usuario u = usuarioService.findByEmail(loginUsuario.getEmailOrPhone());
 
-        if(u==null){
+        if (u == null) {
             return new ResponseEntity(new Mensaje("El correo no existe"), HttpStatus.BAD_REQUEST);
         }
 
-
-        if(uToken==null){
-            return new ResponseEntity(new Mensaje("El token no está asociado a ningun usuario"), HttpStatus.BAD_REQUEST);
+        if (uToken == null) {
+            return new ResponseEntity(new Mensaje("El token no está asociado a ningun usuario"),
+                    HttpStatus.BAD_REQUEST);
         }
 
-        if(!u.getEmail().equals(uToken.getEmail())){
-            return new ResponseEntity(new Mensaje("El token se encuentra asociado a otro usuario"), HttpStatus.BAD_REQUEST);
+        if (!u.getEmail().equals(uToken.getEmail())) {
+            return new ResponseEntity(new Mensaje("El token se encuentra asociado a otro usuario"),
+                    HttpStatus.BAD_REQUEST);
         }
 
         log.info(loginUsuario.getPassword());
@@ -262,15 +278,19 @@ public class AuthController {
                         "\n" +
                         "<body style=\"width: 800px\">\n" +
                         "    <div style=\"background-color: #a5b4fc; width: 100%; padding: 3rem 0;\">\n" +
-                        "        <div style=\"text-align: center; background-color: #ffffff; margin: 0 auto; width: 80%; border-radius: 8px;\">\n" +
+                        "        <div style=\"text-align: center; background-color: #ffffff; margin: 0 auto; width: 80%; border-radius: 8px;\">\n"
+                        +
                         "            <img style=\"margin-top: 3rem; width: 190px\"\n" +
-                        "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n" +
+                        "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n"
+                        +
                         "            <p style=\"margin: 1rem 0; font-size: 25px;\">Cambio de contraseña</p>\n" +
-                        "            <p style=\"color: #424242;\">Hola, <b>"+u.getNombres()+"</b>, se ha cambiado tu " +
+                        "            <p style=\"color: #424242;\">Hola, <b>" + u.getNombres()
+                        + "</b>, se ha cambiado tu " +
                         "contraseña en el sistema.  \n" +
                         "            </p>\n" +
                         "            <div style=\"width: 100%; border-top: 2px solid #a5b4fc; padding: 1rem 0\">\n" +
-                        "                <p>Copyright © 2022 Analytic Hierarchy Process <br> Todos los derechos reservados.</p>\n" +
+                        "                <p>Copyright © 2022 Analytic Hierarchy Process <br> Todos los derechos reservados.</p>\n"
+                        +
                         "            </div>\n" +
                         "        </div>\n" +
                         "    </div>\n" +
@@ -282,15 +302,14 @@ public class AuthController {
                 u.getEmail());
         passwordResetTokenService.eliminarByToken(passwordResetToken.getToken());
 
-
         return ResponseEntity.ok(new Mensaje("Contraseña cambiada con exito"));
     }
 
     @GetMapping("/confirmacion/{token}")
-    public ResponseEntity<?> confirmarToken(@PathVariable String token){
+    public ResponseEntity<?> confirmarToken(@PathVariable String token) {
         Agricultor agricultor = agricultorService.findByResetPassword(token);
 
-        if(agricultor==null){
+        if (agricultor == null) {
             return new ResponseEntity(new Mensaje("Error, Token no encontrado"), HttpStatus.NOT_FOUND);
         }
 
@@ -301,36 +320,37 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return new ResponseEntity(new Mensaje("campos mal puestos"), HttpStatus.BAD_REQUEST);
         }
         Usuario usuario = usuarioService.getByEmail(loginUsuario.getEmailOrPhone()).orElse(null);
-        if(usuario == null){
-            Agricultor agricultor= agricultorService.getAgricultorByPhoneOrEmail(loginUsuario.getEmailOrPhone());
+        if (usuario == null) {
+            Agricultor agricultor = agricultorService.getAgricultorByPhoneOrEmail(loginUsuario.getEmailOrPhone());
 
-            if(agricultor!=null){
-                Authentication authentication =
-                        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getEmailOrPhone(), loginUsuario.getPassword()));
+            if (agricultor != null) {
+                Authentication authentication = authenticationManager
+                        .authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getEmailOrPhone(),
+                                loginUsuario.getPassword()));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 String jwt = jwtProvider.generateToken(authentication);
-                UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
 
                 return new ResponseEntity(jwtDto, HttpStatus.OK);
-            }else{
-                return new ResponseEntity(new Mensaje("No existe usuario ni agricultor asociado a "+loginUsuario.getEmailOrPhone()),
+            } else {
+                return new ResponseEntity(
+                        new Mensaje("No existe usuario ni agricultor asociado a " + loginUsuario.getEmailOrPhone()),
                         HttpStatus.NOT_FOUND);
             }
         }
 
-
-        Authentication authentication =
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), loginUsuario.getPassword()));
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(usuario.getEmail(), loginUsuario.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateToken(authentication);
-        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
 
         return new ResponseEntity(jwtDto, HttpStatus.OK);
