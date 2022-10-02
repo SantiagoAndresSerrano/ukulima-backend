@@ -4,31 +4,41 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Elemento.gateway.ElementoService;
+import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 
 @RestController
-@RequestMapping(value="/api/elemento",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/elemento", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
-public class ElementoController{
+public class ElementoController {
 
     @Autowired
     ElementoService elementoService;
 
     @PostMapping
-    public ResponseEntity<?> saveElemento(@RequestBody Elemento elemento){
+    public ResponseEntity<?> saveElemento(@Valid @RequestBody Elemento elemento, BindingResult br) {
+        if (br.hasErrors())
+            return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
+
         elementoService.saveElemento(elemento);
         return ResponseEntity.ok(new Mensaje("Elemento registrado con éxito :" + elemento.getNombre()));
     }
+
     @GetMapping
-    public ResponseEntity<?> getAllElemento(){
+    public ResponseEntity<?> getAllElemento() {
         return ResponseEntity.ok(elementoService.getAllElemento());
     }
 

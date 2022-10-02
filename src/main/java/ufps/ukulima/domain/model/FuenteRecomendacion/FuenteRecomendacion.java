@@ -5,10 +5,11 @@
  */
 package ufps.ukulima.domain.model.FuenteRecomendacion;
 
+import javax.validation.constraints.NotNull;
+
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Fuente.Fuente;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
-
 
 /**
  *
@@ -17,9 +18,13 @@ import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 public class FuenteRecomendacion {
 
     private Integer id;
+    @NotNull(message = "la cantidad no puede estar vacía")
     private float cantidad;
+    @NotNull(message = "el elemento no puede estar vacía")
     private Elemento idElemento;
+    @NotNull(message = "la fuente no puede estar vacía")
     private Fuente idFuente;
+    @NotNull(message = "la recomendación no puede estar vacía")
     private Recomendacion idRecomendacion;
 
     public FuenteRecomendacion() {
@@ -83,7 +88,7 @@ public class FuenteRecomendacion {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof FuenteRecomendacion)) {
             return false;
         }
@@ -98,5 +103,5 @@ public class FuenteRecomendacion {
     public String toString() {
         return "ejercicios.pkgfinal.FuenteRecomendacion[ id=" + id + " ]";
     }
-    
+
 }

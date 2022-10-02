@@ -8,15 +8,18 @@ package ufps.ukulima.domain.model.ProfundidadMuestra;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 
 import java.util.Collection;
+
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-public class ProfundidadMuestra  {
+public class ProfundidadMuestra {
 
     private Integer idProfundidadMuestra;
+    @NotNull(message = "la profundidad no puede estar vacía")
     private int profundidad;
     private Collection<AnalisisSuelo> analisisSueloCollection;
 
@@ -66,12 +69,14 @@ public class ProfundidadMuestra  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof ProfundidadMuestra)) {
             return false;
         }
         ProfundidadMuestra other = (ProfundidadMuestra) object;
-        if ((this.idProfundidadMuestra == null && other.idProfundidadMuestra != null) || (this.idProfundidadMuestra != null && !this.idProfundidadMuestra.equals(other.idProfundidadMuestra))) {
+        if ((this.idProfundidadMuestra == null && other.idProfundidadMuestra != null)
+                || (this.idProfundidadMuestra != null
+                        && !this.idProfundidadMuestra.equals(other.idProfundidadMuestra))) {
             return false;
         }
         return true;
@@ -81,5 +86,5 @@ public class ProfundidadMuestra  {
     public String toString() {
         return "ejercicios.pkgfinal.ProfundidadMuestra[ idProfundidadMuestra=" + idProfundidadMuestra + " ]";
     }
-    
+
 }

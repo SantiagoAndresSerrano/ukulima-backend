@@ -12,16 +12,22 @@ import ufps.ukulima.domain.model.Enmienda.Enmienda;
 
 import java.util.Collection;
 
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author santi
  */
-public class Recomendacion  {
+public class Recomendacion {
 
     private Integer id;
+    @NotNull(message = "la cantidadEnmienda no puede estar vacía")
     private float cantidadEnmienda;
+    @NotNull(message = "preparacionSuelo no puede estar vacía")
     private short preparacionSuelo;
+    @NotNull(message = "AnalisisSuelo no puede estar vacía")
     private AnalisisSuelo idAnalisisSuelo;
+    @NotNull(message = "Enmienda no puede estar vacía")
     private Enmienda idEnmienda;
     private Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection;
     private Collection<FuenteRecomendacion> fuenteRecomendacionCollection;
@@ -83,7 +89,8 @@ public class Recomendacion  {
         return abonoOrganicoRecomendacionCollection;
     }
 
-    public void setAbonoOrganicoRecomendacionCollection(Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection) {
+    public void setAbonoOrganicoRecomendacionCollection(
+            Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection) {
         this.abonoOrganicoRecomendacionCollection = abonoOrganicoRecomendacionCollection;
     }
 
@@ -104,7 +111,7 @@ public class Recomendacion  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Recomendacion)) {
             return false;
         }
@@ -119,5 +126,5 @@ public class Recomendacion  {
     public String toString() {
         return "ejercicios.pkgfinal.Recomendacion[ id=" + id + " ]";
     }
-    
+
 }

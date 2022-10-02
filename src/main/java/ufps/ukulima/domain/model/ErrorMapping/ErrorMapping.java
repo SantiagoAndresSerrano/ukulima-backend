@@ -14,8 +14,8 @@ public class ErrorMapping {
         for (int i = 0; i < fields.size(); i++) {
             FieldError campo = fields.get(i);
             String field = campo.getField();
-            this.fields.add(field);
-            this.msg += campo.getDefaultMessage() + ",";
+            if (this.fields.add(field))
+                this.msg += campo.getDefaultMessage() + ",";
         }
 
     }

@@ -9,16 +9,23 @@ import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 
 import java.util.Collection;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-public class Elemento  {
+public class Elemento {
 
     private Integer id;
+    @NotBlank(message = "La descripcion no puede estar en blanco")
+    @NotNull(message = "La descripcion no puede estar vacía")
     private String nombre;
+    @NotBlank(message = "La unidad no puede estar en blanco")
+    @NotNull(message = "La unidad no puede estar vacía")
     private String unidad;
     private Collection<AnalisisElemento> analisisElementoCollection;
     private Collection<FuenteRecomendacion> fuenteRecomendacionCollection;
@@ -87,7 +94,7 @@ public class Elemento  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Elemento)) {
             return false;
         }
@@ -102,5 +109,5 @@ public class Elemento  {
     public String toString() {
         return "ejercicios.pkgfinal.Elemento[ id=" + id + " ]";
     }
-    
+
 }

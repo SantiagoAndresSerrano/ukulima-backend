@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
+import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
+import ufps.ukulima.domain.EtapaFenologica.gateway.EtapaFenologicaService;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
@@ -16,8 +18,6 @@ import ufps.ukulima.domain.model.DistanciaSiembra.gateway.DistanciaSiembraServic
 import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Finca.gateway.FincaService;
-import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.EtapaFenologica;
-import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.gateway.EtapaFenologicaService;
 import ufps.ukulima.domain.model.Topografia.Topografia;
 import ufps.ukulima.domain.model.Topografia.gateway.TopografiaService;
 import ufps.ukulima.domain.model.Variedad.Variedad;

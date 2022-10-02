@@ -3,11 +3,13 @@ package ufps.ukulima.infrastructure.driven_adapters.jpa.EtapaFenologica;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.EtapaFenologica;
-import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.gateway.EtapaFenologicaService;
+
+import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
+import ufps.ukulima.domain.EtapaFenologica.gateway.EtapaFenologicaService;
 import ufps.ukulima.infrastructure.db.springdata.mapper.EtapaFenologicaEntityMapper;
 
 import java.util.List;
+
 @Service
 public class EtapaFenologicaServiceImp implements EtapaFenologicaService {
 

@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
-import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.mapper.AgricultorEntityMapper;
 import ufps.ukulima.infrastructure.driven_adapters.jpa.TipoIdentificacion.TipoIdentificacionRepository;
@@ -25,7 +24,6 @@ public class AgricultorServiceImp implements AgricultorService {
 
     @Autowired
     AgricultorEntityMapper agricultorEntityMapper;
-
 
     @Override
     @Transactional(readOnly = true)
@@ -57,7 +55,6 @@ public class AgricultorServiceImp implements AgricultorService {
         return agricultorRepository.existsAgricultorByIdentificacion(id);
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public boolean existByEmail(String email) {
@@ -70,7 +67,6 @@ public class AgricultorServiceImp implements AgricultorService {
         return agricultorRepository.existsAgricultorByEmail(email);
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public List<Agricultor> getAllAgricultor() {
@@ -82,19 +78,19 @@ public class AgricultorServiceImp implements AgricultorService {
     public void saveAgricultor(Agricultor agricultor) {
         AgricultorEntity agricultorEntity = agricultorEntityMapper.toEntity(agricultor);
         agricultorEntity.setIdentificacion(agricultor.getIdentificacion());
-        agricultorEntity.setIdTipoIdentificacion(tipoIdentificacionRepository.getById(agricultor.getIdTipoIdentificacion().getIdTipo()));
+        agricultorEntity.setIdTipoIdentificacion(
+                tipoIdentificacionRepository.getById(agricultor.getIdTipoIdentificacion().getIdTipo()));
         agricultorRepository.saveAgricultorEntity(
-            agricultorEntity.getIdentificacion(),
-            agricultorEntity.getNombres(),
-            agricultorEntity.getApellidos(),
-            agricultorEntity.getTelefono(),
-            agricultorEntity.getFechaNacimiento(),
-            agricultorEntity.getPassword(),
-            agricultorEntity.getEmail(),
-            agricultorEntity.getIdTipoIdentificacion().getIdTipo(),
-            agricultorEntity.getConfirmationToken(),
-            agricultorEntity.getEstado()
-            );
+                agricultorEntity.getIdentificacion(),
+                agricultorEntity.getNombres(),
+                agricultorEntity.getApellidos(),
+                agricultorEntity.getTelefono(),
+                agricultorEntity.getFechaNacimiento(),
+                agricultorEntity.getPassword(),
+                agricultorEntity.getEmail(),
+                agricultorEntity.getIdTipoIdentificacion().getIdTipo(),
+                agricultorEntity.getConfirmationToken(),
+                agricultorEntity.getEstado());
     }
 
     @Override

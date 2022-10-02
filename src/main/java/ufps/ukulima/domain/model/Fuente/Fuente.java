@@ -8,15 +8,20 @@ package ufps.ukulima.domain.model.Fuente;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 
 import java.util.Collection;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-public class Fuente  {
+public class Fuente {
 
     private Integer id;
+    @NotNull(message = "la descripcion no puede estar vacío")
+    @NotBlank(message = "la descripcion no puede estar en blanco")
     private String descripcion;
     private Collection<FuenteRecomendacion> fuenteRecomendacionCollection;
 
@@ -66,7 +71,7 @@ public class Fuente  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Fuente)) {
             return false;
         }
@@ -81,5 +86,5 @@ public class Fuente  {
     public String toString() {
         return "ejercicios.pkgfinal.Fuente[ id=" + id + " ]";
     }
-    
+
 }

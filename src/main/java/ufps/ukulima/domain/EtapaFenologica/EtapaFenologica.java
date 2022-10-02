@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ufps.ukulima.domain.model.DistanciaSiembra;
+package ufps.ukulima.domain.EtapaFenologica;
 
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 
@@ -17,22 +17,22 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author santi
  */
-public class DistanciaSiembra {
+public class EtapaFenologica {
 
     private Integer id;
-    @NotBlank(message = "La descripcion no puede estar en blanco")
-    @NotNull(message = "La descripcion no puede estar vacía")
+    @NotNull(message = "la descripcion no puede estar vacía")
+    @NotBlank(message = "la descripcion no puede estar en blanco")
     private String descripcion;
     private Collection<Cultivo> cultivoCollection;
 
-    public DistanciaSiembra() {
+    public EtapaFenologica() {
     }
 
-    public DistanciaSiembra(Integer id) {
+    public EtapaFenologica(Integer id) {
         this.id = id;
     }
 
-    public DistanciaSiembra(Integer id, String descripcion) {
+    public EtapaFenologica(Integer id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
@@ -72,10 +72,10 @@ public class DistanciaSiembra {
     @Override
     public boolean equals(Object object) {
 
-        if (!(object instanceof DistanciaSiembra)) {
+        if (!(object instanceof EtapaFenologica)) {
             return false;
         }
-        DistanciaSiembra other = (DistanciaSiembra) object;
+        EtapaFenologica other = (EtapaFenologica) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -84,7 +84,7 @@ public class DistanciaSiembra {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.DistanciaSiembra[ id=" + id + " ]";
+        return "ejercicios.pkgfinal.EtapaFenologica[ id=" + id + " ]";
     }
 
 }

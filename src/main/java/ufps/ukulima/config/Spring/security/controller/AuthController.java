@@ -22,7 +22,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ufps.ukulima.config.Spring.email.service.imp.EmailServiceImp;
 import ufps.ukulima.config.Spring.security.dto.*;
@@ -37,7 +36,6 @@ import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 import ufps.ukulima.domain.model.PasswordResetToken.PasswordResetToken;
 import ufps.ukulima.domain.model.PasswordResetToken.gateway.PasswordResetTokenService;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
-import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -85,10 +83,11 @@ public class AuthController {
 
         if (bindingResult.hasErrors())
 
-            return new ResponseEntity(new ErrorMapping(bindingResult.getFieldErrors()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<ErrorMapping>(new ErrorMapping(bindingResult.getFieldErrors()),
+                    HttpStatus.BAD_REQUEST);
         if (usuarioService.existsByEmail(nuevoUsuario.getEmail())
                 || agricultorService.existByEmail(nuevoUsuario.getEmail()))
-            return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Mensaje>(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
 
         Usuario usuario = new Usuario(nuevoUsuario.getEmail(),
                 passwordEncoder.encode(nuevoUsuario.getPassword()));
@@ -109,23 +108,23 @@ public class AuthController {
     public ResponseEntity<?> nuevoAgricultor(@Valid @RequestBody NuevoAgricultor nuevoAgricultor,
             BindingResult bindingResult) throws MessagingException {
 
-        log.info(bindingResult.toString());
         if (bindingResult.hasErrors())
-            return new ResponseEntity(new ErrorMapping(bindingResult.getFieldErrors()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<ErrorMapping>(new ErrorMapping(bindingResult.getFieldErrors()),
+                    HttpStatus.BAD_REQUEST);
 
         Agricultor agricultor = new Agricultor();
 
         if (nuevoAgricultor.getEmail() != null) { // TODO: || usuarioService.existsByEmail(nuevoAgricultor.getEmail())
                                                   // pendiente
             if (agricultorService.existByEmail(nuevoAgricultor.getEmail()))
-                return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<Mensaje>(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
             if (agricultorService.existById(nuevoAgricultor.getIdentificacion()))
-                return new ResponseEntity(new Mensaje("esa identificacion ya existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<Mensaje>(new Mensaje("esa identificacion ya existe"), HttpStatus.BAD_REQUEST);
             agricultor.setEmail(nuevoAgricultor.getEmail());
 
         } else {
             if (agricultorService.existByPhone(nuevoAgricultor.getTelefono()))
-                return new ResponseEntity(new Mensaje("ese telefono ya existe"), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<Mensaje>(new Mensaje("ese telefono ya existe"), HttpStatus.BAD_REQUEST);
             agricultor.setTelefono(agricultor.getTelefono());
         }
 
@@ -152,14 +151,14 @@ public class AuthController {
         Agricultor u = agricultorService.getAgricultorByEmail(email);
 
         if (u == null)
-            return new ResponseEntity(new Mensaje("El email no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Mensaje>(new Mensaje("El email no existe"), HttpStatus.NOT_FOUND);
 
         if (u.getPasswordResetTokens().size() > 0) {
             PasswordResetToken passwordResetToken = u.getPasswordResetTokens().iterator().next();
             if (passwordResetToken.getFechaExpiracion().before(new Date())) {
                 passwordResetTokenService.eliminarByToken(passwordResetToken.getToken());
             } else {
-                return new ResponseEntity(new Mensaje("Ya hay una solicitud de reestablecimiento pendiente"),
+                return new ResponseEntity<Mensaje>(new Mensaje("Ya hay una solicitud de reestablecimiento pendiente"),
                         HttpStatus.BAD_REQUEST);
 
             }
@@ -219,10 +218,10 @@ public class AuthController {
         PasswordResetToken passwordResetToken = passwordResetTokenService.buscarToken(token);
 
         if (passwordResetToken == null)
-            return new ResponseEntity(new Mensaje("El token no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Mensaje>(new Mensaje("El token no existe"), HttpStatus.NOT_FOUND);
 
         if (passwordResetToken.getFechaExpiracion().before(new Date()))
-            return new ResponseEntity(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Mensaje>(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
 
         return ResponseEntity.ok(new Mensaje("Contraseña cambiada con exito"));
     }
@@ -235,26 +234,26 @@ public class AuthController {
         Agricultor uToken = agricultorService.findByResetPassword(token);
 
         if (passwordResetToken == null)
-            return new ResponseEntity(new Mensaje("El token no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Mensaje>(new Mensaje("El token no existe"), HttpStatus.NOT_FOUND);
 
         if (passwordResetToken.getFechaExpiracion().before(new Date()))
-            return new ResponseEntity(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Mensaje>(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
 
         loginUsuario.setEmailOrPhone(passwordResetToken.getAgricultor().getEmail());
 
         Usuario u = usuarioService.findByEmail(loginUsuario.getEmailOrPhone());
 
         if (u == null) {
-            return new ResponseEntity(new Mensaje("El correo no existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Mensaje>(new Mensaje("El correo no existe"), HttpStatus.BAD_REQUEST);
         }
 
         if (uToken == null) {
-            return new ResponseEntity(new Mensaje("El token no está asociado a ningun usuario"),
+            return new ResponseEntity<Mensaje>(new Mensaje("El token no está asociado a ningun usuario"),
                     HttpStatus.BAD_REQUEST);
         }
 
         if (!u.getEmail().equals(uToken.getEmail())) {
-            return new ResponseEntity(new Mensaje("El token se encuentra asociado a otro usuario"),
+            return new ResponseEntity<Mensaje>(new Mensaje("El token se encuentra asociado a otro usuario"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -310,7 +309,7 @@ public class AuthController {
         Agricultor agricultor = agricultorService.findByResetPassword(token);
 
         if (agricultor == null) {
-            return new ResponseEntity(new Mensaje("Error, Token no encontrado"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Mensaje>(new Mensaje("Error, Token no encontrado"), HttpStatus.NOT_FOUND);
         }
 
         agricultor.setEstado(true);

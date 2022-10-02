@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
+import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
@@ -23,7 +24,6 @@ import ufps.ukulima.domain.model.Fuente.Fuente;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 import ufps.ukulima.domain.model.Municipio.Municipio;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
-import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
@@ -58,7 +58,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-01T22:55:22-0500",
+    date = "2022-10-02T00:08:37-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)"
 )
 @Component

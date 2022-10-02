@@ -6,11 +6,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
-import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.EtapaFenologica;
-import ufps.ukulima.domain.model.Recomendacion.EtapaFenologica.gateway.EtapaFenologicaService;
+import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
+import ufps.ukulima.domain.EtapaFenologica.gateway.EtapaFenologicaService;
 
 @RestController
-@RequestMapping(value="/api/etapafenologica",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/etapafenologica", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
 public class EtapaFenologicaController {
 
@@ -18,18 +18,17 @@ public class EtapaFenologicaController {
     EtapaFenologicaService etapaFenologicaService;
 
     @GetMapping
-    public ResponseEntity<?> getAllEtapaFenologica(){
+    public ResponseEntity<?> getAllEtapaFenologica() {
         return ResponseEntity.ok(etapaFenologicaService.getAllEtapaFenologica());
     }
 
     @GetMapping("/{idEtapa}")
-    public ResponseEntity<?> getEtapaById(@PathVariable int idEtapa){
-       EtapaFenologica etapaFenologica= etapaFenologicaService.getEtapaFenologicaById(idEtapa);
-        if(etapaFenologica==null)
-            return new ResponseEntity<>(new Mensaje("Etapa fenologica con id"+idEtapa+" no encontrada"),
+    public ResponseEntity<?> getEtapaById(@PathVariable int idEtapa) {
+        EtapaFenologica etapaFenologica = etapaFenologicaService.getEtapaFenologicaById(idEtapa);
+        if (etapaFenologica == null)
+            return new ResponseEntity<>(new Mensaje("Etapa fenologica con id" + idEtapa + " no encontrada"),
                     HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(etapaFenologica);
     }
-
 
 }

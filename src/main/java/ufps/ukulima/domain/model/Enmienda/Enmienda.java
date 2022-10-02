@@ -8,15 +8,20 @@ package ufps.ukulima.domain.model.Enmienda;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 
 import java.util.Collection;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-public class Enmienda  {
+public class Enmienda {
 
     private Integer id;
+    @NotBlank(message = "La descripcion no puede estar en blanco")
+    @NotNull(message = "La descripcion no puede estar vacía")
     private String descripcion;
     private Collection<Recomendacion> recomendacionCollection;
 
@@ -66,7 +71,7 @@ public class Enmienda  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Enmienda)) {
             return false;
         }
@@ -81,5 +86,5 @@ public class Enmienda  {
     public String toString() {
         return "ejercicios.pkgfinal.Enmienda[ id=" + id + " ]";
     }
-    
+
 }
