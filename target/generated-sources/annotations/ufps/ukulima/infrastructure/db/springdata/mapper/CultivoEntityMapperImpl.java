@@ -58,7 +58,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-02T00:08:37-0500",
+    date = "2022-10-02T10:56:07-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)"
 )
 @Component
@@ -72,15 +72,15 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Cultivo cultivo = new Cultivo();
 
-        cultivo.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( CultivoEntity.getAnalisisSueloCollection() ) );
-        cultivo.setDescripcion( CultivoEntity.getDescripcion() );
         cultivo.setIdCultivo( CultivoEntity.getIdCultivo() );
+        cultivo.setDescripcion( CultivoEntity.getDescripcion() );
+        cultivo.setPlantasPorHectarea( CultivoEntity.getPlantasPorHectarea() );
+        cultivo.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( CultivoEntity.getAnalisisSueloCollection() ) );
         cultivo.setIdDistanciaSiembra( distanciaSiembraEntityToDistanciaSiembra( CultivoEntity.getIdDistanciaSiembra() ) );
         cultivo.setIdEtapaFenologica( etapaFenologicaEntityToEtapaFenologica( CultivoEntity.getIdEtapaFenologica() ) );
         cultivo.setIdFinca( fincaEntityToFinca( CultivoEntity.getIdFinca() ) );
         cultivo.setIdTopografia( topografiaEntityToTopografia( CultivoEntity.getIdTopografia() ) );
         cultivo.setIdVariedad( variedadEntityToVariedad( CultivoEntity.getIdVariedad() ) );
-        cultivo.setPlantasPorHectarea( CultivoEntity.getPlantasPorHectarea() );
 
         return cultivo;
     }
@@ -93,15 +93,15 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         CultivoEntity cultivoEntity = new CultivoEntity();
 
-        cultivoEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( Cultivo.getAnalisisSueloCollection() ) );
-        cultivoEntity.setDescripcion( Cultivo.getDescripcion() );
         cultivoEntity.setIdCultivo( Cultivo.getIdCultivo() );
+        cultivoEntity.setDescripcion( Cultivo.getDescripcion() );
+        cultivoEntity.setPlantasPorHectarea( Cultivo.getPlantasPorHectarea() );
+        cultivoEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( Cultivo.getAnalisisSueloCollection() ) );
         cultivoEntity.setIdDistanciaSiembra( distanciaSiembraToDistanciaSiembraEntity( Cultivo.getIdDistanciaSiembra() ) );
         cultivoEntity.setIdEtapaFenologica( etapaFenologicaToEtapaFenologicaEntity( Cultivo.getIdEtapaFenologica() ) );
         cultivoEntity.setIdFinca( fincaToFincaEntity( Cultivo.getIdFinca() ) );
         cultivoEntity.setIdTopografia( topografiaToTopografiaEntity( Cultivo.getIdTopografia() ) );
         cultivoEntity.setIdVariedad( variedadToVariedadEntity( Cultivo.getIdVariedad() ) );
-        cultivoEntity.setPlantasPorHectarea( Cultivo.getPlantasPorHectarea() );
 
         return cultivoEntity;
     }
@@ -120,6 +120,33 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         return list;
     }
 
+    protected Collection<Recomendacion> recomendacionEntityCollectionToRecomendacionCollection(Collection<RecomendacionEntity> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<Recomendacion> collection1 = new ArrayList<Recomendacion>( collection.size() );
+        for ( RecomendacionEntity recomendacionEntity : collection ) {
+            collection1.add( recomendacionEntityToRecomendacion( recomendacionEntity ) );
+        }
+
+        return collection1;
+    }
+
+    protected Enmienda enmiendaEntityToEnmienda(EnmiendaEntity enmiendaEntity) {
+        if ( enmiendaEntity == null ) {
+            return null;
+        }
+
+        Enmienda enmienda = new Enmienda();
+
+        enmienda.setId( enmiendaEntity.getId() );
+        enmienda.setDescripcion( enmiendaEntity.getDescripcion() );
+        enmienda.setRecomendacionCollection( recomendacionEntityCollectionToRecomendacionCollection( enmiendaEntity.getRecomendacionCollection() ) );
+
+        return enmienda;
+    }
+
     protected AbonoOrganico abonoOrganicoEntityToAbonoOrganico(AbonoOrganicoEntity abonoOrganicoEntity) {
         if ( abonoOrganicoEntity == null ) {
             return null;
@@ -127,8 +154,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         AbonoOrganico abonoOrganico = new AbonoOrganico();
 
-        abonoOrganico.setDescripcion( abonoOrganicoEntity.getDescripcion() );
         abonoOrganico.setId( abonoOrganicoEntity.getId() );
+        abonoOrganico.setDescripcion( abonoOrganicoEntity.getDescripcion() );
 
         return abonoOrganico;
     }
@@ -140,8 +167,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         AbonoOrganicoRecomendacion abonoOrganicoRecomendacion = new AbonoOrganicoRecomendacion();
 
-        abonoOrganicoRecomendacion.setCantidad( abonoOrganicoRecomendacionEntity.getCantidad() );
         abonoOrganicoRecomendacion.setId( abonoOrganicoRecomendacionEntity.getId() );
+        abonoOrganicoRecomendacion.setCantidad( abonoOrganicoRecomendacionEntity.getCantidad() );
         abonoOrganicoRecomendacion.setIdAbonoOrganico( abonoOrganicoEntityToAbonoOrganico( abonoOrganicoRecomendacionEntity.getIdAbonoOrganico() ) );
         abonoOrganicoRecomendacion.setIdRecomendacion( recomendacionEntityToRecomendacion( abonoOrganicoRecomendacionEntity.getIdRecomendacion() ) );
 
@@ -169,9 +196,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         AnalisisElemento analisisElemento = new AnalisisElemento();
 
         analisisElemento.setId( analisisElementosEntity.getId() );
+        analisisElemento.setValor( analisisElementosEntity.getValor() );
         analisisElemento.setIdAnalisisSuelo( analisisSueloEntityToAnalisisSuelo( analisisElementosEntity.getIdAnalisisSuelo() ) );
         analisisElemento.setIdElemento( elementoEntityToElemento( analisisElementosEntity.getIdElemento() ) );
-        analisisElemento.setValor( analisisElementosEntity.getValor() );
 
         return analisisElemento;
     }
@@ -209,11 +236,11 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Elemento elemento = new Elemento();
 
-        elemento.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( elementoEntity.getAnalisisElementoCollection() ) );
-        elemento.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( elementoEntity.getFuenteRecomendacionCollection() ) );
         elemento.setId( elementoEntity.getId() );
         elemento.setNombre( elementoEntity.getNombre() );
         elemento.setUnidad( elementoEntity.getUnidad() );
+        elemento.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( elementoEntity.getAnalisisElementoCollection() ) );
+        elemento.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( elementoEntity.getFuenteRecomendacionCollection() ) );
 
         return elemento;
     }
@@ -225,9 +252,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Fuente fuente = new Fuente();
 
+        fuente.setId( fuenteEntity.getId() );
         fuente.setDescripcion( fuenteEntity.getDescripcion() );
         fuente.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( fuenteEntity.getFuenteRecomendacionCollection() ) );
-        fuente.setId( fuenteEntity.getId() );
 
         return fuente;
     }
@@ -239,40 +266,13 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         FuenteRecomendacion fuenteRecomendacion = new FuenteRecomendacion();
 
-        fuenteRecomendacion.setCantidad( fuenteRecomendacionEntity.getCantidad() );
         fuenteRecomendacion.setId( fuenteRecomendacionEntity.getId() );
+        fuenteRecomendacion.setCantidad( fuenteRecomendacionEntity.getCantidad() );
         fuenteRecomendacion.setIdElemento( elementoEntityToElemento( fuenteRecomendacionEntity.getIdElemento() ) );
         fuenteRecomendacion.setIdFuente( fuenteEntityToFuente( fuenteRecomendacionEntity.getIdFuente() ) );
         fuenteRecomendacion.setIdRecomendacion( recomendacionEntityToRecomendacion( fuenteRecomendacionEntity.getIdRecomendacion() ) );
 
         return fuenteRecomendacion;
-    }
-
-    protected Collection<Recomendacion> recomendacionEntityCollectionToRecomendacionCollection(Collection<RecomendacionEntity> collection) {
-        if ( collection == null ) {
-            return null;
-        }
-
-        Collection<Recomendacion> collection1 = new ArrayList<Recomendacion>( collection.size() );
-        for ( RecomendacionEntity recomendacionEntity : collection ) {
-            collection1.add( recomendacionEntityToRecomendacion( recomendacionEntity ) );
-        }
-
-        return collection1;
-    }
-
-    protected Enmienda enmiendaEntityToEnmienda(EnmiendaEntity enmiendaEntity) {
-        if ( enmiendaEntity == null ) {
-            return null;
-        }
-
-        Enmienda enmienda = new Enmienda();
-
-        enmienda.setDescripcion( enmiendaEntity.getDescripcion() );
-        enmienda.setId( enmiendaEntity.getId() );
-        enmienda.setRecomendacionCollection( recomendacionEntityCollectionToRecomendacionCollection( enmiendaEntity.getRecomendacionCollection() ) );
-
-        return enmienda;
     }
 
     protected Recomendacion recomendacionEntityToRecomendacion(RecomendacionEntity recomendacionEntity) {
@@ -282,13 +282,13 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Recomendacion recomendacion = new Recomendacion();
 
-        recomendacion.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionEntityCollectionToAbonoOrganicoRecomendacionCollection( recomendacionEntity.getAbonoOrganicoRecomendacionCollection() ) );
-        recomendacion.setCantidadEnmienda( recomendacionEntity.getCantidadEnmienda() );
-        recomendacion.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( recomendacionEntity.getFuenteRecomendacionCollection() ) );
         recomendacion.setId( recomendacionEntity.getId() );
+        recomendacion.setCantidadEnmienda( recomendacionEntity.getCantidadEnmienda() );
+        recomendacion.setPreparacionSuelo( recomendacionEntity.getPreparacionSuelo() );
         recomendacion.setIdAnalisisSuelo( analisisSueloEntityToAnalisisSuelo( recomendacionEntity.getIdAnalisisSuelo() ) );
         recomendacion.setIdEnmienda( enmiendaEntityToEnmienda( recomendacionEntity.getIdEnmienda() ) );
-        recomendacion.setPreparacionSuelo( recomendacionEntity.getPreparacionSuelo() );
+        recomendacion.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionEntityCollectionToAbonoOrganicoRecomendacionCollection( recomendacionEntity.getAbonoOrganicoRecomendacionCollection() ) );
+        recomendacion.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( recomendacionEntity.getFuenteRecomendacionCollection() ) );
 
         return recomendacion;
     }
@@ -313,10 +313,10 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         ClaseTextural claseTextural = new ClaseTextural();
 
-        claseTextural.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( claseTexturalEntity.getAnalisisSueloCollection() ) );
         claseTextural.setIdClaseTextural( claseTexturalEntity.getIdClaseTextural() );
         claseTextural.setNombre( claseTexturalEntity.getNombre() );
         claseTextural.setSigla( claseTexturalEntity.getSigla() );
+        claseTextural.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( claseTexturalEntity.getAnalisisSueloCollection() ) );
 
         return claseTextural;
     }
@@ -328,9 +328,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Densidad densidad = new Densidad();
 
-        densidad.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( densidadEntity.getAnalisisSueloCollection() ) );
         densidad.setIdDensidad( densidadEntity.getIdDensidad() );
         densidad.setValor( densidadEntity.getValor() );
+        densidad.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( densidadEntity.getAnalisisSueloCollection() ) );
 
         return densidad;
     }
@@ -342,9 +342,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         ProfundidadMuestra profundidadMuestra = new ProfundidadMuestra();
 
-        profundidadMuestra.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( profundidadMuestraEntity.getAnalisisSueloCollection() ) );
         profundidadMuestra.setIdProfundidadMuestra( profundidadMuestraEntity.getIdProfundidadMuestra() );
         profundidadMuestra.setProfundidad( profundidadMuestraEntity.getProfundidad() );
+        profundidadMuestra.setAnalisisSueloCollection( analisisSueloEntityCollectionToAnalisisSueloCollection( profundidadMuestraEntity.getAnalisisSueloCollection() ) );
 
         return profundidadMuestra;
     }
@@ -432,16 +432,16 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Agricultor agricultor = new Agricultor();
 
-        agricultor.setApellidos( agricultorEntity.getApellidos() );
         agricultor.setConfirmationToken( agricultorEntity.getConfirmationToken() );
-        agricultor.setEmail( agricultorEntity.getEmail() );
         agricultor.setEstado( agricultorEntity.getEstado() );
-        agricultor.setFechaNacimiento( agricultorEntity.getFechaNacimiento() );
-        agricultor.setIdTipoIdentificacion( tipoIdentificacionEntityToTipoIdentificacion( agricultorEntity.getIdTipoIdentificacion() ) );
         agricultor.setIdentificacion( agricultorEntity.getIdentificacion() );
         agricultor.setNombres( agricultorEntity.getNombres() );
-        agricultor.setPassword( agricultorEntity.getPassword() );
+        agricultor.setApellidos( agricultorEntity.getApellidos() );
         agricultor.setTelefono( agricultorEntity.getTelefono() );
+        agricultor.setFechaNacimiento( agricultorEntity.getFechaNacimiento() );
+        agricultor.setPassword( agricultorEntity.getPassword() );
+        agricultor.setEmail( agricultorEntity.getEmail() );
+        agricultor.setIdTipoIdentificacion( tipoIdentificacionEntityToTipoIdentificacion( agricultorEntity.getIdTipoIdentificacion() ) );
 
         return agricultor;
     }
@@ -466,8 +466,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Municipio municipio = new Municipio();
 
-        municipio.setIdDepartamento( departamentoEntityToDepartamento( municipioEntity.getIdDepartamento() ) );
         municipio.setIdMunicipio( municipioEntity.getIdMunicipio() );
+        municipio.setIdDepartamento( departamentoEntityToDepartamento( municipioEntity.getIdDepartamento() ) );
 
         return municipio;
     }
@@ -480,8 +480,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         Corregimiento corregimiento = new Corregimiento();
 
         corregimiento.setIdCorregimiento( corregimientoEntity.getIdCorregimiento() );
-        corregimiento.setIdMunicipio( municipioEntityToMunicipio( corregimientoEntity.getIdMunicipio() ) );
         corregimiento.setNombre( corregimientoEntity.getNombre() );
+        corregimiento.setIdMunicipio( municipioEntityToMunicipio( corregimientoEntity.getIdMunicipio() ) );
 
         return corregimiento;
     }
@@ -493,8 +493,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Vereda vereda = new Vereda();
 
-        vereda.setIdCorregimiento( corregimientoEntityToCorregimiento( veredaEntity.getIdCorregimiento() ) );
         vereda.setIdVereda( veredaEntity.getIdVereda() );
+        vereda.setIdCorregimiento( corregimientoEntityToCorregimiento( veredaEntity.getIdCorregimiento() ) );
         vereda.setNombre( veredaEntity.getNombre() );
 
         return vereda;
@@ -554,8 +554,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         TipoCultivo tipoCultivo = new TipoCultivo();
 
-        tipoCultivo.setDescripcion( tipoCultivoEntity.getDescripcion() );
         tipoCultivo.setId( tipoCultivoEntity.getId() );
+        tipoCultivo.setDescripcion( tipoCultivoEntity.getDescripcion() );
         tipoCultivo.setVariedadCollection( variedadEntityCollectionToVariedadCollection( tipoCultivoEntity.getVariedadCollection() ) );
 
         return tipoCultivo;
@@ -574,6 +574,89 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         variedad.setCultivoCollection( cultivoEntityCollectionToCultivoCollection( variedadEntity.getCultivoCollection() ) );
 
         return variedad;
+    }
+
+    protected Collection<RecomendacionEntity> recomendacionCollectionToRecomendacionEntityCollection(Collection<Recomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<RecomendacionEntity> collection1 = new ArrayList<RecomendacionEntity>( collection.size() );
+        for ( Recomendacion recomendacion : collection ) {
+            collection1.add( recomendacionToRecomendacionEntity( recomendacion ) );
+        }
+
+        return collection1;
+    }
+
+    protected EnmiendaEntity enmiendaToEnmiendaEntity(Enmienda enmienda) {
+        if ( enmienda == null ) {
+            return null;
+        }
+
+        EnmiendaEntity enmiendaEntity = new EnmiendaEntity();
+
+        enmiendaEntity.setId( enmienda.getId() );
+        enmiendaEntity.setDescripcion( enmienda.getDescripcion() );
+        enmiendaEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( enmienda.getRecomendacionCollection() ) );
+
+        return enmiendaEntity;
+    }
+
+    protected AbonoOrganicoEntity abonoOrganicoToAbonoOrganicoEntity(AbonoOrganico abonoOrganico) {
+        if ( abonoOrganico == null ) {
+            return null;
+        }
+
+        AbonoOrganicoEntity abonoOrganicoEntity = new AbonoOrganicoEntity();
+
+        abonoOrganicoEntity.setId( abonoOrganico.getId() );
+        abonoOrganicoEntity.setDescripcion( abonoOrganico.getDescripcion() );
+
+        return abonoOrganicoEntity;
+    }
+
+    protected AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity(AbonoOrganicoRecomendacion abonoOrganicoRecomendacion) {
+        if ( abonoOrganicoRecomendacion == null ) {
+            return null;
+        }
+
+        AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity = new AbonoOrganicoRecomendacionEntity();
+
+        abonoOrganicoRecomendacionEntity.setId( abonoOrganicoRecomendacion.getId() );
+        abonoOrganicoRecomendacionEntity.setCantidad( abonoOrganicoRecomendacion.getCantidad() );
+        abonoOrganicoRecomendacionEntity.setIdAbonoOrganico( abonoOrganicoToAbonoOrganicoEntity( abonoOrganicoRecomendacion.getIdAbonoOrganico() ) );
+        abonoOrganicoRecomendacionEntity.setIdRecomendacion( recomendacionToRecomendacionEntity( abonoOrganicoRecomendacion.getIdRecomendacion() ) );
+
+        return abonoOrganicoRecomendacionEntity;
+    }
+
+    protected Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection(Collection<AbonoOrganicoRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoOrganicoRecomendacionEntity> collection1 = new ArrayList<AbonoOrganicoRecomendacionEntity>( collection.size() );
+        for ( AbonoOrganicoRecomendacion abonoOrganicoRecomendacion : collection ) {
+            collection1.add( abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity( abonoOrganicoRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
+    protected AnalisisElementosEntity analisisElementoToAnalisisElementosEntity(AnalisisElemento analisisElemento) {
+        if ( analisisElemento == null ) {
+            return null;
+        }
+
+        AnalisisElementosEntity analisisElementosEntity = new AnalisisElementosEntity();
+
+        analisisElementosEntity.setId( analisisElemento.getId() );
+        analisisElementosEntity.setValor( analisisElemento.getValor() );
+        analisisElementosEntity.setIdAnalisisSuelo( analisisSueloToAnalisisSueloEntity( analisisElemento.getIdAnalisisSuelo() ) );
+        analisisElementosEntity.setIdElemento( elementoToElementoEntity( analisisElemento.getIdElemento() ) );
+
+        return analisisElementosEntity;
     }
 
     protected Collection<AnalisisElementosEntity> analisisElementoCollectionToAnalisisElementosEntityCollection(Collection<AnalisisElemento> collection) {
@@ -602,6 +685,22 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         return collection1;
     }
 
+    protected ElementoEntity elementoToElementoEntity(Elemento elemento) {
+        if ( elemento == null ) {
+            return null;
+        }
+
+        ElementoEntity elementoEntity = new ElementoEntity();
+
+        elementoEntity.setId( elemento.getId() );
+        elementoEntity.setNombre( elemento.getNombre() );
+        elementoEntity.setUnidad( elemento.getUnidad() );
+        elementoEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( elemento.getAnalisisElementoCollection() ) );
+        elementoEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( elemento.getFuenteRecomendacionCollection() ) );
+
+        return elementoEntity;
+    }
+
     protected FuenteEntity fuenteToFuenteEntity(Fuente fuente) {
         if ( fuente == null ) {
             return null;
@@ -609,97 +708,11 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         FuenteEntity fuenteEntity = new FuenteEntity();
 
+        fuenteEntity.setId( fuente.getId() );
         fuenteEntity.setDescripcion( fuente.getDescripcion() );
         fuenteEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( fuente.getFuenteRecomendacionCollection() ) );
-        fuenteEntity.setId( fuente.getId() );
 
         return fuenteEntity;
-    }
-
-    protected AbonoOrganicoEntity abonoOrganicoToAbonoOrganicoEntity(AbonoOrganico abonoOrganico) {
-        if ( abonoOrganico == null ) {
-            return null;
-        }
-
-        AbonoOrganicoEntity abonoOrganicoEntity = new AbonoOrganicoEntity();
-
-        abonoOrganicoEntity.setDescripcion( abonoOrganico.getDescripcion() );
-        abonoOrganicoEntity.setId( abonoOrganico.getId() );
-
-        return abonoOrganicoEntity;
-    }
-
-    protected AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity(AbonoOrganicoRecomendacion abonoOrganicoRecomendacion) {
-        if ( abonoOrganicoRecomendacion == null ) {
-            return null;
-        }
-
-        AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity = new AbonoOrganicoRecomendacionEntity();
-
-        abonoOrganicoRecomendacionEntity.setCantidad( abonoOrganicoRecomendacion.getCantidad() );
-        abonoOrganicoRecomendacionEntity.setId( abonoOrganicoRecomendacion.getId() );
-        abonoOrganicoRecomendacionEntity.setIdAbonoOrganico( abonoOrganicoToAbonoOrganicoEntity( abonoOrganicoRecomendacion.getIdAbonoOrganico() ) );
-        abonoOrganicoRecomendacionEntity.setIdRecomendacion( recomendacionToRecomendacionEntity( abonoOrganicoRecomendacion.getIdRecomendacion() ) );
-
-        return abonoOrganicoRecomendacionEntity;
-    }
-
-    protected Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection(Collection<AbonoOrganicoRecomendacion> collection) {
-        if ( collection == null ) {
-            return null;
-        }
-
-        Collection<AbonoOrganicoRecomendacionEntity> collection1 = new ArrayList<AbonoOrganicoRecomendacionEntity>( collection.size() );
-        for ( AbonoOrganicoRecomendacion abonoOrganicoRecomendacion : collection ) {
-            collection1.add( abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity( abonoOrganicoRecomendacion ) );
-        }
-
-        return collection1;
-    }
-
-    protected Collection<RecomendacionEntity> recomendacionCollectionToRecomendacionEntityCollection(Collection<Recomendacion> collection) {
-        if ( collection == null ) {
-            return null;
-        }
-
-        Collection<RecomendacionEntity> collection1 = new ArrayList<RecomendacionEntity>( collection.size() );
-        for ( Recomendacion recomendacion : collection ) {
-            collection1.add( recomendacionToRecomendacionEntity( recomendacion ) );
-        }
-
-        return collection1;
-    }
-
-    protected EnmiendaEntity enmiendaToEnmiendaEntity(Enmienda enmienda) {
-        if ( enmienda == null ) {
-            return null;
-        }
-
-        EnmiendaEntity enmiendaEntity = new EnmiendaEntity();
-
-        enmiendaEntity.setDescripcion( enmienda.getDescripcion() );
-        enmiendaEntity.setId( enmienda.getId() );
-        enmiendaEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( enmienda.getRecomendacionCollection() ) );
-
-        return enmiendaEntity;
-    }
-
-    protected RecomendacionEntity recomendacionToRecomendacionEntity(Recomendacion recomendacion) {
-        if ( recomendacion == null ) {
-            return null;
-        }
-
-        RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
-
-        recomendacionEntity.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection( recomendacion.getAbonoOrganicoRecomendacionCollection() ) );
-        recomendacionEntity.setCantidadEnmienda( recomendacion.getCantidadEnmienda() );
-        recomendacionEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( recomendacion.getFuenteRecomendacionCollection() ) );
-        recomendacionEntity.setId( recomendacion.getId() );
-        recomendacionEntity.setIdAnalisisSuelo( analisisSueloToAnalisisSueloEntity( recomendacion.getIdAnalisisSuelo() ) );
-        recomendacionEntity.setIdEnmienda( enmiendaToEnmiendaEntity( recomendacion.getIdEnmienda() ) );
-        recomendacionEntity.setPreparacionSuelo( recomendacion.getPreparacionSuelo() );
-
-        return recomendacionEntity;
     }
 
     protected FuenteRecomendacionEntity fuenteRecomendacionToFuenteRecomendacionEntity(FuenteRecomendacion fuenteRecomendacion) {
@@ -709,8 +722,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         FuenteRecomendacionEntity fuenteRecomendacionEntity = new FuenteRecomendacionEntity();
 
-        fuenteRecomendacionEntity.setCantidad( fuenteRecomendacion.getCantidad() );
         fuenteRecomendacionEntity.setId( fuenteRecomendacion.getId() );
+        fuenteRecomendacionEntity.setCantidad( fuenteRecomendacion.getCantidad() );
         fuenteRecomendacionEntity.setIdElemento( elementoToElementoEntity( fuenteRecomendacion.getIdElemento() ) );
         fuenteRecomendacionEntity.setIdFuente( fuenteToFuenteEntity( fuenteRecomendacion.getIdFuente() ) );
         fuenteRecomendacionEntity.setIdRecomendacion( recomendacionToRecomendacionEntity( fuenteRecomendacion.getIdRecomendacion() ) );
@@ -718,35 +731,22 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         return fuenteRecomendacionEntity;
     }
 
-    protected ElementoEntity elementoToElementoEntity(Elemento elemento) {
-        if ( elemento == null ) {
+    protected RecomendacionEntity recomendacionToRecomendacionEntity(Recomendacion recomendacion) {
+        if ( recomendacion == null ) {
             return null;
         }
 
-        ElementoEntity elementoEntity = new ElementoEntity();
+        RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
 
-        elementoEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( elemento.getAnalisisElementoCollection() ) );
-        elementoEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( elemento.getFuenteRecomendacionCollection() ) );
-        elementoEntity.setId( elemento.getId() );
-        elementoEntity.setNombre( elemento.getNombre() );
-        elementoEntity.setUnidad( elemento.getUnidad() );
+        recomendacionEntity.setId( recomendacion.getId() );
+        recomendacionEntity.setCantidadEnmienda( recomendacion.getCantidadEnmienda() );
+        recomendacionEntity.setPreparacionSuelo( recomendacion.getPreparacionSuelo() );
+        recomendacionEntity.setIdAnalisisSuelo( analisisSueloToAnalisisSueloEntity( recomendacion.getIdAnalisisSuelo() ) );
+        recomendacionEntity.setIdEnmienda( enmiendaToEnmiendaEntity( recomendacion.getIdEnmienda() ) );
+        recomendacionEntity.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection( recomendacion.getAbonoOrganicoRecomendacionCollection() ) );
+        recomendacionEntity.setFuenteRecomendacionCollection( fuenteRecomendacionCollectionToFuenteRecomendacionEntityCollection( recomendacion.getFuenteRecomendacionCollection() ) );
 
-        return elementoEntity;
-    }
-
-    protected AnalisisElementosEntity analisisElementoToAnalisisElementosEntity(AnalisisElemento analisisElemento) {
-        if ( analisisElemento == null ) {
-            return null;
-        }
-
-        AnalisisElementosEntity analisisElementosEntity = new AnalisisElementosEntity();
-
-        analisisElementosEntity.setId( analisisElemento.getId() );
-        analisisElementosEntity.setIdAnalisisSuelo( analisisSueloToAnalisisSueloEntity( analisisElemento.getIdAnalisisSuelo() ) );
-        analisisElementosEntity.setIdElemento( elementoToElementoEntity( analisisElemento.getIdElemento() ) );
-        analisisElementosEntity.setValor( analisisElemento.getValor() );
-
-        return analisisElementosEntity;
+        return recomendacionEntity;
     }
 
     protected Collection<AnalisisSueloEntity> analisisSueloCollectionToAnalisisSueloEntityCollection(Collection<AnalisisSuelo> collection) {
@@ -769,10 +769,10 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         ClaseTexturalEntity claseTexturalEntity = new ClaseTexturalEntity();
 
-        claseTexturalEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( claseTextural.getAnalisisSueloCollection() ) );
         claseTexturalEntity.setIdClaseTextural( claseTextural.getIdClaseTextural() );
         claseTexturalEntity.setNombre( claseTextural.getNombre() );
         claseTexturalEntity.setSigla( claseTextural.getSigla() );
+        claseTexturalEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( claseTextural.getAnalisisSueloCollection() ) );
 
         return claseTexturalEntity;
     }
@@ -784,9 +784,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         DensidadEntity densidadEntity = new DensidadEntity();
 
-        densidadEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( densidad.getAnalisisSueloCollection() ) );
         densidadEntity.setIdDensidad( densidad.getIdDensidad() );
         densidadEntity.setValor( densidad.getValor() );
+        densidadEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( densidad.getAnalisisSueloCollection() ) );
 
         return densidadEntity;
     }
@@ -798,9 +798,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         ProfundidadMuestraEntity profundidadMuestraEntity = new ProfundidadMuestraEntity();
 
-        profundidadMuestraEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( profundidadMuestra.getAnalisisSueloCollection() ) );
         profundidadMuestraEntity.setIdProfundidadMuestra( profundidadMuestra.getIdProfundidadMuestra() );
         profundidadMuestraEntity.setProfundidad( profundidadMuestra.getProfundidad() );
+        profundidadMuestraEntity.setAnalisisSueloCollection( analisisSueloCollectionToAnalisisSueloEntityCollection( profundidadMuestra.getAnalisisSueloCollection() ) );
 
         return profundidadMuestraEntity;
     }
@@ -812,17 +812,17 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         AnalisisSueloEntity analisisSueloEntity = new AnalisisSueloEntity();
 
-        analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( analisisSuelo.getAnalisisElementoCollection() ) );
-        analisisSueloEntity.setFecha( analisisSuelo.getFecha() );
         analisisSueloEntity.setIdAnalisisSuelo( analisisSuelo.getIdAnalisisSuelo() );
+        analisisSueloEntity.setPorcentArena( analisisSuelo.getPorcentArena() );
+        analisisSueloEntity.setPorcentLimos( analisisSuelo.getPorcentLimos() );
+        analisisSueloEntity.setPorcentArcilla( analisisSuelo.getPorcentArcilla() );
+        analisisSueloEntity.setFecha( analisisSuelo.getFecha() );
+        analisisSueloEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( analisisSuelo.getRecomendacionCollection() ) );
+        analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( analisisSuelo.getAnalisisElementoCollection() ) );
         analisisSueloEntity.setIdClaseTextural( claseTexturalToClaseTexturalEntity( analisisSuelo.getIdClaseTextural() ) );
         analisisSueloEntity.setIdCultivo( toEntity( analisisSuelo.getIdCultivo() ) );
         analisisSueloEntity.setIdDensidad( densidadToDensidadEntity( analisisSuelo.getIdDensidad() ) );
         analisisSueloEntity.setIdProfundidad( profundidadMuestraToProfundidadMuestraEntity( analisisSuelo.getIdProfundidad() ) );
-        analisisSueloEntity.setPorcentArcilla( analisisSuelo.getPorcentArcilla() );
-        analisisSueloEntity.setPorcentArena( analisisSuelo.getPorcentArena() );
-        analisisSueloEntity.setPorcentLimos( analisisSuelo.getPorcentLimos() );
-        analisisSueloEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( analisisSuelo.getRecomendacionCollection() ) );
 
         return analisisSueloEntity;
     }
@@ -847,9 +847,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         DistanciaSiembraEntity distanciaSiembraEntity = new DistanciaSiembraEntity();
 
-        distanciaSiembraEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( distanciaSiembra.getCultivoCollection() ) );
-        distanciaSiembraEntity.setDescripcion( distanciaSiembra.getDescripcion() );
         distanciaSiembraEntity.setId( distanciaSiembra.getId() );
+        distanciaSiembraEntity.setDescripcion( distanciaSiembra.getDescripcion() );
+        distanciaSiembraEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( distanciaSiembra.getCultivoCollection() ) );
 
         return distanciaSiembraEntity;
     }
@@ -861,9 +861,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         EtapaFenologicaEntity etapaFenologicaEntity = new EtapaFenologicaEntity();
 
-        etapaFenologicaEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( etapaFenologica.getCultivoCollection() ) );
-        etapaFenologicaEntity.setDescripcion( etapaFenologica.getDescripcion() );
         etapaFenologicaEntity.setId( etapaFenologica.getId() );
+        etapaFenologicaEntity.setDescripcion( etapaFenologica.getDescripcion() );
+        etapaFenologicaEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( etapaFenologica.getCultivoCollection() ) );
 
         return etapaFenologicaEntity;
     }
@@ -888,16 +888,16 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         AgricultorEntity agricultorEntity = new AgricultorEntity();
 
-        agricultorEntity.setApellidos( agricultor.getApellidos() );
-        agricultorEntity.setConfirmationToken( agricultor.getConfirmationToken() );
-        agricultorEntity.setEmail( agricultor.getEmail() );
         agricultorEntity.setEstado( agricultor.getEstado() );
-        agricultorEntity.setFechaNacimiento( agricultor.getFechaNacimiento() );
-        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( agricultor.getIdTipoIdentificacion() ) );
+        agricultorEntity.setConfirmationToken( agricultor.getConfirmationToken() );
         agricultorEntity.setIdentificacion( agricultor.getIdentificacion() );
         agricultorEntity.setNombres( agricultor.getNombres() );
-        agricultorEntity.setPassword( agricultor.getPassword() );
+        agricultorEntity.setApellidos( agricultor.getApellidos() );
         agricultorEntity.setTelefono( agricultor.getTelefono() );
+        agricultorEntity.setFechaNacimiento( agricultor.getFechaNacimiento() );
+        agricultorEntity.setPassword( agricultor.getPassword() );
+        agricultorEntity.setEmail( agricultor.getEmail() );
+        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( agricultor.getIdTipoIdentificacion() ) );
 
         return agricultorEntity;
     }
@@ -922,8 +922,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         MunicipioEntity municipioEntity = new MunicipioEntity();
 
-        municipioEntity.setIdDepartamento( departamentoToDepartamentoEntity( municipio.getIdDepartamento() ) );
         municipioEntity.setIdMunicipio( municipio.getIdMunicipio() );
+        municipioEntity.setIdDepartamento( departamentoToDepartamentoEntity( municipio.getIdDepartamento() ) );
 
         return municipioEntity;
     }
@@ -936,8 +936,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         CorregimientoEntity corregimientoEntity = new CorregimientoEntity();
 
         corregimientoEntity.setIdCorregimiento( corregimiento.getIdCorregimiento() );
-        corregimientoEntity.setIdMunicipio( municipioToMunicipioEntity( corregimiento.getIdMunicipio() ) );
         corregimientoEntity.setNombre( corregimiento.getNombre() );
+        corregimientoEntity.setIdMunicipio( municipioToMunicipioEntity( corregimiento.getIdMunicipio() ) );
 
         return corregimientoEntity;
     }
@@ -949,8 +949,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         VeredaEntity veredaEntity = new VeredaEntity();
 
-        veredaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( vereda.getIdCorregimiento() ) );
         veredaEntity.setIdVereda( vereda.getIdVereda() );
+        veredaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( vereda.getIdCorregimiento() ) );
         veredaEntity.setNombre( vereda.getNombre() );
 
         return veredaEntity;
@@ -963,16 +963,16 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         FincaEntity fincaEntity = new FincaEntity();
 
-        fincaEntity.setAreaEnUso( finca.getAreaEnUso() );
+        fincaEntity.setIdFinca( finca.getIdFinca() );
+        fincaEntity.setNombre( finca.getNombre() );
         fincaEntity.setAreaTotal( finca.getAreaTotal() );
-        fincaEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( finca.getCultivoCollection() ) );
+        fincaEntity.setAreaEnUso( finca.getAreaEnUso() );
         fincaEntity.setGeolocalizacion( finca.getGeolocalizacion() );
         fincaEntity.setIdAgricultor( agricultorToAgricultorEntity( finca.getIdAgricultor() ) );
+        fincaEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( finca.getCultivoCollection() ) );
         fincaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( finca.getIdCorregimiento() ) );
-        fincaEntity.setIdFinca( finca.getIdFinca() );
         fincaEntity.setIdMunicipio( municipioToMunicipioEntity( finca.getIdMunicipio() ) );
         fincaEntity.setIdVereda( veredaToVeredaEntity( finca.getIdVereda() ) );
-        fincaEntity.setNombre( finca.getNombre() );
 
         return fincaEntity;
     }
@@ -984,9 +984,9 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         TopografiaEntity topografiaEntity = new TopografiaEntity();
 
-        topografiaEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( topografia.getCultivoCollection() ) );
-        topografiaEntity.setDescripcion( topografia.getDescripcion() );
         topografiaEntity.setId( topografia.getId() );
+        topografiaEntity.setDescripcion( topografia.getDescripcion() );
+        topografiaEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( topografia.getCultivoCollection() ) );
 
         return topografiaEntity;
     }
@@ -1011,8 +1011,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         TipoCultivoEntity tipoCultivoEntity = new TipoCultivoEntity();
 
-        tipoCultivoEntity.setDescripcion( tipoCultivo.getDescripcion() );
         tipoCultivoEntity.setId( tipoCultivo.getId() );
+        tipoCultivoEntity.setDescripcion( tipoCultivo.getDescripcion() );
         tipoCultivoEntity.setVariedadCollection( variedadCollectionToVariedadEntityCollection( tipoCultivo.getVariedadCollection() ) );
 
         return tipoCultivoEntity;
@@ -1025,10 +1025,10 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         VariedadEntity variedadEntity = new VariedadEntity();
 
-        variedadEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( variedad.getCultivoCollection() ) );
-        variedadEntity.setDescripcion( variedad.getDescripcion() );
         variedadEntity.setId( variedad.getId() );
+        variedadEntity.setDescripcion( variedad.getDescripcion() );
         variedadEntity.setIdTipoCultivo( tipoCultivoToTipoCultivoEntity( variedad.getIdTipoCultivo() ) );
+        variedadEntity.setCultivoCollection( cultivoCollectionToCultivoEntityCollection( variedad.getCultivoCollection() ) );
 
         return variedadEntity;
     }

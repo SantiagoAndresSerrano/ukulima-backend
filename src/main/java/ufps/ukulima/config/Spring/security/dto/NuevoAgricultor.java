@@ -12,8 +12,8 @@ public class NuevoAgricultor {
     @NotNull(message = "El nombre no puede estar vacío")
     @NotBlank(message = "El nombre no puede estar en blanco")
     private String nombres;
-    @NotNull(message = "El nombre no puede estar vacío")
-    @NotBlank(message = "El nombre no puede estar en blanco")
+    @NotNull(message = "Los apellidos no puede estar vacío")
+    @NotBlank(message = "Los apellidos no puede estar en blanco")
     private String apellidos;
     private String telefono;
     private Date fechaNacimiento;
