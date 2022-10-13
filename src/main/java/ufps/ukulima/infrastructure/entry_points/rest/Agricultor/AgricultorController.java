@@ -67,7 +67,7 @@ public class AgricultorController {
                 }
             }
         }
-        agricultorService.saveAgricultor(agricultor);
+        agricultorService.save(agricultor);
         return ResponseEntity.ok(new Mensaje("Agricultor actualizado"));
     }
 
