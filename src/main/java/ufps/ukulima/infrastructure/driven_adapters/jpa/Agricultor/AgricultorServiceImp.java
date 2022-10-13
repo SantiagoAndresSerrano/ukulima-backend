@@ -97,4 +97,9 @@ public class AgricultorServiceImp implements AgricultorService {
     public Agricultor findByResetPassword(String token) {
         return null;
     }
+
+    @Override
+    public void save(Agricultor agricultor) {
+        this.agricultorRepository.save(agricultorEntityMapper.toEntity(agricultor));
+    }
 }
