@@ -122,7 +122,7 @@ public class Finca {
         this.idVereda = idVereda;
     }
 
-    public Collection<Cultivo> getCultivoCollection() {
+    public Collection<Cultivo> cultivoCollection() {
         return cultivoCollection;
     }
 

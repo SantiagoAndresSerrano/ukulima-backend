@@ -51,8 +51,7 @@ public class ProfundidadMuestra {
         this.profundidad = profundidad;
     }
 
-    @XmlTransient
-    public Collection<AnalisisSuelo> getAnalisisSueloCollection() {
+    public Collection<AnalisisSuelo> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 

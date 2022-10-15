@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,14 +30,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "topografia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Topografia.findAll", query = "SELECT t FROM TopografiaEntity t"),
-    @NamedQuery(name = "Topografia.findById", query = "SELECT t FROM TopografiaEntity t WHERE t.id = :id"),
-    @NamedQuery(name = "Topografia.findByDescripcion", query = "SELECT t FROM TopografiaEntity t WHERE t.descripcion" +
-            " = :descripcion")})
+        @NamedQuery(name = "Topografia.findAll", query = "SELECT t FROM TopografiaEntity t"),
+        @NamedQuery(name = "Topografia.findById", query = "SELECT t FROM TopografiaEntity t WHERE t.id = :id"),
+        @NamedQuery(name = "Topografia.findByDescripcion", query = "SELECT t FROM TopografiaEntity t WHERE t.descripcion"
+                +
+                " = :descripcion") })
 public class TopografiaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -73,7 +77,7 @@ public class TopografiaEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Collection<CultivoEntity> getCultivoCollection() {
+    public Collection<CultivoEntity> cultivoCollection() {
         return cultivoCollection;
     }
 
@@ -90,7 +94,7 @@ public class TopografiaEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof TopografiaEntity)) {
             return false;
         }
@@ -105,5 +109,5 @@ public class TopografiaEntity implements Serializable {
     public String toString() {
         return "ejercicios.pkgfinal.Topografia[ id=" + id + " ]";
     }
-    
+
 }

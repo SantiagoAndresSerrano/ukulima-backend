@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "TipoCultivo.findAll", query = "SELECT t FROM TipoCultivoEntity t"),
         @NamedQuery(name = "TipoCultivo.findById", query = "SELECT t FROM TipoCultivoEntity t WHERE t.id = :id"),
-        @NamedQuery(name = "TipoCultivo.findByDescripcion", query = "SELECT t FROM TipoCultivoEntity t WHERE t.descripcion = :descripcion")})
+        @NamedQuery(name = "TipoCultivo.findByDescripcion", query = "SELECT t FROM TipoCultivoEntity t WHERE t.descripcion = :descripcion") })
 public class TipoCultivoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,7 +80,7 @@ public class TipoCultivoEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Collection<VariedadEntity> getVariedadCollection() {
+    public Collection<VariedadEntity> variedadCollection() {
         return variedadCollection;
     }
 

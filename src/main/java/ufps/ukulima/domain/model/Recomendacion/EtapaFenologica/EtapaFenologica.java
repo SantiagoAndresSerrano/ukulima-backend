@@ -49,8 +49,7 @@ public class EtapaFenologica {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<Cultivo> getCultivoCollection() {
+    public Collection<Cultivo> cultivoCollection() {
         return cultivoCollection;
     }
 
@@ -67,7 +66,7 @@ public class EtapaFenologica {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof EtapaFenologica)) {
             return false;
         }
@@ -82,5 +81,5 @@ public class EtapaFenologica {
     public String toString() {
         return "ejercicios.pkgfinal.EtapaFenologica[ id=" + id + " ]";
     }
-    
+
 }

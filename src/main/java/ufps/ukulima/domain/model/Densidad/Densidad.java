@@ -5,7 +5,6 @@
  */
 package ufps.ukulima.domain.model.Densidad;
 
-
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 
 import java.util.Collection;
@@ -15,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author santi
  */
-public class Densidad  {
+public class Densidad {
 
     private Integer idDensidad;
     private float valor;
@@ -49,8 +48,7 @@ public class Densidad  {
         this.valor = valor;
     }
 
-    @XmlTransient
-    public Collection<AnalisisSuelo> getAnalisisSueloCollection() {
+    public Collection<AnalisisSuelo> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 
@@ -67,12 +65,13 @@ public class Densidad  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Densidad)) {
             return false;
         }
         Densidad other = (Densidad) object;
-        if ((this.idDensidad == null && other.idDensidad != null) || (this.idDensidad != null && !this.idDensidad.equals(other.idDensidad))) {
+        if ((this.idDensidad == null && other.idDensidad != null)
+                || (this.idDensidad != null && !this.idDensidad.equals(other.idDensidad))) {
             return false;
         }
         return true;
@@ -82,5 +81,5 @@ public class Densidad  {
     public String toString() {
         return "ejercicios.pkgfinal.Densidad[ idDensidad=" + idDensidad + " ]";
     }
-    
+
 }

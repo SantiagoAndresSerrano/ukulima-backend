@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         @NamedQuery(name = "AnalisisSuelo.findByPorcentArena", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.porcentArena = :porcentArena"),
         @NamedQuery(name = "AnalisisSuelo.findByPorcentLimos", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.porcentLimos = :porcentLimos"),
         @NamedQuery(name = "AnalisisSuelo.findByPorcentArcilla", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.porcentArcilla = :porcentArcilla"),
-        @NamedQuery(name = "AnalisisSuelo.findByFecha", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.fecha = :fecha")})
+        @NamedQuery(name = "AnalisisSuelo.findByFecha", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.fecha = :fecha") })
 public class AnalisisSueloEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -91,7 +91,8 @@ public class AnalisisSueloEntity implements Serializable {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla, Date fecha) {
+    public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla,
+            Date fecha) {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;
@@ -147,7 +148,7 @@ public class AnalisisSueloEntity implements Serializable {
         this.recomendacionCollection = recomendacionCollection;
     }
 
-    public Collection<AnalisisElementosEntity> getAnalisisElementoCollection() {
+    public Collection<AnalisisElementosEntity> analisisElementoCollection() {
         return analisisElementoCollection;
     }
 
@@ -201,7 +202,8 @@ public class AnalisisSueloEntity implements Serializable {
             return false;
         }
         AnalisisSueloEntity other = (AnalisisSueloEntity) object;
-        if ((this.idAnalisisSuelo == null && other.idAnalisisSuelo != null) || (this.idAnalisisSuelo != null && !this.idAnalisisSuelo.equals(other.idAnalisisSuelo))) {
+        if ((this.idAnalisisSuelo == null && other.idAnalisisSuelo != null)
+                || (this.idAnalisisSuelo != null && !this.idAnalisisSuelo.equals(other.idAnalisisSuelo))) {
             return false;
         }
         return true;

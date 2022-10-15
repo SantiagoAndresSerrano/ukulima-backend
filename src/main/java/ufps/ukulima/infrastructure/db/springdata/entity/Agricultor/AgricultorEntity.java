@@ -40,13 +40,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "agricultor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "AgricultorEntity.findAll", query = "SELECT a FROM AgricultorEntity a"),
-    @NamedQuery(name = "AgricultorEntity.findByIdentificacion", query = "SELECT a FROM AgricultorEntity a WHERE a.identificacion = :identificacion"),
-    @NamedQuery(name = "AgricultorEntity.findByNombres", query = "SELECT a FROM AgricultorEntity a WHERE a.nombres = :nombres"),
-    @NamedQuery(name = "AgricultorEntity.findByApellidos", query = "SELECT a FROM AgricultorEntity a WHERE a.apellidos = :apellidos"),
-    @NamedQuery(name = "AgricultorEntity.findByTelefono", query = "SELECT a FROM AgricultorEntity a WHERE a.telefono = :telefono"),
-    @NamedQuery(name = "AgricultorEntity.findByFechaNacimiento", query = "SELECT a FROM AgricultorEntity a WHERE a.fechaNacimiento = :fechaNacimiento"),
-    @NamedQuery(name = "AgricultorEntity.findByEmail", query = "SELECT a FROM AgricultorEntity a WHERE a.email = :email")})
+        @NamedQuery(name = "AgricultorEntity.findAll", query = "SELECT a FROM AgricultorEntity a"),
+        @NamedQuery(name = "AgricultorEntity.findByIdentificacion", query = "SELECT a FROM AgricultorEntity a WHERE a.identificacion = :identificacion"),
+        @NamedQuery(name = "AgricultorEntity.findByNombres", query = "SELECT a FROM AgricultorEntity a WHERE a.nombres = :nombres"),
+        @NamedQuery(name = "AgricultorEntity.findByApellidos", query = "SELECT a FROM AgricultorEntity a WHERE a.apellidos = :apellidos"),
+        @NamedQuery(name = "AgricultorEntity.findByTelefono", query = "SELECT a FROM AgricultorEntity a WHERE a.telefono = :telefono"),
+        @NamedQuery(name = "AgricultorEntity.findByFechaNacimiento", query = "SELECT a FROM AgricultorEntity a WHERE a.fechaNacimiento = :fechaNacimiento"),
+        @NamedQuery(name = "AgricultorEntity.findByEmail", query = "SELECT a FROM AgricultorEntity a WHERE a.email = :email") })
 public class AgricultorEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -101,7 +101,8 @@ public class AgricultorEntity implements Serializable {
         this.identificacion = identificacion;
     }
 
-    public AgricultorEntity(Integer identificacion, String nombres, String apellidos, Date fechaNacimiento, String password) {
+    public AgricultorEntity(Integer identificacion, String nombres, String apellidos, Date fechaNacimiento,
+            String password) {
         this.identificacion = identificacion;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -117,7 +118,7 @@ public class AgricultorEntity implements Serializable {
         this.estado = estado;
     }
 
-    public Collection<PasswordResetTokenEntity> getPasswordResetTokenCollection() {
+    public Collection<PasswordResetTokenEntity> passwordResetTokenCollection() {
         return passwordResetTokenCollection;
     }
 
@@ -214,12 +215,13 @@ public class AgricultorEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof AgricultorEntity)) {
             return false;
         }
         AgricultorEntity other = (AgricultorEntity) object;
-        if ((this.identificacion == null && other.identificacion != null) || (this.identificacion != null && !this.identificacion.equals(other.identificacion))) {
+        if ((this.identificacion == null && other.identificacion != null)
+                || (this.identificacion != null && !this.identificacion.equals(other.identificacion))) {
             return false;
         }
         return true;

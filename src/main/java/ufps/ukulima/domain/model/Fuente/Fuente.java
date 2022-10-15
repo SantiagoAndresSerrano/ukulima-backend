@@ -53,8 +53,7 @@ public class Fuente {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<FuenteRecomendacion> getFuenteRecomendacionCollection() {
+    public Collection<FuenteRecomendacion> fuenteRecomendacionCollection() {
         return fuenteRecomendacionCollection;
     }
 

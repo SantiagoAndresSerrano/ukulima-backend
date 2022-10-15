@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author santi
  */
-public class Variedad  {
+public class Variedad {
 
     private Integer id;
     private String descripcion;
@@ -57,8 +57,7 @@ public class Variedad  {
         this.idTipoCultivo = idTipoCultivo;
     }
 
-    @XmlTransient
-    public Collection<Cultivo> getCultivoCollection() {
+    public Collection<Cultivo> cultivoCollection() {
         return cultivoCollection;
     }
 
@@ -75,7 +74,7 @@ public class Variedad  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Variedad)) {
             return false;
         }
@@ -90,5 +89,5 @@ public class Variedad  {
     public String toString() {
         return "ejercicios.pkgfinal.Variedad[ id=" + id + " ]";
     }
-    
+
 }

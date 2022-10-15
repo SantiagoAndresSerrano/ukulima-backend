@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -42,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         @NamedQuery(name = "Recomendacion.findAll", query = "SELECT r FROM RecomendacionEntity r"),
         @NamedQuery(name = "Recomendacion.findById", query = "SELECT r FROM RecomendacionEntity r WHERE r.id = :id"),
         @NamedQuery(name = "Recomendacion.findByCantidadEnmienda", query = "SELECT r FROM RecomendacionEntity r WHERE r.cantidadEnmienda = :cantidadEnmienda"),
-        @NamedQuery(name = "Recomendacion.findByPreparacionSuelo", query = "SELECT r FROM RecomendacionEntity r WHERE r.preparacionSuelo = :preparacionSuelo")})
+        @NamedQuery(name = "Recomendacion.findByPreparacionSuelo", query = "SELECT r FROM RecomendacionEntity r WHERE r.preparacionSuelo = :preparacionSuelo") })
 public class RecomendacionEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -121,11 +122,12 @@ public class RecomendacionEntity implements Serializable {
         this.idEnmienda = idEnmienda;
     }
 
-    public Collection<AbonoOrganicoRecomendacionEntity> getAbonoOrganicoRecomendacionCollection() {
+    public Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection() {
         return abonoOrganicoRecomendacionCollection;
     }
 
-    public void setAbonoOrganicoRecomendacionCollection(Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection) {
+    public void setAbonoOrganicoRecomendacionCollection(
+            Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection) {
         this.abonoOrganicoRecomendacionCollection = abonoOrganicoRecomendacionCollection;
     }
 

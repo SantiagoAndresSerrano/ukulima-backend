@@ -76,7 +76,7 @@ public class Cultivo {
         this.plantasPorHectarea = plantasPorHectarea;
     }
 
-    public Collection<AnalisisSuelo> getAnalisisSueloCollection() {
+    public Collection<AnalisisSuelo> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 

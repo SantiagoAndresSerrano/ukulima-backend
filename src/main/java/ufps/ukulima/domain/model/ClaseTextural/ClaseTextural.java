@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ufps.ukulima.domain.model.ClaseTextural;
+
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 
 import java.util.Collection;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author santi
  */
-public class ClaseTextural  {
+public class ClaseTextural {
 
     private Integer idClaseTextural;
     private String nombre;
@@ -57,8 +58,7 @@ public class ClaseTextural  {
         this.sigla = sigla;
     }
 
-    @XmlTransient
-    public Collection<AnalisisSuelo> getAnalisisSueloCollection() {
+    public Collection<AnalisisSuelo> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 
@@ -75,12 +75,13 @@ public class ClaseTextural  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof ClaseTextural)) {
             return false;
         }
         ClaseTextural other = (ClaseTextural) object;
-        if ((this.idClaseTextural == null && other.idClaseTextural != null) || (this.idClaseTextural != null && !this.idClaseTextural.equals(other.idClaseTextural))) {
+        if ((this.idClaseTextural == null && other.idClaseTextural != null)
+                || (this.idClaseTextural != null && !this.idClaseTextural.equals(other.idClaseTextural))) {
             return false;
         }
         return true;

@@ -109,8 +109,7 @@ public class AnalisisSuelo {
         this.recomendacionCollection = recomendacionCollection;
     }
 
-    @XmlTransient
-    public Collection<AnalisisElemento> getAnalisisElementoCollection() {
+    public Collection<AnalisisElemento> analisisElementoCollection() {
         return analisisElementoCollection;
     }
 

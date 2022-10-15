@@ -30,12 +30,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "clase_textural")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ClaseTextural.findAll", query = "SELECT c FROM ClaseTexturalEntity c"),
-    @NamedQuery(name = "ClaseTextural.findByIdClaseTextural", query = "SELECT c FROM ClaseTexturalEntity c WHERE c.idClaseTextural = " +
-            ":idClaseTextural"),
-    @NamedQuery(name = "ClaseTextural.findByNombre", query = "SELECT c FROM ClaseTexturalEntity c WHERE c.nombre = " +
-            ":nombre"),
-    @NamedQuery(name = "ClaseTextural.findBySigla", query = "SELECT c FROM ClaseTexturalEntity c WHERE c.sigla = :sigla")})
+        @NamedQuery(name = "ClaseTextural.findAll", query = "SELECT c FROM ClaseTexturalEntity c"),
+        @NamedQuery(name = "ClaseTextural.findByIdClaseTextural", query = "SELECT c FROM ClaseTexturalEntity c WHERE c.idClaseTextural = "
+                +
+                ":idClaseTextural"),
+        @NamedQuery(name = "ClaseTextural.findByNombre", query = "SELECT c FROM ClaseTexturalEntity c WHERE c.nombre = "
+                +
+                ":nombre"),
+        @NamedQuery(name = "ClaseTextural.findBySigla", query = "SELECT c FROM ClaseTexturalEntity c WHERE c.sigla = :sigla") })
 public class ClaseTexturalEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -90,7 +92,7 @@ public class ClaseTexturalEntity implements Serializable {
         this.sigla = sigla;
     }
 
-    public Collection<AnalisisSueloEntity> getAnalisisSueloCollection() {
+    public Collection<AnalisisSueloEntity> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 
@@ -107,12 +109,13 @@ public class ClaseTexturalEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof ClaseTexturalEntity)) {
             return false;
         }
         ClaseTexturalEntity other = (ClaseTexturalEntity) object;
-        if ((this.idClaseTextural == null && other.idClaseTextural != null) || (this.idClaseTextural != null && !this.idClaseTextural.equals(other.idClaseTextural))) {
+        if ((this.idClaseTextural == null && other.idClaseTextural != null)
+                || (this.idClaseTextural != null && !this.idClaseTextural.equals(other.idClaseTextural))) {
             return false;
         }
         return true;
@@ -122,5 +125,5 @@ public class ClaseTexturalEntity implements Serializable {
     public String toString() {
         return "ejercicios.pkgfinal.ClaseTextural[ idClaseTextural=" + idClaseTextural + " ]";
     }
-    
+
 }

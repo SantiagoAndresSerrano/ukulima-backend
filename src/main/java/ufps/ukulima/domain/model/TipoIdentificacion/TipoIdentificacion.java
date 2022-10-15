@@ -8,7 +8,6 @@ package ufps.ukulima.domain.model.TipoIdentificacion;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -48,8 +47,7 @@ public class TipoIdentificacion {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    public Collection<Agricultor> getAgricultorCollection() {
+    public Collection<Agricultor> agricultorCollection() {
         return agricultorCollection;
     }
 
@@ -66,12 +64,13 @@ public class TipoIdentificacion {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof TipoIdentificacion)) {
             return false;
         }
         TipoIdentificacion other = (TipoIdentificacion) object;
-        if ((this.idTipo == null && other.idTipo != null) || (this.idTipo != null && !this.idTipo.equals(other.idTipo))) {
+        if ((this.idTipo == null && other.idTipo != null)
+                || (this.idTipo != null && !this.idTipo.equals(other.idTipo))) {
             return false;
         }
         return true;
@@ -81,5 +80,5 @@ public class TipoIdentificacion {
     public String toString() {
         return "ejercicios.pkgfinal.TipoIdentificacion[ idTipo=" + idTipo + " ]";
     }
-    
+
 }

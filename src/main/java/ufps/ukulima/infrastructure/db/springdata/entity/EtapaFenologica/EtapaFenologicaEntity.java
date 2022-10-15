@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "etapa_fenologica")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EtapaFenologica.findAll", query = "SELECT e FROM EtapaFenologicaEntity e"),
-    @NamedQuery(name = "EtapaFenologica.findById", query = "SELECT e FROM EtapaFenologicaEntity e WHERE e.id = :id"),
-    @NamedQuery(name = "EtapaFenologica.findByDescripcion", query = "SELECT e FROM EtapaFenologicaEntity e WHERE e.descripcion = :descripcion")})
+        @NamedQuery(name = "EtapaFenologica.findAll", query = "SELECT e FROM EtapaFenologicaEntity e"),
+        @NamedQuery(name = "EtapaFenologica.findById", query = "SELECT e FROM EtapaFenologicaEntity e WHERE e.id = :id"),
+        @NamedQuery(name = "EtapaFenologica.findByDescripcion", query = "SELECT e FROM EtapaFenologicaEntity e WHERE e.descripcion = :descripcion") })
 public class EtapaFenologicaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,7 +75,7 @@ public class EtapaFenologicaEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Collection<CultivoEntity> getCultivoCollection() {
+    public Collection<CultivoEntity> cultivoCollection() {
         return cultivoCollection;
     }
 
@@ -92,7 +92,7 @@ public class EtapaFenologicaEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof EtapaFenologicaEntity)) {
             return false;
         }
@@ -107,5 +107,5 @@ public class EtapaFenologicaEntity implements Serializable {
     public String toString() {
         return "ejercicios.pkgfinal.EtapaFenologica[ id=" + id + " ]";
     }
-    
+
 }

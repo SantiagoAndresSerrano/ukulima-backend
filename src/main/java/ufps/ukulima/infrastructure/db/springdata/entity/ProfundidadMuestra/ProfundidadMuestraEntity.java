@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "ProfundidadMuestra.findAll", query = "SELECT p FROM ProfundidadMuestraEntity p"),
         @NamedQuery(name = "ProfundidadMuestra.findByIdProfundidadMuestra", query = "SELECT p FROM ProfundidadMuestraEntity p WHERE p.idProfundidadMuestra = :idProfundidadMuestra"),
-        @NamedQuery(name = "ProfundidadMuestra.findByProfundidad", query = "SELECT p FROM ProfundidadMuestraEntity p WHERE p.profundidad = :profundidad")})
+        @NamedQuery(name = "ProfundidadMuestra.findByProfundidad", query = "SELECT p FROM ProfundidadMuestraEntity p WHERE p.profundidad = :profundidad") })
 public class ProfundidadMuestraEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,7 +80,7 @@ public class ProfundidadMuestraEntity implements Serializable {
         this.profundidad = profundidad;
     }
 
-    public Collection<AnalisisSueloEntity> getAnalisisSueloCollection() {
+    public Collection<AnalisisSueloEntity> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 
@@ -102,7 +102,9 @@ public class ProfundidadMuestraEntity implements Serializable {
             return false;
         }
         ProfundidadMuestraEntity other = (ProfundidadMuestraEntity) object;
-        if ((this.idProfundidadMuestra == null && other.idProfundidadMuestra != null) || (this.idProfundidadMuestra != null && !this.idProfundidadMuestra.equals(other.idProfundidadMuestra))) {
+        if ((this.idProfundidadMuestra == null && other.idProfundidadMuestra != null)
+                || (this.idProfundidadMuestra != null
+                        && !this.idProfundidadMuestra.equals(other.idProfundidadMuestra))) {
             return false;
         }
         return true;

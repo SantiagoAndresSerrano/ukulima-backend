@@ -5,7 +5,6 @@
  */
 package ufps.ukulima.infrastructure.db.springdata.entity.Densidad;
 
-
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 
 import java.io.Serializable;
@@ -31,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "densidad")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Densidad.findAll", query = "SELECT d FROM DensidadEntity d"),
-    @NamedQuery(name = "Densidad.findByIdDensidad", query = "SELECT d FROM DensidadEntity d WHERE d.idDensidad = :idDensidad"),
-    @NamedQuery(name = "Densidad.findByValor", query = "SELECT d FROM DensidadEntity d WHERE d.valor = :valor")})
+        @NamedQuery(name = "Densidad.findAll", query = "SELECT d FROM DensidadEntity d"),
+        @NamedQuery(name = "Densidad.findByIdDensidad", query = "SELECT d FROM DensidadEntity d WHERE d.idDensidad = :idDensidad"),
+        @NamedQuery(name = "Densidad.findByValor", query = "SELECT d FROM DensidadEntity d WHERE d.valor = :valor") })
 public class DensidadEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,7 +75,7 @@ public class DensidadEntity implements Serializable {
         this.valor = valor;
     }
 
-    public Collection<AnalisisSueloEntity> getAnalisisSueloCollection() {
+    public Collection<AnalisisSueloEntity> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 
@@ -93,12 +92,13 @@ public class DensidadEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof DensidadEntity)) {
             return false;
         }
         DensidadEntity other = (DensidadEntity) object;
-        if ((this.idDensidad == null && other.idDensidad != null) || (this.idDensidad != null && !this.idDensidad.equals(other.idDensidad))) {
+        if ((this.idDensidad == null && other.idDensidad != null)
+                || (this.idDensidad != null && !this.idDensidad.equals(other.idDensidad))) {
             return false;
         }
         return true;
@@ -108,5 +108,5 @@ public class DensidadEntity implements Serializable {
     public String toString() {
         return "ejercicios.pkgfinal.Densidad[ idDensidad=" + idDensidad + " ]";
     }
-    
+
 }

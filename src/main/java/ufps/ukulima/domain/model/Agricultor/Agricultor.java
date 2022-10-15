@@ -16,7 +16,7 @@ import java.util.Date;
  *
  * @author santi
  */
-public class Agricultor  {
+public class Agricultor {
     private Integer identificacion;
     private String nombres;
     private String apellidos;
@@ -32,8 +32,6 @@ public class Agricultor  {
     private Collection<Finca> fincaCollection;
 
     private Collection<PasswordResetToken> passwordResetTokens;
-
-
 
     public Agricultor() {
     }
@@ -58,7 +56,7 @@ public class Agricultor  {
         this.confirmationToken = confirmationToken;
     }
 
-    public Collection<PasswordResetToken> getPasswordResetTokens() {
+    public Collection<PasswordResetToken> passwordResetTokens() {
         return passwordResetTokens;
     }
 
@@ -138,7 +136,7 @@ public class Agricultor  {
         this.idTipoidentificacion = idTipoIdentificacion;
     }
 
-    public Collection<Finca> getFincaCollection() {
+    public Collection<Finca> fincaCollection() {
         return fincaCollection;
     }
 
@@ -155,12 +153,13 @@ public class Agricultor  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Agricultor)) {
             return false;
         }
         Agricultor other = (Agricultor) object;
-        if ((this.identificacion == null && other.identificacion != null) || (this.identificacion != null && !this.identificacion.equals(other.identificacion))) {
+        if ((this.identificacion == null && other.identificacion != null)
+                || (this.identificacion != null && !this.identificacion.equals(other.identificacion))) {
             return false;
         }
         return true;

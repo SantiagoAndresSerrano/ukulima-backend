@@ -13,7 +13,7 @@ import java.util.Collection;
  *
  * @author santi
  */
-public class Vereda  {
+public class Vereda {
 
     private Integer idVereda;
     private Corregimiento idCorregimiento;
@@ -74,12 +74,13 @@ public class Vereda  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Vereda)) {
             return false;
         }
         Vereda other = (Vereda) object;
-        if ((this.idVereda == null && other.idVereda != null) || (this.idVereda != null && !this.idVereda.equals(other.idVereda))) {
+        if ((this.idVereda == null && other.idVereda != null)
+                || (this.idVereda != null && !this.idVereda.equals(other.idVereda))) {
             return false;
         }
         return true;
@@ -89,5 +90,5 @@ public class Vereda  {
     public String toString() {
         return "ejercicios.pkgfinal.Vereda[ idVereda=" + idVereda + " ]";
     }
-    
+
 }

@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "variedad")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Variedad.findAll", query = "SELECT v FROM VariedadEntity v"),
-    @NamedQuery(name = "Variedad.findById", query = "SELECT v FROM VariedadEntity v WHERE v.id = :id"),
-    @NamedQuery(name = "Variedad.findByDescripcion", query = "SELECT v FROM VariedadEntity v WHERE v.descripcion = :descripcion")})
+        @NamedQuery(name = "Variedad.findAll", query = "SELECT v FROM VariedadEntity v"),
+        @NamedQuery(name = "Variedad.findById", query = "SELECT v FROM VariedadEntity v WHERE v.id = :id"),
+        @NamedQuery(name = "Variedad.findByDescripcion", query = "SELECT v FROM VariedadEntity v WHERE v.descripcion = :descripcion") })
 public class VariedadEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -81,7 +81,6 @@ public class VariedadEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
-
     public TipoCultivoEntity getIdTipoCultivo() {
         return idTipoCultivo;
     }
@@ -90,7 +89,7 @@ public class VariedadEntity implements Serializable {
         this.idTipoCultivo = idTipoCultivo;
     }
 
-    public Collection<CultivoEntity> getCultivoCollection() {
+    public Collection<CultivoEntity> cultivoCollection() {
         return cultivoCollection;
     }
 
@@ -107,7 +106,7 @@ public class VariedadEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof VariedadEntity)) {
             return false;
         }
@@ -122,5 +121,5 @@ public class VariedadEntity implements Serializable {
     public String toString() {
         return "ejercicios.pkgfinal.Variedad[ id=" + id + " ]";
     }
-    
+
 }

@@ -8,6 +8,7 @@ import ufps.ukulima.domain.model.Elemento.gateway.ElementoService;
 import ufps.ukulima.infrastructure.db.springdata.mapper.ElementoEntityMapper;
 
 import java.util.List;
+
 @Service
 public class ElementoServiceImp implements ElementoService {
 
@@ -15,6 +16,7 @@ public class ElementoServiceImp implements ElementoService {
     ElementoRepository elementoRepository;
     @Autowired
     ElementoEntityMapper elementoEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
 
@@ -29,7 +31,7 @@ public class ElementoServiceImp implements ElementoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void saveElemento(Elemento elemento) {
         elementoRepository.save(elementoEntityMapper.toEntity(elemento));
     }

@@ -8,13 +8,12 @@ package ufps.ukulima.domain.model.Departamento;
 import ufps.ukulima.domain.model.Municipio.Municipio;
 
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author santi
  */
-public class Departamento  {
+public class Departamento {
 
     private Integer idDepto;
     private String nombre;
@@ -65,12 +64,13 @@ public class Departamento  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Departamento)) {
             return false;
         }
         Departamento other = (Departamento) object;
-        if ((this.idDepto == null && other.idDepto != null) || (this.idDepto != null && !this.idDepto.equals(other.idDepto))) {
+        if ((this.idDepto == null && other.idDepto != null)
+                || (this.idDepto != null && !this.idDepto.equals(other.idDepto))) {
             return false;
         }
         return true;
@@ -80,5 +80,5 @@ public class Departamento  {
     public String toString() {
         return "ejercicios.pkgfinal.Departamento[ idDepto=" + idDepto + " ]";
     }
-    
+
 }

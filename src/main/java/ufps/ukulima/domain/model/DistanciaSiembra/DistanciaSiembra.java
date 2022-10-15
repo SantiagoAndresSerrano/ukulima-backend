@@ -53,8 +53,7 @@ public class DistanciaSiembra {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<Cultivo> getCultivoCollection() {
+    public Collection<Cultivo> cultivoCollection() {
         return cultivoCollection;
     }
 

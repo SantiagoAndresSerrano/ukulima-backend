@@ -85,7 +85,7 @@ public class Recomendacion {
         this.idEnmienda = idEnmienda;
     }
 
-    public Collection<AbonoOrganicoRecomendacion> getAbonoOrganicoRecomendacionCollection() {
+    public Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection() {
         return abonoOrganicoRecomendacionCollection;
     }
 
@@ -94,7 +94,7 @@ public class Recomendacion {
         this.abonoOrganicoRecomendacionCollection = abonoOrganicoRecomendacionCollection;
     }
 
-    public Collection<FuenteRecomendacion> getFuenteRecomendacionCollection() {
+    public Collection<FuenteRecomendacion> fuenteRecomendacionCollection() {
         return fuenteRecomendacionCollection;
     }
 

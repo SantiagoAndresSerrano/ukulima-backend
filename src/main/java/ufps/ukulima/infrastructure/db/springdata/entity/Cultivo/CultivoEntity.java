@@ -110,7 +110,7 @@ public class CultivoEntity implements Serializable {
         this.plantasPorHectarea = plantasPorHectarea;
     }
 
-    public Collection<AnalisisSueloEntity> getAnalisisSueloCollection() {
+    public Collection<AnalisisSueloEntity> analisisSueloCollection() {
         return analisisSueloCollection;
     }
 

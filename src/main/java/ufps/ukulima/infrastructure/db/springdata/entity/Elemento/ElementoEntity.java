@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         @NamedQuery(name = "Elemento.findAll", query = "SELECT e FROM ElementoEntity e"),
         @NamedQuery(name = "Elemento.findById", query = "SELECT e FROM ElementoEntity e WHERE e.id = :id"),
         @NamedQuery(name = "Elemento.findByNombre", query = "SELECT e FROM ElementoEntity e WHERE e.nombre = :nombre"),
-        @NamedQuery(name = "Elemento.findByUnidad", query = "SELECT e FROM ElementoEntity e WHERE e.unidad = :unidad")})
+        @NamedQuery(name = "Elemento.findByUnidad", query = "SELECT e FROM ElementoEntity e WHERE e.unidad = :unidad") })
 public class ElementoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -92,7 +92,7 @@ public class ElementoEntity implements Serializable {
         this.unidad = unidad;
     }
 
-    public Collection<AnalisisElementosEntity> getAnalisisElementoCollection() {
+    public Collection<AnalisisElementosEntity> analisisElementoCollection() {
         return analisisElementoCollection;
     }
 
@@ -114,8 +114,6 @@ public class ElementoEntity implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
-
-
 
     @Override
     public String toString() {

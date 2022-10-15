@@ -13,7 +13,7 @@ import java.util.Collection;
  *
  * @author santi
  */
-public class TipoCultivo  {
+public class TipoCultivo {
 
     private Integer id;
     private String descripcion;
@@ -47,7 +47,7 @@ public class TipoCultivo  {
         this.descripcion = descripcion;
     }
 
-    public Collection<Variedad> getVariedadCollection() {
+    public Collection<Variedad> variedadCollection() {
         return variedadCollection;
     }
 
@@ -64,7 +64,7 @@ public class TipoCultivo  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof TipoCultivo)) {
             return false;
         }
@@ -79,5 +79,5 @@ public class TipoCultivo  {
     public String toString() {
         return "ejercicios.pkgfinal.TipoCultivo[ id=" + id + " ]";
     }
-    
+
 }

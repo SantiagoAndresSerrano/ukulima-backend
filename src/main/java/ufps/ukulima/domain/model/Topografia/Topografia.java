@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author santi
  */
-public class Topografia  {
+public class Topografia {
 
     private Integer id;
     private String descripcion;
@@ -48,8 +48,7 @@ public class Topografia  {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<Cultivo> getCultivoCollection() {
+    public Collection<Cultivo> cultivoCollection() {
         return cultivoCollection;
     }
 
@@ -66,7 +65,7 @@ public class Topografia  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Topografia)) {
             return false;
         }
@@ -81,5 +80,5 @@ public class Topografia  {
     public String toString() {
         return "ejercicios.pkgfinal.Topografia[ id=" + id + " ]";
     }
-    
+
 }

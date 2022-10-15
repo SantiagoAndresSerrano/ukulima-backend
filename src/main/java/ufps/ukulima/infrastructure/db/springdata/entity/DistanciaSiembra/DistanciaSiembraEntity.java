@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "distancia_siembra")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DistanciaSiembra.findAll", query = "SELECT d FROM DistanciaSiembraEntity d"),
-    @NamedQuery(name = "DistanciaSiembra.findById", query = "SELECT d FROM DistanciaSiembraEntity d WHERE d.id = :id"),
-    @NamedQuery(name = "DistanciaSiembra.findByDescripcion", query = "SELECT d FROM DistanciaSiembraEntity d WHERE d.descripcion = :descripcion")})
+        @NamedQuery(name = "DistanciaSiembra.findAll", query = "SELECT d FROM DistanciaSiembraEntity d"),
+        @NamedQuery(name = "DistanciaSiembra.findById", query = "SELECT d FROM DistanciaSiembraEntity d WHERE d.id = :id"),
+        @NamedQuery(name = "DistanciaSiembra.findByDescripcion", query = "SELECT d FROM DistanciaSiembraEntity d WHERE d.descripcion = :descripcion") })
 public class DistanciaSiembraEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,7 +75,7 @@ public class DistanciaSiembraEntity implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Collection<CultivoEntity> getCultivoCollection() {
+    public Collection<CultivoEntity> cultivoCollection() {
         return cultivoCollection;
     }
 
@@ -92,7 +92,7 @@ public class DistanciaSiembraEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof DistanciaSiembraEntity)) {
             return false;
         }
@@ -107,5 +107,5 @@ public class DistanciaSiembraEntity implements Serializable {
     public String toString() {
         return "ejercicios.pkgfinal.DistanciaSiembra[ id=" + id + " ]";
     }
-    
+
 }

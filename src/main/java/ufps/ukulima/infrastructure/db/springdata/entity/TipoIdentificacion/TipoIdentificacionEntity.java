@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "TipoIdentificacion.findAll", query = "SELECT t FROM TipoIdentificacionEntity t"),
         @NamedQuery(name = "TipoIdentificacion.findByIdTipo", query = "SELECT t FROM TipoIdentificacionEntity t WHERE t.idTipo = :idTipo"),
-        @NamedQuery(name = "TipoIdentificacion.findByNombre", query = "SELECT t FROM TipoIdentificacionEntity t WHERE t.nombre = :nombre")})
+        @NamedQuery(name = "TipoIdentificacion.findByNombre", query = "SELECT t FROM TipoIdentificacionEntity t WHERE t.nombre = :nombre") })
 public class TipoIdentificacionEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,10 +80,6 @@ public class TipoIdentificacionEntity implements Serializable {
         this.nombre = nombre;
     }
 
-    public Collection<AgricultorEntity> agricultorCollection() {
-        return agricultorCollection;
-    }
-
     public void agricultorCollection(Collection<AgricultorEntity> agricultorCollection) {
         this.agricultorCollection = agricultorCollection;
     }
@@ -102,7 +98,8 @@ public class TipoIdentificacionEntity implements Serializable {
             return false;
         }
         TipoIdentificacionEntity other = (TipoIdentificacionEntity) object;
-        if ((this.idTipo == null && other.idTipo != null) || (this.idTipo != null && !this.idTipo.equals(other.idTipo))) {
+        if ((this.idTipo == null && other.idTipo != null)
+                || (this.idTipo != null && !this.idTipo.equals(other.idTipo))) {
             return false;
         }
         return true;

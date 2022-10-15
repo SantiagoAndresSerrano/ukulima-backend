@@ -11,6 +11,8 @@ import ufps.ukulima.domain.model.Variedad.Variedad;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author santi
@@ -19,11 +21,14 @@ public class ElementoVariedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer idElementoVariedad;
+    @NotNull(message = "nombre no puede estar vacío")
     private String nombre;
     private int valorMinimo;
     private int valorMaximo;
     private int valorOptimo;
+    @NotNull(message = "El Elemento no puede estar vacío")
     private Elemento idElemento;
+    @NotNull(message = "La variedad no puede estar vacío")
     private Variedad idVariedad;
 
     public ElementoVariedad() {
@@ -33,7 +38,8 @@ public class ElementoVariedad implements Serializable {
         this.idElementoVariedad = idElementoVariedad;
     }
 
-    public ElementoVariedad(Integer idElementoVariedad, String nombre, int valorMinimo, int valorMaximo, int valorOptimo) {
+    public ElementoVariedad(Integer idElementoVariedad, String nombre, int valorMinimo, int valorMaximo,
+            int valorOptimo) {
         this.idElementoVariedad = idElementoVariedad;
         this.nombre = nombre;
         this.valorMinimo = valorMinimo;
@@ -97,8 +103,6 @@ public class ElementoVariedad implements Serializable {
         this.valorOptimo = valorOptimo;
     }
 
-
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -108,10 +112,14 @@ public class ElementoVariedad implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         ElementoVariedad that = (ElementoVariedad) o;
-        return valorMinimo == that.valorMinimo && valorMaximo == that.valorMaximo && valorOptimo == that.valorOptimo && Objects.equals(idElementoVariedad, that.idElementoVariedad) && Objects.equals(nombre, that.nombre) && Objects.equals(idElemento, that.idElemento) && Objects.equals(idVariedad, that.idVariedad);
+        return valorMinimo == that.valorMinimo && valorMaximo == that.valorMaximo && valorOptimo == that.valorOptimo
+                && Objects.equals(idElementoVariedad, that.idElementoVariedad) && Objects.equals(nombre, that.nombre)
+                && Objects.equals(idElemento, that.idElemento) && Objects.equals(idVariedad, that.idVariedad);
     }
 
     @Override

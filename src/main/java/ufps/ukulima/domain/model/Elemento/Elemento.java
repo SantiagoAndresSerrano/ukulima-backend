@@ -67,8 +67,7 @@ public class Elemento {
         this.unidad = unidad;
     }
 
-    @XmlTransient
-    public Collection<AnalisisElemento> getAnalisisElementoCollection() {
+    public Collection<AnalisisElemento> analisisElementoCollection() {
         return analisisElementoCollection;
     }
 
@@ -76,8 +75,7 @@ public class Elemento {
         this.analisisElementoCollection = analisisElementoCollection;
     }
 
-    @XmlTransient
-    public Collection<FuenteRecomendacion> getFuenteRecomendacionCollection() {
+    public Collection<FuenteRecomendacion> fuenteRecomendacionCollection() {
         return fuenteRecomendacionCollection;
     }
 

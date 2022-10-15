@@ -161,8 +161,8 @@ public class CultivoController {
                     new Mensaje("El agricultor con telefono o email " + emailOrPhone + ", no existe"),
                     HttpStatus.NOT_FOUND);
         }
-        List<Finca> fincas = (List<Finca>) (agricultor.getFincaCollection());
-        return ResponseEntity.ok(fincas.get(0).getCultivoCollection());
+        List<Finca> fincas = (List<Finca>) (agricultor.fincaCollection());
+        return ResponseEntity.ok(fincas.get(0).cultivoCollection());
     }
 
 }

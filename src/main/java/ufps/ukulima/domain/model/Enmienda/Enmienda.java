@@ -53,8 +53,7 @@ public class Enmienda {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public Collection<Recomendacion> getRecomendacionCollection() {
+    public Collection<Recomendacion> recomendacionCollection() {
         return recomendacionCollection;
     }
 
