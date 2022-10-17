@@ -21,7 +21,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-15T16:08:44-0500",
+    date = "2022-10-17T17:35:55-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)"
 )
 @Component
@@ -35,15 +35,15 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
 
         Finca finca = new Finca();
 
-        finca.setAreaEnUso( FincaEntity.getAreaEnUso() );
+        finca.setIdFinca( FincaEntity.getIdFinca() );
+        finca.setNombre( FincaEntity.getNombre() );
         finca.setAreaTotal( FincaEntity.getAreaTotal() );
+        finca.setAreaEnUso( FincaEntity.getAreaEnUso() );
         finca.setGeolocalizacion( FincaEntity.getGeolocalizacion() );
         finca.setIdAgricultor( agricultorEntityToAgricultor( FincaEntity.getIdAgricultor() ) );
         finca.setIdCorregimiento( corregimientoEntityToCorregimiento( FincaEntity.getIdCorregimiento() ) );
-        finca.setIdFinca( FincaEntity.getIdFinca() );
         finca.setIdMunicipio( municipioEntityToMunicipio( FincaEntity.getIdMunicipio() ) );
         finca.setIdVereda( veredaEntityToVereda( FincaEntity.getIdVereda() ) );
-        finca.setNombre( FincaEntity.getNombre() );
 
         return finca;
     }
@@ -56,15 +56,15 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
 
         FincaEntity fincaEntity = new FincaEntity();
 
-        fincaEntity.setAreaEnUso( Finca.getAreaEnUso() );
+        fincaEntity.setIdFinca( Finca.getIdFinca() );
+        fincaEntity.setNombre( Finca.getNombre() );
         fincaEntity.setAreaTotal( Finca.getAreaTotal() );
+        fincaEntity.setAreaEnUso( Finca.getAreaEnUso() );
         fincaEntity.setGeolocalizacion( Finca.getGeolocalizacion() );
         fincaEntity.setIdAgricultor( agricultorToAgricultorEntity( Finca.getIdAgricultor() ) );
         fincaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( Finca.getIdCorregimiento() ) );
-        fincaEntity.setIdFinca( Finca.getIdFinca() );
         fincaEntity.setIdMunicipio( municipioToMunicipioEntity( Finca.getIdMunicipio() ) );
         fincaEntity.setIdVereda( veredaToVeredaEntity( Finca.getIdVereda() ) );
-        fincaEntity.setNombre( Finca.getNombre() );
 
         return fincaEntity;
     }
@@ -191,16 +191,16 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
 
         AgricultorEntity agricultorEntity = new AgricultorEntity();
 
-        agricultorEntity.setApellidos( agricultor.getApellidos() );
-        agricultorEntity.setConfirmationToken( agricultor.getConfirmationToken() );
-        agricultorEntity.setEmail( agricultor.getEmail() );
         agricultorEntity.setEstado( agricultor.getEstado() );
-        agricultorEntity.setFechaNacimiento( agricultor.getFechaNacimiento() );
-        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( agricultor.getIdTipoIdentificacion() ) );
+        agricultorEntity.setConfirmationToken( agricultor.getConfirmationToken() );
         agricultorEntity.setIdentificacion( agricultor.getIdentificacion() );
         agricultorEntity.setNombres( agricultor.getNombres() );
-        agricultorEntity.setPassword( agricultor.getPassword() );
+        agricultorEntity.setApellidos( agricultor.getApellidos() );
         agricultorEntity.setTelefono( agricultor.getTelefono() );
+        agricultorEntity.setFechaNacimiento( agricultor.getFechaNacimiento() );
+        agricultorEntity.setPassword( agricultor.getPassword() );
+        agricultorEntity.setEmail( agricultor.getEmail() );
+        agricultorEntity.setIdTipoIdentificacion( tipoIdentificacionToTipoIdentificacionEntity( agricultor.getIdTipoIdentificacion() ) );
 
         return agricultorEntity;
     }
@@ -225,8 +225,8 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
 
         MunicipioEntity municipioEntity = new MunicipioEntity();
 
-        municipioEntity.setIdDepartamento( departamentoToDepartamentoEntity( municipio.getIdDepartamento() ) );
         municipioEntity.setIdMunicipio( municipio.getIdMunicipio() );
+        municipioEntity.setIdDepartamento( departamentoToDepartamentoEntity( municipio.getIdDepartamento() ) );
 
         return municipioEntity;
     }
@@ -239,8 +239,8 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
         CorregimientoEntity corregimientoEntity = new CorregimientoEntity();
 
         corregimientoEntity.setIdCorregimiento( corregimiento.getIdCorregimiento() );
-        corregimientoEntity.setIdMunicipio( municipioToMunicipioEntity( corregimiento.getIdMunicipio() ) );
         corregimientoEntity.setNombre( corregimiento.getNombre() );
+        corregimientoEntity.setIdMunicipio( municipioToMunicipioEntity( corregimiento.getIdMunicipio() ) );
 
         return corregimientoEntity;
     }
@@ -252,8 +252,8 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
 
         VeredaEntity veredaEntity = new VeredaEntity();
 
-        veredaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( vereda.getIdCorregimiento() ) );
         veredaEntity.setIdVereda( vereda.getIdVereda() );
+        veredaEntity.setIdCorregimiento( corregimientoToCorregimientoEntity( vereda.getIdCorregimiento() ) );
         veredaEntity.setNombre( vereda.getNombre() );
 
         return veredaEntity;

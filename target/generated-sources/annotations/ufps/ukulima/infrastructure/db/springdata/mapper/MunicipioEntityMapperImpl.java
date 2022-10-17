@@ -11,7 +11,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntit
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-15T09:32:36-0500",
+    date = "2022-10-17T17:36:00-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)"
 )
 @Component
@@ -25,8 +25,9 @@ public class MunicipioEntityMapperImpl implements MunicipioEntityMapper {
 
         Municipio municipio = new Municipio();
 
-        municipio.setIdMunicipio( MunicipioEntity.getIdMunicipio() );
         municipio.setIdDepartamento( departamentoEntityToDepartamento( MunicipioEntity.getIdDepartamento() ) );
+        municipio.setIdMunicipio( MunicipioEntity.getIdMunicipio() );
+        municipio.setNombre( MunicipioEntity.getNombre() );
 
         return municipio;
     }
@@ -39,8 +40,9 @@ public class MunicipioEntityMapperImpl implements MunicipioEntityMapper {
 
         MunicipioEntity municipioEntity = new MunicipioEntity();
 
-        municipioEntity.setIdMunicipio( Municipio.getIdMunicipio() );
         municipioEntity.setIdDepartamento( departamentoToDepartamentoEntity( Municipio.getIdDepartamento() ) );
+        municipioEntity.setIdMunicipio( Municipio.getIdMunicipio() );
+        municipioEntity.setNombre( Municipio.getNombre() );
 
         return municipioEntity;
     }

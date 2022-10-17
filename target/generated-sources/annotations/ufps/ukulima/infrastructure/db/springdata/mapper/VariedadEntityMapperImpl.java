@@ -1,7 +1,6 @@
 package ufps.ukulima.infrastructure.db.springdata.mapper;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
@@ -10,91 +9,80 @@ import ufps.ukulima.domain.model.Variedad.Variedad;
 import ufps.ukulima.infrastructure.db.springdata.entity.TipoCultivo.TipoCultivoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Variedad.VariedadEntity;
 
-@Generated(value = "org.mapstruct.ap.MappingProcessor", date = "2022-10-15T16:07:46-0500", comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)")
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2022-10-17T17:35:54-0500",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)"
+)
 @Component
 public class VariedadEntityMapperImpl implements VariedadEntityMapper {
 
     @Override
     public Variedad toDomain(VariedadEntity VariedadEntity) {
-        if (VariedadEntity == null) {
+        if ( VariedadEntity == null ) {
             return null;
         }
 
         Variedad variedad = new Variedad();
 
-        variedad.setDescripcion(VariedadEntity.getDescripcion());
-        variedad.setId(VariedadEntity.getId());
-        variedad.setIdTipoCultivo(tipoCultivoEntityToTipoCultivo(VariedadEntity.getIdTipoCultivo()));
+        variedad.setId( VariedadEntity.getId() );
+        variedad.setDescripcion( VariedadEntity.getDescripcion() );
+        variedad.setIdTipoCultivo( tipoCultivoEntityToTipoCultivo( VariedadEntity.getIdTipoCultivo() ) );
 
         return variedad;
     }
 
     @Override
     public VariedadEntity toEntity(Variedad Variedad) {
-        if (Variedad == null) {
+        if ( Variedad == null ) {
             return null;
         }
 
         VariedadEntity variedadEntity = new VariedadEntity();
 
-        variedadEntity.setDescripcion(Variedad.getDescripcion());
-        variedadEntity.setId(Variedad.getId());
-        variedadEntity.setIdTipoCultivo(tipoCultivoToTipoCultivoEntity(Variedad.getIdTipoCultivo()));
+        variedadEntity.setId( Variedad.getId() );
+        variedadEntity.setDescripcion( Variedad.getDescripcion() );
+        variedadEntity.setIdTipoCultivo( tipoCultivoToTipoCultivoEntity( Variedad.getIdTipoCultivo() ) );
 
         return variedadEntity;
     }
 
     @Override
     public List<Variedad> abonosOrganicosRecomendacionToDomain(List<VariedadEntity> abonoOrganicoEntities) {
-        if (abonoOrganicoEntities == null) {
+        if ( abonoOrganicoEntities == null ) {
             return null;
         }
 
-        List<Variedad> list = new ArrayList<Variedad>(abonoOrganicoEntities.size());
-        for (VariedadEntity variedadEntity : abonoOrganicoEntities) {
-            list.add(toDomain(variedadEntity));
+        List<Variedad> list = new ArrayList<Variedad>( abonoOrganicoEntities.size() );
+        for ( VariedadEntity variedadEntity : abonoOrganicoEntities ) {
+            list.add( toDomain( variedadEntity ) );
         }
 
         return list;
     }
 
     protected TipoCultivo tipoCultivoEntityToTipoCultivo(TipoCultivoEntity tipoCultivoEntity) {
-        if (tipoCultivoEntity == null) {
+        if ( tipoCultivoEntity == null ) {
             return null;
         }
 
         TipoCultivo tipoCultivo = new TipoCultivo();
 
-        tipoCultivo.setId(tipoCultivoEntity.getId());
-        tipoCultivo.setDescripcion(tipoCultivoEntity.getDescripcion());
+        tipoCultivo.setId( tipoCultivoEntity.getId() );
+        tipoCultivo.setDescripcion( tipoCultivoEntity.getDescripcion() );
 
         return tipoCultivo;
     }
 
-    protected Collection<VariedadEntity> variedadCollectionToVariedadEntityCollection(Collection<Variedad> collection) {
-        if (collection == null) {
-            return null;
-        }
-
-        Collection<VariedadEntity> collection1 = new ArrayList<VariedadEntity>(collection.size());
-        for (Variedad variedad : collection) {
-            collection1.add(toEntity(variedad));
-        }
-
-        return collection1;
-    }
-
     protected TipoCultivoEntity tipoCultivoToTipoCultivoEntity(TipoCultivo tipoCultivo) {
-        if (tipoCultivo == null) {
+        if ( tipoCultivo == null ) {
             return null;
         }
 
         TipoCultivoEntity tipoCultivoEntity = new TipoCultivoEntity();
 
-        tipoCultivoEntity.setDescripcion(tipoCultivo.getDescripcion());
-        tipoCultivoEntity.setId(tipoCultivo.getId());
-        tipoCultivoEntity.setVariedadCollection(
-                variedadCollectionToVariedadEntityCollection(tipoCultivo.variedadCollection()));
+        tipoCultivoEntity.setId( tipoCultivo.getId() );
+        tipoCultivoEntity.setDescripcion( tipoCultivo.getDescripcion() );
 
         return tipoCultivoEntity;
     }

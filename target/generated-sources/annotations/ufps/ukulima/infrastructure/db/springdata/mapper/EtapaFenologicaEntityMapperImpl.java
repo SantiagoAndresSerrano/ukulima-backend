@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.EtapaFenologica.EtapaFen
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-15T16:09:18-0500",
+    date = "2022-10-17T17:35:55-0500",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20220802-0458, environment: Java 17.0.4.1 (Eclipse Adoptium)"
 )
 @Component
@@ -23,8 +23,8 @@ public class EtapaFenologicaEntityMapperImpl implements EtapaFenologicaEntityMap
 
         EtapaFenologica etapaFenologica = new EtapaFenologica();
 
-        etapaFenologica.setDescripcion( EtapaFenologicaEntity.getDescripcion() );
         etapaFenologica.setId( EtapaFenologicaEntity.getId() );
+        etapaFenologica.setDescripcion( EtapaFenologicaEntity.getDescripcion() );
 
         return etapaFenologica;
     }
@@ -37,8 +37,8 @@ public class EtapaFenologicaEntityMapperImpl implements EtapaFenologicaEntityMap
 
         EtapaFenologicaEntity etapaFenologicaEntity = new EtapaFenologicaEntity();
 
-        etapaFenologicaEntity.setDescripcion( EtapaFenologica.getDescripcion() );
         etapaFenologicaEntity.setId( EtapaFenologica.getId() );
+        etapaFenologicaEntity.setDescripcion( EtapaFenologica.getDescripcion() );
 
         return etapaFenologicaEntity;
     }

@@ -15,9 +15,10 @@ import java.util.Collection;
  *
  * @author santi
  */
-public class Municipio  {
+public class Municipio {
 
     private Integer idMunicipio;
+    private String nombre;
     private Departamento idDepartamento;
     private Collection<Corregimiento> corregimientoCollection;
     private Collection<Finca> fincaCollection;
@@ -61,6 +62,14 @@ public class Municipio  {
         this.fincaCollection = fincaCollection;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -70,12 +79,13 @@ public class Municipio  {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Municipio)) {
             return false;
         }
         Municipio other = (Municipio) object;
-        if ((this.idMunicipio == null && other.idMunicipio != null) || (this.idMunicipio != null && !this.idMunicipio.equals(other.idMunicipio))) {
+        if ((this.idMunicipio == null && other.idMunicipio != null)
+                || (this.idMunicipio != null && !this.idMunicipio.equals(other.idMunicipio))) {
             return false;
         }
         return true;
@@ -85,5 +95,5 @@ public class Municipio  {
     public String toString() {
         return "ejercicios.pkgfinal.Municipio[ idMunicipio=" + idMunicipio + " ]";
     }
-    
+
 }
