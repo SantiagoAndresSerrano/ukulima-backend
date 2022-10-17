@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "Municipio.findAll", query = "SELECT m FROM MunicipioEntity m"),
-        @NamedQuery(name = "Municipio.findByIdMunicipio", query = "SELECT m FROM MunicipioEntity m WHERE m.idMunicipio = :idMunicipio")})
+        @NamedQuery(name = "Municipio.findByIdMunicipio", query = "SELECT m FROM MunicipioEntity m WHERE m.idMunicipio = :idMunicipio") })
 public class MunicipioEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +49,9 @@ public class MunicipioEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_municipio")
     private Integer idMunicipio;
+    @Basic(optional = false)
+    @Column(name = "nombre")
+    private String nombre;
     @JoinColumn(name = "id_departamento", referencedColumnName = "id_depto")
     @ManyToOne(optional = false)
     private DepartamentoEntity idDepartamento;
@@ -96,6 +99,14 @@ public class MunicipioEntity implements Serializable {
         this.fincaCollection = fincaCollection;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -110,7 +121,8 @@ public class MunicipioEntity implements Serializable {
             return false;
         }
         MunicipioEntity other = (MunicipioEntity) object;
-        if ((this.idMunicipio == null && other.idMunicipio != null) || (this.idMunicipio != null && !this.idMunicipio.equals(other.idMunicipio))) {
+        if ((this.idMunicipio == null && other.idMunicipio != null)
+                || (this.idMunicipio != null && !this.idMunicipio.equals(other.idMunicipio))) {
             return false;
         }
         return true;
