@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -100,7 +101,31 @@ public class AnalisisSueloController {
             return new ResponseEntity<>(new Mensaje("Análisis suelo ingresado no se encuentra registrado"),
                     HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(analisisSueloR.getRecomendacionCollection());
+        return ResponseEntity.ok(analisisSueloR.recomendacionCollection());
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateAnalisisSuelo(@RequestBody @Valid AnalisisSuelo analisisSuelo, BindingResult br) {
+        if (br.hasErrors())
+            return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
+
+        if (analisisSuelo.getIdAnalisisSuelo() == null) {
+            return new ResponseEntity<>(
+                    new Mensaje("Debe proporcionar un id del analisis suelo"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        AnalisisSuelo analisisSuelo2 = analisisSueloService.getAnalisisSueloById(analisisSuelo.getIdAnalisisSuelo());
+
+        if (analisisSuelo2 == null) {
+            return new ResponseEntity<>(
+                    new Mensaje("El analisis suelo que desea actualizar no existe"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        analisisSueloService.saveAnalisisSuelo(analisisSuelo);
+
+        return ResponseEntity.ok(new Mensaje("Analisis suelo actualizado actualizado"));
     }
 
 }

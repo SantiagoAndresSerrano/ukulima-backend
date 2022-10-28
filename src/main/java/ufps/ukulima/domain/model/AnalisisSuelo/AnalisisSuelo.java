@@ -17,7 +17,6 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -100,8 +99,7 @@ public class AnalisisSuelo {
         this.fecha = fecha;
     }
 
-    @XmlTransient
-    public Collection<Recomendacion> getRecomendacionCollection() {
+    public Collection<Recomendacion> recomendacionCollection() {
         return recomendacionCollection;
     }
 

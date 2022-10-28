@@ -3,6 +3,7 @@ package ufps.ukulima.infrastructure.entry_points.rest.Elemento;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
@@ -40,6 +41,30 @@ public class ElementoController {
     @GetMapping
     public ResponseEntity<?> getAllElemento() {
         return ResponseEntity.ok(elementoService.getAllElemento());
+    }
+
+    @PutMapping
+    public ResponseEntity<?> updateElemento(@RequestBody @Valid Elemento elemento, BindingResult br) {
+        if (br.hasErrors())
+            return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
+
+        if (elemento.getId() == null) {
+            return new ResponseEntity<>(
+                    new Mensaje("Debe proporcionar un id del elemento"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        Elemento elemento2 = elementoService.getElementoById(elemento.getId());
+
+        if (elemento2 == null) {
+            return new ResponseEntity<>(
+                    new Mensaje("El elemento que desea actualizar no existe"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        elementoService.saveElemento(elemento);
+
+        return ResponseEntity.ok(new Mensaje("Elemento actualizado"));
     }
 
 }
