@@ -152,15 +152,17 @@ public class AuthController {
 
         if (u == null)
             return new ResponseEntity<Mensaje>(new Mensaje("El email no existe"), HttpStatus.NOT_FOUND);
+        if (u.passwordResetTokens() != null) {
+            if (u.passwordResetTokens().size() > 0) {
+                PasswordResetToken passwordResetToken = u.passwordResetTokens().iterator().next();
+                if (passwordResetToken.getFechaExpiracion().before(new Date())) {
+                    passwordResetTokenService.eliminarByToken(passwordResetToken.getToken());
+                } else {
+                    return new ResponseEntity<Mensaje>(
+                            new Mensaje("Ya hay una solicitud de reestablecimiento pendiente"),
+                            HttpStatus.BAD_REQUEST);
 
-        if (u.passwordResetTokens().size() > 0) {
-            PasswordResetToken passwordResetToken = u.passwordResetTokens().iterator().next();
-            if (passwordResetToken.getFechaExpiracion().before(new Date())) {
-                passwordResetTokenService.eliminarByToken(passwordResetToken.getToken());
-            } else {
-                return new ResponseEntity<Mensaje>(new Mensaje("Ya hay una solicitud de reestablecimiento pendiente"),
-                        HttpStatus.BAD_REQUEST);
-
+                }
             }
         }
 
