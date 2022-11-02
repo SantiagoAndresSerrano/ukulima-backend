@@ -152,6 +152,8 @@ public class AuthController {
 
         if (u == null)
             return new ResponseEntity<Mensaje>(new Mensaje("El email no existe"), HttpStatus.NOT_FOUND);
+
+        // Test
         if (u.passwordResetTokens() != null) {
             if (u.passwordResetTokens().size() > 0) {
                 PasswordResetToken passwordResetToken = u.passwordResetTokens().iterator().next();
