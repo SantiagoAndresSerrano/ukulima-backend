@@ -35,4 +35,10 @@ public class ClaseTexturalServiceImp implements ClaseTexturalService {
     public void saveClaseTextural(ClaseTextural claseTextural) {
          claseTexturalRepository.save(claseTexturalEntityMapper.toEntity(claseTextural));
     }
+
+    @Override
+    public ClaseTextural getClaseTexturalPorRangos(float porcent_arena, float porcent_limo, float porcent_arcilla) {
+        return claseTexturalEntityMapper.toDomain(claseTexturalRepository.getClaseTexturalByRangos(porcent_arena,porcent_limo
+                ,porcent_arcilla));
+    }
 }

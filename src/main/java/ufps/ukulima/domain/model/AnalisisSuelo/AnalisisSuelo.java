@@ -5,17 +5,29 @@
  */
 package ufps.ukulima.domain.model.AnalisisSuelo;
 
+import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
+import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Densidad.Densidad;
+import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
+import ufps.ukulima.domain.model.MateriaOrganica.MateriaOrganica;
+import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
-import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaOrganicaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo.PhSueloEntity;
 
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -42,6 +54,25 @@ public class AnalisisSuelo {
     private Densidad idDensidad;
     @NotNull(message = "Profundidad de muestra no puede ser vacío")
     private ProfundidadMuestra idProfundidad;
+    @NotNull(message = "ph Suelo no puede ser vacío")
+    private float phSuelo;
+    @NotNull(message = "ph Suelo no puede ser vacío")
+    private float aluminioIntercambiable;
+    private float conductividadElectrica;
+    @NotNull(message = "materiaOrganica no puede ser vacío")
+    private float materiaOrganica;
+    private float intercambioCationico;
+
+    private PhSuelo idPhSuelo;
+
+    private AluminioIntercambiable idAluminioIntercambiable;
+
+    private ConductividadElectrica idConductividadElectrica;
+
+    private MateriaOrganica idMmateriaOrganica;
+
+    private IntercambioCationico idIntercambioCationico;
+
 
     public AnalisisSuelo() {
     }
@@ -50,13 +81,115 @@ public class AnalisisSuelo {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public AnalisisSuelo(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla,
-            Date fecha) {
+    public AnalisisSuelo(Integer idAnalisisSuelo, float porcentArena,
+                         float porcentLimos, float porcentArcilla, Date fecha,
+                         ClaseTextural idClaseTextural, Cultivo idCultivo, Densidad idDensidad,
+                         ProfundidadMuestra idProfundidad, float phSuelo, float aluminioIntercambiable,
+                         float conductividadElectrica, float materiaOrganica, float intercambioCationico
+                         ,PhSuelo idPhSuelo, AluminioIntercambiable idAluminioIntercambiable,
+                         ConductividadElectrica idConductividadElectrica,
+                         MateriaOrganica idMmateriaOrganica,
+                         IntercambioCationico idIntercambioCationico) {
+
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;
         this.porcentArcilla = porcentArcilla;
         this.fecha = fecha;
+        this.idClaseTextural = idClaseTextural;
+        this.idCultivo = idCultivo;
+        this.idDensidad = idDensidad;
+        this.idProfundidad = idProfundidad;
+        this.phSuelo = phSuelo;
+        this.aluminioIntercambiable = aluminioIntercambiable;
+        this.conductividadElectrica = conductividadElectrica;
+        this.materiaOrganica = materiaOrganica;
+        this.intercambioCationico = intercambioCationico;
+        this.idPhSuelo = idPhSuelo;
+        this.idAluminioIntercambiable = idAluminioIntercambiable;
+        this.idConductividadElectrica = idConductividadElectrica;
+        this.idMmateriaOrganica = idMmateriaOrganica;
+        this.idIntercambioCationico = idIntercambioCationico;
+    }
+
+    public float getPhSuelo() {
+        return phSuelo;
+    }
+
+    public void setPhSuelo(float phSuelo) {
+        this.phSuelo = phSuelo;
+    }
+
+    public float getAluminioIntercambiable() {
+        return aluminioIntercambiable;
+    }
+
+    public void setAluminioIntercambiable(float aluminioIntercambiable) {
+        this.aluminioIntercambiable = aluminioIntercambiable;
+    }
+
+    public PhSuelo getIdPhSuelo() {
+        return idPhSuelo;
+    }
+
+    public void setIdPhSuelo(PhSuelo idPhSuelo) {
+        this.idPhSuelo = idPhSuelo;
+    }
+
+    public AluminioIntercambiable getIdAluminioIntercambiable() {
+        return idAluminioIntercambiable;
+    }
+
+    public void setIdAluminioIntercambiable(AluminioIntercambiable idAluminioIntercambiable) {
+        this.idAluminioIntercambiable = idAluminioIntercambiable;
+    }
+
+    public ConductividadElectrica getIdConductividadElectrica() {
+        return idConductividadElectrica;
+    }
+
+    public void setIdConductividadElectrica(ConductividadElectrica idConductividadElectrica) {
+        this.idConductividadElectrica = idConductividadElectrica;
+    }
+
+    public MateriaOrganica getIdMmateriaOrganica() {
+        return idMmateriaOrganica;
+    }
+
+    public void setIdMmateriaOrganica(MateriaOrganica idMmateriaOrganica) {
+        this.idMmateriaOrganica = idMmateriaOrganica;
+    }
+
+    public IntercambioCationico getIdIntercambioCationico() {
+        return idIntercambioCationico;
+    }
+
+    public void setIdIntercambioCationico(IntercambioCationico idIntercambioCationico) {
+        this.idIntercambioCationico = idIntercambioCationico;
+    }
+
+    public float getConductividadElectrica() {
+        return conductividadElectrica;
+    }
+
+    public void setConductividadElectrica(float conductividadElectrica) {
+        this.conductividadElectrica = conductividadElectrica;
+    }
+
+    public float getMateriaOrganica() {
+        return materiaOrganica;
+    }
+
+    public void setMateriaOrganica(float materiaOrganica) {
+        this.materiaOrganica = materiaOrganica;
+    }
+
+    public float getIntercambioCationico() {
+        return intercambioCationico;
+    }
+
+    public void setIntercambioCationico(float intercambioCationico) {
+        this.intercambioCationico = intercambioCationico;
     }
 
     public Integer getIdAnalisisSuelo() {
@@ -162,13 +295,20 @@ public class AnalisisSuelo {
                 ", porcentLimos=" + porcentLimos +
                 ", porcentArcilla=" + porcentArcilla +
                 ", fecha=" + fecha +
-                ", recomendacionCollection=" + recomendacionCollection +
-                ", analisisElementoCollection=" + analisisElementoCollection +
                 ", idClaseTextural=" + idClaseTextural +
                 ", idCultivo=" + idCultivo +
                 ", idDensidad=" + idDensidad +
                 ", idProfundidad=" + idProfundidad +
+                ", phSuelo=" + phSuelo +
+                ", aluminioIntercambiable=" + aluminioIntercambiable +
+                ", conductividadElectrica=" + conductividadElectrica +
+                ", materiaOrganica=" + materiaOrganica +
+                ", intercambioCationico=" + intercambioCationico +
+                ", idPhSuelo=" + idPhSuelo +
+                ", idAluminioIntercambiable=" + idAluminioIntercambiable +
+                ", idConductividadElectrica=" + idConductividadElectrica +
+                ", idMmateriaOrganica=" + idMmateriaOrganica +
+                ", idIntercambioCationico=" + idIntercambioCationico +
                 '}';
     }
-
 }

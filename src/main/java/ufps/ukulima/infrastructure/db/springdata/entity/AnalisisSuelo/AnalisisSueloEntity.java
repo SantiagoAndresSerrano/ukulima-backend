@@ -5,10 +5,15 @@ package ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo;
  * and open the template in the editor.
  */
 
+import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Cultivo.CultivoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Densidad.DensidadEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.IntercambioCationico.IntercambioCationicoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaOrganicaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo.PhSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ProfundidadMuestra.ProfundidadMuestraEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.RecomendacionEntity;
 
@@ -45,7 +50,13 @@ import javax.xml.bind.annotation.XmlRootElement;
         @NamedQuery(name = "AnalisisSuelo.findByPorcentArena", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.porcentArena = :porcentArena"),
         @NamedQuery(name = "AnalisisSuelo.findByPorcentLimos", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.porcentLimos = :porcentLimos"),
         @NamedQuery(name = "AnalisisSuelo.findByPorcentArcilla", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.porcentArcilla = :porcentArcilla"),
-        @NamedQuery(name = "AnalisisSuelo.findByFecha", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.fecha = :fecha") })
+        @NamedQuery(name = "AnalisisSuelo.findByFecha", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.fecha = :fecha"),
+        @NamedQuery(name = "AnalisisSuelo.findByPhSuelo", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.phSuelo = :phSuelo"),
+        @NamedQuery(name = "AnalisisSuelo.findByAluminioIntercambiable", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.aluminioIntercambiable = :aluminioIntercambiable"),
+        @NamedQuery(name = "AnalisisSuelo.findByConductividadElectrica", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.conductividadElectrica = :conductividadElectrica"),
+        @NamedQuery(name = "AnalisisSuelo.findByMateriaOrganica", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.materiaOrganica = :materiaOrganica"),
+        @NamedQuery(name = "AnalisisSuelo.findByIntercambioCationico", query = "SELECT a FROM AnalisisSueloEntity a WHERE a.intercambioCationico = :intercambioCationico")
+})
 public class AnalisisSueloEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -84,6 +95,46 @@ public class AnalisisSueloEntity implements Serializable {
     @ManyToOne(optional = false)
     private ProfundidadMuestraEntity idProfundidad;
 
+    @JoinColumn(name = "id_ph_suelo", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private PhSueloEntity idPhSuelo;
+
+    @JoinColumn(name = "id_aluminio_intercambiable", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private AluminioIntercambiableEntity idAluminioIntercambiable;
+
+    @JoinColumn(name = "id_conductividad_electrica", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ConductividadElectricaEntity idConductividadElectrica;
+
+    @JoinColumn(name = "id_materia_organica", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private MateriaOrganicaEntity idMmateriaOrganica;
+
+    @JoinColumn(name = "id_intercambio_cationico", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private IntercambioCationicoEntity idIntercambioCationico;
+
+    @Basic(optional = false)
+    @Column(name = "ph_suelo")
+    private float phSuelo;
+
+    @Basic(optional = false)
+    @Column(name = "aluminio_intercambiable")
+    private float aluminioIntercambiable;
+
+    @Basic(optional = false)
+    @Column(name = "conductividad_electrica")
+    private float conductividadElectrica;
+
+    @Basic(optional = false)
+    @Column(name = "materia_organica")
+    private float materiaOrganica;
+
+    @Basic(optional = false)
+    @Column(name = "intercambio_cationico")
+    private float intercambioCationico;
+
     public AnalisisSueloEntity() {
     }
 
@@ -92,12 +143,97 @@ public class AnalisisSueloEntity implements Serializable {
     }
 
     public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla,
-            Date fecha) {
+                          Date fecha, float phSuelo, float aluminioIntercambiable, float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;
         this.porcentArcilla = porcentArcilla;
         this.fecha = fecha;
+        this.phSuelo = phSuelo;
+        this.aluminioIntercambiable = aluminioIntercambiable;
+        this.conductividadElectrica = conductividadElectrica;
+        this.materiaOrganica = materiaOrganica;
+        this.intercambioCationico = intercambioCationico;
+    }
+
+    public float getPhSuelo() {
+        return phSuelo;
+    }
+
+    public void setPhSuelo(float phSuelo) {
+        this.phSuelo = phSuelo;
+    }
+
+    public float getAluminioIntercambiable() {
+        return aluminioIntercambiable;
+    }
+
+    public void setAluminioIntercambiable(float aluminioIntercambiable) {
+        this.aluminioIntercambiable = aluminioIntercambiable;
+    }
+
+    public float getConductividadElectrica() {
+        return conductividadElectrica;
+    }
+
+    public void setConductividadElectrica(float conductividadElectrica) {
+        this.conductividadElectrica = conductividadElectrica;
+    }
+
+    public float getMateriaOrganica() {
+        return materiaOrganica;
+    }
+
+    public void setMateriaOrganica(float materiaOrganica) {
+        this.materiaOrganica = materiaOrganica;
+    }
+
+    public float getIntercambioCationico() {
+        return intercambioCationico;
+    }
+
+    public void setIntercambioCationico(float intercambioCationico) {
+        this.intercambioCationico = intercambioCationico;
+    }
+
+    public PhSueloEntity getIdPhSuelo() {
+        return idPhSuelo;
+    }
+
+    public ConductividadElectricaEntity getIdConductividadElectrica() {
+        return idConductividadElectrica;
+    }
+
+    public void setIdConductividadElectrica(ConductividadElectricaEntity idConductividadElectrica) {
+        this.idConductividadElectrica = idConductividadElectrica;
+    }
+
+    public MateriaOrganicaEntity getIdMmateriaOrganica() {
+        return idMmateriaOrganica;
+    }
+
+    public void setIdMmateriaOrganica(MateriaOrganicaEntity idMmateriaOrganica) {
+        this.idMmateriaOrganica = idMmateriaOrganica;
+    }
+
+    public IntercambioCationicoEntity getIdIntercambioCationico() {
+        return idIntercambioCationico;
+    }
+
+    public void setIdIntercambioCationico(IntercambioCationicoEntity idIntercambioCationico) {
+        this.idIntercambioCationico = idIntercambioCationico;
+    }
+
+    public void setIdPhSuelo(PhSueloEntity idPhSuelo) {
+        this.idPhSuelo = idPhSuelo;
+    }
+
+    public AluminioIntercambiableEntity getIdAluminioIntercambiable() {
+        return idAluminioIntercambiable;
+    }
+
+    public void setIdAluminioIntercambiable(AluminioIntercambiableEntity idAluminioIntercambiable) {
+        this.idAluminioIntercambiable = idAluminioIntercambiable;
     }
 
     public Integer getIdAnalisisSuelo() {

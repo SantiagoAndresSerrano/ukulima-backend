@@ -27,7 +27,7 @@ public class AnalisisSueloServiceImp implements AnalisisSueloService {
     @Override
     @Transactional(readOnly = true)
     public List<AnalisisSuelo> getAllAnalisisSuelo() {
-        return analisisSueloEntityMapper.abonosOrganicosRecomendacionToDomain(analisisSueloRepository.findAll());
+        return analisisSueloEntityMapper.toDomain(analisisSueloRepository.findAll());
     }
 
     @Override

@@ -10,7 +10,6 @@ import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 import ufps.ukulima.infrastructure.db.springdata.mapper.AbonoOrganicoEntityMapper;
 
 import java.util.List;
-//BP IN YOUR AREA 
 @Service
 public class AbonoOrganicoServiceImp implements AbonoOrganicoService {
     @Autowired

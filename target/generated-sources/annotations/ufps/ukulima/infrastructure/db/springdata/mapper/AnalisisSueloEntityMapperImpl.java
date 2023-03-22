@@ -52,8 +52,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-11-02T12:08:19-0500",
-    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 1.4.200.v20221012-0724, environment: Java 17.0.4.1 (Eclipse Adoptium)"
+    date = "2023-03-13T11:16:51-0500",
+    comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
 public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper {
@@ -66,6 +66,11 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
 
         AnalisisSuelo analisisSuelo = new AnalisisSuelo();
 
+        analisisSuelo.setPhSuelo( AnalisisSueloEntity.getPhSuelo() );
+        analisisSuelo.setAluminioIntercambiable( AnalisisSueloEntity.getAluminioIntercambiable() );
+        analisisSuelo.setConductividadElectrica( AnalisisSueloEntity.getConductividadElectrica() );
+        analisisSuelo.setMateriaOrganica( AnalisisSueloEntity.getMateriaOrganica() );
+        analisisSuelo.setIntercambioCationico( AnalisisSueloEntity.getIntercambioCationico() );
         analisisSuelo.setIdAnalisisSuelo( AnalisisSueloEntity.getIdAnalisisSuelo() );
         analisisSuelo.setPorcentArena( AnalisisSueloEntity.getPorcentArena() );
         analisisSuelo.setPorcentLimos( AnalisisSueloEntity.getPorcentLimos() );
@@ -88,6 +93,11 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
 
         AnalisisSueloEntity analisisSueloEntity = new AnalisisSueloEntity();
 
+        analisisSueloEntity.setPhSuelo( AnalisisSuelo.getPhSuelo() );
+        analisisSueloEntity.setAluminioIntercambiable( AnalisisSuelo.getAluminioIntercambiable() );
+        analisisSueloEntity.setConductividadElectrica( AnalisisSuelo.getConductividadElectrica() );
+        analisisSueloEntity.setMateriaOrganica( AnalisisSuelo.getMateriaOrganica() );
+        analisisSueloEntity.setIntercambioCationico( AnalisisSuelo.getIntercambioCationico() );
         analisisSueloEntity.setIdAnalisisSuelo( AnalisisSuelo.getIdAnalisisSuelo() );
         analisisSueloEntity.setPorcentArena( AnalisisSuelo.getPorcentArena() );
         analisisSueloEntity.setPorcentLimos( AnalisisSuelo.getPorcentLimos() );
@@ -102,13 +112,13 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
     }
 
     @Override
-    public List<AnalisisSuelo> abonosOrganicosRecomendacionToDomain(List<AnalisisSueloEntity> abonoOrganicoEntities) {
-        if ( abonoOrganicoEntities == null ) {
+    public List<AnalisisSuelo> toDomain(List<AnalisisSueloEntity> analisisSueloEntities) {
+        if ( analisisSueloEntities == null ) {
             return null;
         }
 
-        List<AnalisisSuelo> list = new ArrayList<AnalisisSuelo>( abonoOrganicoEntities.size() );
-        for ( AnalisisSueloEntity analisisSueloEntity : abonoOrganicoEntities ) {
+        List<AnalisisSuelo> list = new ArrayList<AnalisisSuelo>( analisisSueloEntities.size() );
+        for ( AnalisisSueloEntity analisisSueloEntity : analisisSueloEntities ) {
             list.add( toDomain( analisisSueloEntity ) );
         }
 

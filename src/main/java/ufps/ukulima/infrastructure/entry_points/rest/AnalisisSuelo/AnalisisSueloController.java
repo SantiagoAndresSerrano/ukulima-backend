@@ -10,15 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
+import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
+import ufps.ukulima.domain.model.AluminioIntercambiable.gateway.AluminioIntercambiableService;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.AnalisisSuelo.gateway.AnalisisSueloService;
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ClaseTextural.gateway.ClaseTexturalService;
+import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
+import ufps.ukulima.domain.model.ConductividadElectrica.gateway.ConductividadElectricaService;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Cultivo.gateway.CultivoService;
 import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Densidad.gateway.DensidadService;
 import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
+import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
+import ufps.ukulima.domain.model.IntercambioCationico.gateway.IntercambioCationicoService;
+import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
+import ufps.ukulima.domain.model.PhSuelo.gateway.PhSueloService;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
 import ufps.ukulima.domain.model.ProfundidadMuestra.gateway.ProfundidaMuestraService;
 import org.springframework.http.HttpStatus;
@@ -39,6 +47,13 @@ public class AnalisisSueloController {
     AnalisisSueloService analisisSueloService;
 
     @Autowired
+    AluminioIntercambiableService aluminioIntercambiableService;
+    @Autowired
+    IntercambioCationicoService intercambioCationicoService;
+    @Autowired
+    ConductividadElectricaService conductividadElectricaService;
+
+    @Autowired
     ClaseTexturalService claseTexturalService;
 
     @Autowired
@@ -46,6 +61,8 @@ public class AnalisisSueloController {
 
     @Autowired
     DensidadService densidadService;
+    @Autowired
+    PhSueloService phSueloService;
 
     @Autowired
     ProfundidaMuestraService muestraService;
@@ -62,22 +79,22 @@ public class AnalisisSueloController {
             return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
 
         ClaseTextural claseTextural = claseTexturalService
-                .getClaseTexturalById(analisisSuelo.getIdClaseTextural().getIdClaseTextural());
+                .getClaseTexturalPorRangos(analisisSuelo.getPorcentArena()
+                        ,analisisSuelo.getPorcentLimos(), analisisSuelo.getPorcentArcilla());
         Cultivo cultivo = cultivoService.getCultivoById(analisisSuelo.getIdCultivo().getIdCultivo());
         Densidad densidad = densidadService.getDensidadById(analisisSuelo.getIdDensidad().getIdDensidad());
-        ProfundidadMuestra muestra = muestraService
-                .findProfundidadMuestraById(analisisSuelo.getIdProfundidad().getIdProfundidadMuestra());
-
-        if (claseTextural == null)
-            return new ResponseEntity<>(new Mensaje("Clase textural no encontrada"),
-                    HttpStatus.BAD_REQUEST);
+        ProfundidadMuestra muestra =
+                muestraService.findProfundidadMuestraById(analisisSuelo.getIdProfundidad().getIdProfundidadMuestra());
+        PhSuelo phSuelo =phSueloService.getPhSueloByValor(analisisSuelo.getPhSuelo());
+        AluminioIntercambiable aluminioIntercambiable =
+                aluminioIntercambiableService.getAluminioIntercambiableByValor(analisisSuelo.getAluminioIntercambiable());
+        ConductividadElectrica conductividadElectrica =
+                conductividadElectricaService.getConductividadElectricaByValor(analisisSuelo.getConductividadElectrica());
+        IntercambioCationico intercambioCationico =
+                intercambioCationicoService.getIntercambioCationicoByValor(analisisSuelo.getIntercambioCationico());
 
         if (cultivo == null)
             return new ResponseEntity<>(new Mensaje("cultivo no encontrada"),
-                    HttpStatus.BAD_REQUEST);
-
-        if (densidad == null)
-            return new ResponseEntity<>(new Mensaje("densidad no encontrada"),
                     HttpStatus.BAD_REQUEST);
 
         if (muestra == null)
@@ -85,13 +102,16 @@ public class AnalisisSueloController {
                     "suelo"), HttpStatus.BAD_REQUEST);
 
         analisisSuelo.setIdClaseTextural(claseTextural);
+        analisisSuelo.setIdConductividadElectrica(conductividadElectrica);
+        analisisSuelo.setIdIntercambioCationico(intercambioCationico);
+        analisisSuelo.setIdAluminioIntercambiable(aluminioIntercambiable);
+        analisisSuelo.setIdPhSuelo(phSuelo);
         analisisSuelo.setIdCultivo(cultivo);
         analisisSuelo.setIdDensidad(densidad);
         analisisSuelo.setIdProfundidad(muestra);
+        //analisisSueloService.saveAnalisisSuelo(analisisSuelo);
 
-        analisisSueloService.saveAnalisisSuelo(analisisSuelo);
-
-        return ResponseEntity.ok(new Mensaje("Analisis suelo agregado"));
+        return ResponseEntity.ok(analisisSuelo);
     }
 
     @GetMapping("/{idAnalisisSuelo}/recomendaciones")
