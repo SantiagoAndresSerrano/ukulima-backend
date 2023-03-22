@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
+import ufps.ukulima.config.Spring.security.dto.Response;
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AluminioIntercambiable.gateway.AluminioIntercambiableService;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
@@ -109,9 +110,9 @@ public class AnalisisSueloController {
         analisisSuelo.setIdCultivo(cultivo);
         analisisSuelo.setIdDensidad(densidad);
         analisisSuelo.setIdProfundidad(muestra);
-        //analisisSueloService.saveAnalisisSuelo(analisisSuelo);
+        analisisSueloService.saveAnalisisSuelo(analisisSuelo);
 
-        return ResponseEntity.ok(analisisSuelo);
+        return ResponseEntity.ok(new Response(200, "Analisis suelo agregado correctamente", analisisSuelo));
     }
 
     @GetMapping("/{idAnalisisSuelo}/recomendaciones")
