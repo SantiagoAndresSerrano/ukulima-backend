@@ -136,14 +136,6 @@ public class AnalisisSueloController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        AnalisisSuelo analisisSuelo2 = analisisSueloService.getAnalisisSueloById(analisisSuelo.getIdAnalisisSuelo());
-
-        if (analisisSuelo2 == null) {
-            return new ResponseEntity<>(
-                    new Mensaje("El analisis suelo que desea actualizar no existe"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
         analisisSueloService.saveAnalisisSuelo(analisisSuelo);
 
         return ResponseEntity.ok(new Mensaje("Analisis suelo actualizado actualizado"));
