@@ -11,6 +11,7 @@ import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Densidad.Densidad;
+import ufps.ukulima.domain.model.GrupoTextural.GrupoTextural;
 import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
 import ufps.ukulima.domain.model.MateriaOrganica.MateriaOrganica;
 import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
@@ -46,7 +47,6 @@ public class AnalisisSuelo {
     private Date fecha;
     private Collection<Recomendacion> recomendacionCollection;
     private Collection<AnalisisElemento> analisisElementoCollection;
-    @NotNull(message = "Clase textural no puede ser vacío")
     private ClaseTextural idClaseTextural;
     @NotNull(message = "Cultivo no puede ser vacío")
     private Cultivo idCultivo;
@@ -56,7 +56,7 @@ public class AnalisisSuelo {
     private ProfundidadMuestra idProfundidad;
     @NotNull(message = "ph Suelo no puede ser vacío")
     private float phSuelo;
-    @NotNull(message = "ph Suelo no puede ser vacío")
+    @NotNull(message = "aluminio Intercambiable no puede ser vacío")
     private float aluminioIntercambiable;
     private float conductividadElectrica;
     @NotNull(message = "materiaOrganica no puede ser vacío")
@@ -64,6 +64,8 @@ public class AnalisisSuelo {
     private float intercambioCationico;
 
     private PhSuelo idPhSuelo;
+
+    private GrupoTextural idGrupoTextural;
 
     private AluminioIntercambiable idAluminioIntercambiable;
 
@@ -89,7 +91,7 @@ public class AnalisisSuelo {
                          ,PhSuelo idPhSuelo, AluminioIntercambiable idAluminioIntercambiable,
                          ConductividadElectrica idConductividadElectrica,
                          MateriaOrganica idMmateriaOrganica,
-                         IntercambioCationico idIntercambioCationico) {
+                         IntercambioCationico idIntercambioCationico,GrupoTextural idGrupoTextural) {
 
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
@@ -106,6 +108,7 @@ public class AnalisisSuelo {
         this.materiaOrganica = materiaOrganica;
         this.intercambioCationico = intercambioCationico;
         this.idPhSuelo = idPhSuelo;
+        this.idGrupoTextural=idGrupoTextural;
         this.idAluminioIntercambiable = idAluminioIntercambiable;
         this.idConductividadElectrica = idConductividadElectrica;
         this.idMmateriaOrganica = idMmateriaOrganica;
@@ -278,6 +281,18 @@ public class AnalisisSuelo {
 
     public void setIdProfundidad(ProfundidadMuestra idProfundidad) {
         this.idProfundidad = idProfundidad;
+    }
+
+    public GrupoTextural getGrupoTextural() {
+        return idGrupoTextural;
+    }
+
+    public GrupoTextural getIdGrupoTextural() {
+        return idGrupoTextural;
+    }
+
+    public void setIdGrupoTextural(GrupoTextural idGrupoTextural) {
+        this.idGrupoTextural = idGrupoTextural;
     }
 
     @Override

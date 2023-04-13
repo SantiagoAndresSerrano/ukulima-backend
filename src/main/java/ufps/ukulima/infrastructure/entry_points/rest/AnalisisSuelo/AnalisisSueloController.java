@@ -1,5 +1,8 @@
 package ufps.ukulima.infrastructure.entry_points.rest.AnalisisSuelo;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ufps.ukulima.config.Spring.security.controller.AuthController;
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.config.Spring.security.dto.Response;
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
@@ -24,6 +28,8 @@ import ufps.ukulima.domain.model.Cultivo.gateway.CultivoService;
 import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Densidad.gateway.DensidadService;
 import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
+import ufps.ukulima.domain.model.GrupoTextural.GrupoTextural;
+import ufps.ukulima.domain.model.GrupoTextural.gateway.GrupoTexturalService;
 import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
 import ufps.ukulima.domain.model.IntercambioCationico.gateway.IntercambioCationicoService;
 import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
@@ -43,6 +49,7 @@ import org.springframework.validation.BindingResult;
 @RequestMapping(value = "/api/analisissuelo", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
 public class AnalisisSueloController {
+    private static Logger log = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     AnalisisSueloService analisisSueloService;
@@ -68,6 +75,9 @@ public class AnalisisSueloController {
     @Autowired
     ProfundidaMuestraService muestraService;
 
+    @Autowired
+    GrupoTexturalService grupoTexturalService;
+
     @GetMapping
     public ResponseEntity<?> getAllAnalisisSuelo() {
         return ResponseEntity.ok(analisisSueloService.getAllAnalisisSuelo());
@@ -78,6 +88,9 @@ public class AnalisisSueloController {
 
         if (br.hasErrors())
             return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
+
+        log.info(analisisSuelo.toString());
+
 
         ClaseTextural claseTextural = claseTexturalService
                 .getClaseTexturalPorRangos(analisisSuelo.getPorcentArena()
@@ -94,14 +107,51 @@ public class AnalisisSueloController {
         IntercambioCationico intercambioCationico =
                 intercambioCationicoService.getIntercambioCationicoByValor(analisisSuelo.getIntercambioCationico());
 
+        String MUY_FINOS_INTERPRETACION="MUY FINOS";
+        String FINOS_INTERPRETACION="FINOS";
+        String MODERADAMENTE_FINOS_INTERPRETACION="MODERADAMENTE FINOS";
+        String MEDIOS_INTERPRETACION="MEDIOS";
+        String MODERADAMENTE_GRUESOS_INTERPRETACION="MODERADAMENTE GRUESOS";
+        String GRUESOS_INTERPRETACION="GRUESOS";
+
+        String interpretacion="";
+
+        if (analisisSuelo.getPorcentArcilla() >60)
+            interpretacion = MUY_FINOS_INTERPRETACION;
+        if (claseTextural.getNombre().equals("ARENOSO") || claseTextural.getNombre().equals("ARENOSO FRANCO"))
+            interpretacion = GRUESOS_INTERPRETACION;
+        if (claseTextural.getNombre().equals("ARCILLOSO") || (claseTextural.getNombre().equals("ARCILLO ARENOSO")) || (claseTextural.getNombre().equals("ARCILLO LIMOSO")))
+            interpretacion = FINOS_INTERPRETACION;
+        if (claseTextural.getNombre().equals("FRANCO ARCILLOSO")
+                || (claseTextural.getNombre().equals("FRANCO ARCILLO ARENOSO"))
+                || (claseTextural.getNombre().equals("FRANCO ARCILLO LIMOSO"))
+                || (claseTextural.getNombre().equals("FRANCO"))
+                || (claseTextural.getNombre().equals("FRANCO LIMOSO")))
+            interpretacion = MODERADAMENTE_FINOS_INTERPRETACION;
+
+        if (( (claseTextural.getNombre().equals("FRANCO ARCILLO LIMOSO"))
+                        && analisisSuelo.getPorcentArena()<15 && analisisSuelo.getPorcentArcilla()<35)
+                || ( (claseTextural.getNombre().equals("FRANCO LIMOSO"))
+                        && analisisSuelo.getPorcentArcilla() > 18 && analisisSuelo.getPorcentArena() <15 ))
+            interpretacion = MEDIOS_INTERPRETACION;
+
+        if (    (claseTextural.getNombre().equals("FRANCO"))
+                || (claseTextural.getNombre().equals("LIMOSO"))
+                || (claseTextural.getNombre().equals("FRANCO ARENOSO"))
+                || ( (claseTextural.getNombre().equals("FRANCO LIMOSO"))
+                && analisisSuelo.getPorcentArcilla() < 18 && analisisSuelo.getPorcentArena() <15 ))
+            interpretacion = MODERADAMENTE_GRUESOS_INTERPRETACION;
+        log.info(interpretacion);
+        GrupoTextural grupoTextural = grupoTexturalService.getGrupoTexturalByNombre(interpretacion);
         if (cultivo == null)
-            return new ResponseEntity<>(new Mensaje("cultivo no encontrada"),
+            return new ResponseEntity<>(new Mensaje("cultivo no encontrado."),
                     HttpStatus.BAD_REQUEST);
 
         if (muestra == null)
             return new ResponseEntity<>(new Mensaje("profundidad muestra no encontrada" +
                     "suelo"), HttpStatus.BAD_REQUEST);
 
+        analisisSuelo.setIdGrupoTextural(grupoTextural);
         analisisSuelo.setIdClaseTextural(claseTextural);
         analisisSuelo.setIdConductividadElectrica(conductividadElectrica);
         analisisSuelo.setIdIntercambioCationico(intercambioCationico);
@@ -133,6 +183,14 @@ public class AnalisisSueloController {
         if (analisisSuelo.getIdAnalisisSuelo() == null) {
             return new ResponseEntity<>(
                     new Mensaje("Debe proporcionar un id del analisis suelo"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        AnalisisSuelo analisisSuelo2 = analisisSueloService.getAnalisisSueloById(analisisSuelo.getIdAnalisisSuelo());
+
+        if (analisisSuelo2 == null) {
+            return new ResponseEntity<>(
+                    new Mensaje("El analisis suelo que desea actualizar no existe"),
                     HttpStatus.BAD_REQUEST);
         }
 

@@ -11,6 +11,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTextu
 import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Cultivo.CultivoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Densidad.DensidadEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.GrupoTextural.GrupoTexturalEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.IntercambioCationico.IntercambioCationicoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaOrganicaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo.PhSueloEntity;
@@ -99,6 +100,10 @@ public class AnalisisSueloEntity implements Serializable {
     @ManyToOne(optional = false)
     private PhSueloEntity idPhSuelo;
 
+    @JoinColumn(name = "id_grupo_textural", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private GrupoTexturalEntity idGrupoTextural;
+
     @JoinColumn(name = "id_aluminio_intercambiable", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AluminioIntercambiableEntity idAluminioIntercambiable;
@@ -143,7 +148,8 @@ public class AnalisisSueloEntity implements Serializable {
     }
 
     public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla,
-                          Date fecha, float phSuelo, float aluminioIntercambiable, float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
+                          Date fecha, float phSuelo, float aluminioIntercambiable,
+                               float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;
@@ -170,6 +176,14 @@ public class AnalisisSueloEntity implements Serializable {
 
     public void setAluminioIntercambiable(float aluminioIntercambiable) {
         this.aluminioIntercambiable = aluminioIntercambiable;
+    }
+
+    public GrupoTexturalEntity getIdGrupoTexturalEntity() {
+        return idGrupoTextural;
+    }
+
+    public void setIdGrupoTexturalEntity(GrupoTexturalEntity idGrupoTexturalEntity) {
+        this.idGrupoTextural = idGrupoTexturalEntity;
     }
 
     public float getConductividadElectrica() {
