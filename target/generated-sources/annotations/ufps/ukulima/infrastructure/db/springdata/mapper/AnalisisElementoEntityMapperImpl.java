@@ -7,9 +7,11 @@ import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
+import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
+import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Densidad.Densidad;
@@ -20,7 +22,10 @@ import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Fuente.Fuente;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
+import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
+import ufps.ukulima.domain.model.MateriaOrganica.MateriaOrganica;
 import ufps.ukulima.domain.model.Municipio.Municipio;
+import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
@@ -29,9 +34,11 @@ import ufps.ukulima.domain.model.Topografia.Topografia;
 import ufps.ukulima.domain.model.Variedad.Variedad;
 import ufps.ukulima.domain.model.Vereda.Vereda;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Cultivo.CultivoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Densidad.DensidadEntity;
@@ -43,7 +50,10 @@ import ufps.ukulima.infrastructure.db.springdata.entity.EtapaFenologica.EtapaFen
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Fuente.FuenteEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.FuenteRecomendacion.FuenteRecomendacionEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.IntercambioCationico.IntercambioCationicoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaOrganicaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo.PhSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ProfundidadMuestra.ProfundidadMuestraEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.RecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.TipoCultivo.TipoCultivoEntity;
@@ -54,7 +64,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-12T09:33:21-0500",
+    date = "2023-04-13T01:32:44-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -104,6 +114,81 @@ public class AnalisisElementoEntityMapperImpl implements AnalisisElementoEntityM
         }
 
         return list;
+    }
+
+    protected PhSuelo phSueloEntityToPhSuelo(PhSueloEntity phSueloEntity) {
+        if ( phSueloEntity == null ) {
+            return null;
+        }
+
+        PhSuelo phSuelo = new PhSuelo();
+
+        phSuelo.setId( phSueloEntity.getId() );
+        phSuelo.setValorMin( phSueloEntity.getValorMin() );
+        phSuelo.setValorMax( phSueloEntity.getValorMax() );
+        phSuelo.setInterpretacion( phSueloEntity.getInterpretacion() );
+
+        return phSuelo;
+    }
+
+    protected AluminioIntercambiable aluminioIntercambiableEntityToAluminioIntercambiable(AluminioIntercambiableEntity aluminioIntercambiableEntity) {
+        if ( aluminioIntercambiableEntity == null ) {
+            return null;
+        }
+
+        AluminioIntercambiable aluminioIntercambiable = new AluminioIntercambiable();
+
+        aluminioIntercambiable.setId( aluminioIntercambiableEntity.getId() );
+        aluminioIntercambiable.setValorMin( aluminioIntercambiableEntity.getValorMin() );
+        aluminioIntercambiable.setValorMax( aluminioIntercambiableEntity.getValorMax() );
+        aluminioIntercambiable.setInterpretacion( aluminioIntercambiableEntity.getInterpretacion() );
+
+        return aluminioIntercambiable;
+    }
+
+    protected ConductividadElectrica conductividadElectricaEntityToConductividadElectrica(ConductividadElectricaEntity conductividadElectricaEntity) {
+        if ( conductividadElectricaEntity == null ) {
+            return null;
+        }
+
+        ConductividadElectrica conductividadElectrica = new ConductividadElectrica();
+
+        conductividadElectrica.setId( conductividadElectricaEntity.getId() );
+        conductividadElectrica.setValorMin( conductividadElectricaEntity.getValorMin() );
+        conductividadElectrica.setValorMax( conductividadElectricaEntity.getValorMax() );
+        conductividadElectrica.setInterpretacion( conductividadElectricaEntity.getInterpretacion() );
+
+        return conductividadElectrica;
+    }
+
+    protected MateriaOrganica materiaOrganicaEntityToMateriaOrganica(MateriaOrganicaEntity materiaOrganicaEntity) {
+        if ( materiaOrganicaEntity == null ) {
+            return null;
+        }
+
+        MateriaOrganica materiaOrganica = new MateriaOrganica();
+
+        materiaOrganica.setId( materiaOrganicaEntity.getId() );
+        materiaOrganica.setValorMin( materiaOrganicaEntity.getValorMin() );
+        materiaOrganica.setValorMax( materiaOrganicaEntity.getValorMax() );
+        materiaOrganica.setInterpretacion( materiaOrganicaEntity.getInterpretacion() );
+
+        return materiaOrganica;
+    }
+
+    protected IntercambioCationico intercambioCationicoEntityToIntercambioCationico(IntercambioCationicoEntity intercambioCationicoEntity) {
+        if ( intercambioCationicoEntity == null ) {
+            return null;
+        }
+
+        IntercambioCationico intercambioCationico = new IntercambioCationico();
+
+        intercambioCationico.setId( intercambioCationicoEntity.getId() );
+        intercambioCationico.setValorMin( intercambioCationicoEntity.getValorMin() );
+        intercambioCationico.setValorMax( intercambioCationicoEntity.getValorMax() );
+        intercambioCationico.setInterpretacion( intercambioCationicoEntity.getInterpretacion() );
+
+        return intercambioCationico;
     }
 
     protected Collection<Recomendacion> recomendacionEntityCollectionToRecomendacionCollection(Collection<RecomendacionEntity> collection) {
@@ -449,6 +534,16 @@ public class AnalisisElementoEntityMapperImpl implements AnalisisElementoEntityM
 
         AnalisisSuelo analisisSuelo = new AnalisisSuelo();
 
+        analisisSuelo.setPhSuelo( analisisSueloEntity.getPhSuelo() );
+        analisisSuelo.setAluminioIntercambiable( analisisSueloEntity.getAluminioIntercambiable() );
+        analisisSuelo.setIdPhSuelo( phSueloEntityToPhSuelo( analisisSueloEntity.getIdPhSuelo() ) );
+        analisisSuelo.setIdAluminioIntercambiable( aluminioIntercambiableEntityToAluminioIntercambiable( analisisSueloEntity.getIdAluminioIntercambiable() ) );
+        analisisSuelo.setIdConductividadElectrica( conductividadElectricaEntityToConductividadElectrica( analisisSueloEntity.getIdConductividadElectrica() ) );
+        analisisSuelo.setIdMmateriaOrganica( materiaOrganicaEntityToMateriaOrganica( analisisSueloEntity.getIdMmateriaOrganica() ) );
+        analisisSuelo.setIdIntercambioCationico( intercambioCationicoEntityToIntercambioCationico( analisisSueloEntity.getIdIntercambioCationico() ) );
+        analisisSuelo.setConductividadElectrica( analisisSueloEntity.getConductividadElectrica() );
+        analisisSuelo.setMateriaOrganica( analisisSueloEntity.getMateriaOrganica() );
+        analisisSuelo.setIntercambioCationico( analisisSueloEntity.getIntercambioCationico() );
         analisisSuelo.setIdAnalisisSuelo( analisisSueloEntity.getIdAnalisisSuelo() );
         analisisSuelo.setPorcentArena( analisisSueloEntity.getPorcentArena() );
         analisisSuelo.setPorcentLimos( analisisSueloEntity.getPorcentLimos() );
@@ -461,6 +556,81 @@ public class AnalisisElementoEntityMapperImpl implements AnalisisElementoEntityM
         analisisSuelo.setIdProfundidad( profundidadMuestraEntityToProfundidadMuestra( analisisSueloEntity.getIdProfundidad() ) );
 
         return analisisSuelo;
+    }
+
+    protected ConductividadElectricaEntity conductividadElectricaToConductividadElectricaEntity(ConductividadElectrica conductividadElectrica) {
+        if ( conductividadElectrica == null ) {
+            return null;
+        }
+
+        ConductividadElectricaEntity conductividadElectricaEntity = new ConductividadElectricaEntity();
+
+        conductividadElectricaEntity.setId( conductividadElectrica.getId() );
+        conductividadElectricaEntity.setValorMin( conductividadElectrica.getValorMin() );
+        conductividadElectricaEntity.setValorMax( conductividadElectrica.getValorMax() );
+        conductividadElectricaEntity.setInterpretacion( conductividadElectrica.getInterpretacion() );
+
+        return conductividadElectricaEntity;
+    }
+
+    protected MateriaOrganicaEntity materiaOrganicaToMateriaOrganicaEntity(MateriaOrganica materiaOrganica) {
+        if ( materiaOrganica == null ) {
+            return null;
+        }
+
+        MateriaOrganicaEntity materiaOrganicaEntity = new MateriaOrganicaEntity();
+
+        materiaOrganicaEntity.setInterpretacion( materiaOrganica.getInterpretacion() );
+        materiaOrganicaEntity.setId( materiaOrganica.getId() );
+        materiaOrganicaEntity.setValorMin( materiaOrganica.getValorMin() );
+        materiaOrganicaEntity.setValorMax( materiaOrganica.getValorMax() );
+
+        return materiaOrganicaEntity;
+    }
+
+    protected IntercambioCationicoEntity intercambioCationicoToIntercambioCationicoEntity(IntercambioCationico intercambioCationico) {
+        if ( intercambioCationico == null ) {
+            return null;
+        }
+
+        IntercambioCationicoEntity intercambioCationicoEntity = new IntercambioCationicoEntity();
+
+        intercambioCationicoEntity.setInterpretacion( intercambioCationico.getInterpretacion() );
+        intercambioCationicoEntity.setId( intercambioCationico.getId() );
+        intercambioCationicoEntity.setValorMin( intercambioCationico.getValorMin() );
+        intercambioCationicoEntity.setValorMax( intercambioCationico.getValorMax() );
+
+        return intercambioCationicoEntity;
+    }
+
+    protected PhSueloEntity phSueloToPhSueloEntity(PhSuelo phSuelo) {
+        if ( phSuelo == null ) {
+            return null;
+        }
+
+        PhSueloEntity phSueloEntity = new PhSueloEntity();
+
+        phSueloEntity.setInterpretacion( phSuelo.getInterpretacion() );
+        phSueloEntity.setId( phSuelo.getId() );
+        phSueloEntity.setValorMin( phSuelo.getValorMin() );
+        phSueloEntity.setValorMax( phSuelo.getValorMax() );
+
+        return phSueloEntity;
+    }
+
+    protected AluminioIntercambiableEntity aluminioIntercambiableToAluminioIntercambiableEntity(AluminioIntercambiable aluminioIntercambiable) {
+        if ( aluminioIntercambiable == null ) {
+            return null;
+        }
+
+        AluminioIntercambiableEntity aluminioIntercambiableEntity = new AluminioIntercambiableEntity();
+
+        aluminioIntercambiableEntity.setId( aluminioIntercambiable.getId() );
+        aluminioIntercambiableEntity.setValorMin( aluminioIntercambiable.getValorMin() );
+        aluminioIntercambiableEntity.setValorMax( aluminioIntercambiable.getValorMax() );
+        aluminioIntercambiableEntity.setInterpretacion( aluminioIntercambiable.getInterpretacion() );
+
+        return aluminioIntercambiableEntity;
     }
 
     protected ClaseTexturalEntity claseTexturalToClaseTexturalEntity(ClaseTextural claseTextural) {
@@ -704,6 +874,16 @@ public class AnalisisElementoEntityMapperImpl implements AnalisisElementoEntityM
 
         AnalisisSueloEntity analisisSueloEntity = new AnalisisSueloEntity();
 
+        analisisSueloEntity.setPhSuelo( analisisSuelo.getPhSuelo() );
+        analisisSueloEntity.setAluminioIntercambiable( analisisSuelo.getAluminioIntercambiable() );
+        analisisSueloEntity.setConductividadElectrica( analisisSuelo.getConductividadElectrica() );
+        analisisSueloEntity.setMateriaOrganica( analisisSuelo.getMateriaOrganica() );
+        analisisSueloEntity.setIntercambioCationico( analisisSuelo.getIntercambioCationico() );
+        analisisSueloEntity.setIdConductividadElectrica( conductividadElectricaToConductividadElectricaEntity( analisisSuelo.getIdConductividadElectrica() ) );
+        analisisSueloEntity.setIdMmateriaOrganica( materiaOrganicaToMateriaOrganicaEntity( analisisSuelo.getIdMmateriaOrganica() ) );
+        analisisSueloEntity.setIdIntercambioCationico( intercambioCationicoToIntercambioCationicoEntity( analisisSuelo.getIdIntercambioCationico() ) );
+        analisisSueloEntity.setIdPhSuelo( phSueloToPhSueloEntity( analisisSuelo.getIdPhSuelo() ) );
+        analisisSueloEntity.setIdAluminioIntercambiable( aluminioIntercambiableToAluminioIntercambiableEntity( analisisSuelo.getIdAluminioIntercambiable() ) );
         analisisSueloEntity.setIdAnalisisSuelo( analisisSuelo.getIdAnalisisSuelo() );
         analisisSueloEntity.setPorcentArena( analisisSuelo.getPorcentArena() );
         analisisSueloEntity.setPorcentLimos( analisisSuelo.getPorcentLimos() );

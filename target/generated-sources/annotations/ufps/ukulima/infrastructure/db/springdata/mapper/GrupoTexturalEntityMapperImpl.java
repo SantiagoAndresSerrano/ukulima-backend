@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.GrupoTextural.GrupoTextu
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-12T22:45:33-0500",
+    date = "2023-04-13T01:32:42-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -21,15 +21,12 @@ public class GrupoTexturalEntityMapperImpl implements GrupoTexturalEntityMapper 
             return null;
         }
 
-        int id = 0;
-        String nombre = null;
+        GrupoTextural grupoTextural = new GrupoTextural();
 
         if ( GrupoTexturalEntity.getId() != null ) {
-            id = GrupoTexturalEntity.getId();
+            grupoTextural.setId( GrupoTexturalEntity.getId() );
         }
-        nombre = GrupoTexturalEntity.getNombre();
-
-        GrupoTextural grupoTextural = new GrupoTextural( id, nombre );
+        grupoTextural.setNombre( GrupoTexturalEntity.getNombre() );
 
         return grupoTextural;
     }
@@ -40,13 +37,10 @@ public class GrupoTexturalEntityMapperImpl implements GrupoTexturalEntityMapper 
             return null;
         }
 
-        Integer id = null;
-        String nombre = null;
+        GrupoTexturalEntity grupoTexturalEntity = new GrupoTexturalEntity();
 
-        id = GrupoTextural.getId();
-        nombre = GrupoTextural.getNombre();
-
-        GrupoTexturalEntity grupoTexturalEntity = new GrupoTexturalEntity( id, nombre );
+        grupoTexturalEntity.setId( GrupoTextural.getId() );
+        grupoTexturalEntity.setNombre( GrupoTextural.getNombre() );
 
         return grupoTexturalEntity;
     }

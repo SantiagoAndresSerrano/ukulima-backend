@@ -147,14 +147,22 @@ public class AnalisisSueloEntity implements Serializable {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla,
-                          Date fecha, float phSuelo, float aluminioIntercambiable,
-                               float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
+    public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla, Date fecha, ClaseTexturalEntity idClaseTextural, CultivoEntity idCultivo, DensidadEntity idDensidad, ProfundidadMuestraEntity idProfundidad, PhSueloEntity idPhSuelo, GrupoTexturalEntity idGrupoTextural, AluminioIntercambiableEntity idAluminioIntercambiable, ConductividadElectricaEntity idConductividadElectrica, MateriaOrganicaEntity idMmateriaOrganica, IntercambioCationicoEntity idIntercambioCationico, float phSuelo, float aluminioIntercambiable, float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;
         this.porcentArcilla = porcentArcilla;
         this.fecha = fecha;
+        this.idClaseTextural = idClaseTextural;
+        this.idCultivo = idCultivo;
+        this.idDensidad = idDensidad;
+        this.idProfundidad = idProfundidad;
+        this.idPhSuelo = idPhSuelo;
+        this.idGrupoTextural = idGrupoTextural;
+        this.idAluminioIntercambiable = idAluminioIntercambiable;
+        this.idConductividadElectrica = idConductividadElectrica;
+        this.idMmateriaOrganica = idMmateriaOrganica;
+        this.idIntercambioCationico = idIntercambioCationico;
         this.phSuelo = phSuelo;
         this.aluminioIntercambiable = aluminioIntercambiable;
         this.conductividadElectrica = conductividadElectrica;

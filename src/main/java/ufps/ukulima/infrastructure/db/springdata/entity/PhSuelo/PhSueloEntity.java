@@ -1,6 +1,9 @@
 package ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo;
 
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
+
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -34,7 +37,8 @@ public class PhSueloEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "interpretacion")
     private String interpretacion;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPhSuelo")
+    private Collection<AnalisisSueloEntity> analisisSueloCollection;
     public PhSueloEntity() {
     }
 
@@ -74,6 +78,14 @@ public class PhSueloEntity implements Serializable {
 
     public Float getValorMax() {
         return valorMax;
+    }
+
+    public Collection<AnalisisSueloEntity> getAnalisisSueloCollection() {
+        return analisisSueloCollection;
+    }
+
+    public void setAnalisisSueloCollection(Collection<AnalisisSueloEntity> analisisSueloCollection) {
+        this.analisisSueloCollection = analisisSueloCollection;
     }
 
     public void setValorMax(Float valorMax) {

@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.DeterminacionClaseTextur
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-12T13:13:04-0500",
+    date = "2023-04-13T01:32:44-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -27,7 +27,6 @@ public class DeterminacionClaseTexturalEntityMapperImpl implements Determinacion
         determinacionClaseTextural.setValorMin( DeterminacionClaseTexturalEntity.getValorMin() );
         determinacionClaseTextural.setValorMax( DeterminacionClaseTexturalEntity.getValorMax() );
         determinacionClaseTextural.setContenido( DeterminacionClaseTexturalEntity.getContenido() );
-        determinacionClaseTextural.setInterpretacion( DeterminacionClaseTexturalEntity.getInterpretacion() );
 
         return determinacionClaseTextural;
     }
@@ -44,7 +43,6 @@ public class DeterminacionClaseTexturalEntityMapperImpl implements Determinacion
         determinacionClaseTexturalEntity.setId( DeterminacionClaseTextural.getId() );
         determinacionClaseTexturalEntity.setValorMin( DeterminacionClaseTextural.getValorMin() );
         determinacionClaseTexturalEntity.setValorMax( DeterminacionClaseTextural.getValorMax() );
-        determinacionClaseTexturalEntity.setInterpretacion( DeterminacionClaseTextural.getInterpretacion() );
 
         return determinacionClaseTexturalEntity;
     }
