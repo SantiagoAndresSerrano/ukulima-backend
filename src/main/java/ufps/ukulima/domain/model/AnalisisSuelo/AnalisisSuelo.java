@@ -71,7 +71,7 @@ public class AnalisisSuelo {
 
     private ConductividadElectrica idConductividadElectrica;
 
-    private MateriaOrganica idMmateriaOrganica;
+    private MateriaOrganica idMateriaOrganica;
 
     private IntercambioCationico idIntercambioCationico;
 
@@ -111,7 +111,7 @@ public class AnalisisSuelo {
         this.idGrupoTextural=idGrupoTextural;
         this.idAluminioIntercambiable = idAluminioIntercambiable;
         this.idConductividadElectrica = idConductividadElectrica;
-        this.idMmateriaOrganica = idMmateriaOrganica;
+        this.idMateriaOrganica = idMmateriaOrganica;
         this.idIntercambioCationico = idIntercambioCationico;
     }
 
@@ -155,12 +155,12 @@ public class AnalisisSuelo {
         this.idConductividadElectrica = idConductividadElectrica;
     }
 
-    public MateriaOrganica getIdMmateriaOrganica() {
-        return idMmateriaOrganica;
+    public MateriaOrganica getIdMateriaOrganica() {
+        return idMateriaOrganica;
     }
 
-    public void setIdMmateriaOrganica(MateriaOrganica idMmateriaOrganica) {
-        this.idMmateriaOrganica = idMmateriaOrganica;
+    public void setIdMateriaOrganica(MateriaOrganica idMateriaOrganica) {
+        this.idMateriaOrganica = idMateriaOrganica;
     }
 
     public IntercambioCationico getIdIntercambioCationico() {
@@ -322,7 +322,7 @@ public class AnalisisSuelo {
                 ", idPhSuelo=" + idPhSuelo +
                 ", idAluminioIntercambiable=" + idAluminioIntercambiable +
                 ", idConductividadElectrica=" + idConductividadElectrica +
-                ", idMmateriaOrganica=" + idMmateriaOrganica +
+                ", idMateriaOrganica=" + idMateriaOrganica +
                 ", idIntercambioCationico=" + idIntercambioCationico +
                 '}';
     }

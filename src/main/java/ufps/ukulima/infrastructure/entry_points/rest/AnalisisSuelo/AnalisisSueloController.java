@@ -1,6 +1,10 @@
 package ufps.ukulima.infrastructure.entry_points.rest.AnalisisSuelo;
 
-import lombok.extern.slf4j.Slf4j;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.client.RestTemplate;
 import ufps.ukulima.config.Spring.security.controller.AuthController;
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.config.Spring.security.dto.Response;
@@ -32,6 +37,8 @@ import ufps.ukulima.domain.model.GrupoTextural.GrupoTextural;
 import ufps.ukulima.domain.model.GrupoTextural.gateway.GrupoTexturalService;
 import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
 import ufps.ukulima.domain.model.IntercambioCationico.gateway.IntercambioCationicoService;
+import ufps.ukulima.domain.model.MateriaOrganica.MateriaOrganica;
+import ufps.ukulima.domain.model.MateriaOrganica.gateway.MateriaOrganicaService;
 import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
 import ufps.ukulima.domain.model.PhSuelo.gateway.PhSueloService;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
@@ -44,6 +51,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/api/analisissuelo", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -65,6 +74,9 @@ public class AnalisisSueloController {
     ClaseTexturalService claseTexturalService;
 
     @Autowired
+    MateriaOrganicaService materiaOrganicaService;
+
+    @Autowired
     CultivoService cultivoService;
 
     @Autowired
@@ -78,27 +90,33 @@ public class AnalisisSueloController {
     @Autowired
     GrupoTexturalService grupoTexturalService;
 
+
     @GetMapping
     public ResponseEntity<?> getAllAnalisisSuelo() {
         return ResponseEntity.ok(analisisSueloService.getAllAnalisisSuelo());
     }
 
     @PostMapping
-    public ResponseEntity<?> saveAnalisisSuelo(@Valid @RequestBody AnalisisSuelo analisisSuelo, BindingResult br) {
+    public ResponseEntity<?> saveAnalisisSuelo(@Valid @RequestBody AnalisisSuelo analisisSuelo, BindingResult br) throws JsonProcessingException {
 
         if (br.hasErrors())
             return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        Cultivo cultivo = cultivoService.getCultivoById(analisisSuelo.getIdCultivo().getIdCultivo());
+        ProfundidadMuestra muestra =
+                muestraService.findProfundidadMuestraById(analisisSuelo.getIdProfundidad().getIdProfundidadMuestra());
+        if (cultivo == null)
+            return new ResponseEntity<>(new Mensaje("cultivo no encontrado."),
+                    HttpStatus.BAD_REQUEST);
+        if (muestra == null)
+            return new ResponseEntity<>(new Mensaje("profundidad muestra no encontrada" +
+                    "suelo"), HttpStatus.BAD_REQUEST);
 
-        log.info(analisisSuelo.toString());
-
-
+        RestTemplate restTemplate = new RestTemplate();
         ClaseTextural claseTextural = claseTexturalService
                 .getClaseTexturalPorRangos(analisisSuelo.getPorcentArena()
                         ,analisisSuelo.getPorcentLimos(), analisisSuelo.getPorcentArcilla());
-        Cultivo cultivo = cultivoService.getCultivoById(analisisSuelo.getIdCultivo().getIdCultivo());
         Densidad densidad = densidadService.getDensidadById(analisisSuelo.getIdDensidad().getIdDensidad());
-        ProfundidadMuestra muestra =
-                muestraService.findProfundidadMuestraById(analisisSuelo.getIdProfundidad().getIdProfundidadMuestra());
+
         PhSuelo phSuelo =phSueloService.getPhSueloByValor(analisisSuelo.getPhSuelo());
         AluminioIntercambiable aluminioIntercambiable =
                 aluminioIntercambiableService.getAluminioIntercambiableByValor(analisisSuelo.getAluminioIntercambiable());
@@ -107,6 +125,7 @@ public class AnalisisSueloController {
         IntercambioCationico intercambioCationico =
                 intercambioCationicoService.getIntercambioCationicoByValor(analisisSuelo.getIntercambioCationico());
 
+        //Determinacion de materiales
         String MUY_FINOS_INTERPRETACION="MUY FINOS";
         String FINOS_INTERPRETACION="FINOS";
         String MODERADAMENTE_FINOS_INTERPRETACION="MODERADAMENTE FINOS";
@@ -141,16 +160,33 @@ public class AnalisisSueloController {
                 || ( (claseTextural.getNombre().equals("FRANCO LIMOSO"))
                 && analisisSuelo.getPorcentArcilla() < 18 && analisisSuelo.getPorcentArena() <15 ))
             interpretacion = MODERADAMENTE_GRUESOS_INTERPRETACION;
-        log.info(interpretacion);
+
+        // Determinacion de clima
+        String fooResourceUrl
+                = "https://api.opentopodata.org/v1/srtm90m?locations="+cultivo.
+                getIdFinca().getGeolocalizacion();
+        ResponseEntity<String> response
+                = restTemplate.getForEntity(fooResourceUrl, String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(response.getBody());
+        double altitude = rootNode.get("results").get(0).get("elevation").asDouble();
+
+        String CLIMA_FRIO="FRIO";
+        String CLIMA_MEDIO="MEDIO";
+        String CLIMA_CALIDO="CALIDO";
+
+        String clima="";
+
+        if (altitude>2000) clima=CLIMA_FRIO;
+        if (altitude<2000 && altitude>1000) clima=CLIMA_MEDIO;
+        if (altitude<1000) clima=CLIMA_CALIDO;
+
+        MateriaOrganica materiaOrganica = materiaOrganicaService.getMateriaOrganicaByClimaAndValor(clima,
+                analisisSuelo.getMateriaOrganica());
+        log.info(materiaOrganica.toString());
         GrupoTextural grupoTextural = grupoTexturalService.getGrupoTexturalByNombre(interpretacion);
-        if (cultivo == null)
-            return new ResponseEntity<>(new Mensaje("cultivo no encontrado."),
-                    HttpStatus.BAD_REQUEST);
 
-        if (muestra == null)
-            return new ResponseEntity<>(new Mensaje("profundidad muestra no encontrada" +
-                    "suelo"), HttpStatus.BAD_REQUEST);
-
+        analisisSuelo.setIdMateriaOrganica(materiaOrganica);
         analisisSuelo.setIdGrupoTextural(grupoTextural);
         analisisSuelo.setIdClaseTextural(claseTextural);
         analisisSuelo.setIdConductividadElectrica(conductividadElectrica);

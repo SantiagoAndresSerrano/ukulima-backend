@@ -114,7 +114,7 @@ public class AnalisisSueloEntity implements Serializable {
 
     @JoinColumn(name = "id_materia_organica", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private MateriaOrganicaEntity idMmateriaOrganica;
+    private MateriaOrganicaEntity idMateriaOrganica;
 
     @JoinColumn(name = "id_intercambio_cationico", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -147,7 +147,9 @@ public class AnalisisSueloEntity implements Serializable {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos, float porcentArcilla, Date fecha, ClaseTexturalEntity idClaseTextural, CultivoEntity idCultivo, DensidadEntity idDensidad, ProfundidadMuestraEntity idProfundidad, PhSueloEntity idPhSuelo, GrupoTexturalEntity idGrupoTextural, AluminioIntercambiableEntity idAluminioIntercambiable, ConductividadElectricaEntity idConductividadElectrica, MateriaOrganicaEntity idMmateriaOrganica, IntercambioCationicoEntity idIntercambioCationico, float phSuelo, float aluminioIntercambiable, float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
+    public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos,
+                               float porcentArcilla, Date fecha, ClaseTexturalEntity idClaseTextural,
+                               CultivoEntity idCultivo, DensidadEntity idDensidad, ProfundidadMuestraEntity idProfundidad, PhSueloEntity idPhSuelo, GrupoTexturalEntity idGrupoTextural, AluminioIntercambiableEntity idAluminioIntercambiable, ConductividadElectricaEntity idConductividadElectrica, MateriaOrganicaEntity idMateriaOrganica, IntercambioCationicoEntity idIntercambioCationico, float phSuelo, float aluminioIntercambiable, float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;
@@ -161,7 +163,7 @@ public class AnalisisSueloEntity implements Serializable {
         this.idGrupoTextural = idGrupoTextural;
         this.idAluminioIntercambiable = idAluminioIntercambiable;
         this.idConductividadElectrica = idConductividadElectrica;
-        this.idMmateriaOrganica = idMmateriaOrganica;
+        this.idMateriaOrganica = idMateriaOrganica;
         this.idIntercambioCationico = idIntercambioCationico;
         this.phSuelo = phSuelo;
         this.aluminioIntercambiable = aluminioIntercambiable;
@@ -230,12 +232,12 @@ public class AnalisisSueloEntity implements Serializable {
         this.idConductividadElectrica = idConductividadElectrica;
     }
 
-    public MateriaOrganicaEntity getIdMmateriaOrganica() {
-        return idMmateriaOrganica;
+    public MateriaOrganicaEntity getIdMateriaOrganica() {
+        return idMateriaOrganica;
     }
 
-    public void setIdMmateriaOrganica(MateriaOrganicaEntity idMmateriaOrganica) {
-        this.idMmateriaOrganica = idMmateriaOrganica;
+    public void setIdMateriaOrganica(MateriaOrganicaEntity idMateriaOrganica) {
+        this.idMateriaOrganica = idMateriaOrganica;
     }
 
     public IntercambioCationicoEntity getIdIntercambioCationico() {

@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTextu
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-13T01:32:45-0500",
+    date = "2023-04-17T01:51:26-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component

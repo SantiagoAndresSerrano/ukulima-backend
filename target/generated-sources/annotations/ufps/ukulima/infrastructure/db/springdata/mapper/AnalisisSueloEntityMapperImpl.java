@@ -62,7 +62,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-13T01:32:44-0500",
+    date = "2023-04-17T01:51:27-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -81,7 +81,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         analisisSuelo.setIdPhSuelo( phSueloEntityToPhSuelo( AnalisisSueloEntity.getIdPhSuelo() ) );
         analisisSuelo.setIdAluminioIntercambiable( aluminioIntercambiableEntityToAluminioIntercambiable( AnalisisSueloEntity.getIdAluminioIntercambiable() ) );
         analisisSuelo.setIdConductividadElectrica( conductividadElectricaEntityToConductividadElectrica( AnalisisSueloEntity.getIdConductividadElectrica() ) );
-        analisisSuelo.setIdMmateriaOrganica( materiaOrganicaEntityToMateriaOrganica( AnalisisSueloEntity.getIdMmateriaOrganica() ) );
+        analisisSuelo.setIdMateriaOrganica( materiaOrganicaEntityToMateriaOrganica( AnalisisSueloEntity.getIdMateriaOrganica() ) );
         analisisSuelo.setIdIntercambioCationico( intercambioCationicoEntityToIntercambioCationico( AnalisisSueloEntity.getIdIntercambioCationico() ) );
         analisisSuelo.setConductividadElectrica( AnalisisSueloEntity.getConductividadElectrica() );
         analisisSuelo.setMateriaOrganica( AnalisisSueloEntity.getMateriaOrganica() );
@@ -114,7 +114,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         analisisSueloEntity.setMateriaOrganica( AnalisisSuelo.getMateriaOrganica() );
         analisisSueloEntity.setIntercambioCationico( AnalisisSuelo.getIntercambioCationico() );
         analisisSueloEntity.setIdConductividadElectrica( conductividadElectricaToConductividadElectricaEntity( AnalisisSuelo.getIdConductividadElectrica() ) );
-        analisisSueloEntity.setIdMmateriaOrganica( materiaOrganicaToMateriaOrganicaEntity( AnalisisSuelo.getIdMmateriaOrganica() ) );
+        analisisSueloEntity.setIdMateriaOrganica( materiaOrganicaToMateriaOrganicaEntity( AnalisisSuelo.getIdMateriaOrganica() ) );
         analisisSueloEntity.setIdIntercambioCationico( intercambioCationicoToIntercambioCationicoEntity( AnalisisSuelo.getIdIntercambioCationico() ) );
         analisisSueloEntity.setIdPhSuelo( phSueloToPhSueloEntity( AnalisisSuelo.getIdPhSuelo() ) );
         analisisSueloEntity.setIdAluminioIntercambiable( aluminioIntercambiableToAluminioIntercambiableEntity( AnalisisSuelo.getIdAluminioIntercambiable() ) );
@@ -197,6 +197,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
 
         MateriaOrganica materiaOrganica = new MateriaOrganica();
 
+        materiaOrganica.setClima( materiaOrganicaEntity.getClima() );
         materiaOrganica.setId( materiaOrganicaEntity.getId() );
         materiaOrganica.setValorMin( materiaOrganicaEntity.getValorMin() );
         materiaOrganica.setValorMax( materiaOrganicaEntity.getValorMax() );
@@ -578,6 +579,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
 
         MateriaOrganicaEntity materiaOrganicaEntity = new MateriaOrganicaEntity();
 
+        materiaOrganicaEntity.setClima( materiaOrganica.getClima() );
         materiaOrganicaEntity.setInterpretacion( materiaOrganica.getInterpretacion() );
         materiaOrganicaEntity.setId( materiaOrganica.getId() );
         materiaOrganicaEntity.setValorMin( materiaOrganica.getValorMin() );

@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaO
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-13T01:32:45-0500",
+    date = "2023-04-17T01:51:26-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -23,6 +23,7 @@ public class MateriaOrganicaEntityMapperImpl implements MateriaOrganicaEntityMap
 
         MateriaOrganica materiaOrganica = new MateriaOrganica();
 
+        materiaOrganica.setClima( MateriaOrganicaEntity.getClima() );
         materiaOrganica.setId( MateriaOrganicaEntity.getId() );
         materiaOrganica.setValorMin( MateriaOrganicaEntity.getValorMin() );
         materiaOrganica.setValorMax( MateriaOrganicaEntity.getValorMax() );
@@ -39,6 +40,7 @@ public class MateriaOrganicaEntityMapperImpl implements MateriaOrganicaEntityMap
 
         MateriaOrganicaEntity materiaOrganicaEntity = new MateriaOrganicaEntity();
 
+        materiaOrganicaEntity.setClima( MateriaOrganica.getClima() );
         materiaOrganicaEntity.setInterpretacion( MateriaOrganica.getInterpretacion() );
         materiaOrganicaEntity.setId( MateriaOrganica.getId() );
         materiaOrganicaEntity.setValorMin( MateriaOrganica.getValorMin() );

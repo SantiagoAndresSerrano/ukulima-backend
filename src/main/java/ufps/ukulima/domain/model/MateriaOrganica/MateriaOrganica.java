@@ -6,14 +6,24 @@ public class MateriaOrganica {
     private Float valorMin;
     private Float valorMax;
     private String interpretacion;
+    private String clima;
 
     public MateriaOrganica() {}
 
-    public MateriaOrganica(Integer id, Float valorMin, Float valorMax, String interpretacion) {
+    public MateriaOrganica(Integer id, Float valorMin, Float valorMax, String interpretacion, String clima) {
         this.id = id;
         this.valorMin = valorMin;
         this.valorMax = valorMax;
         this.interpretacion = interpretacion;
+        this.clima = clima;
+    }
+
+    public String getClima() {
+        return clima;
+    }
+
+    public void setClima(String clima) {
+        this.clima = clima;
     }
 
     public Integer getId() {

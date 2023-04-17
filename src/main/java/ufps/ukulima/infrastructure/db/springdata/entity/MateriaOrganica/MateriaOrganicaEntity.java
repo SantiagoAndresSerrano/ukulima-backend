@@ -37,16 +37,29 @@ public class MateriaOrganicaEntity implements Serializable {
     @Column(name = "interpretacion")
     private String interpretacion;
 
+    @Basic(optional = false)
+    @Column(name = "clima")
+    private String clima;
+
     public MateriaOrganicaEntity() {
     }
 
-    public MateriaOrganicaEntity(Integer id, Float valorMin, Float valorMax, String interpretacion) {
+    public MateriaOrganicaEntity(Integer id, Float valorMin, Float valorMax, String interpretacion, String clima) {
         this.id = id;
         this.valorMin = valorMin;
         this.valorMax = valorMax;
         this.interpretacion = interpretacion;
-
+        this.clima = clima;
     }
+
+    public String getClima() {
+        return clima;
+    }
+
+    public void setClima(String clima) {
+        this.clima = clima;
+    }
+
     public String getInterpretacion() {
         return interpretacion;
     }

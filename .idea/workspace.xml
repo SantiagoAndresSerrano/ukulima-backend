@@ -19,7 +19,9 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.jdks/corretto-17.0.6/lib/src.zip!/java.base/java/lang/ClassNotFoundException.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.jdks/corretto-17.0.6/lib/src.zip!/java.compiler/javax/lang/model/SourceVersion.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/com/google/maps/google-maps-services/0.10.0/google-maps-services-0.10.0.jar!/com/google/maps/GeoApiContext.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/2.6.2/spring-data-jpa-2.6.2-sources.jar!/org/springframework/data/jpa/repository/JpaRepository.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="JpbToolWindowState">
@@ -130,7 +132,12 @@
       <workItem from="1680535284836" duration="598000" />
       <workItem from="1680561773616" duration="20000" />
       <workItem from="1681214488680" duration="1260000" />
-      <workItem from="1681346953551" duration="16494000" />
+      <workItem from="1681346953551" duration="16751000" />
+      <workItem from="1681499983438" duration="2414000" />
+      <workItem from="1681680330580" duration="754000" />
+      <workItem from="1681684292157" duration="31000" />
+      <workItem from="1681692257773" duration="4716000" />
+      <workItem from="1681700320010" duration="10140000" />
     </task>
     <servers />
   </component>
