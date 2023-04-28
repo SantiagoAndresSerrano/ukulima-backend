@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.EtapaFenologica.EtapaFen
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-28T00:48:54-0500",
+    date = "2023-04-28T09:39:51-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component

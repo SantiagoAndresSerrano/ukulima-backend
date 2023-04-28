@@ -70,7 +70,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-28T00:48:52-0500",
+    date = "2023-04-28T09:39:52-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -282,7 +282,6 @@ public class ElementoEntityMapperImpl implements ElementoEntityMapper {
         analisisElemento.setId( analisisElementosEntity.getId() );
         analisisElemento.setValor( analisisElementosEntity.getValor() );
         analisisElemento.setIdAnalisisElementoInterpretacion( analisisElementosEntity.getIdAnalisisElementoInterpretacion() );
-        analisisElemento.setIdAnalisisSuelo( analisisElementosEntity.getIdAnalisisSuelo() );
         analisisElemento.setIdElemento( analisisElementosEntity.getIdElemento() );
 
         return analisisElemento;

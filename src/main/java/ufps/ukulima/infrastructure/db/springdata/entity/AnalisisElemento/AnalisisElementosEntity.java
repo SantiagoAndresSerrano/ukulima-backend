@@ -96,7 +96,7 @@ public class AnalisisElementosEntity implements Serializable {
         this.idAnalisisElementoInterpretacion = idAnalisisElementoInterpretacion;
     }
 
-    public AnalisisSueloEntity getIdAnalisisSuelo() {
+    public AnalisisSueloEntity analisisSuelo() {
         return idAnalisisSuelo;
     }
 
