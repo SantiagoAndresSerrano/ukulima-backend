@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Densidad.gateway.DensidadService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.DensidadEntityMapper;
+import ufps.ukulima.infrastructure.mapper.DensidadEntityMapper;
 
 import java.util.List;
 @Service

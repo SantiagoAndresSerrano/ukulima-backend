@@ -7,6 +7,7 @@ package ufps.ukulima.domain.model.AnalisisSuelo;
 
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
+import ufps.ukulima.domain.model.AnalisisSueloRelacionBase.AnalisisSueloRelacionBase;
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
@@ -18,6 +19,7 @@ import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases.AnalisisSueloRelacionBaseEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaOrganicaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo.PhSueloEntity;
@@ -47,6 +49,8 @@ public class AnalisisSuelo {
     private Date fecha;
     private Collection<Recomendacion> recomendacionCollection;
     private Collection<AnalisisElemento> analisisElementoCollection;
+    private Collection<AnalisisSueloRelacionBase> analisisSueloRelacionBaseEntities;
+
     private ClaseTextural idClaseTextural;
     @NotNull(message = "Cultivo no puede ser vacío")
     private Cultivo idCultivo;
@@ -113,6 +117,14 @@ public class AnalisisSuelo {
         this.idConductividadElectrica = idConductividadElectrica;
         this.idMateriaOrganica = idMmateriaOrganica;
         this.idIntercambioCationico = idIntercambioCationico;
+    }
+
+    public Collection<AnalisisSueloRelacionBase> getAnalisisSueloRelacionBaseEntities() {
+        return analisisSueloRelacionBaseEntities;
+    }
+
+    public void setAnalisisSueloRelacionBaseEntities(Collection<AnalisisSueloRelacionBase> analisisSueloRelacionBaseEntities) {
+        this.analisisSueloRelacionBaseEntities = analisisSueloRelacionBaseEntities;
     }
 
     public float getPhSuelo() {
@@ -243,7 +255,7 @@ public class AnalisisSuelo {
         this.recomendacionCollection = recomendacionCollection;
     }
 
-    public Collection<AnalisisElemento> analisisElementoCollection() {
+    public Collection<AnalisisElemento> getAnalisisElementoCollection() {
         return analisisElementoCollection;
     }
 

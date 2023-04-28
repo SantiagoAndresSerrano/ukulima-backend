@@ -10,7 +10,7 @@ import ufps.ukulima.config.Spring.security.controller.AuthController;
 import ufps.ukulima.domain.model.MateriaOrganica.MateriaOrganica;
 import ufps.ukulima.domain.model.MateriaOrganica.gateway.MateriaOrganicaService;
 import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaOrganicaEntity;
-import ufps.ukulima.infrastructure.db.springdata.mapper.MateriaOrganicaEntityMapper;
+import ufps.ukulima.infrastructure.mapper.MateriaOrganicaEntityMapper;
 
 import java.util.List;
 

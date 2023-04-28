@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Cultivo.gateway.CultivoService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.CultivoEntityMapper;
+import ufps.ukulima.infrastructure.mapper.CultivoEntityMapper;
 
 import java.util.List;
 

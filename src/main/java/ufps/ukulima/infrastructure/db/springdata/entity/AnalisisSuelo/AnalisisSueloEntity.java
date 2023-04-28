@@ -7,6 +7,7 @@ package ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo;
 
 import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases.AnalisisSueloRelacionBaseEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Cultivo.CultivoEntity;
@@ -19,6 +20,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.ProfundidadMuestra.Profu
 import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.RecomendacionEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -83,6 +85,8 @@ public class AnalisisSueloEntity implements Serializable {
     private Collection<RecomendacionEntity> recomendacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAnalisisSuelo")
     private Collection<AnalisisElementosEntity> analisisElementoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAnalisisSuelo")
+    private Collection<AnalisisSueloRelacionBaseEntity> analisisSueloRelacionBaseEntities;
     @JoinColumn(name = "id_clase_textural", referencedColumnName = "id_clase_textural")
     @ManyToOne(optional = false)
     private ClaseTexturalEntity idClaseTextural;
@@ -188,11 +192,11 @@ public class AnalisisSueloEntity implements Serializable {
         this.aluminioIntercambiable = aluminioIntercambiable;
     }
 
-    public GrupoTexturalEntity getIdGrupoTexturalEntity() {
+    public GrupoTexturalEntity getIdGrupoTextural() {
         return idGrupoTextural;
     }
 
-    public void setIdGrupoTexturalEntity(GrupoTexturalEntity idGrupoTexturalEntity) {
+    public void setIdGrupoTextural(GrupoTexturalEntity idGrupoTexturalEntity) {
         this.idGrupoTextural = idGrupoTexturalEntity;
     }
 
@@ -202,6 +206,14 @@ public class AnalisisSueloEntity implements Serializable {
 
     public void setConductividadElectrica(float conductividadElectrica) {
         this.conductividadElectrica = conductividadElectrica;
+    }
+
+    public Collection<AnalisisSueloRelacionBaseEntity> getAnalisisSueloRelacionBaseEntities() {
+        return analisisSueloRelacionBaseEntities;
+    }
+
+    public void setAnalisisSueloRelacionBaseEntities(Collection<AnalisisSueloRelacionBaseEntity> analisisSueloRelacionBaseEntities) {
+        this.analisisSueloRelacionBaseEntities = analisisSueloRelacionBaseEntities;
     }
 
     public float getMateriaOrganica() {
@@ -300,7 +312,7 @@ public class AnalisisSueloEntity implements Serializable {
         this.fecha = fecha;
     }
 
-    public Collection<RecomendacionEntity> getRecomendacionCollection() {
+    public Collection<RecomendacionEntity> recomendacionCollection() {
         return recomendacionCollection;
     }
 
@@ -308,7 +320,7 @@ public class AnalisisSueloEntity implements Serializable {
         this.recomendacionCollection = recomendacionCollection;
     }
 
-    public Collection<AnalisisElementosEntity> analisisElementoCollection() {
+    public Collection<AnalisisElementosEntity> getAnalisisElementoCollection() {
         return analisisElementoCollection;
     }
 

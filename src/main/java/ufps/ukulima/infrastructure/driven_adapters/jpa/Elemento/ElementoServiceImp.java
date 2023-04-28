@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Elemento.gateway.ElementoService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.ElementoEntityMapper;
+import ufps.ukulima.infrastructure.mapper.ElementoEntityMapper;
 
 import java.util.List;
 

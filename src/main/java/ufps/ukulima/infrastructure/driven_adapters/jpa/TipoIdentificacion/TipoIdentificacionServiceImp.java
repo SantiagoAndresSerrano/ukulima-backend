@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 import ufps.ukulima.domain.model.TipoIdentificacion.gateway.TipoIdentificacionService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.TipoIdentificacionEntityMapper;
+import ufps.ukulima.infrastructure.mapper.TipoIdentificacionEntityMapper;
 
 import java.util.List;
 

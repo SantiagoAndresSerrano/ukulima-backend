@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AluminioIntercambiable.gateway.AluminioIntercambiableService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.AluminioIntercambiableEntityMapper;
+import ufps.ukulima.infrastructure.mapper.AluminioIntercambiableEntityMapper;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
 import ufps.ukulima.domain.model.AbonoOrganico.gateway.AbonoOrganicoService;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
-import ufps.ukulima.infrastructure.db.springdata.mapper.AbonoOrganicoEntityMapper;
+import ufps.ukulima.infrastructure.mapper.AbonoOrganicoEntityMapper;
 
 import java.util.List;
 @Service

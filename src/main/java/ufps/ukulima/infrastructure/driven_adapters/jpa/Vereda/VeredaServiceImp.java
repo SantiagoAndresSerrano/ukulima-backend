@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Vereda.Vereda;
 import ufps.ukulima.domain.model.Vereda.gateway.VeredaService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.VeredaEntityMapper;
+import ufps.ukulima.infrastructure.mapper.VeredaEntityMapper;
 
 import java.util.List;
 @Service

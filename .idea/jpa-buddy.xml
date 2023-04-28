@@ -2,7 +2,13 @@
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
-    <option name="reverseEngineeringLastDbConnectionId" value="00b7ab14-0bc5-4312-80d2-3faab5f70040" />
-    <option name="reLastEntityCreationPackage" value="src/main/java/ufps/ukulima/infrastructure/db/springdata/entity" />
+    <option name="reverseEngineeringLastDbConnectionId" value="58def20c-bb85-4582-8b72-94c41bad40e2" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/ufps/ukulima/infrastructure/db/springdata/entity/AnalisisSueloRelacionBases" />
+    <reUseDbSnapshotConnections>
+      <dbConnection id="58def20c-bb85-4582-8b72-94c41bad40e2" />
+    </reUseDbSnapshotConnections>
+    <option name="reIgnoreSlowDbConnections">
+      <ignoreDs id="58def20c-bb85-4582-8b72-94c41bad40e2" />
+    </option>
   </component>
 </project>

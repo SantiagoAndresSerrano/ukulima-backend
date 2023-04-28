@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
 import ufps.ukulima.domain.model.IntercambioCationico.gateway.IntercambioCationicoService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.IntercambioCationicoEntityMapper;
+import ufps.ukulima.infrastructure.mapper.IntercambioCationicoEntityMapper;
 
 import java.util.List;
 

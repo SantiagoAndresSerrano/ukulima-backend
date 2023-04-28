@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ufps.ukulima.domain.model.Topografia.Topografia;
 import ufps.ukulima.domain.model.Topografia.gateway.TopografiaService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.TopografiaEntityMapper;
+import ufps.ukulima.infrastructure.mapper.TopografiaEntityMapper;
 
 import java.util.List;
 @Service

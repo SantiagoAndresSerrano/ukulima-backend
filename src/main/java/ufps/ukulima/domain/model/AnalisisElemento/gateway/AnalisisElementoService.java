@@ -8,6 +8,8 @@ public interface AnalisisElementoService {
 
     public AnalisisElemento getAnalisisElementoById(int id);
     public List<AnalisisElemento> getAllAnalisisElemento();
+    public List<AnalisisElemento> getAllAnalisisElementoByIdAnalisisSuelo(int idAnalisisSuelo);
+
     public void saveAnalisisElemento(AnalisisElemento analisisElemento);
 
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Fuente.Fuente;
 import ufps.ukulima.domain.model.Fuente.gateway.FuenteService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.FuenteEntityMapper;
+import ufps.ukulima.infrastructure.mapper.FuenteEntityMapper;
 
 import java.util.List;
 @Service

@@ -13,8 +13,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
+        <option value="com.haulmont.jpb.JpaEntity" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -22,6 +23,7 @@
     <setting file="jar://$USER_HOME$/.jdks/corretto-17.0.6/lib/src.zip!/java.base/java/lang/ClassNotFoundException.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.jdks/corretto-17.0.6/lib/src.zip!/java.compiler/javax/lang/model/SourceVersion.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/com/google/maps/google-maps-services/0.10.0/google-maps-services-0.10.0.jar!/com/google/maps/GeoApiContext.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.6.2/spring-data-commons-2.6.2-sources.jar!/org/springframework/data/repository/CrudRepository.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-jpa/2.6.2/spring-data-jpa-2.6.2-sources.jar!/org/springframework/data/jpa/repository/JpaRepository.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="JpbToolWindowState">
@@ -59,8 +61,10 @@
   &quot;keyToString&quot;: {
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
@@ -73,7 +77,9 @@
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.25076452&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;7feeadb8a68b6956b91aab7d37377588&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -137,7 +143,13 @@
       <workItem from="1681680330580" duration="754000" />
       <workItem from="1681684292157" duration="31000" />
       <workItem from="1681692257773" duration="4716000" />
-      <workItem from="1681700320010" duration="11141000" />
+      <workItem from="1681700320010" duration="11751000" />
+      <workItem from="1681840825141" duration="286000" />
+      <workItem from="1682288941315" duration="1227000" />
+      <workItem from="1682290966872" duration="19408000" />
+      <workItem from="1682564815960" duration="7348000" />
+      <workItem from="1682632525430" duration="13013000" />
+      <workItem from="1682656581357" duration="4753000" />
     </task>
     <servers />
   </component>

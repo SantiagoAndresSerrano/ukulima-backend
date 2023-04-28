@@ -104,7 +104,8 @@ public class ElementoEntity implements Serializable {
         return fuenteRecomendacionCollection;
     }
 
-    public void setFuenteRecomendacionCollection(Collection<FuenteRecomendacionEntity> fuenteRecomendacionCollection) {
+    public void setFuenteRecomendacionCollection(Collection<FuenteRecomendacionEntity>
+                                                         fuenteRecomendacionCollection) {
         this.fuenteRecomendacionCollection = fuenteRecomendacionCollection;
     }
 
@@ -117,7 +118,12 @@ public class ElementoEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.Elemento[ id=" + id + " ]";
+        return "ElementoEntity{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", unidad='" + unidad + '\'' +
+                ", analisisElementoCollection=" + analisisElementoCollection +
+                ", fuenteRecomendacionCollection=" + fuenteRecomendacionCollection +
+                '}';
     }
-
 }

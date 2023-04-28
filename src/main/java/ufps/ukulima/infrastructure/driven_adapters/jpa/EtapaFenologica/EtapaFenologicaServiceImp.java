@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.EtapaFenologica.gateway.EtapaFenologicaService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.EtapaFenologicaEntityMapper;
+import ufps.ukulima.infrastructure.mapper.EtapaFenologicaEntityMapper;
 
 import java.util.List;
 

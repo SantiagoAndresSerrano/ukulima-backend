@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.PasswordResetToken.PasswordResetToken;
 import ufps.ukulima.domain.model.PasswordResetToken.gateway.PasswordResetTokenService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.PasswordResetTokenEntityMapper;
+import ufps.ukulima.infrastructure.mapper.PasswordResetTokenEntityMapper;
 
 import java.util.List;
 

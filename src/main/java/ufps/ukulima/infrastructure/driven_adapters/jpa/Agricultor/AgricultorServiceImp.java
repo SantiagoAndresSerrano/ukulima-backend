@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
-import ufps.ukulima.infrastructure.db.springdata.mapper.AgricultorEntityMapper;
+import ufps.ukulima.infrastructure.mapper.AgricultorEntityMapper;
 import ufps.ukulima.infrastructure.driven_adapters.jpa.TipoIdentificacion.TipoIdentificacionRepository;
 
 import java.util.List;

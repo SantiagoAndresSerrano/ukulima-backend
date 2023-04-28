@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Finca.gateway.FincaService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.FincaEntityMapper;
+import ufps.ukulima.infrastructure.mapper.FincaEntityMapper;
 
 import java.util.List;
 

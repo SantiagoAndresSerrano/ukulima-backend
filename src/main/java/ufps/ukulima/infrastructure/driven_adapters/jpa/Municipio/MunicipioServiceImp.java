@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Municipio.Municipio;
 import ufps.ukulima.domain.model.Municipio.gateway.MunicipioService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.MunicipioEntityMapper;
+import ufps.ukulima.infrastructure.mapper.MunicipioEntityMapper;
 
 import java.util.List;
 @Service

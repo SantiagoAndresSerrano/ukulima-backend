@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.DeterminacionClaseTextural.DeterminacionClaseTextural;
 import ufps.ukulima.domain.model.DeterminacionClaseTextural.gateway.DeterminacionClaseTexturalService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.DeterminacionClaseTexturalEntityMapper;
+import ufps.ukulima.infrastructure.mapper.DeterminacionClaseTexturalEntityMapper;
 
 import java.util.List;
 

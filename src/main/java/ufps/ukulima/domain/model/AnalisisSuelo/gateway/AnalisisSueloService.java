@@ -7,5 +7,6 @@ import java.util.List;
 public interface AnalisisSueloService {
     public AnalisisSuelo getAnalisisSueloById(int idAnalisisSuelo);
     public List<AnalisisSuelo> getAllAnalisisSuelo();
-    public void saveAnalisisSuelo(AnalisisSuelo analisisSuelo);
+
+    public AnalisisSuelo saveAnalisisSuelo(AnalisisSuelo analisisSuelo);
 }

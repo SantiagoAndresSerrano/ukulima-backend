@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.gateway.AbonoOrganicoRecomendacionService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.AbonoOrganicoRecomendacionEntityMapper;
+import ufps.ukulima.infrastructure.mapper.AbonoOrganicoRecomendacionEntityMapper;
 
 import java.util.List;
 

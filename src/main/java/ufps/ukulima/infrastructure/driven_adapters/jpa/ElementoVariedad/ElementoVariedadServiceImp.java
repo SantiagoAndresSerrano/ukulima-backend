@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import ufps.ukulima.domain.model.ElementoVariedad.ElementoVariedad;
 import ufps.ukulima.domain.model.ElementoVariedad.gateway.ElementoVariedadService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.ElementoVariedadEntityMapper;
+import ufps.ukulima.infrastructure.mapper.ElementoVariedadEntityMapper;
 
 import java.util.List;
 

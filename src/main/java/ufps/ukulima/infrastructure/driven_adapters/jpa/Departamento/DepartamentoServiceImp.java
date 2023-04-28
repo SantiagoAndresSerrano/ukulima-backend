@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Departamento.Departamento;
 import ufps.ukulima.domain.model.Departamento.gateway.DepartamentoService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.DepartamentoEntityMapper;
+import ufps.ukulima.infrastructure.mapper.DepartamentoEntityMapper;
 
 import java.util.List;
 @Service

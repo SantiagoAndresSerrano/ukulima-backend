@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.AnalisisSuelo.gateway.AnalisisSueloService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.AnalisisSueloEntityMapper;
+import ufps.ukulima.infrastructure.mapper.AnalisisSueloEntityMapper;
 
 import java.util.List;
 @Service
@@ -32,7 +32,8 @@ public class AnalisisSueloServiceImp implements AnalisisSueloService {
 
     @Override
     @Transactional
-    public void saveAnalisisSuelo(AnalisisSuelo analisisSuelo) {
-        analisisSueloRepository.save(analisisSueloEntityMapper.toEntity(analisisSuelo));
+    public AnalisisSuelo saveAnalisisSuelo(AnalisisSuelo analisisSuelo) {
+        return analisisSueloEntityMapper.toDomain(
+                analisisSueloRepository.save(analisisSueloEntityMapper.toEntity(analisisSuelo)));
     }
 }

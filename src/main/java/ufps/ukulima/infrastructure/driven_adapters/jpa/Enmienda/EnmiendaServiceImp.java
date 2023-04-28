@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.Enmienda.gateway.EnmiendaService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.EnmiendaEntityMapper;
+import ufps.ukulima.infrastructure.mapper.EnmiendaEntityMapper;
 
 import java.util.List;
 @Service

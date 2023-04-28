@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
 import ufps.ukulima.domain.model.PhSuelo.gateway.PhSueloService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.PhSueloEntityMapper;
+import ufps.ukulima.infrastructure.mapper.PhSueloEntityMapper;
 
 import java.util.List;
 

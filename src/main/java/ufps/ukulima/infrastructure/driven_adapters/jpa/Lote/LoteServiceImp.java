@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Lote.gateway.LoteServicio;
 import ufps.ukulima.domain.model.Lote.Lote;
-import ufps.ukulima.infrastructure.db.springdata.mapper.LoteEntityMapper;
+import ufps.ukulima.infrastructure.mapper.LoteEntityMapper;
 
 import java.util.List;
 

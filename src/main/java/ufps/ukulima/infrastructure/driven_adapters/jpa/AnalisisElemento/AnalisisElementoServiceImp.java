@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
 import ufps.ukulima.domain.model.AnalisisElemento.gateway.AnalisisElementoService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.AnalisisElementoEntityMapper;
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
+import ufps.ukulima.infrastructure.mapper.AnalisisElementoEntityMapper;
 
 import java.util.List;
 @Service
@@ -27,6 +28,14 @@ public class AnalisisElementoServiceImp implements AnalisisElementoService {
     @Transactional(readOnly = true)
     public List<AnalisisElemento> getAllAnalisisElemento() {
         return analisisElementoEntityMapper.abonosOrganicosRecomendacionToDomain(analsisElementoRepository.findAll());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AnalisisElemento> getAllAnalisisElementoByIdAnalisisSuelo(int idAnalisisSuelo) {
+        return analisisElementoEntityMapper.abonosOrganicosRecomendacionToDomain(
+                analsisElementoRepository.getAllByIdAnalisisSuelo(new AnalisisSueloEntity(idAnalisisSuelo))
+        );
     }
 
     @Override

@@ -3,8 +3,6 @@ package ufps.ukulima.infrastructure.entry_points.rest.AnalisisSuelo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.tomcat.util.json.JSONParser;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,8 +20,13 @@ import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.config.Spring.security.dto.Response;
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AluminioIntercambiable.gateway.AluminioIntercambiableService;
+import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
+import ufps.ukulima.domain.model.AnalisisElemento.gateway.AnalisisElementoService;
+import ufps.ukulima.domain.model.AnalisisElementoInterpretacion.gateway.AnalisisElementoInterpretacionService;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.AnalisisSuelo.gateway.AnalisisSueloService;
+import ufps.ukulima.domain.model.AnalisisSueloRelacionBase.AnalisisSueloRelacionBase;
+import ufps.ukulima.domain.model.AnalisisSueloRelacionBase.gateway.AnalisisSueloRelacionBaseService;
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ClaseTextural.gateway.ClaseTexturalService;
 import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
@@ -51,8 +54,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import ufps.ukulima.domain.model.RelacionBase.RelacionBase;
+import ufps.ukulima.domain.model.RelacionBase.gateway.RelacionBaseServicio;
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases.AnalisisSueloRelacionBaseEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.RelacionBase.RelacionBaseEntity;
 
-import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/analisissuelo", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -90,6 +99,17 @@ public class AnalisisSueloController {
     @Autowired
     GrupoTexturalService grupoTexturalService;
 
+    @Autowired
+    RelacionBaseServicio relacionBasesService;
+
+    @Autowired
+    AnalisisElementoInterpretacionService analisisElementoInterpretacionService;
+
+    @Autowired
+    AnalisisElementoService analisisElementoService;
+
+    @Autowired
+    AnalisisSueloRelacionBaseService analisisSueloRelacionBaseService;
 
     @GetMapping
     public ResponseEntity<?> getAllAnalisisSuelo() {
@@ -102,6 +122,7 @@ public class AnalisisSueloController {
         if (br.hasErrors())
             return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
         Cultivo cultivo = cultivoService.getCultivoById(analisisSuelo.getIdCultivo().getIdCultivo());
+
         ProfundidadMuestra muestra =
                 muestraService.findProfundidadMuestraById(analisisSuelo.getIdProfundidad().getIdProfundidadMuestra());
         if (cultivo == null)
@@ -114,10 +135,10 @@ public class AnalisisSueloController {
         RestTemplate restTemplate = new RestTemplate();
         ClaseTextural claseTextural = claseTexturalService
                 .getClaseTexturalPorRangos(analisisSuelo.getPorcentArena()
-                        ,analisisSuelo.getPorcentLimos(), analisisSuelo.getPorcentArcilla());
+                        , analisisSuelo.getPorcentLimos(), analisisSuelo.getPorcentArcilla());
         Densidad densidad = densidadService.getDensidadById(analisisSuelo.getIdDensidad().getIdDensidad());
 
-        PhSuelo phSuelo =phSueloService.getPhSueloByValor(analisisSuelo.getPhSuelo());
+        PhSuelo phSuelo = phSueloService.getPhSueloByValor(analisisSuelo.getPhSuelo());
         AluminioIntercambiable aluminioIntercambiable =
                 aluminioIntercambiableService.getAluminioIntercambiableByValor(analisisSuelo.getAluminioIntercambiable());
         ConductividadElectrica conductividadElectrica =
@@ -126,16 +147,16 @@ public class AnalisisSueloController {
                 intercambioCationicoService.getIntercambioCationicoByValor(analisisSuelo.getIntercambioCationico());
 
         //Determinacion de materiales
-        String MUY_FINOS_INTERPRETACION="MUY FINOS";
-        String FINOS_INTERPRETACION="FINOS";
-        String MODERADAMENTE_FINOS_INTERPRETACION="MODERADAMENTE FINOS";
-        String MEDIOS_INTERPRETACION="MEDIOS";
-        String MODERADAMENTE_GRUESOS_INTERPRETACION="MODERADAMENTE GRUESOS";
-        String GRUESOS_INTERPRETACION="GRUESOS";
+        String MUY_FINOS_INTERPRETACION = "MUY FINOS";
+        String FINOS_INTERPRETACION = "FINOS";
+        String MODERADAMENTE_FINOS_INTERPRETACION = "MODERADAMENTE FINOS";
+        String MEDIOS_INTERPRETACION = "MEDIOS";
+        String MODERADAMENTE_GRUESOS_INTERPRETACION = "MODERADAMENTE GRUESOS";
+        String GRUESOS_INTERPRETACION = "GRUESOS";
 
-        String interpretacion="";
+        String interpretacion = "";
 
-        if (analisisSuelo.getPorcentArcilla() >60)
+        if (analisisSuelo.getPorcentArcilla() > 60)
             interpretacion = MUY_FINOS_INTERPRETACION;
         if (claseTextural.getNombre().equals("ARENOSO") || claseTextural.getNombre().equals("ARENOSO FRANCO"))
             interpretacion = GRUESOS_INTERPRETACION;
@@ -148,22 +169,22 @@ public class AnalisisSueloController {
                 || (claseTextural.getNombre().equals("FRANCO LIMOSO")))
             interpretacion = MODERADAMENTE_FINOS_INTERPRETACION;
 
-        if (( (claseTextural.getNombre().equals("FRANCO ARCILLO LIMOSO"))
-                        && analisisSuelo.getPorcentArena()<15 && analisisSuelo.getPorcentArcilla()<35)
-                || ( (claseTextural.getNombre().equals("FRANCO LIMOSO"))
-                        && analisisSuelo.getPorcentArcilla() > 18 && analisisSuelo.getPorcentArena() <15 ))
+        if (((claseTextural.getNombre().equals("FRANCO ARCILLO LIMOSO"))
+                && analisisSuelo.getPorcentArena() < 15 && analisisSuelo.getPorcentArcilla() < 35)
+                || ((claseTextural.getNombre().equals("FRANCO LIMOSO"))
+                && analisisSuelo.getPorcentArcilla() > 18 && analisisSuelo.getPorcentArena() < 15))
             interpretacion = MEDIOS_INTERPRETACION;
 
-        if (    (claseTextural.getNombre().equals("FRANCO"))
+        if ((claseTextural.getNombre().equals("FRANCO"))
                 || (claseTextural.getNombre().equals("LIMOSO"))
                 || (claseTextural.getNombre().equals("FRANCO ARENOSO"))
-                || ( (claseTextural.getNombre().equals("FRANCO LIMOSO"))
-                && analisisSuelo.getPorcentArcilla() < 18 && analisisSuelo.getPorcentArena() <15 ))
+                || ((claseTextural.getNombre().equals("FRANCO LIMOSO"))
+                && analisisSuelo.getPorcentArcilla() < 18 && analisisSuelo.getPorcentArena() < 15))
             interpretacion = MODERADAMENTE_GRUESOS_INTERPRETACION;
 
         // Determinacion de clima
         String fooResourceUrl
-                = "https://api.opentopodata.org/v1/srtm90m?locations="+cultivo.
+                = "https://api.opentopodata.org/v1/srtm90m?locations=" + cultivo.
                 getIdFinca().getGeolocalizacion();
         ResponseEntity<String> response
                 = restTemplate.getForEntity(fooResourceUrl, String.class);
@@ -171,20 +192,62 @@ public class AnalisisSueloController {
         JsonNode rootNode = objectMapper.readTree(response.getBody());
         double altitude = rootNode.get("results").get(0).get("elevation").asDouble();
 
-        String CLIMA_FRIO="FRIO";
-        String CLIMA_MEDIO="MEDIO";
-        String CLIMA_CALIDO="CALIDO";
+        String CLIMA_FRIO = "FRIO";
+        String CLIMA_MEDIO = "MEDIO";
+        String CLIMA_CALIDO = "CALIDO";
 
-        String clima="";
+        String clima = "";
 
-        if (altitude>2000) clima=CLIMA_FRIO;
-        if (altitude<2000 && altitude>1000) clima=CLIMA_MEDIO;
-        if (altitude<1000) clima=CLIMA_CALIDO;
+        if (altitude > 2000) clima = CLIMA_FRIO;
+        if (altitude < 2000 && altitude > 1000) clima = CLIMA_MEDIO;
+        if (altitude < 1000) clima = CLIMA_CALIDO;
 
         MateriaOrganica materiaOrganica = materiaOrganicaService.getMateriaOrganicaByClimaAndValor(clima,
                 analisisSuelo.getMateriaOrganica());
-        log.info(materiaOrganica.toString());
         GrupoTextural grupoTextural = grupoTexturalService.getGrupoTexturalByNombre(interpretacion);
+
+        float valorF = 0;
+        int idF = 0;
+        float valorP = 0;
+        int idP = 0;
+        float valorC = 0;
+        int idC = 0;
+        float valorM = 0;
+        int idM = 0;
+        float valorS = 0;
+        int idS = 0;
+        float valorA = 0;
+        int idA = 0;
+
+        List<AnalisisElemento> analisisElementosEntities =
+                (List<AnalisisElemento>) analisisSuelo.getAnalisisElementoCollection();
+        for (int i = 0; i < analisisElementosEntities.size(); i++) {
+            AnalisisElemento analisisElementosEntity = analisisElementosEntities.get(i);
+            if (analisisElementosEntity.getIdElemento().getNombre().equals("FÓSFORO (P)")) {
+                valorF = analisisElementosEntity.getValor();
+                idF = analisisElementosEntity.getIdElemento().getId();
+            }
+            if (analisisElementosEntity.getIdElemento().getNombre().equals("POTASIO (K)")) {
+                valorP = analisisElementosEntity.getValor();
+                idP = analisisElementosEntity.getIdElemento().getId();
+            }
+            if (analisisElementosEntity.getIdElemento().getNombre().equals("MAGNESIO (Mg)")) {
+                valorM = analisisElementosEntity.getValor();
+                idM = analisisElementosEntity.getIdElemento().getId();
+            }
+            if (analisisElementosEntity.getIdElemento().getNombre().equals("CALCIO (Ca)")) {
+                valorC = analisisElementosEntity.getValor();
+                idC = analisisElementosEntity.getIdElemento().getId();
+            }
+            if (analisisElementosEntity.getIdElemento().getNombre().equals("AZUFRE (S)")) {
+                valorA = analisisElementosEntity.getValor();
+                idA = analisisElementosEntity.getIdElemento().getId();
+            }
+            if (analisisElementosEntity.getIdElemento().getNombre().equals("SODIO (Na)")) {
+                valorS = analisisElementosEntity.getValor();
+                idS = analisisElementosEntity.getIdElemento().getId();
+            }
+        }
 
         analisisSuelo.setIdMateriaOrganica(materiaOrganica);
         analisisSuelo.setIdGrupoTextural(grupoTextural);
@@ -196,9 +259,42 @@ public class AnalisisSueloController {
         analisisSuelo.setIdCultivo(cultivo);
         analisisSuelo.setIdDensidad(densidad);
         analisisSuelo.setIdProfundidad(muestra);
-        analisisSueloService.saveAnalisisSuelo(analisisSuelo);
+        analisisSuelo.setAnalisisElementoCollection(null);
+        AnalisisSuelo savedAnalisisSuelo = analisisSueloService.saveAnalisisSuelo(analisisSuelo);
 
-        return ResponseEntity.ok(new Response(200, "Analisis suelo agregado correctamente", analisisSuelo));
+        List<AnalisisElementosEntity> analisisElementoEntityList =
+                analisisElementoInterpretacionService.getElementosByInterpretacion(
+                        valorF, valorP, valorC, valorM, valorS, valorA,
+                        idF, idP, idC, idM, idS, idA, savedAnalisisSuelo.getIdAnalisisSuelo()
+                );
+        float relacion_ca_mg = valorC/valorM;
+        float relacion_ca_k = valorC/valorP;
+        float relacion_ca_mg_k = (valorC+valorM)/valorP;
+
+        RelacionBase relacionBaseCaMg = relacionBasesService.findRelacionCalMag(relacion_ca_mg);
+        RelacionBase relacionBaseCaK = relacionBasesService.findRelacionCalPot(relacion_ca_k);
+        RelacionBase relacionBaseCaMgK = relacionBasesService.findRelacionBasesPrincipales(relacion_ca_mg_k);
+
+        analisisSueloRelacionBaseService.saveAnalisisSueloRelacionBase(new AnalisisSueloRelacionBase(null,
+                relacionBaseCaMg,savedAnalisisSuelo,relacion_ca_mg));
+        analisisSueloRelacionBaseService.saveAnalisisSueloRelacionBase(new AnalisisSueloRelacionBase(null,
+                relacionBaseCaK,savedAnalisisSuelo,relacion_ca_k));
+        analisisSueloRelacionBaseService.saveAnalisisSueloRelacionBase(new AnalisisSueloRelacionBase(null,
+                relacionBaseCaMgK,savedAnalisisSuelo,relacion_ca_mg_k));
+
+        if (analisisElementoEntityList.size()==0){
+            return ResponseEntity.ok(
+                    new Response(200, "Analisis suelo agregado correctamente. (No se encontraron valores para Interpretación de la Disponibilidad de nutrientes)",
+                            savedAnalisisSuelo));
+        }
+        savedAnalisisSuelo = analisisSueloService.getAnalisisSueloById(savedAnalisisSuelo.getIdAnalisisSuelo());
+        savedAnalisisSuelo.setAnalisisSueloRelacionBaseEntities(
+                analisisSueloRelacionBaseService.getAllAnalisisSueloByAnalisisSuelo(savedAnalisisSuelo.getIdAnalisisSuelo())
+        );
+        savedAnalisisSuelo.setAnalisisElementoCollection(
+                analisisElementoService.getAllAnalisisElementoByIdAnalisisSuelo(savedAnalisisSuelo.getIdAnalisisSuelo()));
+        return ResponseEntity.ok(
+                new Response(200, "Analisis suelo agregado correctamente", savedAnalisisSuelo));
     }
 
     @GetMapping("/{idAnalisisSuelo}/recomendaciones")

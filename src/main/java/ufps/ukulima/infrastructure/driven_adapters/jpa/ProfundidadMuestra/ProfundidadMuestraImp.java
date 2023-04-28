@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.ProfundidadMuestra.gateway.ProfundidaMuestraService;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
-import ufps.ukulima.infrastructure.db.springdata.mapper.ProfundidadMuestraEntityMapper;
+import ufps.ukulima.infrastructure.mapper.ProfundidadMuestraEntityMapper;
 
 import java.util.List;
 

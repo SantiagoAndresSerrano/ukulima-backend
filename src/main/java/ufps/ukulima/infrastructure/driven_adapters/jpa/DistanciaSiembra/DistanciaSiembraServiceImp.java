@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.DistanciaSiembra.DistanciaSiembra;
 import ufps.ukulima.domain.model.DistanciaSiembra.gateway.DistanciaSiembraService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.DistanciaSiembraEntityMapper;
+import ufps.ukulima.infrastructure.mapper.DistanciaSiembraEntityMapper;
 
 import java.util.List;
 @Service

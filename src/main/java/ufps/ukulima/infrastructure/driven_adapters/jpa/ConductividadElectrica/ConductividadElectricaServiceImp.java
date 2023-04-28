@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
 import ufps.ukulima.domain.model.ConductividadElectrica.gateway.ConductividadElectricaService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.ConductividadElectricaEntityMapper;
+import ufps.ukulima.infrastructure.mapper.ConductividadElectricaEntityMapper;
 
 import java.util.List;
 @Service

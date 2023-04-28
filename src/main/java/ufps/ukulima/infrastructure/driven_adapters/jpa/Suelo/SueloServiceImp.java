@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Suelo.Suelo;
 import ufps.ukulima.domain.model.Suelo.gateway.SueloService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.SueloEntityMapper;
+import ufps.ukulima.infrastructure.mapper.SueloEntityMapper;
 
 import java.util.List;
 

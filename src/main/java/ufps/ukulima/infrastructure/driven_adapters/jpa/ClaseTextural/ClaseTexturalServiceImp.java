@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ClaseTextural.gateway.ClaseTexturalService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.ClaseTexturalEntityMapper;
+import ufps.ukulima.infrastructure.mapper.ClaseTexturalEntityMapper;
 
 import java.util.List;
 @Service

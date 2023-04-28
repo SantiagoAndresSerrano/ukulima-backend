@@ -261,10 +261,6 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        log.info(loginUsuario.getPassword());
-        log.info(passwordResetToken.getAgricultor().getEmail());
-        log.info(uToken.getEmail());
-
         u.setPassword(passwordEncoder.encode(loginUsuario.getPassword()));
         usuarioService.guardar(u);
 

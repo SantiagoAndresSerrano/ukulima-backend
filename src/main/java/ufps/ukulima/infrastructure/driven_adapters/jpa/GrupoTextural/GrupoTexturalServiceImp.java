@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.GrupoTextural.GrupoTextural;
 import ufps.ukulima.domain.model.GrupoTextural.gateway.GrupoTexturalService;
-import ufps.ukulima.infrastructure.db.springdata.mapper.GrupoTexturalEntityMapper;
-import ufps.ukulima.infrastructure.driven_adapters.jpa.GrupoTextural.GrupoTexturalRepository;
+import ufps.ukulima.infrastructure.mapper.GrupoTexturalEntityMapper;
 
 import java.util.List;
 @Service
