@@ -9,6 +9,7 @@ import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
+import ufps.ukulima.domain.model.AnalisisElementoInterpretacion.AnalisisElementoInterpretacion;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.AnalisisSueloRelacionBase.AnalisisSueloRelacionBase;
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
@@ -39,6 +40,7 @@ import ufps.ukulima.domain.model.Vereda.Vereda;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElementoInterpretacion.AnalisisElementoInterpretacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases.AnalisisSueloRelacionBaseEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
@@ -70,7 +72,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-28T09:39:52-0500",
+    date = "2023-05-04T16:08:33-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -239,6 +241,28 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
         return intercambioCationico;
     }
 
+    protected AnalisisElementoInterpretacion analisisElementoInterpretacionEntityToAnalisisElementoInterpretacion(AnalisisElementoInterpretacionEntity analisisElementoInterpretacionEntity) {
+        if ( analisisElementoInterpretacionEntity == null ) {
+            return null;
+        }
+
+        Elemento idElemento = null;
+        Integer id = null;
+        Integer valorMin = null;
+        Integer valorMax = null;
+        String interpretacion = null;
+
+        idElemento = elementoEntityToElemento( analisisElementoInterpretacionEntity.getIdElemento() );
+        id = analisisElementoInterpretacionEntity.getId();
+        valorMin = analisisElementoInterpretacionEntity.getValorMin();
+        valorMax = analisisElementoInterpretacionEntity.getValorMax();
+        interpretacion = analisisElementoInterpretacionEntity.getInterpretacion();
+
+        AnalisisElementoInterpretacion analisisElementoInterpretacion = new AnalisisElementoInterpretacion( id, valorMin, valorMax, interpretacion, idElemento );
+
+        return analisisElementoInterpretacion;
+    }
+
     protected AnalisisElemento analisisElementosEntityToAnalisisElemento(AnalisisElementosEntity analisisElementosEntity) {
         if ( analisisElementosEntity == null ) {
             return null;
@@ -246,10 +270,10 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
 
         AnalisisElemento analisisElemento = new AnalisisElemento();
 
+        analisisElemento.setIdAnalisisElementoInterpretacion( analisisElementoInterpretacionEntityToAnalisisElementoInterpretacion( analisisElementosEntity.getIdAnalisisElementoInterpretacion() ) );
         analisisElemento.setId( analisisElementosEntity.getId() );
         analisisElemento.setValor( analisisElementosEntity.getValor() );
-        analisisElemento.setIdAnalisisElementoInterpretacion( analisisElementosEntity.getIdAnalisisElementoInterpretacion() );
-        analisisElemento.setIdElemento( analisisElementosEntity.getIdElemento() );
+        analisisElemento.setIdElemento( elementoEntityToElemento( analisisElementosEntity.getIdElemento() ) );
 
         return analisisElemento;
     }
@@ -778,6 +802,22 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
         return aluminioIntercambiableEntity;
     }
 
+    protected AnalisisElementoInterpretacionEntity analisisElementoInterpretacionToAnalisisElementoInterpretacionEntity(AnalisisElementoInterpretacion analisisElementoInterpretacion) {
+        if ( analisisElementoInterpretacion == null ) {
+            return null;
+        }
+
+        AnalisisElementoInterpretacionEntity analisisElementoInterpretacionEntity = new AnalisisElementoInterpretacionEntity();
+
+        analisisElementoInterpretacionEntity.setId( analisisElementoInterpretacion.getId() );
+        analisisElementoInterpretacionEntity.setValorMin( analisisElementoInterpretacion.getValorMin() );
+        analisisElementoInterpretacionEntity.setValorMax( analisisElementoInterpretacion.getValorMax() );
+        analisisElementoInterpretacionEntity.setInterpretacion( analisisElementoInterpretacion.getInterpretacion() );
+        analisisElementoInterpretacionEntity.setIdElemento( elementoToElementoEntity( analisisElementoInterpretacion.getIdElemento() ) );
+
+        return analisisElementoInterpretacionEntity;
+    }
+
     protected AnalisisElementosEntity analisisElementoToAnalisisElementosEntity(AnalisisElemento analisisElemento) {
         if ( analisisElemento == null ) {
             return null;
@@ -787,9 +827,9 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
 
         analisisElementosEntity.setId( analisisElemento.getId() );
         analisisElementosEntity.setValor( analisisElemento.getValor() );
-        analisisElementosEntity.setIdAnalisisElementoInterpretacion( analisisElemento.getIdAnalisisElementoInterpretacion() );
-        analisisElementosEntity.setIdAnalisisSuelo( analisisElemento.getIdAnalisisSuelo() );
-        analisisElementosEntity.setIdElemento( analisisElemento.getIdElemento() );
+        analisisElementosEntity.setIdAnalisisElementoInterpretacion( analisisElementoInterpretacionToAnalisisElementoInterpretacionEntity( analisisElemento.getIdAnalisisElementoInterpretacion() ) );
+        analisisElementosEntity.setIdAnalisisSuelo( analisisSueloToAnalisisSueloEntity( analisisElemento.getIdAnalisisSuelo() ) );
+        analisisElementosEntity.setIdElemento( elementoToElementoEntity( analisisElemento.getIdElemento() ) );
 
         return analisisElementosEntity;
     }

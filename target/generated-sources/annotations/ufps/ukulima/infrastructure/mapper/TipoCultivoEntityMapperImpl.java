@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.TipoCultivo.TipoCultivoE
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-28T09:39:52-0500",
+    date = "2023-05-04T16:08:31-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component

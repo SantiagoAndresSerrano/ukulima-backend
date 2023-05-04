@@ -15,6 +15,9 @@ package ufps.ukulima.domain.model.AnalisisElemento;
  * and open the template in the editor.
  */
 
+import ufps.ukulima.domain.model.AnalisisElementoInterpretacion.AnalisisElementoInterpretacion;
+import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
+import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElementoInterpretacion.AnalisisElementoInterpretacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
@@ -27,10 +30,10 @@ public class AnalisisElemento{
     private Integer id;
 
     private float valor;
-    private AnalisisSueloEntity idAnalisisSuelo;
-    private ElementoEntity idElemento;
+    private AnalisisSuelo idAnalisisSuelo;
+    private Elemento idElemento;
 
-    private AnalisisElementoInterpretacionEntity idAnalisisElementoInterpretacion;
+    private AnalisisElementoInterpretacion idAnalisisElementoInterpretacion;
 
     public AnalisisElemento(Integer id) {
         this.id = id;
@@ -39,11 +42,19 @@ public class AnalisisElemento{
     public AnalisisElemento() {
     }
 
-    public AnalisisElemento(Integer id, float valor, AnalisisSueloEntity idAnalisisSuelo, ElementoEntity idElemento, AnalisisElementoInterpretacionEntity idAnalisisElementoInterpretacion) {
+    public AnalisisElemento(Integer id, float valor, AnalisisSuelo idAnalisisSuelo, Elemento idElemento, AnalisisElementoInterpretacion idAnalisisElementoInterpretacion) {
         this.id = id;
         this.valor = valor;
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.idElemento = idElemento;
+        this.idAnalisisElementoInterpretacion = idAnalisisElementoInterpretacion;
+    }
+
+    public AnalisisElementoInterpretacion getIdAnalisisElementoInterpretacion() {
+        return idAnalisisElementoInterpretacion;
+    }
+
+    public void setIdAnalisisElementoInterpretacion(AnalisisElementoInterpretacion idAnalisisElementoInterpretacion) {
         this.idAnalisisElementoInterpretacion = idAnalisisElementoInterpretacion;
     }
 
@@ -63,29 +74,25 @@ public class AnalisisElemento{
         this.valor = valor;
     }
 
-    public AnalisisElementoInterpretacionEntity getIdAnalisisElementoInterpretacion() {
-        return idAnalisisElementoInterpretacion;
-    }
 
-    public void setIdAnalisisElementoInterpretacion(AnalisisElementoInterpretacionEntity idAnalisisElementoInterpretacion) {
-        this.idAnalisisElementoInterpretacion = idAnalisisElementoInterpretacion;
-    }
 
-    public AnalisisSueloEntity getIdAnalisisSuelo() {
+    public AnalisisSuelo getIdAnalisisSuelo() {
         return idAnalisisSuelo;
     }
 
-    public void setIdAnalisisSuelo(AnalisisSueloEntity idAnalisisSuelo) {
+    public void setIdAnalisisSuelo(AnalisisSuelo idAnalisisSuelo) {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public ElementoEntity getIdElemento() {
+    public Elemento getIdElemento() {
         return idElemento;
     }
 
-    public void setIdElemento(ElementoEntity idElemento) {
+    public void setIdElemento(Elemento idElemento) {
         this.idElemento = idElemento;
     }
+
+
 
     @Override
     public int hashCode() {

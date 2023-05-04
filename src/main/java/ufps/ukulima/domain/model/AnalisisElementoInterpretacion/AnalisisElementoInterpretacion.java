@@ -1,5 +1,6 @@
 package ufps.ukulima.domain.model.AnalisisElementoInterpretacion;
 
+import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
 
 public class AnalisisElementoInterpretacion {
@@ -9,15 +10,24 @@ public class AnalisisElementoInterpretacion {
 
     private Integer valorMax;
 
-    private Integer interpretacion;
+    private String interpretacion;
 
-    private ElementoEntity idElemento;
+    private Elemento idElemento;
 
-    public AnalisisElementoInterpretacion(Integer id, Integer valorMin, Integer valorMax, Integer interpretacion, ElementoEntity idElemento) {
+    public AnalisisElementoInterpretacion(Integer id, Integer valorMin, Integer valorMax, String interpretacion,
+                                          Elemento idElemento) {
         this.id = id;
         this.valorMin = valorMin;
         this.valorMax = valorMax;
         this.interpretacion = interpretacion;
+        this.idElemento = idElemento;
+    }
+
+    public Elemento getIdElemento() {
+        return idElemento;
+    }
+
+    public void setIdElemento(Elemento idElemento) {
         this.idElemento = idElemento;
     }
 
@@ -45,20 +55,14 @@ public class AnalisisElementoInterpretacion {
         this.valorMax = valorMax;
     }
 
-    public Integer getInterpretacion() {
+    public String getInterpretacion() {
         return interpretacion;
     }
 
-    public void setInterpretacion(Integer interpretacion) {
+    public void setInterpretacion(String interpretacion) {
         this.interpretacion = interpretacion;
     }
 
-    public ElementoEntity getIdElemento() {
-        return idElemento;
-    }
 
-    public void setIdElemento(ElementoEntity idElemento) {
-        this.idElemento = idElemento;
-    }
     }
 
