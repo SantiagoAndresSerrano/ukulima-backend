@@ -5,6 +5,8 @@ package ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo;
  * and open the template in the editor.
  */
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases.AnalisisSueloRelacionBaseEntity;
@@ -312,7 +314,7 @@ public class AnalisisSueloEntity implements Serializable {
         this.fecha = fecha;
     }
 
-    public Collection<RecomendacionEntity> recomendacionCollection() {
+    public Collection<RecomendacionEntity> getRecomendacionCollection() {
         return recomendacionCollection;
     }
 
@@ -383,7 +385,27 @@ public class AnalisisSueloEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.AnalisisSuelo[ idAnalisisSuelo=" + idAnalisisSuelo + " ]";
+        return "AnalisisSueloEntity{" +
+                "idAnalisisSuelo=" + idAnalisisSuelo +
+                ", porcentArena=" + porcentArena +
+                ", porcentLimos=" + porcentLimos +
+                ", porcentArcilla=" + porcentArcilla +
+                ", fecha=" + fecha +
+                ", idClaseTextural=" + idClaseTextural +
+                ", idCultivo=" + idCultivo +
+                ", idDensidad=" + idDensidad +
+                ", idProfundidad=" + idProfundidad +
+                ", idPhSuelo=" + idPhSuelo +
+                ", idGrupoTextural=" + idGrupoTextural +
+                ", idAluminioIntercambiable=" + idAluminioIntercambiable +
+                ", idConductividadElectrica=" + idConductividadElectrica +
+                ", idMateriaOrganica=" + idMateriaOrganica +
+                ", idIntercambioCationico=" + idIntercambioCationico +
+                ", phSuelo=" + phSuelo +
+                ", aluminioIntercambiable=" + aluminioIntercambiable +
+                ", conductividadElectrica=" + conductividadElectrica +
+                ", materiaOrganica=" + materiaOrganica +
+                ", intercambioCationico=" + intercambioCationico +
+                '}';
     }
-
 }

@@ -7,6 +7,7 @@ package ufps.ukulima.domain.model.Recomendacion;
 
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
+import ufps.ukulima.domain.model.EnmiendaRecomendacion.EnmiendaRecomendacion;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
 
@@ -21,16 +22,12 @@ import javax.validation.constraints.NotNull;
 public class Recomendacion {
 
     private Integer id;
-    @NotNull(message = "la cantidadEnmienda no puede estar vacía")
     private float cantidadEnmienda;
-    @NotNull(message = "preparacionSuelo no puede estar vacía")
     private short preparacionSuelo;
-    @NotNull(message = "AnalisisSuelo no puede estar vacía")
     private AnalisisSuelo idAnalisisSuelo;
-    @NotNull(message = "Enmienda no puede estar vacía")
-    private Enmienda idEnmienda;
     private Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection;
     private Collection<FuenteRecomendacion> fuenteRecomendacionCollection;
+    private Collection<EnmiendaRecomendacion> enmiendaRecomendacionEntityCollection;
 
     public Recomendacion() {
     }
@@ -43,6 +40,21 @@ public class Recomendacion {
         this.id = id;
         this.cantidadEnmienda = cantidadEnmienda;
         this.preparacionSuelo = preparacionSuelo;
+    }
+
+    public Recomendacion(Integer id, float cantidadEnmienda, short preparacionSuelo, AnalisisSuelo idAnalisisSuelo) {
+        this.id = id;
+        this.cantidadEnmienda = cantidadEnmienda;
+        this.preparacionSuelo = preparacionSuelo;
+        this.idAnalisisSuelo = idAnalisisSuelo;
+    }
+
+    public Collection<EnmiendaRecomendacion> getEnmiendaRecomendacionEntityCollection() {
+        return enmiendaRecomendacionEntityCollection;
+    }
+
+    public void setEnmiendaRecomendacionEntityCollection(Collection<EnmiendaRecomendacion> enmiendaRecomendacionEntityCollection) {
+        this.enmiendaRecomendacionEntityCollection = enmiendaRecomendacionEntityCollection;
     }
 
     public Integer getId() {
@@ -69,20 +81,12 @@ public class Recomendacion {
         this.preparacionSuelo = preparacionSuelo;
     }
 
-    public AnalisisSuelo getIdAnalisisSuelo() {
+    public AnalisisSuelo analisisSuelo() {
         return idAnalisisSuelo;
     }
 
     public void setIdAnalisisSuelo(AnalisisSuelo idAnalisisSuelo) {
         this.idAnalisisSuelo = idAnalisisSuelo;
-    }
-
-    public Enmienda getIdEnmienda() {
-        return idEnmienda;
-    }
-
-    public void setIdEnmienda(Enmienda idEnmienda) {
-        this.idEnmienda = idEnmienda;
     }
 
     public Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection() {

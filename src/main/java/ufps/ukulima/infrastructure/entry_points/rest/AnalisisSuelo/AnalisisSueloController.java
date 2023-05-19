@@ -35,6 +35,10 @@ import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Cultivo.gateway.CultivoService;
 import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Densidad.gateway.DensidadService;
+import ufps.ukulima.domain.model.Enmienda.Enmienda;
+import ufps.ukulima.domain.model.Enmienda.gateway.EnmiendaService;
+import ufps.ukulima.domain.model.EnmiendaRecomendacion.EnmiendaRecomendacion;
+import ufps.ukulima.domain.model.EnmiendaRecomendacion.gateway.EnmiendaRecomendacionService;
 import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 import ufps.ukulima.domain.model.GrupoTextural.GrupoTextural;
 import ufps.ukulima.domain.model.GrupoTextural.gateway.GrupoTexturalService;
@@ -54,12 +58,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
+import ufps.ukulima.domain.model.Recomendacion.gateway.RecomendacionService;
 import ufps.ukulima.domain.model.RelacionBase.RelacionBase;
 import ufps.ukulima.domain.model.RelacionBase.gateway.RelacionBaseServicio;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases.AnalisisSueloRelacionBaseEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.RecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.RelacionBase.RelacionBaseEntity;
+import ufps.ukulima.infrastructure.mapper.AnalisisSueloEntityMapper;
+import ufps.ukulima.infrastructure.mapper.RecomendacionEntityMapper;
 
 import java.util.List;
 
@@ -86,6 +95,9 @@ public class AnalisisSueloController {
     MateriaOrganicaService materiaOrganicaService;
 
     @Autowired
+    RecomendacionEntityMapper recomendacionEntityMapper;
+
+    @Autowired
     CultivoService cultivoService;
 
     @Autowired
@@ -94,6 +106,8 @@ public class AnalisisSueloController {
     PhSueloService phSueloService;
 
     @Autowired
+    EnmiendaRecomendacionService enmiendaRecomendacionService;
+    @Autowired
     ProfundidaMuestraService muestraService;
 
     @Autowired
@@ -101,6 +115,15 @@ public class AnalisisSueloController {
 
     @Autowired
     RelacionBaseServicio relacionBasesService;
+
+    @Autowired
+    EnmiendaService enmiendaService;
+
+    @Autowired
+    AnalisisSueloEntityMapper analisisSueloEntityMapper;
+
+    @Autowired
+    RecomendacionService recomendacionService;
 
     @Autowired
     AnalisisElementoInterpretacionService analisisElementoInterpretacionService;
@@ -287,6 +310,42 @@ public class AnalisisSueloController {
                     new Response(200, "Analisis suelo agregado correctamente. (No se encontraron valores para Interpretación de la Disponibilidad de nutrientes)",
                             savedAnalisisSuelo));
         }
+        //Guardar enmiendas
+
+        RecomendacionEntity r = recomendacionService.saveRecomendacion(new RecomendacionEntity(null,0.0f,(short)0.0,
+                analisisSueloEntityMapper.toEntity(savedAnalisisSuelo)));
+
+        Recomendacion r2 = recomendacionEntityMapper.toDomain(r);
+
+        float value_em = (analisisSuelo.getAluminioIntercambiable() != 0.0)?1:0;
+
+        Enmienda enmiendaCal= enmiendaService.getByValor(value_em,"calcio");
+        Enmienda enmiendaDol=enmiendaService.getByValor(value_em,"dolomita");
+        Enmienda enmiendaFos=enmiendaService.getByValor(value_em,"fosforita");
+        Enmienda enmiendaCalcitica=enmiendaService.getByValor(value_em,"calcitica");
+
+        float vEnmiendaCal;
+        float vEnmiendaDol;
+        float vEnmiendaFos;
+        float vEnmiendaCalcitica;
+
+        if (analisisSuelo.getAluminioIntercambiable() != 0.0){
+            vEnmiendaCal = analisisSuelo.getAluminioIntercambiable() * 1000;
+        }else{
+            float SB2 = 85f;
+            float SB1 = ((valorC + valorM + valorP + valorS)/analisisSuelo.getIntercambioCationico())*100;
+            vEnmiendaCal = analisisSuelo.getIntercambioCationico()*(SB2-SB1)*10;
+        }
+
+        vEnmiendaDol = vEnmiendaCal * 1.06f;
+        vEnmiendaFos = vEnmiendaCal * 1.37f;
+        vEnmiendaCalcitica = vEnmiendaCal * 0.9f;
+        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaCal,r2,vEnmiendaCal));
+        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaDol,r2,vEnmiendaDol));
+        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaFos,r2,vEnmiendaFos));
+        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaCalcitica,r2,
+                vEnmiendaCalcitica));
+
         savedAnalisisSuelo = analisisSueloService.getAnalisisSueloById(savedAnalisisSuelo.getIdAnalisisSuelo());
         savedAnalisisSuelo.setAnalisisSueloRelacionBaseEntities(
                 analisisSueloRelacionBaseService.getAllAnalisisSueloByAnalisisSuelo(savedAnalisisSuelo.getIdAnalisisSuelo())
@@ -304,7 +363,7 @@ public class AnalisisSueloController {
             return new ResponseEntity<>(new Mensaje("Análisis suelo ingresado no se encuentra registrado"),
                     HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(analisisSueloR.recomendacionCollection());
+        return ResponseEntity.ok(analisisSueloR.getRecomendacionCollection());
     }
 
     @PutMapping

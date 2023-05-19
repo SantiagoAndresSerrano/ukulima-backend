@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Enmienda.findAll", query = "SELECT e FROM EnmiendaEntity e"),
-    @NamedQuery(name = "Enmienda.findById", query = "SELECT e FROM EnmiendaEntity e WHERE e.id = :id"),
-    @NamedQuery(name = "Enmienda.findByDescripcion", query = "SELECT e FROM EnmiendaEntity e WHERE e.descripcion = :descripcion")})
+    @NamedQuery(name = "Enmienda.findById", query = "SELECT e FROM EnmiendaEntity e WHERE e.id = :id")})
 public class EnmiendaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,9 +41,17 @@ public class EnmiendaEntity implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEnmienda")
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Basic(optional = false)
+    @Column(name = "formula")
+    private String formula;
+
+    @Basic(optional = false)
+    @Column(name = "valor")
+    private String valor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
     private Collection<RecomendacionEntity> recomendacionCollection;
 
     public EnmiendaEntity() {
@@ -54,9 +61,35 @@ public class EnmiendaEntity implements Serializable {
         this.id = id;
     }
 
-    public EnmiendaEntity(Integer id, String descripcion) {
+    public EnmiendaEntity(Integer id, String nombre, String formula, String valor) {
         this.id = id;
-        this.descripcion = descripcion;
+        this.nombre = nombre;
+        this.formula = formula;
+        this.valor = valor;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public void setFormula(String formula) {
+        this.formula = formula;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
     public Integer getId() {
@@ -67,15 +100,8 @@ public class EnmiendaEntity implements Serializable {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Collection<RecomendacionEntity> getRecomendacionCollection() {
+    public Collection<RecomendacionEntity> recomendacionCollection() {
         return recomendacionCollection;
     }
 
@@ -105,7 +131,11 @@ public class EnmiendaEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.Enmienda[ id=" + id + " ]";
+        return "EnmiendaEntity{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", formula='" + formula + '\'' +
+                ", valor='" + valor + '\'' +
+                '}';
     }
-    
 }

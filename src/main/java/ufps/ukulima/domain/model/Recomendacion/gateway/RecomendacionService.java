@@ -2,11 +2,13 @@ package ufps.ukulima.domain.model.Recomendacion.gateway;
 
 
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
+import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.RecomendacionEntity;
 
 import java.util.List;
 
 public interface RecomendacionService {
-    public  void saveRecomendacion(Recomendacion recomendacion);
-    public  Recomendacion findRecomendacionById(int id);
-    public List<Recomendacion> findByAllRecomendacion();
-}
+        Recomendacion getRecomendacionById(int idRecomendacion);
+        List<Recomendacion> getAllRecomendacion();
+        RecomendacionEntity saveRecomendacion(RecomendacionEntity recomendacion);
+    }
+

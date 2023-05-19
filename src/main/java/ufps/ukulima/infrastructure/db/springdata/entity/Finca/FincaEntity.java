@@ -5,6 +5,7 @@
  */
 package ufps.ukulima.infrastructure.db.springdata.entity.Finca;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Cultivo.CultivoEntity;
@@ -73,6 +74,7 @@ public class FincaEntity implements Serializable {
     private MunicipioEntity idMunicipio;
     @JoinColumn(name = "id_vereda", referencedColumnName = "id_vereda")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private VeredaEntity idVereda;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFinca")
     private Collection<CultivoEntity> cultivoCollection;

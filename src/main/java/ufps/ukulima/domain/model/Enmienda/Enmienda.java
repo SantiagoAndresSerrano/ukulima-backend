@@ -11,7 +11,6 @@ import java.util.Collection;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -20,9 +19,11 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Enmienda {
 
     private Integer id;
-    @NotBlank(message = "La descripcion no puede estar en blanco")
-    @NotNull(message = "La descripcion no puede estar vacía")
-    private String descripcion;
+    @NotBlank(message = "El nombre no puede estar en blanco")
+    @NotNull(message = "El nombre no puede estar vacía")
+    private String nombre;
+    private String valor;
+    private String formula;
     private Collection<Recomendacion> recomendacionCollection;
 
     public Enmienda() {
@@ -32,9 +33,11 @@ public class Enmienda {
         this.id = id;
     }
 
-    public Enmienda(Integer id, String descripcion) {
+    public Enmienda(Integer id, String nombre, String valor, String formula) {
         this.id = id;
-        this.descripcion = descripcion;
+        this.nombre = nombre;
+        this.valor = valor;
+        this.formula = formula;
     }
 
     public Integer getId() {
@@ -45,15 +48,31 @@ public class Enmienda {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public Collection<Recomendacion> recomendacionCollection() {
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public void setFormula(String formula) {
+        this.formula = formula;
+    }
+
+    public Collection<Recomendacion> getRecomendacionCollection() {
         return recomendacionCollection;
     }
 
@@ -83,7 +102,11 @@ public class Enmienda {
 
     @Override
     public String toString() {
-        return "ejercicios.pkgfinal.Enmienda[ id=" + id + " ]";
+        return "Enmienda{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", valor='" + valor + '\'' +
+                ", formula='" + formula + '\'' +
+                '}';
     }
-
 }

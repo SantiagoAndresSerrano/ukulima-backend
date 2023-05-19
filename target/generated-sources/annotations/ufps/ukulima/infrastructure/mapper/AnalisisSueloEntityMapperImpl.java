@@ -21,6 +21,7 @@ import ufps.ukulima.domain.model.Departamento.Departamento;
 import ufps.ukulima.domain.model.DistanciaSiembra.DistanciaSiembra;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
+import ufps.ukulima.domain.model.EnmiendaRecomendacion.EnmiendaRecomendacion;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Fuente.Fuente;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
@@ -52,6 +53,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.Departament
 import ufps.ukulima.infrastructure.db.springdata.entity.DistanciaSiembra.DistanciaSiembraEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.EnmiendaRecomendacion.EnmiendaRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.EtapaFenologica.EtapaFenologicaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Fuente.FuenteEntity;
@@ -72,7 +74,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-04T16:08:34-0500",
+    date = "2023-05-18T20:40:45-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -102,6 +104,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         analisisSuelo.setPorcentLimos( AnalisisSueloEntity.getPorcentLimos() );
         analisisSuelo.setPorcentArcilla( AnalisisSueloEntity.getPorcentArcilla() );
         analisisSuelo.setFecha( AnalisisSueloEntity.getFecha() );
+        analisisSuelo.setRecomendacionCollection( recomendacionEntityCollectionToRecomendacionCollection( AnalisisSueloEntity.getRecomendacionCollection() ) );
         analisisSuelo.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( AnalisisSueloEntity.getAnalisisElementoCollection() ) );
         analisisSuelo.setIdClaseTextural( claseTexturalEntityToClaseTextural( AnalisisSueloEntity.getIdClaseTextural() ) );
         analisisSuelo.setIdCultivo( cultivoEntityToCultivo( AnalisisSueloEntity.getIdCultivo() ) );
@@ -137,6 +140,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         analisisSueloEntity.setPorcentLimos( AnalisisSuelo.getPorcentLimos() );
         analisisSueloEntity.setPorcentArcilla( AnalisisSuelo.getPorcentArcilla() );
         analisisSueloEntity.setFecha( AnalisisSuelo.getFecha() );
+        analisisSueloEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( AnalisisSuelo.getRecomendacionCollection() ) );
         analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( AnalisisSuelo.getAnalisisElementoCollection() ) );
         analisisSueloEntity.setIdClaseTextural( claseTexturalToClaseTexturalEntity( AnalisisSuelo.getIdClaseTextural() ) );
         analisisSueloEntity.setIdCultivo( cultivoToCultivoEntity( AnalisisSuelo.getIdCultivo() ) );
@@ -187,19 +191,6 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         return fuente;
     }
 
-    protected Collection<Recomendacion> recomendacionEntityCollectionToRecomendacionCollection(Collection<RecomendacionEntity> collection) {
-        if ( collection == null ) {
-            return null;
-        }
-
-        Collection<Recomendacion> collection1 = new ArrayList<Recomendacion>( collection.size() );
-        for ( RecomendacionEntity recomendacionEntity : collection ) {
-            collection1.add( recomendacionEntityToRecomendacion( recomendacionEntity ) );
-        }
-
-        return collection1;
-    }
-
     protected Enmienda enmiendaEntityToEnmienda(EnmiendaEntity enmiendaEntity) {
         if ( enmiendaEntity == null ) {
             return null;
@@ -208,10 +199,38 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         Enmienda enmienda = new Enmienda();
 
         enmienda.setId( enmiendaEntity.getId() );
-        enmienda.setDescripcion( enmiendaEntity.getDescripcion() );
-        enmienda.setRecomendacionCollection( recomendacionEntityCollectionToRecomendacionCollection( enmiendaEntity.getRecomendacionCollection() ) );
+        enmienda.setNombre( enmiendaEntity.getNombre() );
+        enmienda.setValor( enmiendaEntity.getValor() );
+        enmienda.setFormula( enmiendaEntity.getFormula() );
 
         return enmienda;
+    }
+
+    protected EnmiendaRecomendacion enmiendaRecomendacionEntityToEnmiendaRecomendacion(EnmiendaRecomendacionEntity enmiendaRecomendacionEntity) {
+        if ( enmiendaRecomendacionEntity == null ) {
+            return null;
+        }
+
+        EnmiendaRecomendacion enmiendaRecomendacion = new EnmiendaRecomendacion();
+
+        enmiendaRecomendacion.setId( enmiendaRecomendacionEntity.getId() );
+        enmiendaRecomendacion.setEnmienda( enmiendaEntityToEnmienda( enmiendaRecomendacionEntity.getEnmienda() ) );
+        enmiendaRecomendacion.setValor( enmiendaRecomendacionEntity.getValor() );
+
+        return enmiendaRecomendacion;
+    }
+
+    protected Collection<EnmiendaRecomendacion> enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection(Collection<EnmiendaRecomendacionEntity> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<EnmiendaRecomendacion> collection1 = new ArrayList<EnmiendaRecomendacion>( collection.size() );
+        for ( EnmiendaRecomendacionEntity enmiendaRecomendacionEntity : collection ) {
+            collection1.add( enmiendaRecomendacionEntityToEnmiendaRecomendacion( enmiendaRecomendacionEntity ) );
+        }
+
+        return collection1;
     }
 
     protected Recomendacion recomendacionEntityToRecomendacion(RecomendacionEntity recomendacionEntity) {
@@ -221,12 +240,10 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
 
         Recomendacion recomendacion = new Recomendacion();
 
+        recomendacion.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection( recomendacionEntity.getEnmiendaRecomendacionEntityCollection() ) );
         recomendacion.setId( recomendacionEntity.getId() );
         recomendacion.setCantidadEnmienda( recomendacionEntity.getCantidadEnmienda() );
         recomendacion.setPreparacionSuelo( recomendacionEntity.getPreparacionSuelo() );
-        recomendacion.setIdAnalisisSuelo( toDomain( recomendacionEntity.getIdAnalisisSuelo() ) );
-        recomendacion.setIdEnmienda( enmiendaEntityToEnmienda( recomendacionEntity.getIdEnmienda() ) );
-        recomendacion.setFuenteRecomendacionCollection( fuenteRecomendacionEntityCollectionToFuenteRecomendacionCollection( recomendacionEntity.getFuenteRecomendacionCollection() ) );
 
         return recomendacion;
     }
@@ -384,6 +401,19 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         intercambioCationico.setInterpretacion( intercambioCationicoEntity.getInterpretacion() );
 
         return intercambioCationico;
+    }
+
+    protected Collection<Recomendacion> recomendacionEntityCollectionToRecomendacionCollection(Collection<RecomendacionEntity> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<Recomendacion> collection1 = new ArrayList<Recomendacion>( collection.size() );
+        for ( RecomendacionEntity recomendacionEntity : collection ) {
+            collection1.add( recomendacionEntityToRecomendacion( recomendacionEntity ) );
+        }
+
+        return collection1;
     }
 
     protected AnalisisElementoInterpretacion analisisElementoInterpretacionEntityToAnalisisElementoInterpretacion(AnalisisElementoInterpretacionEntity analisisElementoInterpretacionEntity) {
@@ -833,6 +863,78 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         aluminioIntercambiableEntity.setInterpretacion( aluminioIntercambiable.getInterpretacion() );
 
         return aluminioIntercambiableEntity;
+    }
+
+    protected Collection<RecomendacionEntity> recomendacionCollectionToRecomendacionEntityCollection(Collection<Recomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<RecomendacionEntity> collection1 = new ArrayList<RecomendacionEntity>( collection.size() );
+        for ( Recomendacion recomendacion : collection ) {
+            collection1.add( recomendacionToRecomendacionEntity( recomendacion ) );
+        }
+
+        return collection1;
+    }
+
+    protected EnmiendaEntity enmiendaToEnmiendaEntity(Enmienda enmienda) {
+        if ( enmienda == null ) {
+            return null;
+        }
+
+        EnmiendaEntity enmiendaEntity = new EnmiendaEntity();
+
+        enmiendaEntity.setNombre( enmienda.getNombre() );
+        enmiendaEntity.setFormula( enmienda.getFormula() );
+        enmiendaEntity.setValor( enmienda.getValor() );
+        enmiendaEntity.setId( enmienda.getId() );
+        enmiendaEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( enmienda.getRecomendacionCollection() ) );
+
+        return enmiendaEntity;
+    }
+
+    protected EnmiendaRecomendacionEntity enmiendaRecomendacionToEnmiendaRecomendacionEntity(EnmiendaRecomendacion enmiendaRecomendacion) {
+        if ( enmiendaRecomendacion == null ) {
+            return null;
+        }
+
+        EnmiendaRecomendacionEntity enmiendaRecomendacionEntity = new EnmiendaRecomendacionEntity();
+
+        enmiendaRecomendacionEntity.setId( enmiendaRecomendacion.getId() );
+        enmiendaRecomendacionEntity.setEnmienda( enmiendaToEnmiendaEntity( enmiendaRecomendacion.getEnmienda() ) );
+        enmiendaRecomendacionEntity.setRecomendacion( recomendacionToRecomendacionEntity( enmiendaRecomendacion.getRecomendacion() ) );
+        enmiendaRecomendacionEntity.setValor( enmiendaRecomendacion.getValor() );
+
+        return enmiendaRecomendacionEntity;
+    }
+
+    protected Collection<EnmiendaRecomendacionEntity> enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection(Collection<EnmiendaRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<EnmiendaRecomendacionEntity> collection1 = new ArrayList<EnmiendaRecomendacionEntity>( collection.size() );
+        for ( EnmiendaRecomendacion enmiendaRecomendacion : collection ) {
+            collection1.add( enmiendaRecomendacionToEnmiendaRecomendacionEntity( enmiendaRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
+    protected RecomendacionEntity recomendacionToRecomendacionEntity(Recomendacion recomendacion) {
+        if ( recomendacion == null ) {
+            return null;
+        }
+
+        RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
+
+        recomendacionEntity.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection( recomendacion.getEnmiendaRecomendacionEntityCollection() ) );
+        recomendacionEntity.setId( recomendacion.getId() );
+        recomendacionEntity.setCantidadEnmienda( recomendacion.getCantidadEnmienda() );
+        recomendacionEntity.setPreparacionSuelo( recomendacion.getPreparacionSuelo() );
+
+        return recomendacionEntity;
     }
 
     protected AnalisisElementoInterpretacionEntity analisisElementoInterpretacionToAnalisisElementoInterpretacionEntity(AnalisisElementoInterpretacion analisisElementoInterpretacion) {

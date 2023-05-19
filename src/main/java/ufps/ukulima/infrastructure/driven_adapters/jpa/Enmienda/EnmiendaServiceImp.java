@@ -38,4 +38,9 @@ public class EnmiendaServiceImp implements EnmiendaService {
     public void disableEnmienda(Enmienda Enmienda) {
 
     }
+
+    @Override
+    public Enmienda getByValor(float valor,String nombre) {
+        return enmiendaEntityMapper.toDomain(enmiendaRepository.getEnmiendaByValor(valor,nombre));
+    }
 }

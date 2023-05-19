@@ -10,4 +10,7 @@ public interface EnmiendaService {
     public void saveEnmienda(Enmienda Enmienda);
     public void disableEnmienda(Enmienda Enmienda);
 
+    public Enmienda getByValor(float valor,String nombre);
+
+
 }

@@ -6,7 +6,6 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.Recomendac
 
 import java.util.List;
 //@Service
-
 @Mapper(componentModel = "spring")
 public interface RecomendacionEntityMapper{
     Recomendacion toDomain(RecomendacionEntity RecomendacionEntity);

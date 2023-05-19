@@ -48,7 +48,7 @@ public class AbonoOrganicoRecomendacionRestController {
         if (abonoOrganico1 == null)
             return new ResponseEntity<>(new Mensaje("Abono organico no existe"), HttpStatus.NOT_FOUND);
         Recomendacion recomendacion = recomendacionService
-                .findRecomendacionById(abonoOrganico.getIdRecomendacion().getId());
+                .getRecomendacionById(abonoOrganico.getIdRecomendacion().getId());
         if (recomendacion == null)
             return new ResponseEntity<>(new Mensaje("Recomendacion no existe"), HttpStatus.NOT_FOUND);
 

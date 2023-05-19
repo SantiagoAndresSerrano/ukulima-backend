@@ -10,9 +10,11 @@ package ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.EnmiendaRecomendacion.EnmiendaRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.FuenteRecomendacion.FuenteRecomendacionEntity;
 
 import java.io.Serializable;
@@ -60,14 +62,16 @@ public class RecomendacionEntity implements Serializable {
     private short preparacionSuelo;
     @JoinColumn(name = "id_analisis_suelo", referencedColumnName = "id_analisis_suelo")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private AnalisisSueloEntity idAnalisisSuelo;
-    @JoinColumn(name = "id_enmienda", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private EnmiendaEntity idEnmienda;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecomendacion")
     private Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecomendacion")
     private Collection<FuenteRecomendacionEntity> fuenteRecomendacionCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recomendacion")
+    private Collection<EnmiendaRecomendacionEntity> enmiendaRecomendacionEntityCollection;
 
     public RecomendacionEntity() {
     }
@@ -76,10 +80,19 @@ public class RecomendacionEntity implements Serializable {
         this.id = id;
     }
 
-    public RecomendacionEntity(Integer id, float cantidadEnmienda, short preparacionSuelo) {
+    public RecomendacionEntity(Integer id, float cantidadEnmienda, short preparacionSuelo, AnalisisSueloEntity idAnalisisSuelo) {
         this.id = id;
         this.cantidadEnmienda = cantidadEnmienda;
         this.preparacionSuelo = preparacionSuelo;
+        this.idAnalisisSuelo = idAnalisisSuelo;
+    }
+
+    public Collection<EnmiendaRecomendacionEntity> getEnmiendaRecomendacionEntityCollection() {
+        return enmiendaRecomendacionEntityCollection;
+    }
+
+    public void setEnmiendaRecomendacionEntityCollection(Collection<EnmiendaRecomendacionEntity> enmiendaRecomendacionEntityCollection) {
+        this.enmiendaRecomendacionEntityCollection = enmiendaRecomendacionEntityCollection;
     }
 
     public Integer getId() {
@@ -106,20 +119,12 @@ public class RecomendacionEntity implements Serializable {
         this.preparacionSuelo = preparacionSuelo;
     }
 
-    public AnalisisSueloEntity getIdAnalisisSuelo() {
+    public AnalisisSueloEntity idAnalisisSuelo() {
         return idAnalisisSuelo;
     }
 
     public void setIdAnalisisSuelo(AnalisisSueloEntity idAnalisisSuelo) {
         this.idAnalisisSuelo = idAnalisisSuelo;
-    }
-
-    public EnmiendaEntity getIdEnmienda() {
-        return idEnmienda;
-    }
-
-    public void setIdEnmienda(EnmiendaEntity idEnmienda) {
-        this.idEnmienda = idEnmienda;
     }
 
     public Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection() {
@@ -131,7 +136,7 @@ public class RecomendacionEntity implements Serializable {
         this.abonoOrganicoRecomendacionCollection = abonoOrganicoRecomendacionCollection;
     }
 
-    public Collection<FuenteRecomendacionEntity> getFuenteRecomendacionCollection() {
+    public Collection<FuenteRecomendacionEntity> fuenteRecomendacionCollection() {
         return fuenteRecomendacionCollection;
     }
 

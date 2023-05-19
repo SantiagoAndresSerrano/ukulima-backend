@@ -1,13 +1,17 @@
 package ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.RelacionBase.RelacionBaseEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "analisis_suelo_relacion_bases")
-public class AnalisisSueloRelacionBaseEntity {
+public class AnalisisSueloRelacionBaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -20,6 +24,7 @@ public class AnalisisSueloRelacionBaseEntity {
 
     @JoinColumn(name = "id_analisis_suelo", referencedColumnName = "id_analisis_suelo")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private AnalisisSueloEntity idAnalisisSuelo;
 
     public AnalisisSueloRelacionBaseEntity() {

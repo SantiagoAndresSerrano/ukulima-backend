@@ -3,10 +3,15 @@ package ufps.ukulima.infrastructure.db.springdata.entity.RelacionBase;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "relacion_base")
-public class RelacionBaseEntity {
+@XmlRootElement
+public class RelacionBaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

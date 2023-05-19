@@ -21,6 +21,7 @@ import ufps.ukulima.domain.model.Agricultor.gateway.AgricultorService;
 import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 import ufps.ukulima.domain.model.Recomendacion.gateway.RecomendacionService;
+import ufps.ukulima.infrastructure.mapper.RecomendacionEntityMapper;
 
 @RestController
 @RequestMapping("/api/recomendacion")
@@ -31,9 +32,12 @@ public class RecomendacionController {
     @Autowired
     AgricultorService agricultorService;
 
+    @Autowired
+    RecomendacionEntityMapper recomendacionEntityMapper;
+
     @GetMapping
     public ResponseEntity<?> getAllRecomendacion() {
-        return ResponseEntity.ok(recomendacionService.findByAllRecomendacion());
+        return ResponseEntity.ok(recomendacionService.getAllRecomendacion());
     }
 
     @PostMapping
@@ -42,7 +46,7 @@ public class RecomendacionController {
         if (br.hasErrors())
             return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
 
-        recomendacionService.saveRecomendacion(recomendacion);
+        recomendacionService.saveRecomendacion(recomendacionEntityMapper.toEntity(recomendacion));
         return ResponseEntity.ok(new Mensaje("Recomendación registrado con éxito :"));
     }
 

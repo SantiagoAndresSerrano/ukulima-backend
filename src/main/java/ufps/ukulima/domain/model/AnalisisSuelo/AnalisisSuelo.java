@@ -247,7 +247,7 @@ public class AnalisisSuelo {
         this.fecha = fecha;
     }
 
-    public Collection<Recomendacion> recomendacionCollection() {
+    public Collection<Recomendacion> getRecomendacionCollection() {
         return recomendacionCollection;
     }
 
