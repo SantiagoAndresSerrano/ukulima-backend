@@ -18,6 +18,10 @@ import org.springframework.web.client.RestTemplate;
 import ufps.ukulima.config.Spring.security.controller.AuthController;
 import ufps.ukulima.config.Spring.security.dto.Mensaje;
 import ufps.ukulima.config.Spring.security.dto.Response;
+import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
+import ufps.ukulima.domain.model.AbonoOrganico.gateway.AbonoOrganicoService;
+import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
+import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.gateway.AbonoOrganicoRecomendacionService;
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AluminioIntercambiable.gateway.AluminioIntercambiableService;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
@@ -82,11 +86,16 @@ public class AnalisisSueloController {
     AnalisisSueloService analisisSueloService;
 
     @Autowired
+    AbonoOrganicoService abonoOrganicoService;
+    @Autowired
     AluminioIntercambiableService aluminioIntercambiableService;
     @Autowired
     IntercambioCationicoService intercambioCationicoService;
     @Autowired
     ConductividadElectricaService conductividadElectricaService;
+
+    @Autowired
+    AbonoOrganicoRecomendacionService abonoOrganicoRecomendacionService;
 
     @Autowired
     ClaseTexturalService claseTexturalService;
@@ -159,7 +168,8 @@ public class AnalisisSueloController {
         ClaseTextural claseTextural = claseTexturalService
                 .getClaseTexturalPorRangos(analisisSuelo.getPorcentArena()
                         , analisisSuelo.getPorcentLimos(), analisisSuelo.getPorcentArcilla());
-        Densidad densidad = densidadService.getDensidadById(analisisSuelo.getIdDensidad().getIdDensidad());
+
+
 
         PhSuelo phSuelo = phSueloService.getPhSueloByValor(analisisSuelo.getPhSuelo());
         AluminioIntercambiable aluminioIntercambiable =
@@ -229,6 +239,29 @@ public class AnalisisSueloController {
                 analisisSuelo.getMateriaOrganica());
         GrupoTextural grupoTextural = grupoTexturalService.getGrupoTexturalByNombre(interpretacion);
 
+        Densidad densidad = null;
+        if(analisisSuelo.getIdDensidad() != null){
+            densidad = densidadService.getDensidadById(analisisSuelo.getIdDensidad().getIdDensidad());
+        }else{
+            if(grupoTextural.getNombre().equals("MUY FINOS")){
+                densidad = densidadService.getDensidadByValor(1.2f);
+            }
+            if(grupoTextural.getNombre().equals("FINOS")){
+                densidad = densidadService.getDensidadByValor(1.3f);
+            }
+            if(grupoTextural.getNombre().equals("MODERADAMENTE FINOS")){
+                densidad = densidadService.getDensidadByValor(1.4f);
+            }
+            if(grupoTextural.getNombre().equals("MEDIOS")){
+                densidad = densidadService.getDensidadByValor(1.5f);
+            }
+            if(grupoTextural.getNombre().equals("MODERADAMENTE GRUESOS")){
+                densidad = densidadService.getDensidadByValor(1.6f);
+            }
+            if(grupoTextural.getNombre().equals("GRUESOS")){
+                densidad = densidadService.getDensidadByValor(1.7f);
+            }
+        }
         float valorF = 0;
         int idF = 0;
         float valorP = 0;
@@ -310,41 +343,65 @@ public class AnalisisSueloController {
                     new Response(200, "Analisis suelo agregado correctamente. (No se encontraron valores para Interpretación de la Disponibilidad de nutrientes)",
                             savedAnalisisSuelo));
         }
-        //Guardar enmiendas
-
         RecomendacionEntity r = recomendacionService.saveRecomendacion(new RecomendacionEntity(null,0.0f,(short)0.0,
                 analisisSueloEntityMapper.toEntity(savedAnalisisSuelo)));
-
         Recomendacion r2 = recomendacionEntityMapper.toDomain(r);
 
-        float value_em = (analisisSuelo.getAluminioIntercambiable() != 0.0)?1:0;
+        //Guardar enmiendas
+        if(analisisSuelo.getPhSuelo() < 5.5){
+            float value_em = (analisisSuelo.getAluminioIntercambiable() != 0.0)?1:0;
+            Enmienda enmiendaCal= enmiendaService.getByValor(value_em,"calcio");
+            Enmienda enmiendaDol=enmiendaService.getByValor(value_em,"dolomita");
+            Enmienda enmiendaFos=enmiendaService.getByValor(value_em,"fosforita");
+            Enmienda enmiendaCalcitica=enmiendaService.getByValor(value_em,"calcitica");
 
-        Enmienda enmiendaCal= enmiendaService.getByValor(value_em,"calcio");
-        Enmienda enmiendaDol=enmiendaService.getByValor(value_em,"dolomita");
-        Enmienda enmiendaFos=enmiendaService.getByValor(value_em,"fosforita");
-        Enmienda enmiendaCalcitica=enmiendaService.getByValor(value_em,"calcitica");
+            float vEnmiendaCal;
+            float vEnmiendaDol;
+            float vEnmiendaFos;
+            float vEnmiendaCalcitica;
 
-        float vEnmiendaCal;
-        float vEnmiendaDol;
-        float vEnmiendaFos;
-        float vEnmiendaCalcitica;
+            if (analisisSuelo.getAluminioIntercambiable() != 0.0){
+                vEnmiendaCal = analisisSuelo.getAluminioIntercambiable() * 1000;
+            }else{
+                float SB2 = 85f;
+                float SB1 = ((valorC + valorM + valorP + valorS)/analisisSuelo.getIntercambioCationico())*100;
+                vEnmiendaCal = analisisSuelo.getIntercambioCationico()*(SB2-SB1)*10;
+            }
 
-        if (analisisSuelo.getAluminioIntercambiable() != 0.0){
-            vEnmiendaCal = analisisSuelo.getAluminioIntercambiable() * 1000;
-        }else{
-            float SB2 = 85f;
-            float SB1 = ((valorC + valorM + valorP + valorS)/analisisSuelo.getIntercambioCationico())*100;
-            vEnmiendaCal = analisisSuelo.getIntercambioCationico()*(SB2-SB1)*10;
+            vEnmiendaDol = vEnmiendaCal * 1.06f;
+            vEnmiendaFos = vEnmiendaCal * 1.37f;
+            vEnmiendaCalcitica = vEnmiendaCal * 0.9f;
+            enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaCal,r2,vEnmiendaCal));
+            enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaDol,r2,vEnmiendaDol));
+            enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaFos,r2,vEnmiendaFos));
+            enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaCalcitica,r2,
+                    vEnmiendaCalcitica));
         }
 
-        vEnmiendaDol = vEnmiendaCal * 1.06f;
-        vEnmiendaFos = vEnmiendaCal * 1.37f;
-        vEnmiendaCalcitica = vEnmiendaCal * 0.9f;
-        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaCal,r2,vEnmiendaCal));
-        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaDol,r2,vEnmiendaDol));
-        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaFos,r2,vEnmiendaFos));
-        enmiendaRecomendacionService.saveEnmiendaRecomendacion(new EnmiendaRecomendacion(enmiendaCalcitica,r2,
-                vEnmiendaCalcitica));
+        if(!savedAnalisisSuelo.getIdMateriaOrganica().getInterpretacion().equals("ALTO")){
+            int total_clima = 0;
+            if(clima.equals(CLIMA_FRIO))
+                total_clima=10;
+
+            if(clima.equals(CLIMA_MEDIO))
+                total_clima=5;
+
+            if(clima.equals(CLIMA_CALIDO))
+                total_clima=3;
+            double diferencial_suelo=total_clima-savedAnalisisSuelo.getMateriaOrganica();
+            double peso_suelo = densidad.getValor()*10000*analisisSuelo.getIdProfundidad().getProfundidad()*1000;
+            double materia_organica= peso_suelo*(diferencial_suelo/100);
+            materia_organica/=3;
+            AbonoOrganicoRecomendacion recomendacion_raquis = new AbonoOrganicoRecomendacion((float)materia_organica,
+                    abonoOrganicoService.getAbonoOrganicoByNombre("RAQUIS"),r2);
+            AbonoOrganicoRecomendacion recomendacion_bovinaza = new AbonoOrganicoRecomendacion((float)materia_organica,
+                    abonoOrganicoService.getAbonoOrganicoByNombre("BOVINAZA"),r2);
+            AbonoOrganicoRecomendacion recomendacion_vermicompost = new AbonoOrganicoRecomendacion((float)materia_organica,
+                    abonoOrganicoService.getAbonoOrganicoByNombre("VERMICOMPOST"),r2);
+            abonoOrganicoRecomendacionService.saveAbonoOrganicoRecomendacion(recomendacion_raquis);
+            abonoOrganicoRecomendacionService.saveAbonoOrganicoRecomendacion(recomendacion_bovinaza);
+            abonoOrganicoRecomendacionService.saveAbonoOrganicoRecomendacion(recomendacion_vermicompost);
+        }
 
         savedAnalisisSuelo = analisisSueloService.getAnalisisSueloById(savedAnalisisSuelo.getIdAnalisisSuelo());
         savedAnalisisSuelo.setAnalisisSueloRelacionBaseEntities(
@@ -364,6 +421,16 @@ public class AnalisisSueloController {
                     HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(analisisSueloR.getRecomendacionCollection());
+    }
+
+    @GetMapping("/{idAnalisisSuelo}")
+    public ResponseEntity<?> getAnalisisSueloById(@PathVariable int idAnalisisSuelo) {
+        AnalisisSuelo analisisSueloR = analisisSueloService.getAnalisisSueloById(idAnalisisSuelo);
+        if (analisisSueloR == null) {
+            return new ResponseEntity<>(new Mensaje("Análisis suelo ingresado no se encuentra registrado"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(analisisSueloR);
     }
 
     @PutMapping

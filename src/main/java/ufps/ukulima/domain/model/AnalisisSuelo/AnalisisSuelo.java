@@ -54,7 +54,6 @@ public class AnalisisSuelo {
     private ClaseTextural idClaseTextural;
     @NotNull(message = "Cultivo no puede ser vacío")
     private Cultivo idCultivo;
-    @NotNull(message = "Densidad no puede ser vacío")
     private Densidad idDensidad;
     @NotNull(message = "Profundidad de muestra no puede ser vacío")
     private ProfundidadMuestra idProfundidad;

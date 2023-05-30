@@ -87,7 +87,7 @@ public class AbonoOrganicoRecomendacionEntity implements Serializable {
         this.idAbonoOrganico = idAbonoOrganico;
     }
 
-    public RecomendacionEntity getIdRecomendacion() {
+    public RecomendacionEntity recomendacion() {
         return idRecomendacion;
     }
 

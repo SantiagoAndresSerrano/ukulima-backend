@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
+import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
+import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.AluminioIntercambiable.AluminioIntercambiable;
 import ufps.ukulima.domain.model.AnalisisElemento.AnalisisElemento;
@@ -38,6 +40,8 @@ import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 import ufps.ukulima.domain.model.Topografia.Topografia;
 import ufps.ukulima.domain.model.Variedad.Variedad;
 import ufps.ukulima.domain.model.Vereda.Vereda;
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganico.AbonoOrganicoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisElemento.AnalisisElementosEntity;
@@ -74,7 +78,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-18T20:40:45-0500",
+    date = "2023-05-29T23:53:48-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -233,6 +237,46 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         return collection1;
     }
 
+    protected AbonoOrganico abonoOrganicoEntityToAbonoOrganico(AbonoOrganicoEntity abonoOrganicoEntity) {
+        if ( abonoOrganicoEntity == null ) {
+            return null;
+        }
+
+        AbonoOrganico abonoOrganico = new AbonoOrganico();
+
+        abonoOrganico.setId( abonoOrganicoEntity.getId() );
+        abonoOrganico.setDescripcion( abonoOrganicoEntity.getDescripcion() );
+
+        return abonoOrganico;
+    }
+
+    protected AbonoOrganicoRecomendacion abonoOrganicoRecomendacionEntityToAbonoOrganicoRecomendacion(AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity) {
+        if ( abonoOrganicoRecomendacionEntity == null ) {
+            return null;
+        }
+
+        AbonoOrganicoRecomendacion abonoOrganicoRecomendacion = new AbonoOrganicoRecomendacion();
+
+        abonoOrganicoRecomendacion.setId( abonoOrganicoRecomendacionEntity.getId() );
+        abonoOrganicoRecomendacion.setCantidad( abonoOrganicoRecomendacionEntity.getCantidad() );
+        abonoOrganicoRecomendacion.setIdAbonoOrganico( abonoOrganicoEntityToAbonoOrganico( abonoOrganicoRecomendacionEntity.getIdAbonoOrganico() ) );
+
+        return abonoOrganicoRecomendacion;
+    }
+
+    protected Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionEntityCollectionToAbonoOrganicoRecomendacionCollection(Collection<AbonoOrganicoRecomendacionEntity> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoOrganicoRecomendacion> collection1 = new ArrayList<AbonoOrganicoRecomendacion>( collection.size() );
+        for ( AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity : collection ) {
+            collection1.add( abonoOrganicoRecomendacionEntityToAbonoOrganicoRecomendacion( abonoOrganicoRecomendacionEntity ) );
+        }
+
+        return collection1;
+    }
+
     protected Recomendacion recomendacionEntityToRecomendacion(RecomendacionEntity recomendacionEntity) {
         if ( recomendacionEntity == null ) {
             return null;
@@ -244,6 +288,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         recomendacion.setId( recomendacionEntity.getId() );
         recomendacion.setCantidadEnmienda( recomendacionEntity.getCantidadEnmienda() );
         recomendacion.setPreparacionSuelo( recomendacionEntity.getPreparacionSuelo() );
+        recomendacion.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionEntityCollectionToAbonoOrganicoRecomendacionCollection( recomendacionEntity.getAbonoOrganicoRecomendacionCollection() ) );
 
         return recomendacion;
     }
@@ -922,6 +967,47 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         return collection1;
     }
 
+    protected AbonoOrganicoEntity abonoOrganicoToAbonoOrganicoEntity(AbonoOrganico abonoOrganico) {
+        if ( abonoOrganico == null ) {
+            return null;
+        }
+
+        AbonoOrganicoEntity abonoOrganicoEntity = new AbonoOrganicoEntity();
+
+        abonoOrganicoEntity.setId( abonoOrganico.getId() );
+        abonoOrganicoEntity.setDescripcion( abonoOrganico.getDescripcion() );
+
+        return abonoOrganicoEntity;
+    }
+
+    protected AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity(AbonoOrganicoRecomendacion abonoOrganicoRecomendacion) {
+        if ( abonoOrganicoRecomendacion == null ) {
+            return null;
+        }
+
+        AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity = new AbonoOrganicoRecomendacionEntity();
+
+        abonoOrganicoRecomendacionEntity.setId( abonoOrganicoRecomendacion.getId() );
+        abonoOrganicoRecomendacionEntity.setCantidad( abonoOrganicoRecomendacion.getCantidad() );
+        abonoOrganicoRecomendacionEntity.setIdAbonoOrganico( abonoOrganicoToAbonoOrganicoEntity( abonoOrganicoRecomendacion.getIdAbonoOrganico() ) );
+        abonoOrganicoRecomendacionEntity.setIdRecomendacion( recomendacionToRecomendacionEntity( abonoOrganicoRecomendacion.getIdRecomendacion() ) );
+
+        return abonoOrganicoRecomendacionEntity;
+    }
+
+    protected Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection(Collection<AbonoOrganicoRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoOrganicoRecomendacionEntity> collection1 = new ArrayList<AbonoOrganicoRecomendacionEntity>( collection.size() );
+        for ( AbonoOrganicoRecomendacion abonoOrganicoRecomendacion : collection ) {
+            collection1.add( abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity( abonoOrganicoRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
     protected RecomendacionEntity recomendacionToRecomendacionEntity(Recomendacion recomendacion) {
         if ( recomendacion == null ) {
             return null;
@@ -933,6 +1019,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         recomendacionEntity.setId( recomendacion.getId() );
         recomendacionEntity.setCantidadEnmienda( recomendacion.getCantidadEnmienda() );
         recomendacionEntity.setPreparacionSuelo( recomendacion.getPreparacionSuelo() );
+        recomendacionEntity.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection( recomendacion.getAbonoOrganicoRecomendacionCollection() ) );
 
         return recomendacionEntity;
     }

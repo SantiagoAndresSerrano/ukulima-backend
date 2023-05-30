@@ -18,7 +18,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.Recomendac
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-18T20:40:42-0500",
+    date = "2023-05-29T23:53:50-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -35,7 +35,6 @@ public class AbonoOrganicoRecomendacionEntityMapperImpl implements AbonoOrganico
         abonoOrganicoRecomendacion.setId( AbonoOrganicoRecomendacionEntity.getId() );
         abonoOrganicoRecomendacion.setCantidad( AbonoOrganicoRecomendacionEntity.getCantidad() );
         abonoOrganicoRecomendacion.setIdAbonoOrganico( abonoOrganicoEntityToAbonoOrganico( AbonoOrganicoRecomendacionEntity.getIdAbonoOrganico() ) );
-        abonoOrganicoRecomendacion.setIdRecomendacion( recomendacionEntityToRecomendacion( AbonoOrganicoRecomendacionEntity.getIdRecomendacion() ) );
 
         return abonoOrganicoRecomendacion;
     }
@@ -81,63 +80,6 @@ public class AbonoOrganicoRecomendacionEntityMapperImpl implements AbonoOrganico
         abonoOrganico.setDescripcion( abonoOrganicoEntity.getDescripcion() );
 
         return abonoOrganico;
-    }
-
-    protected Enmienda enmiendaEntityToEnmienda(EnmiendaEntity enmiendaEntity) {
-        if ( enmiendaEntity == null ) {
-            return null;
-        }
-
-        Enmienda enmienda = new Enmienda();
-
-        enmienda.setId( enmiendaEntity.getId() );
-        enmienda.setNombre( enmiendaEntity.getNombre() );
-        enmienda.setValor( enmiendaEntity.getValor() );
-        enmienda.setFormula( enmiendaEntity.getFormula() );
-
-        return enmienda;
-    }
-
-    protected EnmiendaRecomendacion enmiendaRecomendacionEntityToEnmiendaRecomendacion(EnmiendaRecomendacionEntity enmiendaRecomendacionEntity) {
-        if ( enmiendaRecomendacionEntity == null ) {
-            return null;
-        }
-
-        EnmiendaRecomendacion enmiendaRecomendacion = new EnmiendaRecomendacion();
-
-        enmiendaRecomendacion.setId( enmiendaRecomendacionEntity.getId() );
-        enmiendaRecomendacion.setEnmienda( enmiendaEntityToEnmienda( enmiendaRecomendacionEntity.getEnmienda() ) );
-        enmiendaRecomendacion.setValor( enmiendaRecomendacionEntity.getValor() );
-
-        return enmiendaRecomendacion;
-    }
-
-    protected Collection<EnmiendaRecomendacion> enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection(Collection<EnmiendaRecomendacionEntity> collection) {
-        if ( collection == null ) {
-            return null;
-        }
-
-        Collection<EnmiendaRecomendacion> collection1 = new ArrayList<EnmiendaRecomendacion>( collection.size() );
-        for ( EnmiendaRecomendacionEntity enmiendaRecomendacionEntity : collection ) {
-            collection1.add( enmiendaRecomendacionEntityToEnmiendaRecomendacion( enmiendaRecomendacionEntity ) );
-        }
-
-        return collection1;
-    }
-
-    protected Recomendacion recomendacionEntityToRecomendacion(RecomendacionEntity recomendacionEntity) {
-        if ( recomendacionEntity == null ) {
-            return null;
-        }
-
-        Recomendacion recomendacion = new Recomendacion();
-
-        recomendacion.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection( recomendacionEntity.getEnmiendaRecomendacionEntityCollection() ) );
-        recomendacion.setId( recomendacionEntity.getId() );
-        recomendacion.setCantidadEnmienda( recomendacionEntity.getCantidadEnmienda() );
-        recomendacion.setPreparacionSuelo( recomendacionEntity.getPreparacionSuelo() );
-
-        return recomendacion;
     }
 
     protected AbonoOrganicoEntity abonoOrganicoToAbonoOrganicoEntity(AbonoOrganico abonoOrganico) {
@@ -210,6 +152,19 @@ public class AbonoOrganicoRecomendacionEntityMapperImpl implements AbonoOrganico
         return collection1;
     }
 
+    protected Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection(Collection<AbonoOrganicoRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoOrganicoRecomendacionEntity> collection1 = new ArrayList<AbonoOrganicoRecomendacionEntity>( collection.size() );
+        for ( AbonoOrganicoRecomendacion abonoOrganicoRecomendacion : collection ) {
+            collection1.add( toEntity( abonoOrganicoRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
     protected RecomendacionEntity recomendacionToRecomendacionEntity(Recomendacion recomendacion) {
         if ( recomendacion == null ) {
             return null;
@@ -221,6 +176,7 @@ public class AbonoOrganicoRecomendacionEntityMapperImpl implements AbonoOrganico
         recomendacionEntity.setId( recomendacion.getId() );
         recomendacionEntity.setCantidadEnmienda( recomendacion.getCantidadEnmienda() );
         recomendacionEntity.setPreparacionSuelo( recomendacion.getPreparacionSuelo() );
+        recomendacionEntity.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection( recomendacion.getAbonoOrganicoRecomendacionCollection() ) );
 
         return recomendacionEntity;
     }

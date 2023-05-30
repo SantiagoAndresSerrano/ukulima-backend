@@ -24,6 +24,11 @@ public class DensidadServiceImp implements DensidadService {
     }
 
     @Override
+    public Densidad getDensidadByValor(float valor) {
+        return densidadEntityMapper.toDomain(densidadRepository.findByValor(valor));
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Densidad> getAllDensidad() {
         return densidadEntityMapper.abonosOrganicosRecomendacionToDomain(densidadRepository.findAll());

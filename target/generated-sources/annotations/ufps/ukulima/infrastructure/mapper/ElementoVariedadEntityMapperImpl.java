@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
+import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
+import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.ElementoVariedad.ElementoVariedad;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
@@ -14,6 +16,8 @@ import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
 import ufps.ukulima.domain.model.Variedad.Variedad;
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganico.AbonoOrganicoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ElementoVariedad.ElementoVariedadEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
@@ -26,7 +30,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Variedad.VariedadEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-18T20:40:44-0500",
+    date = "2023-05-29T23:53:47-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -153,6 +157,46 @@ public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityM
         return collection1;
     }
 
+    protected AbonoOrganico abonoOrganicoEntityToAbonoOrganico(AbonoOrganicoEntity abonoOrganicoEntity) {
+        if ( abonoOrganicoEntity == null ) {
+            return null;
+        }
+
+        AbonoOrganico abonoOrganico = new AbonoOrganico();
+
+        abonoOrganico.setId( abonoOrganicoEntity.getId() );
+        abonoOrganico.setDescripcion( abonoOrganicoEntity.getDescripcion() );
+
+        return abonoOrganico;
+    }
+
+    protected AbonoOrganicoRecomendacion abonoOrganicoRecomendacionEntityToAbonoOrganicoRecomendacion(AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity) {
+        if ( abonoOrganicoRecomendacionEntity == null ) {
+            return null;
+        }
+
+        AbonoOrganicoRecomendacion abonoOrganicoRecomendacion = new AbonoOrganicoRecomendacion();
+
+        abonoOrganicoRecomendacion.setId( abonoOrganicoRecomendacionEntity.getId() );
+        abonoOrganicoRecomendacion.setCantidad( abonoOrganicoRecomendacionEntity.getCantidad() );
+        abonoOrganicoRecomendacion.setIdAbonoOrganico( abonoOrganicoEntityToAbonoOrganico( abonoOrganicoRecomendacionEntity.getIdAbonoOrganico() ) );
+
+        return abonoOrganicoRecomendacion;
+    }
+
+    protected Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionEntityCollectionToAbonoOrganicoRecomendacionCollection(Collection<AbonoOrganicoRecomendacionEntity> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoOrganicoRecomendacion> collection1 = new ArrayList<AbonoOrganicoRecomendacion>( collection.size() );
+        for ( AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity : collection ) {
+            collection1.add( abonoOrganicoRecomendacionEntityToAbonoOrganicoRecomendacion( abonoOrganicoRecomendacionEntity ) );
+        }
+
+        return collection1;
+    }
+
     protected Recomendacion recomendacionEntityToRecomendacion(RecomendacionEntity recomendacionEntity) {
         if ( recomendacionEntity == null ) {
             return null;
@@ -164,6 +208,7 @@ public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityM
         recomendacion.setId( recomendacionEntity.getId() );
         recomendacion.setCantidadEnmienda( recomendacionEntity.getCantidadEnmienda() );
         recomendacion.setPreparacionSuelo( recomendacionEntity.getPreparacionSuelo() );
+        recomendacion.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionEntityCollectionToAbonoOrganicoRecomendacionCollection( recomendacionEntity.getAbonoOrganicoRecomendacionCollection() ) );
 
         return recomendacion;
     }

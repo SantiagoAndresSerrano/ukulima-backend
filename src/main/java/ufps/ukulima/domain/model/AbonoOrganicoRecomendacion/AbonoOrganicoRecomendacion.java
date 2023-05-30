@@ -27,6 +27,12 @@ public class AbonoOrganicoRecomendacion {
     public AbonoOrganicoRecomendacion() {
     }
 
+    public AbonoOrganicoRecomendacion(float cantidad, AbonoOrganico idAbonoOrganico, Recomendacion idRecomendacion) {
+        this.cantidad = cantidad;
+        this.idAbonoOrganico = idAbonoOrganico;
+        this.idRecomendacion = idRecomendacion;
+    }
+
     public AbonoOrganicoRecomendacion(Integer id) {
         this.id = id;
     }

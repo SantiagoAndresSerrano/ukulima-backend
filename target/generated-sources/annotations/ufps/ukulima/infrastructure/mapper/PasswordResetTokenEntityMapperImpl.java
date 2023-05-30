@@ -13,7 +13,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoI
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-18T20:40:44-0500",
+    date = "2023-05-29T23:53:47-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component

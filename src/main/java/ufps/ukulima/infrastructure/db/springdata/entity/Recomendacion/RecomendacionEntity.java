@@ -127,7 +127,7 @@ public class RecomendacionEntity implements Serializable {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection() {
+    public Collection<AbonoOrganicoRecomendacionEntity> getAbonoOrganicoRecomendacionCollection() {
         return abonoOrganicoRecomendacionCollection;
     }
 

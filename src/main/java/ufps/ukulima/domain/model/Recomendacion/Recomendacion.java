@@ -89,7 +89,7 @@ public class Recomendacion {
         this.idAnalisisSuelo = idAnalisisSuelo;
     }
 
-    public Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection() {
+    public Collection<AbonoOrganicoRecomendacion> getAbonoOrganicoRecomendacionCollection() {
         return abonoOrganicoRecomendacionCollection;
     }
 
