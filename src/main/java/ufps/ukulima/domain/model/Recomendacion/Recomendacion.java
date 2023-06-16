@@ -6,13 +6,17 @@
 package ufps.ukulima.domain.model.Recomendacion;
 
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
+import ufps.ukulima.domain.model.AbonoQuimicoRecomendacion.AbonoQuimicoRecomendacion;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.EnmiendaRecomendacion.EnmiendaRecomendacion;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoQuimicoRecomendacion.AbonoQuimicoRecomendacionEntity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -29,6 +33,7 @@ public class Recomendacion {
     private Collection<FuenteRecomendacion> fuenteRecomendacionCollection;
     private Collection<EnmiendaRecomendacion> enmiendaRecomendacionEntityCollection;
 
+    private Collection<AbonoQuimicoRecomendacion> abonoQuimicoRecomendacionEntities;
     public Recomendacion() {
     }
 
@@ -47,6 +52,14 @@ public class Recomendacion {
         this.cantidadEnmienda = cantidadEnmienda;
         this.preparacionSuelo = preparacionSuelo;
         this.idAnalisisSuelo = idAnalisisSuelo;
+    }
+
+    public Collection<AbonoQuimicoRecomendacion> getAbonoQuimicoRecomendacionEntities() {
+        return abonoQuimicoRecomendacionEntities;
+    }
+
+    public void setAbonoQuimicoRecomendacionEntities(Collection<AbonoQuimicoRecomendacion> abonoQuimicoRecomendacionEntities) {
+        this.abonoQuimicoRecomendacionEntities = abonoQuimicoRecomendacionEntities;
     }
 
     public Collection<EnmiendaRecomendacion> getEnmiendaRecomendacionEntityCollection() {

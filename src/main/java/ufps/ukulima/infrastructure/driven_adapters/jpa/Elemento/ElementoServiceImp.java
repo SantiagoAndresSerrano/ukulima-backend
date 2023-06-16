@@ -35,4 +35,9 @@ public class ElementoServiceImp implements ElementoService {
     public void saveElemento(Elemento elemento) {
         elementoRepository.save(elementoEntityMapper.toEntity(elemento));
     }
+
+    @Override
+    public Elemento getElementoEntityByNombre(String nombre) {
+        return elementoEntityMapper.toDomain(elementoRepository.getElementoEntityByNombre(nombre));
+    }
 }

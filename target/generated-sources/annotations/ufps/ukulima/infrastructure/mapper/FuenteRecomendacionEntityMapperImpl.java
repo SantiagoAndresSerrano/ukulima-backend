@@ -7,6 +7,7 @@ import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
+import ufps.ukulima.domain.model.AbonoQuimicoRecomendacion.AbonoQuimicoRecomendacion;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.EnmiendaRecomendacion.EnmiendaRecomendacion;
@@ -15,6 +16,7 @@ import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
 import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganico.AbonoOrganicoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacionEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoQuimicoRecomendacion.AbonoQuimicoRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.EnmiendaRecomendacion.EnmiendaRecomendacionEntity;
@@ -24,7 +26,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.Recomendac
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-29T23:53:50-0500",
+    date = "2023-06-15T20:22:50-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -120,6 +122,34 @@ public class FuenteRecomendacionEntityMapperImpl implements FuenteRecomendacionE
         return fuente;
     }
 
+    protected AbonoQuimicoRecomendacion abonoQuimicoRecomendacionEntityToAbonoQuimicoRecomendacion(AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity) {
+        if ( abonoQuimicoRecomendacionEntity == null ) {
+            return null;
+        }
+
+        AbonoQuimicoRecomendacion abonoQuimicoRecomendacion = new AbonoQuimicoRecomendacion();
+
+        abonoQuimicoRecomendacion.setId( abonoQuimicoRecomendacionEntity.getId() );
+        abonoQuimicoRecomendacion.setElemento( elementoEntityToElemento( abonoQuimicoRecomendacionEntity.getElemento() ) );
+        abonoQuimicoRecomendacion.setDisponibilidad( abonoQuimicoRecomendacionEntity.getDisponibilidad() );
+        abonoQuimicoRecomendacion.setEficiencia( abonoQuimicoRecomendacionEntity.getEficiencia() );
+
+        return abonoQuimicoRecomendacion;
+    }
+
+    protected Collection<AbonoQuimicoRecomendacion> abonoQuimicoRecomendacionEntityCollectionToAbonoQuimicoRecomendacionCollection(Collection<AbonoQuimicoRecomendacionEntity> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoQuimicoRecomendacion> collection1 = new ArrayList<AbonoQuimicoRecomendacion>( collection.size() );
+        for ( AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity : collection ) {
+            collection1.add( abonoQuimicoRecomendacionEntityToAbonoQuimicoRecomendacion( abonoQuimicoRecomendacionEntity ) );
+        }
+
+        return collection1;
+    }
+
     protected Enmienda enmiendaEntityToEnmienda(EnmiendaEntity enmiendaEntity) {
         if ( enmiendaEntity == null ) {
             return null;
@@ -209,6 +239,7 @@ public class FuenteRecomendacionEntityMapperImpl implements FuenteRecomendacionE
 
         Recomendacion recomendacion = new Recomendacion();
 
+        recomendacion.setAbonoQuimicoRecomendacionEntities( abonoQuimicoRecomendacionEntityCollectionToAbonoQuimicoRecomendacionCollection( recomendacionEntity.getAbonoQuimicoRecomendacionEntities() ) );
         recomendacion.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection( recomendacionEntity.getEnmiendaRecomendacionEntityCollection() ) );
         recomendacion.setId( recomendacionEntity.getId() );
         recomendacion.setCantidadEnmienda( recomendacionEntity.getCantidadEnmienda() );
@@ -302,6 +333,35 @@ public class FuenteRecomendacionEntityMapperImpl implements FuenteRecomendacionE
         return collection1;
     }
 
+    protected AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionToAbonoQuimicoRecomendacionEntity(AbonoQuimicoRecomendacion abonoQuimicoRecomendacion) {
+        if ( abonoQuimicoRecomendacion == null ) {
+            return null;
+        }
+
+        AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity = new AbonoQuimicoRecomendacionEntity();
+
+        abonoQuimicoRecomendacionEntity.setId( abonoQuimicoRecomendacion.getId() );
+        abonoQuimicoRecomendacionEntity.setRecomendacion( recomendacionToRecomendacionEntity( abonoQuimicoRecomendacion.getRecomendacion() ) );
+        abonoQuimicoRecomendacionEntity.setElemento( elementoToElementoEntity( abonoQuimicoRecomendacion.getElemento() ) );
+        abonoQuimicoRecomendacionEntity.setDisponibilidad( abonoQuimicoRecomendacion.getDisponibilidad() );
+        abonoQuimicoRecomendacionEntity.setEficiencia( abonoQuimicoRecomendacion.getEficiencia() );
+
+        return abonoQuimicoRecomendacionEntity;
+    }
+
+    protected Collection<AbonoQuimicoRecomendacionEntity> abonoQuimicoRecomendacionCollectionToAbonoQuimicoRecomendacionEntityCollection(Collection<AbonoQuimicoRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoQuimicoRecomendacionEntity> collection1 = new ArrayList<AbonoQuimicoRecomendacionEntity>( collection.size() );
+        for ( AbonoQuimicoRecomendacion abonoQuimicoRecomendacion : collection ) {
+            collection1.add( abonoQuimicoRecomendacionToAbonoQuimicoRecomendacionEntity( abonoQuimicoRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
     protected AbonoOrganicoEntity abonoOrganicoToAbonoOrganicoEntity(AbonoOrganico abonoOrganico) {
         if ( abonoOrganico == null ) {
             return null;
@@ -354,6 +414,7 @@ public class FuenteRecomendacionEntityMapperImpl implements FuenteRecomendacionE
         recomendacionEntity.setId( recomendacion.getId() );
         recomendacionEntity.setCantidadEnmienda( recomendacion.getCantidadEnmienda() );
         recomendacionEntity.setPreparacionSuelo( recomendacion.getPreparacionSuelo() );
+        recomendacionEntity.setAbonoQuimicoRecomendacionEntities( abonoQuimicoRecomendacionCollectionToAbonoQuimicoRecomendacionEntityCollection( recomendacion.getAbonoQuimicoRecomendacionEntities() ) );
         recomendacionEntity.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection( recomendacion.getAbonoOrganicoRecomendacionCollection() ) );
 
         return recomendacionEntity;

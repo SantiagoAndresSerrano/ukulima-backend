@@ -8,4 +8,6 @@ public interface ElementoService {
     public Elemento getElementoById(int idElemento);
     public List<Elemento> getAllElemento();
     public void saveElemento(Elemento elemento);
+
+    public Elemento getElementoEntityByNombre(String nombre);
 }

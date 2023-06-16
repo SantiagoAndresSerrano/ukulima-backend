@@ -14,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="com.haulmont.jpb.JpaEntity" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -68,7 +68,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Santiago/Desktop/ukulima-backend/src/main/java/ufps/ukulima/infrastructure/driven_adapters/jpa/PhSuelo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Santiago/Videos/AnyDesk/gidis/ukulima-backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -78,7 +78,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.25076452&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;7feeadb8a68b6956b91aab7d37377588&quot;
   },
@@ -98,6 +98,9 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Santiago\Desktop\ukulima-backend\src\main\java\ufps\ukulima\infrastructure\driven_adapters\jpa" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ufps.ukulima.domain.model.AbonoQuimicoRecomendacion" />
     </key>
   </component>
   <component name="RunManager">
@@ -166,7 +169,20 @@
       <workItem from="1685315141040" duration="896000" />
       <workItem from="1685337978820" duration="595000" />
       <workItem from="1685412874500" duration="1881000" />
-      <workItem from="1685415562970" duration="9272000" />
+      <workItem from="1685415562970" duration="10173000" />
+      <workItem from="1685549509827" duration="633000" />
+      <workItem from="1686499291469" duration="14669000" />
+      <workItem from="1686604751604" duration="883000" />
+      <workItem from="1686697489459" duration="920000" />
+      <workItem from="1686702743819" duration="84000" />
+      <workItem from="1686703479984" duration="597000" />
+      <workItem from="1686709761582" duration="3825000" />
+      <workItem from="1686719694114" duration="303000" />
+      <workItem from="1686841107706" duration="613000" />
+      <workItem from="1686846282909" duration="1035000" />
+      <workItem from="1686852230649" duration="5532000" />
+      <workItem from="1686877215274" duration="395000" />
+      <workItem from="1686877674778" duration="11390000" />
     </task>
     <servers />
   </component>

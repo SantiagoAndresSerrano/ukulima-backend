@@ -20,6 +20,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.MateriaOrganica.MateriaO
 import ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo.PhSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ProfundidadMuestra.ProfundidadMuestraEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.RecomendacionEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Suelo.SueloEntity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -92,15 +93,16 @@ public class AnalisisSueloEntity implements Serializable {
     @JoinColumn(name = "id_clase_textural", referencedColumnName = "id_clase_textural")
     @ManyToOne(optional = false)
     private ClaseTexturalEntity idClaseTextural;
-    @JoinColumn(name = "id_cultivo", referencedColumnName = "id_cultivo")
-    @ManyToOne(optional = false)
-    private CultivoEntity idCultivo;
     @JoinColumn(name = "id_densidad", referencedColumnName = "id_densidad")
     @ManyToOne(optional = false)
     private DensidadEntity idDensidad;
     @JoinColumn(name = "id_profundidad", referencedColumnName = "id_profundidad_muestra")
     @ManyToOne(optional = false)
     private ProfundidadMuestraEntity idProfundidad;
+
+    @JoinColumn(name = "id_suelo", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private SueloEntity idSuelo;
 
     @JoinColumn(name = "id_ph_suelo", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -155,14 +157,22 @@ public class AnalisisSueloEntity implements Serializable {
 
     public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos,
                                float porcentArcilla, Date fecha, ClaseTexturalEntity idClaseTextural,
-                               CultivoEntity idCultivo, DensidadEntity idDensidad, ProfundidadMuestraEntity idProfundidad, PhSueloEntity idPhSuelo, GrupoTexturalEntity idGrupoTextural, AluminioIntercambiableEntity idAluminioIntercambiable, ConductividadElectricaEntity idConductividadElectrica, MateriaOrganicaEntity idMateriaOrganica, IntercambioCationicoEntity idIntercambioCationico, float phSuelo, float aluminioIntercambiable, float conductividadElectrica, float materiaOrganica, float intercambioCationico) {
+                               DensidadEntity idDensidad, ProfundidadMuestraEntity idProfundidad,
+                               PhSueloEntity idPhSuelo, GrupoTexturalEntity idGrupoTextural,
+                               AluminioIntercambiableEntity idAluminioIntercambiable,
+                               ConductividadElectricaEntity idConductividadElectrica,
+                               MateriaOrganicaEntity idMateriaOrganica,
+                               IntercambioCationicoEntity idIntercambioCationico,
+                               float phSuelo, float aluminioIntercambiable,
+                               float conductividadElectrica, float materiaOrganica,
+                               float intercambioCationico, SueloEntity idSuelo) {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
         this.porcentLimos = porcentLimos;
         this.porcentArcilla = porcentArcilla;
         this.fecha = fecha;
         this.idClaseTextural = idClaseTextural;
-        this.idCultivo = idCultivo;
+        this.idSuelo = idSuelo;
         this.idDensidad = idDensidad;
         this.idProfundidad = idProfundidad;
         this.idPhSuelo = idPhSuelo;
@@ -176,6 +186,14 @@ public class AnalisisSueloEntity implements Serializable {
         this.conductividadElectrica = conductividadElectrica;
         this.materiaOrganica = materiaOrganica;
         this.intercambioCationico = intercambioCationico;
+    }
+
+    public SueloEntity getIdSuelo() {
+        return idSuelo;
+    }
+
+    public void setIdSuelo(SueloEntity idSuelo) {
+        this.idSuelo = idSuelo;
     }
 
     public float getPhSuelo() {
@@ -338,14 +356,6 @@ public class AnalisisSueloEntity implements Serializable {
         this.idClaseTextural = idClaseTextural;
     }
 
-    public CultivoEntity getIdCultivo() {
-        return idCultivo;
-    }
-
-    public void setIdCultivo(CultivoEntity idCultivo) {
-        this.idCultivo = idCultivo;
-    }
-
     public DensidadEntity getIdDensidad() {
         return idDensidad;
     }
@@ -392,7 +402,6 @@ public class AnalisisSueloEntity implements Serializable {
                 ", porcentArcilla=" + porcentArcilla +
                 ", fecha=" + fecha +
                 ", idClaseTextural=" + idClaseTextural +
-                ", idCultivo=" + idCultivo +
                 ", idDensidad=" + idDensidad +
                 ", idProfundidad=" + idProfundidad +
                 ", idPhSuelo=" + idPhSuelo +

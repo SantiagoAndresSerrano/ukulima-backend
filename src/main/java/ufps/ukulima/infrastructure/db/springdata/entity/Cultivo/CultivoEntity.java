@@ -55,8 +55,6 @@ public class CultivoEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "plantas_por_hectarea")
     private int plantasPorHectarea;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCultivo")
-    private Collection<AnalisisSueloEntity> analisisSueloCollection;
     @JoinColumn(name = "id_distancia_siembra", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private DistanciaSiembraEntity idDistanciaSiembra;
@@ -108,14 +106,6 @@ public class CultivoEntity implements Serializable {
 
     public void setPlantasPorHectarea(int plantasPorHectarea) {
         this.plantasPorHectarea = plantasPorHectarea;
-    }
-
-    public Collection<AnalisisSueloEntity> analisisSueloCollection() {
-        return analisisSueloCollection;
-    }
-
-    public void setAnalisisSueloCollection(Collection<AnalisisSueloEntity> analisisSueloCollection) {
-        this.analisisSueloCollection = analisisSueloCollection;
     }
 
     public DistanciaSiembraEntity getIdDistanciaSiembra() {

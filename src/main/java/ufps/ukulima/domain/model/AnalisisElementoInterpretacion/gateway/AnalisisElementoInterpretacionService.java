@@ -9,8 +9,8 @@ public interface AnalisisElementoInterpretacionService {
     public AnalisisElementoInterpretacion getAnalisisElementoById(int id);
     public List<AnalisisElementoInterpretacion> getAllAnalisisElemento();
     public List<AnalisisElementosEntity> getElementosByInterpretacion(
-            float valorF,float valorP,float valorC,float valorM,float valorS, float valorA,int idF,int idP,int idC,
-            int idM,int idS,int idA,int idAnalisisSuelo
+            float valorF,float valorP,float valorC,float valorM,float valorS,float valorA,float valorBo,float valorCo,
+            int idF,int idP,int idC,int idM,int idS,int idA,int idBo,int idCo, int idAnalisisSuelo
     );
 
     public void saveAnalisisElemento(AnalisisElementoInterpretacion analisisElementoInterpretacion);

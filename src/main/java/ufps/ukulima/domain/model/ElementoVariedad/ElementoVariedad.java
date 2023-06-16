@@ -21,7 +21,6 @@ public class ElementoVariedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Integer idElementoVariedad;
-    @NotNull(message = "nombre no puede estar vacío")
     private String nombre;
     private int valorMinimo;
     private int valorMaximo;

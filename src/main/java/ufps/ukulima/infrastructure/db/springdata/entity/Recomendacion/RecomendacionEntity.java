@@ -12,6 +12,7 @@ package ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacionEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.AbonoQuimicoRecomendacion.AbonoQuimicoRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.EnmiendaRecomendacion.EnmiendaRecomendacionEntity;
@@ -67,11 +68,16 @@ public class RecomendacionEntity implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecomendacion")
     private Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recomendacion")
+    private Collection<AbonoQuimicoRecomendacionEntity> abonoQuimicoRecomendacionEntities;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRecomendacion")
     private Collection<FuenteRecomendacionEntity> fuenteRecomendacionCollection;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recomendacion")
     private Collection<EnmiendaRecomendacionEntity> enmiendaRecomendacionEntityCollection;
+
+
 
     public RecomendacionEntity() {
     }
@@ -129,6 +135,14 @@ public class RecomendacionEntity implements Serializable {
 
     public Collection<AbonoOrganicoRecomendacionEntity> getAbonoOrganicoRecomendacionCollection() {
         return abonoOrganicoRecomendacionCollection;
+    }
+
+    public Collection<AbonoQuimicoRecomendacionEntity> getAbonoQuimicoRecomendacionEntities() {
+        return abonoQuimicoRecomendacionEntities;
+    }
+
+    public void setAbonoQuimicoRecomendacionEntities(Collection<AbonoQuimicoRecomendacionEntity> abonoQuimicoRecomendacionEntities) {
+        this.abonoQuimicoRecomendacionEntities = abonoQuimicoRecomendacionEntities;
     }
 
     public void setAbonoOrganicoRecomendacionCollection(

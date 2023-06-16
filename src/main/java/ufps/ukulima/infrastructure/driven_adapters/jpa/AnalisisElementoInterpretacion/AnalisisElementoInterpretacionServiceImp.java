@@ -49,12 +49,9 @@ public class AnalisisElementoInterpretacionServiceImp implements AnalisisElement
 
     @Override
     public List<AnalisisElementosEntity> getElementosByInterpretacion(
-            float valorF, float valorP, float valorC, float valorM, float valorS, float valorA,
-            int idF, int idP, int idC, int idM, int idS, int idA, int idAnalisisSuelo) {
-        List<AnalisisElementoInterpretacionEntity> muyBajos =
-                analsisElementoRepository.obtenerInterpretacionMuyBajos(valorF, valorP, valorC, valorM);
-        List<AnalisisElementoInterpretacionEntity> all =
-                analsisElementoRepository.obtenerInterpretacionVarias(valorF, valorP, valorC, valorM, valorS, valorA);
+            float valorF, float valorP, float valorC, float valorM, float valorS, float valorA,float valorBo,
+            float valorCo,
+            int idF, int idP, int idC, int idM, int idS, int idA,int idBo,int idCo, int idAnalisisSuelo) {
 
         List<AnalisisElementosEntity> result = new ArrayList<>();
 
@@ -63,44 +60,59 @@ public class AnalisisElementoInterpretacionServiceImp implements AnalisisElement
         ElementoEntity cElementoEntity = elementoRepository.getElementoEntityById(idC);
         ElementoEntity mElementoEntity = elementoRepository.getElementoEntityById(idM);
 
-        if (muyBajos.size() > 0 || all.size() > 0) {
-            String interpretacion = muyBajos.get(0).getInterpretacion();
-            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorF,
+        result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorF,
+                new AnalisisSueloEntity(idAnalisisSuelo),
+                fElementoEntity, analsisElementoRepository.
+                getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
+        (fElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(valorF,"FÓSFORO (P)").getInterpretacion()))));
+
+        result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorP,
+                new AnalisisSueloEntity(idAnalisisSuelo),
+                pElementoEntity, analsisElementoRepository.
+                getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
+                        (pElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(valorP,"POTASIO (K)").getInterpretacion()))));
+        result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorC,
+                new AnalisisSueloEntity(idAnalisisSuelo),
+                cElementoEntity, analsisElementoRepository.
+                getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
+                        (cElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(valorC,"CALCIO (Ca)").getInterpretacion()))));
+        result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorM,
+                new AnalisisSueloEntity(idAnalisisSuelo),
+                mElementoEntity, analsisElementoRepository.
+                getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
+                        (mElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(valorM,"MAGNESIO (Mg)").getInterpretacion()))));
+
+        if(idS !=0 && idA!=0 && idBo!=0 && idCo!=0){
+            ElementoEntity sElementoEntity = elementoRepository.getElementoEntityById(idS);
+            ElementoEntity aElementoEntity = elementoRepository.getElementoEntityById(idA);
+            ElementoEntity boElementoEntity = elementoRepository.getElementoEntityById(idBo);
+            ElementoEntity coElementoEntity = elementoRepository.getElementoEntityById(idCo);
+
+            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorS,
                     new AnalisisSueloEntity(idAnalisisSuelo),
-                    fElementoEntity, analsisElementoRepository.
-                            getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
-                                    (fElementoEntity,interpretacion))));
-            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorP,
-                    new AnalisisSueloEntity(idAnalisisSuelo),
-                    pElementoEntity, analsisElementoRepository.
+                    sElementoEntity, analsisElementoRepository.
                     getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
-                            (pElementoEntity,interpretacion))));
-            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorC,
-                    new AnalisisSueloEntity(idAnalisisSuelo),
-                    cElementoEntity, analsisElementoRepository.
-                    getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
-                            (cElementoEntity,interpretacion))));
+                            (sElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(
+                                    valorS,"SODIO (Na)").getInterpretacion()))));
             result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorM,
                     new AnalisisSueloEntity(idAnalisisSuelo),
-                    mElementoEntity, analsisElementoRepository.
+                    aElementoEntity, analsisElementoRepository.
                     getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
-                            (mElementoEntity,interpretacion))));
+                            (aElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(
+                                    valorA,"AZUFRE (S)").getInterpretacion()))));
 
-            if(all.size() > 0){
-                ElementoEntity sElementoEntity = elementoRepository.getElementoEntityById(idS);
-                ElementoEntity aElementoEntity = elementoRepository.getElementoEntityById(idA);
-                result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorS,
-                        new AnalisisSueloEntity(idAnalisisSuelo),
-                        sElementoEntity, analsisElementoRepository.
-                        getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
-                                (sElementoEntity,interpretacion))));
-
-                result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorA,
-                        new AnalisisSueloEntity(idAnalisisSuelo),
-                        aElementoEntity, analsisElementoRepository.
-                        getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
-                                (aElementoEntity,interpretacion))));
-            }
+            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorM,
+                    new AnalisisSueloEntity(idAnalisisSuelo),
+                    boElementoEntity, analsisElementoRepository.
+                    getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
+                            (boElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(
+                                    valorBo,"BORO (B)").getInterpretacion()))));
+            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorM,
+                    new AnalisisSueloEntity(idAnalisisSuelo),
+                    coElementoEntity, analsisElementoRepository.
+                    getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
+                            (coElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(
+                                    valorCo,"COBRE (Cu)").getInterpretacion()))));
         }
         return result;
     }

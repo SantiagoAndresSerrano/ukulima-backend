@@ -18,6 +18,7 @@ import ufps.ukulima.domain.model.MateriaOrganica.MateriaOrganica;
 import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
 import ufps.ukulima.domain.model.ProfundidadMuestra.ProfundidadMuestra;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
+import ufps.ukulima.domain.model.Suelo.Suelo;
 import ufps.ukulima.infrastructure.db.springdata.entity.AluminioIntercambiable.AluminioIntercambiableEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBases.AnalisisSueloRelacionBaseEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
@@ -52,8 +53,7 @@ public class AnalisisSuelo {
     private Collection<AnalisisSueloRelacionBase> analisisSueloRelacionBaseEntities;
 
     private ClaseTextural idClaseTextural;
-    @NotNull(message = "Cultivo no puede ser vacío")
-    private Cultivo idCultivo;
+
     private Densidad idDensidad;
     @NotNull(message = "Profundidad de muestra no puede ser vacío")
     private ProfundidadMuestra idProfundidad;
@@ -78,6 +78,7 @@ public class AnalisisSuelo {
 
     private IntercambioCationico idIntercambioCationico;
 
+    private Suelo idSuelo;
 
     public AnalisisSuelo() {
     }
@@ -88,13 +89,13 @@ public class AnalisisSuelo {
 
     public AnalisisSuelo(Integer idAnalisisSuelo, float porcentArena,
                          float porcentLimos, float porcentArcilla, Date fecha,
-                         ClaseTextural idClaseTextural, Cultivo idCultivo, Densidad idDensidad,
+                         ClaseTextural idClaseTextural, Densidad idDensidad,
                          ProfundidadMuestra idProfundidad, float phSuelo, float aluminioIntercambiable,
                          float conductividadElectrica, float materiaOrganica, float intercambioCationico
-                         ,PhSuelo idPhSuelo, AluminioIntercambiable idAluminioIntercambiable,
+                         , PhSuelo idPhSuelo, AluminioIntercambiable idAluminioIntercambiable,
                          ConductividadElectrica idConductividadElectrica,
                          MateriaOrganica idMmateriaOrganica,
-                         IntercambioCationico idIntercambioCationico,GrupoTextural idGrupoTextural) {
+                         IntercambioCationico idIntercambioCationico, GrupoTextural idGrupoTextural, Suelo idSuelo) {
 
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.porcentArena = porcentArena;
@@ -102,7 +103,6 @@ public class AnalisisSuelo {
         this.porcentArcilla = porcentArcilla;
         this.fecha = fecha;
         this.idClaseTextural = idClaseTextural;
-        this.idCultivo = idCultivo;
         this.idDensidad = idDensidad;
         this.idProfundidad = idProfundidad;
         this.phSuelo = phSuelo;
@@ -116,6 +116,14 @@ public class AnalisisSuelo {
         this.idConductividadElectrica = idConductividadElectrica;
         this.idMateriaOrganica = idMmateriaOrganica;
         this.idIntercambioCationico = idIntercambioCationico;
+    }
+
+    public Suelo getIdSuelo() {
+        return idSuelo;
+    }
+
+    public void setIdSuelo(Suelo idSuelo) {
+        this.idSuelo = idSuelo;
     }
 
     public Collection<AnalisisSueloRelacionBase> getAnalisisSueloRelacionBaseEntities() {
@@ -270,14 +278,6 @@ public class AnalisisSuelo {
         this.idClaseTextural = idClaseTextural;
     }
 
-    public Cultivo getIdCultivo() {
-        return idCultivo;
-    }
-
-    public void setIdCultivo(Cultivo idCultivo) {
-        this.idCultivo = idCultivo;
-    }
-
     public Densidad getIdDensidad() {
         return idDensidad;
     }
@@ -322,7 +322,6 @@ public class AnalisisSuelo {
                 ", porcentArcilla=" + porcentArcilla +
                 ", fecha=" + fecha +
                 ", idClaseTextural=" + idClaseTextural +
-                ", idCultivo=" + idCultivo +
                 ", idDensidad=" + idDensidad +
                 ", idProfundidad=" + idProfundidad +
                 ", phSuelo=" + phSuelo +

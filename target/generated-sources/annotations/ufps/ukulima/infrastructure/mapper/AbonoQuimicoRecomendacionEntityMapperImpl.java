@@ -9,82 +9,85 @@ import ufps.ukulima.domain.model.AbonoOrganico.AbonoOrganico;
 import ufps.ukulima.domain.model.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacion;
 import ufps.ukulima.domain.model.AbonoQuimicoRecomendacion.AbonoQuimicoRecomendacion;
 import ufps.ukulima.domain.model.Elemento.Elemento;
-import ufps.ukulima.domain.model.ElementoVariedad.ElementoVariedad;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.EnmiendaRecomendacion.EnmiendaRecomendacion;
 import ufps.ukulima.domain.model.Fuente.Fuente;
 import ufps.ukulima.domain.model.FuenteRecomendacion.FuenteRecomendacion;
 import ufps.ukulima.domain.model.Recomendacion.Recomendacion;
-import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
-import ufps.ukulima.domain.model.Variedad.Variedad;
 import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganico.AbonoOrganicoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AbonoOrganicoRecomendacion.AbonoOrganicoRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.AbonoQuimicoRecomendacion.AbonoQuimicoRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
-import ufps.ukulima.infrastructure.db.springdata.entity.ElementoVariedad.ElementoVariedadEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.EnmiendaRecomendacion.EnmiendaRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Fuente.FuenteEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.FuenteRecomendacion.FuenteRecomendacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.RecomendacionEntity;
-import ufps.ukulima.infrastructure.db.springdata.entity.TipoCultivo.TipoCultivoEntity;
-import ufps.ukulima.infrastructure.db.springdata.entity.Variedad.VariedadEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-15T20:22:49-0500",
+    date = "2023-06-15T20:22:51-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
-public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityMapper {
+public class AbonoQuimicoRecomendacionEntityMapperImpl implements AbonoQuimicoRecomendacionEntityMapper {
 
     @Override
-    public ElementoVariedad toDomain(ElementoVariedadEntity elementoVariedadEntity) {
-        if ( elementoVariedadEntity == null ) {
+    public AbonoQuimicoRecomendacion toDomain(AbonoQuimicoRecomendacionEntity entity) {
+        if ( entity == null ) {
             return null;
         }
 
-        ElementoVariedad elementoVariedad = new ElementoVariedad();
+        AbonoQuimicoRecomendacion abonoQuimicoRecomendacion = new AbonoQuimicoRecomendacion();
 
-        elementoVariedad.setIdElementoVariedad( elementoVariedadEntity.getIdElementoVariedad() );
-        elementoVariedad.setNombre( elementoVariedadEntity.getNombre() );
-        elementoVariedad.setValorMinimo( elementoVariedadEntity.getValorMinimo() );
-        elementoVariedad.setValorMaximo( elementoVariedadEntity.getValorMaximo() );
-        elementoVariedad.setIdElemento( elementoEntityToElemento( elementoVariedadEntity.getIdElemento() ) );
-        elementoVariedad.setIdVariedad( variedadEntityToVariedad( elementoVariedadEntity.getIdVariedad() ) );
-        elementoVariedad.setValorOptimo( elementoVariedadEntity.getValorOptimo() );
+        abonoQuimicoRecomendacion.setId( entity.getId() );
+        abonoQuimicoRecomendacion.setElemento( elementoEntityToElemento( entity.getElemento() ) );
+        abonoQuimicoRecomendacion.setDisponibilidad( entity.getDisponibilidad() );
+        abonoQuimicoRecomendacion.setEficiencia( entity.getEficiencia() );
 
-        return elementoVariedad;
+        return abonoQuimicoRecomendacion;
     }
 
     @Override
-    public ElementoVariedadEntity toEntity(ElementoVariedad elementoVariedad) {
-        if ( elementoVariedad == null ) {
+    public AbonoQuimicoRecomendacionEntity toEntity(AbonoQuimicoRecomendacion domain) {
+        if ( domain == null ) {
             return null;
         }
 
-        ElementoVariedadEntity elementoVariedadEntity = new ElementoVariedadEntity();
+        AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity = new AbonoQuimicoRecomendacionEntity();
 
-        elementoVariedadEntity.setIdElementoVariedad( elementoVariedad.getIdElementoVariedad() );
-        elementoVariedadEntity.setNombre( elementoVariedad.getNombre() );
-        elementoVariedadEntity.setValorMinimo( elementoVariedad.getValorMinimo() );
-        elementoVariedadEntity.setValorMaximo( elementoVariedad.getValorMaximo() );
-        elementoVariedadEntity.setValorOptimo( elementoVariedad.getValorOptimo() );
-        elementoVariedadEntity.setIdElemento( elementoToElementoEntity( elementoVariedad.getIdElemento() ) );
-        elementoVariedadEntity.setIdVariedad( variedadToVariedadEntity( elementoVariedad.getIdVariedad() ) );
+        abonoQuimicoRecomendacionEntity.setId( domain.getId() );
+        abonoQuimicoRecomendacionEntity.setRecomendacion( recomendacionToRecomendacionEntity( domain.getRecomendacion() ) );
+        abonoQuimicoRecomendacionEntity.setElemento( elementoToElementoEntity( domain.getElemento() ) );
+        abonoQuimicoRecomendacionEntity.setDisponibilidad( domain.getDisponibilidad() );
+        abonoQuimicoRecomendacionEntity.setEficiencia( domain.getEficiencia() );
 
-        return elementoVariedadEntity;
+        return abonoQuimicoRecomendacionEntity;
     }
 
     @Override
-    public List<ElementoVariedad> elementoVariedadToDomain(List<ElementoVariedadEntity> elementoVariedadEntities) {
-        if ( elementoVariedadEntities == null ) {
+    public List<AbonoQuimicoRecomendacion> toDomainList(List<AbonoQuimicoRecomendacionEntity> entityList) {
+        if ( entityList == null ) {
             return null;
         }
 
-        List<ElementoVariedad> list = new ArrayList<ElementoVariedad>( elementoVariedadEntities.size() );
-        for ( ElementoVariedadEntity elementoVariedadEntity : elementoVariedadEntities ) {
-            list.add( toDomain( elementoVariedadEntity ) );
+        List<AbonoQuimicoRecomendacion> list = new ArrayList<AbonoQuimicoRecomendacion>( entityList.size() );
+        for ( AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity : entityList ) {
+            list.add( toDomain( abonoQuimicoRecomendacionEntity ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<AbonoQuimicoRecomendacionEntity> toEntityList(List<AbonoQuimicoRecomendacion> domainList) {
+        if ( domainList == null ) {
+            return null;
+        }
+
+        List<AbonoQuimicoRecomendacionEntity> list = new ArrayList<AbonoQuimicoRecomendacionEntity>( domainList.size() );
+        for ( AbonoQuimicoRecomendacion abonoQuimicoRecomendacion : domainList ) {
+            list.add( toEntity( abonoQuimicoRecomendacion ) );
         }
 
         return list;
@@ -117,21 +120,6 @@ public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityM
         return fuente;
     }
 
-    protected AbonoQuimicoRecomendacion abonoQuimicoRecomendacionEntityToAbonoQuimicoRecomendacion(AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity) {
-        if ( abonoQuimicoRecomendacionEntity == null ) {
-            return null;
-        }
-
-        AbonoQuimicoRecomendacion abonoQuimicoRecomendacion = new AbonoQuimicoRecomendacion();
-
-        abonoQuimicoRecomendacion.setId( abonoQuimicoRecomendacionEntity.getId() );
-        abonoQuimicoRecomendacion.setElemento( elementoEntityToElemento( abonoQuimicoRecomendacionEntity.getElemento() ) );
-        abonoQuimicoRecomendacion.setDisponibilidad( abonoQuimicoRecomendacionEntity.getDisponibilidad() );
-        abonoQuimicoRecomendacion.setEficiencia( abonoQuimicoRecomendacionEntity.getEficiencia() );
-
-        return abonoQuimicoRecomendacion;
-    }
-
     protected Collection<AbonoQuimicoRecomendacion> abonoQuimicoRecomendacionEntityCollectionToAbonoQuimicoRecomendacionCollection(Collection<AbonoQuimicoRecomendacionEntity> collection) {
         if ( collection == null ) {
             return null;
@@ -139,7 +127,7 @@ public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityM
 
         Collection<AbonoQuimicoRecomendacion> collection1 = new ArrayList<AbonoQuimicoRecomendacion>( collection.size() );
         for ( AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity : collection ) {
-            collection1.add( abonoQuimicoRecomendacionEntityToAbonoQuimicoRecomendacion( abonoQuimicoRecomendacionEntity ) );
+            collection1.add( toDomain( abonoQuimicoRecomendacionEntity ) );
         }
 
         return collection1;
@@ -275,31 +263,132 @@ public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityM
         return elemento;
     }
 
-    protected TipoCultivo tipoCultivoEntityToTipoCultivo(TipoCultivoEntity tipoCultivoEntity) {
-        if ( tipoCultivoEntity == null ) {
+    protected Collection<RecomendacionEntity> recomendacionCollectionToRecomendacionEntityCollection(Collection<Recomendacion> collection) {
+        if ( collection == null ) {
             return null;
         }
 
-        TipoCultivo tipoCultivo = new TipoCultivo();
+        Collection<RecomendacionEntity> collection1 = new ArrayList<RecomendacionEntity>( collection.size() );
+        for ( Recomendacion recomendacion : collection ) {
+            collection1.add( recomendacionToRecomendacionEntity( recomendacion ) );
+        }
 
-        tipoCultivo.setId( tipoCultivoEntity.getId() );
-        tipoCultivo.setDescripcion( tipoCultivoEntity.getDescripcion() );
-
-        return tipoCultivo;
+        return collection1;
     }
 
-    protected Variedad variedadEntityToVariedad(VariedadEntity variedadEntity) {
-        if ( variedadEntity == null ) {
+    protected EnmiendaEntity enmiendaToEnmiendaEntity(Enmienda enmienda) {
+        if ( enmienda == null ) {
             return null;
         }
 
-        Variedad variedad = new Variedad();
+        EnmiendaEntity enmiendaEntity = new EnmiendaEntity();
 
-        variedad.setId( variedadEntity.getId() );
-        variedad.setDescripcion( variedadEntity.getDescripcion() );
-        variedad.setIdTipoCultivo( tipoCultivoEntityToTipoCultivo( variedadEntity.getIdTipoCultivo() ) );
+        enmiendaEntity.setNombre( enmienda.getNombre() );
+        enmiendaEntity.setFormula( enmienda.getFormula() );
+        enmiendaEntity.setValor( enmienda.getValor() );
+        enmiendaEntity.setId( enmienda.getId() );
+        enmiendaEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( enmienda.getRecomendacionCollection() ) );
 
-        return variedad;
+        return enmiendaEntity;
+    }
+
+    protected EnmiendaRecomendacionEntity enmiendaRecomendacionToEnmiendaRecomendacionEntity(EnmiendaRecomendacion enmiendaRecomendacion) {
+        if ( enmiendaRecomendacion == null ) {
+            return null;
+        }
+
+        EnmiendaRecomendacionEntity enmiendaRecomendacionEntity = new EnmiendaRecomendacionEntity();
+
+        enmiendaRecomendacionEntity.setId( enmiendaRecomendacion.getId() );
+        enmiendaRecomendacionEntity.setEnmienda( enmiendaToEnmiendaEntity( enmiendaRecomendacion.getEnmienda() ) );
+        enmiendaRecomendacionEntity.setRecomendacion( recomendacionToRecomendacionEntity( enmiendaRecomendacion.getRecomendacion() ) );
+        enmiendaRecomendacionEntity.setValor( enmiendaRecomendacion.getValor() );
+
+        return enmiendaRecomendacionEntity;
+    }
+
+    protected Collection<EnmiendaRecomendacionEntity> enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection(Collection<EnmiendaRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<EnmiendaRecomendacionEntity> collection1 = new ArrayList<EnmiendaRecomendacionEntity>( collection.size() );
+        for ( EnmiendaRecomendacion enmiendaRecomendacion : collection ) {
+            collection1.add( enmiendaRecomendacionToEnmiendaRecomendacionEntity( enmiendaRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
+    protected Collection<AbonoQuimicoRecomendacionEntity> abonoQuimicoRecomendacionCollectionToAbonoQuimicoRecomendacionEntityCollection(Collection<AbonoQuimicoRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoQuimicoRecomendacionEntity> collection1 = new ArrayList<AbonoQuimicoRecomendacionEntity>( collection.size() );
+        for ( AbonoQuimicoRecomendacion abonoQuimicoRecomendacion : collection ) {
+            collection1.add( toEntity( abonoQuimicoRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
+    protected AbonoOrganicoEntity abonoOrganicoToAbonoOrganicoEntity(AbonoOrganico abonoOrganico) {
+        if ( abonoOrganico == null ) {
+            return null;
+        }
+
+        AbonoOrganicoEntity abonoOrganicoEntity = new AbonoOrganicoEntity();
+
+        abonoOrganicoEntity.setId( abonoOrganico.getId() );
+        abonoOrganicoEntity.setDescripcion( abonoOrganico.getDescripcion() );
+
+        return abonoOrganicoEntity;
+    }
+
+    protected AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity(AbonoOrganicoRecomendacion abonoOrganicoRecomendacion) {
+        if ( abonoOrganicoRecomendacion == null ) {
+            return null;
+        }
+
+        AbonoOrganicoRecomendacionEntity abonoOrganicoRecomendacionEntity = new AbonoOrganicoRecomendacionEntity();
+
+        abonoOrganicoRecomendacionEntity.setId( abonoOrganicoRecomendacion.getId() );
+        abonoOrganicoRecomendacionEntity.setCantidad( abonoOrganicoRecomendacion.getCantidad() );
+        abonoOrganicoRecomendacionEntity.setIdAbonoOrganico( abonoOrganicoToAbonoOrganicoEntity( abonoOrganicoRecomendacion.getIdAbonoOrganico() ) );
+        abonoOrganicoRecomendacionEntity.setIdRecomendacion( recomendacionToRecomendacionEntity( abonoOrganicoRecomendacion.getIdRecomendacion() ) );
+
+        return abonoOrganicoRecomendacionEntity;
+    }
+
+    protected Collection<AbonoOrganicoRecomendacionEntity> abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection(Collection<AbonoOrganicoRecomendacion> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<AbonoOrganicoRecomendacionEntity> collection1 = new ArrayList<AbonoOrganicoRecomendacionEntity>( collection.size() );
+        for ( AbonoOrganicoRecomendacion abonoOrganicoRecomendacion : collection ) {
+            collection1.add( abonoOrganicoRecomendacionToAbonoOrganicoRecomendacionEntity( abonoOrganicoRecomendacion ) );
+        }
+
+        return collection1;
+    }
+
+    protected RecomendacionEntity recomendacionToRecomendacionEntity(Recomendacion recomendacion) {
+        if ( recomendacion == null ) {
+            return null;
+        }
+
+        RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
+
+        recomendacionEntity.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection( recomendacion.getEnmiendaRecomendacionEntityCollection() ) );
+        recomendacionEntity.setId( recomendacion.getId() );
+        recomendacionEntity.setCantidadEnmienda( recomendacion.getCantidadEnmienda() );
+        recomendacionEntity.setPreparacionSuelo( recomendacion.getPreparacionSuelo() );
+        recomendacionEntity.setAbonoQuimicoRecomendacionEntities( abonoQuimicoRecomendacionCollectionToAbonoQuimicoRecomendacionEntityCollection( recomendacion.getAbonoQuimicoRecomendacionEntities() ) );
+        recomendacionEntity.setAbonoOrganicoRecomendacionCollection( abonoOrganicoRecomendacionCollectionToAbonoOrganicoRecomendacionEntityCollection( recomendacion.getAbonoOrganicoRecomendacionCollection() ) );
+
+        return recomendacionEntity;
     }
 
     protected ElementoEntity elementoToElementoEntity(Elemento elemento) {
@@ -314,32 +403,5 @@ public class ElementoVariedadEntityMapperImpl implements ElementoVariedadEntityM
         elementoEntity.setUnidad( elemento.getUnidad() );
 
         return elementoEntity;
-    }
-
-    protected TipoCultivoEntity tipoCultivoToTipoCultivoEntity(TipoCultivo tipoCultivo) {
-        if ( tipoCultivo == null ) {
-            return null;
-        }
-
-        TipoCultivoEntity tipoCultivoEntity = new TipoCultivoEntity();
-
-        tipoCultivoEntity.setId( tipoCultivo.getId() );
-        tipoCultivoEntity.setDescripcion( tipoCultivo.getDescripcion() );
-
-        return tipoCultivoEntity;
-    }
-
-    protected VariedadEntity variedadToVariedadEntity(Variedad variedad) {
-        if ( variedad == null ) {
-            return null;
-        }
-
-        VariedadEntity variedadEntity = new VariedadEntity();
-
-        variedadEntity.setId( variedad.getId() );
-        variedadEntity.setDescripcion( variedad.getDescripcion() );
-        variedadEntity.setIdTipoCultivo( tipoCultivoToTipoCultivoEntity( variedad.getIdTipoCultivo() ) );
-
-        return variedadEntity;
     }
 }
