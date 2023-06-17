@@ -14,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="com.haulmont.jpb.JpaEntity" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -185,7 +185,7 @@
       <workItem from="1686877674778" duration="12134000" />
       <workItem from="1686948657215" duration="605000" />
       <workItem from="1686957162335" duration="350000" />
-      <workItem from="1686966730793" duration="12404000" />
+      <workItem from="1686966730793" duration="17406000" />
     </task>
     <servers />
   </component>

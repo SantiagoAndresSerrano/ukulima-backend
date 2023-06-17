@@ -10,6 +10,7 @@ public class AbonoQuimicoRecomendacion {
     private Elemento elemento;
     private Float disponibilidad;
     private Float eficiencia;
+    private Float dosis;
 
     public AbonoQuimicoRecomendacion() {
     }
@@ -20,6 +21,14 @@ public class AbonoQuimicoRecomendacion {
         this.elemento = elemento;
         this.disponibilidad = disponibilidad;
         this.eficiencia = eficiencia;
+    }
+
+    public Float getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(Float dosis) {
+        this.dosis = dosis;
     }
 
     public Integer getId() {

@@ -1,6 +1,7 @@
 package ufps.ukulima.infrastructure.entry_points.rest.Cultivo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +65,10 @@ public class CultivoController {
         return ResponseEntity.ok(cultivoService.getAllCultivo());
     }
 
+    @GetMapping("{nombreUsuario}/cultivos")
+    public ResponseEntity<?> getAllCultivoByAgricultor(@PathVariable("nombreUsuario") String nombreUsuario) {
+        return ResponseEntity.ok(cultivoService.getAllCultivoByAgricultor(nombreUsuario));
+    }
     @PostMapping
     public ResponseEntity<?> saveCultivo(@Valid @RequestBody Cultivo cultivo, BindingResult br) {
 

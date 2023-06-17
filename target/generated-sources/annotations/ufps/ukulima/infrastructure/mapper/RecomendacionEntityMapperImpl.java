@@ -26,7 +26,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.Recomendac
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-17T01:21:51-0500",
+    date = "2023-06-17T11:32:34-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -147,6 +147,7 @@ public class RecomendacionEntityMapperImpl implements RecomendacionEntityMapper 
 
         AbonoQuimicoRecomendacion abonoQuimicoRecomendacion = new AbonoQuimicoRecomendacion();
 
+        abonoQuimicoRecomendacion.setDosis( abonoQuimicoRecomendacionEntity.getDosis() );
         abonoQuimicoRecomendacion.setId( abonoQuimicoRecomendacionEntity.getId() );
         abonoQuimicoRecomendacion.setElemento( elementoEntityToElemento( abonoQuimicoRecomendacionEntity.getElemento() ) );
         abonoQuimicoRecomendacion.setDisponibilidad( abonoQuimicoRecomendacionEntity.getDisponibilidad() );
@@ -328,6 +329,7 @@ public class RecomendacionEntityMapperImpl implements RecomendacionEntityMapper 
 
         AbonoQuimicoRecomendacionEntity abonoQuimicoRecomendacionEntity = new AbonoQuimicoRecomendacionEntity();
 
+        abonoQuimicoRecomendacionEntity.setDosis( abonoQuimicoRecomendacion.getDosis() );
         abonoQuimicoRecomendacionEntity.setId( abonoQuimicoRecomendacion.getId() );
         abonoQuimicoRecomendacionEntity.setRecomendacion( toEntity( abonoQuimicoRecomendacion.getRecomendacion() ) );
         abonoQuimicoRecomendacionEntity.setElemento( elementoToElementoEntity( abonoQuimicoRecomendacion.getElemento() ) );

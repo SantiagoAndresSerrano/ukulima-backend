@@ -625,6 +625,8 @@ public class AnalisisSueloController {
         }
 
 
+
+
             AbonoQuimicoRecomendacion aqr_nit = new AbonoQuimicoRecomendacion(null,r2,elemento_nit,
                     nit_disponibilidad,nit_eficiencia);
 

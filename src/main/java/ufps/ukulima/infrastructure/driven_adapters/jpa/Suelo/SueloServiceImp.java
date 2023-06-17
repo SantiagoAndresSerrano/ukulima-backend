@@ -32,7 +32,7 @@ public class SueloServiceImp implements SueloService {
     @Override
     @Transactional
     public void saveSuelo(Suelo abonoOrganico) {
-
+        this.sueloRepository.save( sueloEntityMapper.toEntity(abonoOrganico));
     }
 
 }

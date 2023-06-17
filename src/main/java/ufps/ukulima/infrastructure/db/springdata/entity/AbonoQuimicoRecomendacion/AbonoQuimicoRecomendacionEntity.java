@@ -31,6 +31,10 @@ public class AbonoQuimicoRecomendacionEntity implements Serializable {
 
     @Column(name = "eficiencia")
     private Float eficiencia;
+
+    @Column(name = "dosis")
+    private Float dosis;
+
     public AbonoQuimicoRecomendacionEntity(){}
     public AbonoQuimicoRecomendacionEntity(Integer id, RecomendacionEntity recomendacion, ElementoEntity elemento, Float disponibilidad, Float eficiencia) {
         this.id = id;
@@ -38,6 +42,13 @@ public class AbonoQuimicoRecomendacionEntity implements Serializable {
         this.elemento = elemento;
         this.disponibilidad = disponibilidad;
         this.eficiencia = eficiencia;
+    }
+    public Float getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(Float dosis) {
+        this.dosis = dosis;
     }
 
     public Integer getId() {

@@ -124,9 +124,6 @@ public class FincaController {
                 }
                 }
         }
-
-
-
         return ResponseEntity.ok(new Mensaje("Finca guardada"));
     }
 
