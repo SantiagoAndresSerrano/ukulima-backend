@@ -52,6 +52,8 @@ import ufps.ukulima.domain.model.GrupoTextural.GrupoTextural;
 import ufps.ukulima.domain.model.GrupoTextural.gateway.GrupoTexturalService;
 import ufps.ukulima.domain.model.IntercambioCationico.IntercambioCationico;
 import ufps.ukulima.domain.model.IntercambioCationico.gateway.IntercambioCationicoService;
+import ufps.ukulima.domain.model.Lote.Lote;
+import ufps.ukulima.domain.model.Lote.gateway.LoteServicio;
 import ufps.ukulima.domain.model.MateriaOrganica.MateriaOrganica;
 import ufps.ukulima.domain.model.MateriaOrganica.gateway.MateriaOrganicaService;
 import ufps.ukulima.domain.model.PhSuelo.PhSuelo;
@@ -80,6 +82,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.RelacionBase.RelacionBas
 import ufps.ukulima.infrastructure.mapper.AnalisisSueloEntityMapper;
 import ufps.ukulima.infrastructure.mapper.RecomendacionEntityMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -157,6 +160,9 @@ public class AnalisisSueloController {
 
     @Autowired
     AbonoQuimicoRecomendacionServicio abonoQuimicoRecomendacionServicio;
+
+    @Autowired
+    LoteServicio loteServicio;
 
     @GetMapping
     public ResponseEntity<?> getAllAnalisisSuelo() {
@@ -666,6 +672,19 @@ public class AnalisisSueloController {
                     HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(analisisSueloR);
+    }
+
+    @GetMapping("/{idLote}/analisisLotes")
+    public ResponseEntity<?> getAnalisisSueloByLote(@PathVariable int idLote) {
+        Lote lote = loteServicio.getLoteById(idLote);
+        if (lote == null) {
+            return new ResponseEntity<>(new Mensaje("Ese lote no existe"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        List<AnalisisSuelo> analisisSueloLotes = analisisSueloService.getAllAnalisisSueloByLote(idLote);
+        if(analisisSueloLotes==null)
+            analisisSueloLotes = new ArrayList<>();
+        return ResponseEntity.ok(analisisSueloLotes);
     }
 
     @PutMapping

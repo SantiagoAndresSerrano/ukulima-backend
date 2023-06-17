@@ -9,6 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSuelo.AnalisisSu
 import ufps.ukulima.infrastructure.db.springdata.entity.DistanciaSiembra.DistanciaSiembraEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.EtapaFenologica.EtapaFenologicaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Suelo.SueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Topografia.TopografiaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Variedad.VariedadEntity;
 
@@ -52,6 +53,11 @@ public class CultivoEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
+
+    @Basic(optional = false)
+    @Column(name = "rendimiento")
+    private int rendimiento;
+
     @Basic(optional = false)
     @Column(name = "plantas_por_hectarea")
     private int plantasPorHectarea;
@@ -71,6 +77,18 @@ public class CultivoEntity implements Serializable {
     @ManyToOne(optional = false)
     private VariedadEntity idVariedad;
 
+    @JoinColumn(name = "id_suelo", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private SueloEntity idSuelo;
+
+    public SueloEntity getIdSuelo() {
+        return idSuelo;
+    }
+
+    public void setIdSuelo(SueloEntity idSuelo) {
+        this.idSuelo = idSuelo;
+    }
+
     public CultivoEntity() {
     }
 
@@ -82,6 +100,14 @@ public class CultivoEntity implements Serializable {
         this.idCultivo = idCultivo;
         this.descripcion = descripcion;
         this.plantasPorHectarea = plantasPorHectarea;
+    }
+
+    public int getRendimiento() {
+        return rendimiento;
+    }
+
+    public void setRendimiento(int rendimiento) {
+        this.rendimiento = rendimiento;
     }
 
     public Integer getIdCultivo() {

@@ -25,7 +25,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-15T20:22:52-0500",
+    date = "2023-06-17T01:21:48-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -39,6 +39,7 @@ public class SueloEntityMapperImpl implements SueloEntityMapper {
 
         Suelo suelo = new Suelo();
 
+        suelo.setDescripcion( SueloEntity.getDescripcion() );
         suelo.setId( SueloEntity.getId() );
         suelo.setIdLote( loteEntityToLote( SueloEntity.getIdLote() ) );
 
@@ -53,6 +54,7 @@ public class SueloEntityMapperImpl implements SueloEntityMapper {
 
         SueloEntity sueloEntity = new SueloEntity();
 
+        sueloEntity.setDescripcion( Suelo.getDescripcion() );
         sueloEntity.setId( Suelo.getId() );
         sueloEntity.setIdLote( loteToLoteEntity( Suelo.getIdLote() ) );
 
@@ -189,6 +191,7 @@ public class SueloEntityMapperImpl implements SueloEntityMapper {
 
         Lote lote = new Lote();
 
+        lote.setDescripcion( loteEntity.getDescripcion() );
         lote.setId( loteEntity.getId() );
         lote.setIdFinca( fincaEntityToFinca( loteEntity.getIdFinca() ) );
 
@@ -311,6 +314,7 @@ public class SueloEntityMapperImpl implements SueloEntityMapper {
 
         LoteEntity loteEntity = new LoteEntity();
 
+        loteEntity.setDescripcion( lote.getDescripcion() );
         loteEntity.setId( lote.getId() );
         loteEntity.setIdFinca( fincaToFincaEntity( lote.getIdFinca() ) );
 

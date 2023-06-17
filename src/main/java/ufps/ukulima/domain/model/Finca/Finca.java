@@ -8,11 +8,15 @@ package ufps.ukulima.domain.model.Finca;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
+import ufps.ukulima.domain.model.Lote.Lote;
 import ufps.ukulima.domain.model.Municipio.Municipio;
 import ufps.ukulima.domain.model.Vereda.Vereda;
+import ufps.ukulima.infrastructure.db.springdata.entity.Lote.LoteEntity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -29,12 +33,14 @@ public class Finca {
     private int areaTotal;
     private int areaEnUso;
     private String geolocalizacion;
-    @NotNull(message = "Debe tener asociado un agricultor")
     private Agricultor idAgricultor;
     private Corregimiento idCorregimiento;
     private Municipio idMunicipio;
     private Vereda idVereda;
     private Collection<Cultivo> cultivoCollection;
+
+    private Collection<Lote> loteEntityCollection;
+
 
     public Finca() {
     }
@@ -64,6 +70,14 @@ public class Finca {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Collection<Lote> getLoteEntityCollection() {
+        return loteEntityCollection;
+    }
+
+    public void setLoteEntityCollection(Collection<Lote> loteEntityCollection) {
+        this.loteEntityCollection = loteEntityCollection;
     }
 
     public int getAreaTotal() {

@@ -11,7 +11,9 @@ import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Departamento.Departamento;
 import ufps.ukulima.domain.model.DistanciaSiembra.DistanciaSiembra;
 import ufps.ukulima.domain.model.Finca.Finca;
+import ufps.ukulima.domain.model.Lote.Lote;
 import ufps.ukulima.domain.model.Municipio.Municipio;
+import ufps.ukulima.domain.model.Suelo.Suelo;
 import ufps.ukulima.domain.model.TipoCultivo.TipoCultivo;
 import ufps.ukulima.domain.model.TipoIdentificacion.TipoIdentificacion;
 import ufps.ukulima.domain.model.Topografia.Topografia;
@@ -24,7 +26,9 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.Departament
 import ufps.ukulima.infrastructure.db.springdata.entity.DistanciaSiembra.DistanciaSiembraEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.EtapaFenologica.EtapaFenologicaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Lote.LoteEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Suelo.SueloEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.TipoCultivo.TipoCultivoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.TipoIdentificacion.TipoIdentificacionEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Topografia.TopografiaEntity;
@@ -33,7 +37,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-15T20:22:52-0500",
+    date = "2023-06-17T01:21:50-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -47,6 +51,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         Cultivo cultivo = new Cultivo();
 
+        cultivo.setIdSuelo( sueloEntityToSuelo( CultivoEntity.getIdSuelo() ) );
+        cultivo.setRendimiento( CultivoEntity.getRendimiento() );
         cultivo.setIdCultivo( CultivoEntity.getIdCultivo() );
         cultivo.setDescripcion( CultivoEntity.getDescripcion() );
         cultivo.setPlantasPorHectarea( CultivoEntity.getPlantasPorHectarea() );
@@ -67,6 +73,8 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
 
         CultivoEntity cultivoEntity = new CultivoEntity();
 
+        cultivoEntity.setIdSuelo( sueloToSueloEntity( Cultivo.getIdSuelo() ) );
+        cultivoEntity.setRendimiento( Cultivo.getRendimiento() );
         cultivoEntity.setIdCultivo( Cultivo.getIdCultivo() );
         cultivoEntity.setDescripcion( Cultivo.getDescripcion() );
         cultivoEntity.setPlantasPorHectarea( Cultivo.getPlantasPorHectarea() );
@@ -91,32 +99,6 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         }
 
         return list;
-    }
-
-    protected DistanciaSiembra distanciaSiembraEntityToDistanciaSiembra(DistanciaSiembraEntity distanciaSiembraEntity) {
-        if ( distanciaSiembraEntity == null ) {
-            return null;
-        }
-
-        DistanciaSiembra distanciaSiembra = new DistanciaSiembra();
-
-        distanciaSiembra.setId( distanciaSiembraEntity.getId() );
-        distanciaSiembra.setDescripcion( distanciaSiembraEntity.getDescripcion() );
-
-        return distanciaSiembra;
-    }
-
-    protected EtapaFenologica etapaFenologicaEntityToEtapaFenologica(EtapaFenologicaEntity etapaFenologicaEntity) {
-        if ( etapaFenologicaEntity == null ) {
-            return null;
-        }
-
-        EtapaFenologica etapaFenologica = new EtapaFenologica();
-
-        etapaFenologica.setId( etapaFenologicaEntity.getId() );
-        etapaFenologica.setDescripcion( etapaFenologicaEntity.getDescripcion() );
-
-        return etapaFenologica;
     }
 
     protected TipoIdentificacion tipoIdentificacionEntityToTipoIdentificacion(TipoIdentificacionEntity tipoIdentificacionEntity) {
@@ -228,6 +210,60 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         return finca;
     }
 
+    protected Lote loteEntityToLote(LoteEntity loteEntity) {
+        if ( loteEntity == null ) {
+            return null;
+        }
+
+        Lote lote = new Lote();
+
+        lote.setDescripcion( loteEntity.getDescripcion() );
+        lote.setId( loteEntity.getId() );
+        lote.setIdFinca( fincaEntityToFinca( loteEntity.getIdFinca() ) );
+
+        return lote;
+    }
+
+    protected Suelo sueloEntityToSuelo(SueloEntity sueloEntity) {
+        if ( sueloEntity == null ) {
+            return null;
+        }
+
+        Suelo suelo = new Suelo();
+
+        suelo.setDescripcion( sueloEntity.getDescripcion() );
+        suelo.setId( sueloEntity.getId() );
+        suelo.setIdLote( loteEntityToLote( sueloEntity.getIdLote() ) );
+
+        return suelo;
+    }
+
+    protected DistanciaSiembra distanciaSiembraEntityToDistanciaSiembra(DistanciaSiembraEntity distanciaSiembraEntity) {
+        if ( distanciaSiembraEntity == null ) {
+            return null;
+        }
+
+        DistanciaSiembra distanciaSiembra = new DistanciaSiembra();
+
+        distanciaSiembra.setId( distanciaSiembraEntity.getId() );
+        distanciaSiembra.setDescripcion( distanciaSiembraEntity.getDescripcion() );
+
+        return distanciaSiembra;
+    }
+
+    protected EtapaFenologica etapaFenologicaEntityToEtapaFenologica(EtapaFenologicaEntity etapaFenologicaEntity) {
+        if ( etapaFenologicaEntity == null ) {
+            return null;
+        }
+
+        EtapaFenologica etapaFenologica = new EtapaFenologica();
+
+        etapaFenologica.setId( etapaFenologicaEntity.getId() );
+        etapaFenologica.setDescripcion( etapaFenologicaEntity.getDescripcion() );
+
+        return etapaFenologica;
+    }
+
     protected Topografia topografiaEntityToTopografia(TopografiaEntity topografiaEntity) {
         if ( topografiaEntity == null ) {
             return null;
@@ -266,32 +302,6 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         variedad.setIdTipoCultivo( tipoCultivoEntityToTipoCultivo( variedadEntity.getIdTipoCultivo() ) );
 
         return variedad;
-    }
-
-    protected DistanciaSiembraEntity distanciaSiembraToDistanciaSiembraEntity(DistanciaSiembra distanciaSiembra) {
-        if ( distanciaSiembra == null ) {
-            return null;
-        }
-
-        DistanciaSiembraEntity distanciaSiembraEntity = new DistanciaSiembraEntity();
-
-        distanciaSiembraEntity.setId( distanciaSiembra.getId() );
-        distanciaSiembraEntity.setDescripcion( distanciaSiembra.getDescripcion() );
-
-        return distanciaSiembraEntity;
-    }
-
-    protected EtapaFenologicaEntity etapaFenologicaToEtapaFenologicaEntity(EtapaFenologica etapaFenologica) {
-        if ( etapaFenologica == null ) {
-            return null;
-        }
-
-        EtapaFenologicaEntity etapaFenologicaEntity = new EtapaFenologicaEntity();
-
-        etapaFenologicaEntity.setId( etapaFenologica.getId() );
-        etapaFenologicaEntity.setDescripcion( etapaFenologica.getDescripcion() );
-
-        return etapaFenologicaEntity;
     }
 
     protected TipoIdentificacionEntity tipoIdentificacionToTipoIdentificacionEntity(TipoIdentificacion tipoIdentificacion) {
@@ -401,6 +411,60 @@ public class CultivoEntityMapperImpl implements CultivoEntityMapper {
         fincaEntity.setIdVereda( veredaToVeredaEntity( finca.getIdVereda() ) );
 
         return fincaEntity;
+    }
+
+    protected LoteEntity loteToLoteEntity(Lote lote) {
+        if ( lote == null ) {
+            return null;
+        }
+
+        LoteEntity loteEntity = new LoteEntity();
+
+        loteEntity.setDescripcion( lote.getDescripcion() );
+        loteEntity.setId( lote.getId() );
+        loteEntity.setIdFinca( fincaToFincaEntity( lote.getIdFinca() ) );
+
+        return loteEntity;
+    }
+
+    protected SueloEntity sueloToSueloEntity(Suelo suelo) {
+        if ( suelo == null ) {
+            return null;
+        }
+
+        SueloEntity sueloEntity = new SueloEntity();
+
+        sueloEntity.setDescripcion( suelo.getDescripcion() );
+        sueloEntity.setId( suelo.getId() );
+        sueloEntity.setIdLote( loteToLoteEntity( suelo.getIdLote() ) );
+
+        return sueloEntity;
+    }
+
+    protected DistanciaSiembraEntity distanciaSiembraToDistanciaSiembraEntity(DistanciaSiembra distanciaSiembra) {
+        if ( distanciaSiembra == null ) {
+            return null;
+        }
+
+        DistanciaSiembraEntity distanciaSiembraEntity = new DistanciaSiembraEntity();
+
+        distanciaSiembraEntity.setId( distanciaSiembra.getId() );
+        distanciaSiembraEntity.setDescripcion( distanciaSiembra.getDescripcion() );
+
+        return distanciaSiembraEntity;
+    }
+
+    protected EtapaFenologicaEntity etapaFenologicaToEtapaFenologicaEntity(EtapaFenologica etapaFenologica) {
+        if ( etapaFenologica == null ) {
+            return null;
+        }
+
+        EtapaFenologicaEntity etapaFenologicaEntity = new EtapaFenologicaEntity();
+
+        etapaFenologicaEntity.setId( etapaFenologica.getId() );
+        etapaFenologicaEntity.setDescripcion( etapaFenologica.getDescripcion() );
+
+        return etapaFenologicaEntity;
     }
 
     protected TopografiaEntity topografiaToTopografiaEntity(Topografia topografia) {

@@ -13,11 +13,18 @@ import ufps.ukulima.domain.model.Corregimiento.gateway.CorregimientoService;
 import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Finca.gateway.FincaService;
+import ufps.ukulima.domain.model.Lote.Lote;
+import ufps.ukulima.domain.model.Lote.gateway.LoteServicio;
 import ufps.ukulima.domain.model.Municipio.Municipio;
 import ufps.ukulima.domain.model.Municipio.gateway.MunicipioService;
+import ufps.ukulima.domain.model.Suelo.Suelo;
+import ufps.ukulima.domain.model.Suelo.gateway.SueloService;
 import ufps.ukulima.domain.model.Vereda.Vereda;
 import ufps.ukulima.domain.model.Vereda.gateway.VeredaService;
+import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Lote.LoteEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -30,11 +37,17 @@ public class FincaController {
     @Autowired
     FincaService fincaService;
 
+
+    @Autowired
+    LoteServicio loteServicio;
     @Autowired
     AgricultorService agricultorService;
 
     @Autowired
     CorregimientoService corregimientoService;
+
+    @Autowired
+    SueloService sueloService;
 
     @Autowired
     VeredaService veredaService;
@@ -47,18 +60,72 @@ public class FincaController {
         return ResponseEntity.ok(fincaService.getAllFinca());
     }
 
-    @PostMapping
-    public ResponseEntity<?> saveFinca(@Valid @RequestBody Finca finca, BindingResult br) {
+    @GetMapping("/{emailOrPhone}")
+    public ResponseEntity<?> getAllFincaByAgricultor(@PathVariable String emailOrPhone) {
+        Agricultor agricultor = agricultorService.getAgricultorByPhoneOrEmail(emailOrPhone);
+        if (agricultor == null) {
+            return new ResponseEntity<>(
+                    new Mensaje("El agricultor con telefono o email " + emailOrPhone + ", no existe"),
+                    HttpStatus.NOT_FOUND);
+        }
+        List<Finca> fincas = fincaService.getFincaByIdAgricultor(agricultor);
+
+        if(fincas == null){
+            return ResponseEntity.ok(new ArrayList<>());
+        }
+        return ResponseEntity.ok(fincas);
+    }
+
+    @GetMapping("/{idFinca}/lotes")
+    public ResponseEntity<?> getAllLotesByFinca(@PathVariable int idFinca) {
+        Finca finca = fincaService.getFincaById(idFinca);
+        if (finca == null) {
+            return new ResponseEntity<>(
+                    new Mensaje("La finca no existe"),
+                    HttpStatus.NOT_FOUND);
+        }
+        List<Lote> lotes = loteServicio.getAllLotesByFinca(finca);
+
+        if(lotes == null){
+            return ResponseEntity.ok(new ArrayList<>());
+        }
+        return ResponseEntity.ok(lotes);
+    }
+
+    @PostMapping("/{emailOrPhone}")
+    public ResponseEntity<?> saveFinca(@PathVariable String emailOrPhone,@Valid @RequestBody Finca finca,
+                                       BindingResult br) {
 
         if (br.hasErrors())
             return new ResponseEntity<ErrorMapping>(new ErrorMapping(br.getFieldErrors()), HttpStatus.BAD_REQUEST);
 
-        Agricultor agricultor = agricultorService.getAgricultorById(finca.getIdAgricultor().getIdentificacion());
+        Agricultor agricultor = agricultorService.getAgricultorByPhoneOrEmail(emailOrPhone);
         if (agricultor == null) {
-            return new ResponseEntity<>(new Mensaje("No existe un agricultor con ese ID"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(
+                    new Mensaje("El agricultor con telefono o email " + emailOrPhone + ", no existe"),
+                    HttpStatus.NOT_FOUND);
         }
         finca.setIdAgricultor(agricultor);
-        fincaService.saveFinca(finca);
+        FincaEntity fincaEntity=fincaService.saveFinca(finca);
+
+        if(finca.getLoteEntityCollection() != null){
+            List<Lote> lotes = (List) finca.getLoteEntityCollection();
+            for (int i = 0; i < finca.getLoteEntityCollection().size(); i++) {
+                Lote lote=lotes.get(i);
+                lote.setIdFinca(new Finca(fincaEntity.getIdFinca()));
+                List<Suelo> suelos=lote.getSuelos();
+                LoteEntity loteGuardado=loteServicio.saveLote(lote);
+                if(suelos != null){
+                    for (int j = 0; j < suelos.size(); j++) {
+                        Suelo suelo = suelos.get(j);
+                        suelo.setIdLote(new Lote(loteGuardado.getId()));
+                        sueloService.saveSuelo(suelo);
+                    }
+                }
+                }
+        }
+
+
 
         return ResponseEntity.ok(new Mensaje("Finca guardada"));
     }

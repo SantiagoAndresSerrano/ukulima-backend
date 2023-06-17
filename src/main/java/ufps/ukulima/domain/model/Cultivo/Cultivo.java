@@ -9,12 +9,11 @@ import ufps.ukulima.domain.EtapaFenologica.EtapaFenologica;
 import ufps.ukulima.domain.model.AnalisisSuelo.AnalisisSuelo;
 import ufps.ukulima.domain.model.DistanciaSiembra.DistanciaSiembra;
 import ufps.ukulima.domain.model.Finca.Finca;
+import ufps.ukulima.domain.model.Suelo.Suelo;
 import ufps.ukulima.domain.model.Topografia.Topografia;
 import ufps.ukulima.domain.model.Variedad.Variedad;
 
 import java.util.Collection;
-
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -24,17 +23,15 @@ import javax.validation.constraints.NotNull;
 public class Cultivo {
 
     private Integer idCultivo;
-    @NotBlank(message = "La descripción no puede estar en blanco")
     private String descripcion;
     private int plantasPorHectarea;
+    private int rendimiento;
+
+    private Suelo idSuelo;
     private Collection<AnalisisSuelo> analisisSueloCollection;
-    @NotNull(message = "La DistanciaSiembra no puede estar vacío")
     private DistanciaSiembra idDistanciaSiembra;
-    @NotNull(message = "La EtapaFenologica no puede estar vacío")
     private EtapaFenologica idEtapaFenologica;
-    @NotNull(message = "La finca no puede estar vacío")
     private Finca idFinca;
-    @NotNull(message = "La Topografia no puede estar vacío")
     private Topografia idTopografia;
     @NotNull(message = "La Variedad no puede estar vacío")
     private Variedad idVariedad;
@@ -51,7 +48,21 @@ public class Cultivo {
         this.descripcion = descripcion;
         this.plantasPorHectarea = plantasPorHectarea;
     }
+    public int getRendimiento() {
+        return rendimiento;
+    }
 
+    public Suelo getIdSuelo() {
+        return idSuelo;
+    }
+
+    public void setIdSuelo(Suelo idSuelo) {
+        this.idSuelo = idSuelo;
+    }
+
+    public void setRendimiento(int rendimiento) {
+        this.rendimiento = rendimiento;
+    }
     public Integer getIdCultivo() {
         return idCultivo;
     }

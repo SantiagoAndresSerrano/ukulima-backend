@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Cultivo.gateway.CultivoService;
+import ufps.ukulima.domain.model.Finca.Finca;
+import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
 import ufps.ukulima.infrastructure.mapper.CultivoEntityMapper;
+import ufps.ukulima.infrastructure.mapper.FincaEntityMapper;
 
 import java.util.List;
 
@@ -17,6 +20,9 @@ public class CultivoServiceImp implements CultivoService {
     @Autowired
     CultivoEntityMapper cultivoEntityMapper;
 
+    @Autowired
+    FincaEntityMapper fincaEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
     public Cultivo getCultivoById(int idCultivo) {
@@ -27,6 +33,12 @@ public class CultivoServiceImp implements CultivoService {
     @Transactional(readOnly = true)
     public List<Cultivo> getAllCultivo() {
         return cultivoEntityMapper.abonosOrganicosRecomendacionToDomain(cultivoRepository.findAll());
+    }
+
+    @Override
+    public List<Cultivo> getAllCultivoByFinca(Finca idFinca) {
+        return cultivoEntityMapper.abonosOrganicosRecomendacionToDomain(cultivoRepository.getAllByIdFinca(
+                fincaEntityMapper.toEntity(idFinca)));
     }
 
     @Override

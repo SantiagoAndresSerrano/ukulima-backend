@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ufps.ukulima.domain.model.Agricultor.Agricultor;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Finca.gateway.FincaService;
+import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
+import ufps.ukulima.infrastructure.mapper.AgricultorEntityMapper;
 import ufps.ukulima.infrastructure.mapper.FincaEntityMapper;
 
 import java.util.List;
@@ -19,6 +21,9 @@ public class FincaServiceImp implements FincaService {
     @Autowired
     FincaEntityMapper fincaEntityMapper;
 
+    @Autowired
+    AgricultorEntityMapper agricultorEntityMapper;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -28,8 +33,8 @@ public class FincaServiceImp implements FincaService {
 
     @Override
     @Transactional(readOnly = true)
-    public Finca getFincaByIdAgricultor(Agricultor idAgricultor) {
-        return (fincaRepository.getFincaByIdAgricultor(idAgricultor));
+    public List<Finca> getFincaByIdAgricultor(Agricultor idAgricultor) {
+        return fincaEntityMapper.abonosOrganicosRecomendacionToDomain(fincaRepository.getAllByIdAgricultor(agricultorEntityMapper.toEntity(idAgricultor)));
     }
 
     @Override
@@ -40,8 +45,8 @@ public class FincaServiceImp implements FincaService {
 
     @Override
     @Transactional
-    public void saveFinca(Finca Finca) {
-        fincaRepository.save(fincaEntityMapper.toEntity(Finca));
+    public FincaEntity saveFinca(Finca Finca) {
+        return fincaRepository.save(fincaEntityMapper.toEntity(Finca));
     }
 
     @Override

@@ -18,11 +18,14 @@ import ufps.ukulima.domain.model.DistanciaSiembra.gateway.DistanciaSiembraServic
 import ufps.ukulima.domain.model.ErrorMapping.ErrorMapping;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Finca.gateway.FincaService;
+import ufps.ukulima.domain.model.Suelo.Suelo;
+import ufps.ukulima.domain.model.Suelo.gateway.SueloService;
 import ufps.ukulima.domain.model.Topografia.Topografia;
 import ufps.ukulima.domain.model.Topografia.gateway.TopografiaService;
 import ufps.ukulima.domain.model.Variedad.Variedad;
 import ufps.ukulima.domain.model.Variedad.gateway.VariedadService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -53,6 +56,9 @@ public class CultivoController {
     @Autowired
     VariedadService variedadService;
 
+    @Autowired
+    SueloService sueloService;
+
     @GetMapping
     public ResponseEntity<?> getAllCultivo() {
         return ResponseEntity.ok(cultivoService.getAllCultivo());
@@ -71,11 +77,14 @@ public class CultivoController {
         Topografia topografia = topografiaService.findTopografiaById(cultivo.getIdTopografia().getId());
         Variedad variedad = variedadService.findVariedadById(cultivo.getIdVariedad().getId());
         Finca finca = fincaService.getFincaById(cultivo.getIdFinca().getIdFinca());
+        Suelo suelo = sueloService.getSueloById(cultivo.getIdSuelo().getId());
 
         if (distanciaSiembra == null)
             return new ResponseEntity<>(new Mensaje("distanciaSiembra no encontrada"),
                     HttpStatus.BAD_REQUEST);
-
+        if (suelo == null)
+            return new ResponseEntity<>(new Mensaje("suelo no encontrada"),
+                    HttpStatus.BAD_REQUEST);
         if (etapaFenologica == null)
             return new ResponseEntity<>(new Mensaje("etapaFenologica no encontrada"),
                     HttpStatus.BAD_REQUEST);
@@ -93,6 +102,7 @@ public class CultivoController {
                     HttpStatus.BAD_REQUEST);
 
         cultivo.setIdFinca(finca);
+        cultivo.setIdSuelo(suelo);
         cultivo.setIdTopografia(topografia);
         cultivo.setIdVariedad(variedad);
         cultivo.setIdDistanciaSiembra(distanciaSiembra);
@@ -153,16 +163,21 @@ public class CultivoController {
 
     }
 
-    @GetMapping("/{emailOrPhone}")
-    public ResponseEntity<?> getAllCultivoAgricultor(@PathVariable String emailOrPhone) {
-        Agricultor agricultor = agricultorService.getAgricultorByPhoneOrEmail(emailOrPhone);
-        if (agricultor == null) {
+    @GetMapping("/{idFinca}")
+    public ResponseEntity<?> getAllCultivoAgricultor(@PathVariable int idFinca) {
+        Finca finca = fincaService.getFincaById(idFinca);
+        if (finca == null) {
             return new ResponseEntity<>(
-                    new Mensaje("El agricultor con telefono o email " + emailOrPhone + ", no existe"),
+                    new Mensaje("No existe finca con ese id"),
                     HttpStatus.NOT_FOUND);
         }
-        List<Finca> fincas = (List<Finca>) (agricultor.fincaCollection());
-        return ResponseEntity.ok(fincas.get(0).cultivoCollection());
+        List<Cultivo> cultivos = cultivoService.getAllCultivoByFinca(finca);
+        if(cultivos == null){
+            return ResponseEntity.ok(new ArrayList<>());
+        }
+        return ResponseEntity.ok(cultivos);
     }
+
+
 
 }

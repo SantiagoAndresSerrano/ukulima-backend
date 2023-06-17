@@ -2,8 +2,11 @@ package ufps.ukulima.infrastructure.driven_adapters.jpa.Lote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.domain.model.Lote.gateway.LoteServicio;
 import ufps.ukulima.domain.model.Lote.Lote;
+import ufps.ukulima.infrastructure.db.springdata.entity.Lote.LoteEntity;
+import ufps.ukulima.infrastructure.mapper.FincaEntityMapper;
 import ufps.ukulima.infrastructure.mapper.LoteEntityMapper;
 
 import java.util.List;
@@ -15,6 +18,9 @@ public class LoteServiceImp implements LoteServicio {
 
         @Autowired
         LoteEntityMapper loteEntityMapper;
+
+        @Autowired
+        FincaEntityMapper fincaEntityMapper;
 
         @Override
         @Transactional(readOnly = true)
@@ -30,8 +36,14 @@ public class LoteServiceImp implements LoteServicio {
 
         @Override
         @Transactional
-        public void saveLote(Lote abonoOrganico) {
-
+        public LoteEntity saveLote(Lote abonoOrganico) {
+                return this.loteRepository.save(this.loteEntityMapper.toEntity(abonoOrganico));
         }
 
-    }
+        @Override
+        public List<Lote> getAllLotesByFinca(Finca idFinca) {
+                return loteEntityMapper.toDomain(
+                        loteRepository.getAllByIdFinca(fincaEntityMapper.toEntity(idFinca)));
+        }
+
+}

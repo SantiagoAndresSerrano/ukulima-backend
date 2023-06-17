@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.GrupoTextural.GrupoTextu
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-15T20:22:50-0500",
+    date = "2023-06-17T01:21:51-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component

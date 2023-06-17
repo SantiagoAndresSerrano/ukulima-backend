@@ -6,6 +6,7 @@ public class Suelo {
     private Integer id;
     private Lote idLote;
 
+    private String descripcion;
     public Suelo() {
     }
 
@@ -13,7 +14,13 @@ public class Suelo {
         this.id = id;
         this.idLote = idLote;
     }
+    public String getDescripcion() {
+        return descripcion;
+    }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     public Integer getId() {
         return id;
     }

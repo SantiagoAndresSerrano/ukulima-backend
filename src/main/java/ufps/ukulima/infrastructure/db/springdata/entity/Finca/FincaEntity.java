@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import ufps.ukulima.infrastructure.db.springdata.entity.Agricultor.AgricultorEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Cultivo.CultivoEntity;
+import ufps.ukulima.infrastructure.db.springdata.entity.Lote.LoteEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
@@ -63,6 +64,9 @@ public class FincaEntity implements Serializable {
     @Lob
     @Column(name = "geolocalizacion")
     private String geolocalizacion;
+
+    @Column(name = "descripcion")
+    private String descripcion;
     @JoinColumn(name = "id_agricultor", referencedColumnName = "identificacion")
     @ManyToOne(optional = false)
     private AgricultorEntity idAgricultor;
@@ -79,6 +83,9 @@ public class FincaEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFinca")
     private Collection<CultivoEntity> cultivoCollection;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    private Collection<LoteEntity> loteEntityCollection;
+
     public FincaEntity() {
     }
 
@@ -91,6 +98,14 @@ public class FincaEntity implements Serializable {
         this.areaTotal = areaTotal;
         this.areaEnUso = areaEnUso;
         this.geolocalizacion = geolocalizacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Integer getIdFinca() {

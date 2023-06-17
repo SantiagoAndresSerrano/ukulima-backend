@@ -20,13 +20,22 @@ public class SueloEntity {
     @ManyToOne(optional = false)
     private LoteEntity idLote;
 
+    @Basic(optional = false)
+    private String descripcion;
+
     public SueloEntity(){}
 
     public SueloEntity(Integer id, LoteEntity idLote) {
         this.id = id;
         this.idLote = idLote;
     }
+    public String getDescripcion() {
+        return descripcion;
+    }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     public Integer getId() {
         return id;
     }

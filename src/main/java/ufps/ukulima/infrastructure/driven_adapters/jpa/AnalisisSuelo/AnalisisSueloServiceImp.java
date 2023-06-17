@@ -31,6 +31,11 @@ public class AnalisisSueloServiceImp implements AnalisisSueloService {
     }
 
     @Override
+    public List<AnalisisSuelo> getAllAnalisisSueloByLote(int idLote) {
+        return analisisSueloEntityMapper.toDomain(analisisSueloRepository.finAllByLotes(idLote));
+    }
+
+    @Override
     @Transactional
     public AnalisisSuelo saveAnalisisSuelo(AnalisisSuelo analisisSuelo) {
         return analisisSueloEntityMapper.toDomain(
