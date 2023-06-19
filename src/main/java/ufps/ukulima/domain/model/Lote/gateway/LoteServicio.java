@@ -7,8 +7,11 @@ import java.util.List;
 
 public interface LoteServicio {
     public Lote getLoteById(int id);
+    public boolean existLoteById(int id);
     public List<Lote> getAllLotes();
     public LoteEntity saveLote(Lote lote);
+
+    public void eliminar(int idLote);
 
     public List<Lote> getAllLotesByFinca(Finca idFinca);
 

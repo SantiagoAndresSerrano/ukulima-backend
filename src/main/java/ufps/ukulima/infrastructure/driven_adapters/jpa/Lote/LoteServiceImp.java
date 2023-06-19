@@ -29,6 +29,11 @@ public class LoteServiceImp implements LoteServicio {
         }
 
         @Override
+        public boolean existLoteById(int id) {
+                return loteRepository.existsById(id);
+        }
+
+        @Override
         @Transactional(readOnly = true)
         public List<Lote> getAllLotes() {
             return loteEntityMapper.toDomain(loteRepository.findAll());
@@ -38,6 +43,11 @@ public class LoteServiceImp implements LoteServicio {
         @Transactional
         public LoteEntity saveLote(Lote abonoOrganico) {
                 return this.loteRepository.save(this.loteEntityMapper.toEntity(abonoOrganico));
+        }
+
+        @Override
+        public void eliminar(int idLote) {
+                this.loteRepository.deleteById(idLote);
         }
 
         @Override

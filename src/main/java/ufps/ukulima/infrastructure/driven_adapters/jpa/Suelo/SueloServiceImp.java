@@ -24,6 +24,11 @@ public class SueloServiceImp implements SueloService {
     }
 
     @Override
+    public List<Suelo> getSueloByLote(int id) {
+        return sueloEntityMapper.toDomain(sueloRepository.getAllByLote(id));
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Suelo> getAllSuelos() {
         return sueloEntityMapper.toDomain(sueloRepository.findAll());

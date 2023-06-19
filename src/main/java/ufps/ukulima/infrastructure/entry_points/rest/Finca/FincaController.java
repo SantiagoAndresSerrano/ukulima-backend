@@ -78,6 +78,12 @@ public class FincaController {
 
     @GetMapping("/{idFinca}/lotes")
     public ResponseEntity<?> getAllLotesByFinca(@PathVariable int idFinca) {
+        boolean exist = fincaService.existById(idFinca);
+        if(!exist){
+            return new ResponseEntity<>(
+                    new Mensaje("La finca no existe"),
+                    HttpStatus.NOT_FOUND);
+        }
         Finca finca = fincaService.getFincaById(idFinca);
         if (finca == null) {
             return new ResponseEntity<>(
@@ -136,7 +142,12 @@ public class FincaController {
         if (finca.getIdFinca() == null)
             return new ResponseEntity<>(new Mensaje("Debe proporcionar un ID si desea actualizar"),
                     HttpStatus.BAD_REQUEST);
-
+        boolean exist = fincaService.existById(finca.getIdFinca());
+        if(!exist){
+            return new ResponseEntity<>(
+                    new Mensaje("La finca no existe"),
+                    HttpStatus.NOT_FOUND);
+        }
         Corregimiento corregimiento = corregimientoService
                 .getCorregimientoById(finca.getIdCorregimiento().getIdCorregimiento());
         Municipio municipio = municipioService.getMunicipioById(finca.getIdMunicipio().getIdMunicipio());

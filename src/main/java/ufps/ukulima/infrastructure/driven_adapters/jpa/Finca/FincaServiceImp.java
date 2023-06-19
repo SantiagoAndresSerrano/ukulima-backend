@@ -32,6 +32,11 @@ public class FincaServiceImp implements FincaService {
     }
 
     @Override
+    public boolean existById(int id) {
+        return fincaRepository.existsById(id);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Finca> getFincaByIdAgricultor(Agricultor idAgricultor) {
         return fincaEntityMapper.abonosOrganicosRecomendacionToDomain(fincaRepository.getAllByIdAgricultor(agricultorEntityMapper.toEntity(idAgricultor)));

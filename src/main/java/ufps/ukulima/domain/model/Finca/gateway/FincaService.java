@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface FincaService {
     public Finca getFincaById(int idFinca);
+
+    public boolean existById(int id);
     public List<Finca> getFincaByIdAgricultor(Agricultor idAgricultor);
     public List<Finca> getAllFinca();
     public FincaEntity saveFinca(Finca Finca);
