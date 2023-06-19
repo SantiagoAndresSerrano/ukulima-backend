@@ -33,6 +33,8 @@ public class Finca {
     private int areaTotal;
     private int areaEnUso;
     private String geolocalizacion;
+    private String precipitacion;
+
     private Agricultor idAgricultor;
     private Corregimiento idCorregimiento;
     private Municipio idMunicipio;
@@ -55,7 +57,13 @@ public class Finca {
         this.areaEnUso = areaEnUso;
         this.geolocalizacion = geolocalizacion;
     }
+    public String getPrecipitacion() {
+        return precipitacion;
+    }
 
+    public void setPrecipitacion(String precipitacion) {
+        this.precipitacion = precipitacion;
+    }
     public Integer getIdFinca() {
         return idFinca;
     }

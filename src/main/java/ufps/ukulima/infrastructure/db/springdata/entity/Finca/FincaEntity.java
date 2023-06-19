@@ -67,6 +67,9 @@ public class FincaEntity implements Serializable {
 
     @Column(name = "descripcion")
     private String descripcion;
+
+    @Column(name = "precipitacion")
+    private String precipitacion;
     @JoinColumn(name = "id_agricultor", referencedColumnName = "identificacion")
     @ManyToOne(optional = false)
     private AgricultorEntity idAgricultor;
@@ -80,6 +83,8 @@ public class FincaEntity implements Serializable {
     @ManyToOne(optional = false)
     @JsonIgnore
     private VeredaEntity idVereda;
+
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFinca")
     private Collection<CultivoEntity> cultivoCollection;
 
@@ -98,6 +103,14 @@ public class FincaEntity implements Serializable {
         this.areaTotal = areaTotal;
         this.areaEnUso = areaEnUso;
         this.geolocalizacion = geolocalizacion;
+    }
+
+    public String getPrecipitacion() {
+        return precipitacion;
+    }
+
+    public void setPrecipitacion(String precipitacion) {
+        this.precipitacion = precipitacion;
     }
 
     public String getDescripcion() {

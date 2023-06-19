@@ -21,7 +21,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-17T11:32:33-0500",
+    date = "2023-06-18T20:38:45-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -35,6 +35,7 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
 
         Finca finca = new Finca();
 
+        finca.setPrecipitacion( FincaEntity.getPrecipitacion() );
         finca.setIdFinca( FincaEntity.getIdFinca() );
         finca.setNombre( FincaEntity.getNombre() );
         finca.setAreaTotal( FincaEntity.getAreaTotal() );
@@ -56,6 +57,7 @@ public class FincaEntityMapperImpl implements FincaEntityMapper {
 
         FincaEntity fincaEntity = new FincaEntity();
 
+        fincaEntity.setPrecipitacion( Finca.getPrecipitacion() );
         fincaEntity.setIdFinca( Finca.getIdFinca() );
         fincaEntity.setNombre( Finca.getNombre() );
         fincaEntity.setAreaTotal( Finca.getAreaTotal() );

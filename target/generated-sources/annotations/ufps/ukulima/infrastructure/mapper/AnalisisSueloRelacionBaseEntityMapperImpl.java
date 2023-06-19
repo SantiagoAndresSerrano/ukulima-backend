@@ -72,7 +72,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-17T11:32:34-0500",
+    date = "2023-06-18T20:38:48-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -459,6 +459,7 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
 
         FincaEntity fincaEntity = new FincaEntity();
 
+        fincaEntity.setPrecipitacion( finca.getPrecipitacion() );
         fincaEntity.setIdFinca( finca.getIdFinca() );
         fincaEntity.setNombre( finca.getNombre() );
         fincaEntity.setAreaTotal( finca.getAreaTotal() );

@@ -11,7 +11,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Municipio.MunicipioEntit
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-17T11:32:32-0500",
+    date = "2023-06-18T20:38:47-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
