@@ -261,22 +261,22 @@ public class AnalisisSueloController {
                 densidad = densidadService.getDensidadById(analisisSuelo.getIdDensidad().getIdDensidad());
             }else{
                 if(grupoTextural.getNombre().equals("MUY FINOS")){
-                    densidad = densidadService.getDensidadByValor(1.2f);
+                    densidad = densidadService.getDensidadByValor(1.1f);
                 }
                 if(grupoTextural.getNombre().equals("FINOS")){
-                    densidad = densidadService.getDensidadByValor(1.3f);
+                    densidad = densidadService.getDensidadByValor(1.2f);
                 }
                 if(grupoTextural.getNombre().equals("MODERADAMENTE FINOS")){
-                    densidad = densidadService.getDensidadByValor(1.4f);
+                    densidad = densidadService.getDensidadByValor(1.3f);
                 }
                 if(grupoTextural.getNombre().equals("MEDIOS")){
-                    densidad = densidadService.getDensidadByValor(1.5f);
+                    densidad = densidadService.getDensidadByValor(1.35f);
                 }
                 if(grupoTextural.getNombre().equals("MODERADAMENTE GRUESOS")){
-                    densidad = densidadService.getDensidadByValor(1.6f);
+                    densidad = densidadService.getDensidadByValor(1.5f);
                 }
                 if(grupoTextural.getNombre().equals("GRUESOS")){
-                    densidad = densidadService.getDensidadByValor(1.7f);
+                    densidad = densidadService.getDensidadByValor(1.6f);
                 }
             }
             float valorF = 0;
@@ -438,6 +438,7 @@ public class AnalisisSueloController {
             Elemento elemento_nit = elementoService.getElementoEntityByNombre("NITRÓGENO (N)");
             Elemento elemento_fos = elementoService.getElementoEntityByNombre("FÓSFORO (P)");
             Elemento elemento_pot = elementoService.getElementoEntityByNombre("POTASIO (K)");
+            Elemento elemento_azu = elementoService.getElementoEntityByNombre("AZUFRE (S)");
             Elemento elemento_cal = elementoService.getElementoEntityByNombre("CALCIO (Ca)");
             Elemento elemento_mag = elementoService.getElementoEntityByNombre("MAGNESIO (Mg)");
             Elemento elemento_cob = elementoService.getElementoEntityByNombre("COBRE (Cu)");
@@ -456,6 +457,13 @@ public class AnalisisSueloController {
             float pot_eficiencia=0.0f;
             float cal_eficiencia=0.0f;
             float mag_eficiencia=0.0f;
+            
+            float nit_requerimiento=0.0f;
+            float fos_requerimiento=0.0f;
+            float pot_requerimiento=0.0f;
+            float cal_requerimiento=0.0f;
+            float mag_requerimiento=0.0f;
+
             float mo=savedAnalisisSuelo.getMateriaOrganica();
             if(clima.equals(CLIMA_CALIDO)){
                 if(mo>1.5f){
@@ -514,6 +522,80 @@ public class AnalisisSueloController {
                     nit_eficiencia=0.65f;
                 }
             }
+
+            String precipitacion=savedAnalisisSuelo.getIdSuelo().getIdLote().getIdFinca().getPrecipitacion();
+            if(precipitacion.equals("Lluvioso")){
+                if(grupoTextural.getNombre().equals("MUY FINOS") ||
+                        grupoTextural.getNombre().equals("FINOS") ||
+                        grupoTextural.getNombre().equals("MODERADAMENTE FINOS")){
+                    pot_eficiencia=0.75f;
+                    cal_eficiencia=0.75f;
+                    mag_eficiencia=0.75f;
+
+                }
+
+                if(grupoTextural.getNombre().equals("MEDIOS")){
+                    pot_eficiencia=0.65f;
+                    cal_eficiencia=0.65f;
+                    mag_eficiencia=0.65f;
+                }
+
+                if(grupoTextural.getNombre().equals("MODERADAMENTE GRUESOS") ||
+                        grupoTextural.getNombre().equals("GRUESOS")){
+                    pot_eficiencia=0.5f;
+                    cal_eficiencia=0.5f;
+                    mag_eficiencia=0.5f;
+                }
+            }
+
+            if(precipitacion.equals("Medio")){
+                if(grupoTextural.getNombre().equals("MUY FINOS") ||
+                        grupoTextural.getNombre().equals("FINOS") ||
+                        grupoTextural.getNombre().equals("MODERADAMENTE FINOS")){
+                    pot_eficiencia=0.8f;
+                    cal_eficiencia=0.8f;
+                    mag_eficiencia=0.8f;
+                }
+
+                if(grupoTextural.getNombre().equals("MEDIOS")){
+                    pot_eficiencia=0.75f;
+                    cal_eficiencia=0.75f;
+                    mag_eficiencia=0.75f;
+                }
+
+                if(grupoTextural.getNombre().equals("MODERADAMENTE GRUESOS") ||
+                        grupoTextural.getNombre().equals("GRUESOS")){
+                    pot_eficiencia=0.6f;
+                    cal_eficiencia=0.6f;
+                    mag_eficiencia=0.6f;
+                }
+            }
+
+            if(precipitacion.equals("Seco")){
+                if(grupoTextural.getNombre().equals("MUY FINOS") ||
+                        grupoTextural.getNombre().equals("FINOS") ||
+                        grupoTextural.getNombre().equals("MODERADAMENTE FINOS")){
+                    pot_eficiencia=0.9f;
+                    cal_eficiencia=0.9f;
+                    mag_eficiencia=0.9f;
+
+                }
+
+                if(grupoTextural.getNombre().equals("MEDIOS")){
+                    pot_eficiencia=0.85f;
+                    cal_eficiencia=0.85f;
+                    mag_eficiencia=0.85f;
+                }
+
+                if(grupoTextural.getNombre().equals("MODERADAMENTE GRUESOS") ||
+                        grupoTextural.getNombre().equals("GRUESOS")){
+                    pot_eficiencia=0.7f;
+                    cal_eficiencia=0.7f;
+                    mag_eficiencia=0.7f;
+                }
+            }
+
+
             for (int i = 0; i < analisisElementoEntityList.size(); i++) {
                 AnalisisElementosEntity analisisElementosEntity = analisisElementoEntityList.get(i);
                 if (analisisElementosEntity.getIdElemento().getNombre().equals("FÓSFORO (P)")) {
@@ -624,27 +706,43 @@ public class AnalisisSueloController {
             }
         }
 
-
-
-
             AbonoQuimicoRecomendacion aqr_nit = new AbonoQuimicoRecomendacion(null,r2,elemento_nit,
-                    nit_disponibilidad,nit_eficiencia);
+                    nit_disponibilidad,nit_eficiencia,0.0f);
 
             AbonoQuimicoRecomendacion aqr_fos = new AbonoQuimicoRecomendacion(null,r2,elemento_fos,
-                fos_disponibilidad,fos_eficiencia);
+                fos_disponibilidad,fos_eficiencia,0.0f);
+
+            AbonoQuimicoRecomendacion aqr_pot = new AbonoQuimicoRecomendacion(null,r2,elemento_pot,
+                pot_disponibilidad,pot_eficiencia,0.0f);
+
+            AbonoQuimicoRecomendacion aqr_cal = new AbonoQuimicoRecomendacion(null,r2,elemento_cal,
+                cal_disponibilidad,cal_eficiencia,0.0f);
+
+            AbonoQuimicoRecomendacion aqr_mag = new AbonoQuimicoRecomendacion(null,r2,elemento_mag,
+                mag_disponibilidad,mag_eficiencia,0.0f);
+
+            AbonoQuimicoRecomendacion aqr_azu = new AbonoQuimicoRecomendacion(null,r2,elemento_azu,
+                pot_disponibilidad,pot_eficiencia,0.0f);
 
             AbonoQuimicoRecomendacion aqr_bor = new AbonoQuimicoRecomendacion(null,r2,elemento_bor,
-                bor_disponibilidad,null);
+                bor_disponibilidad,null,bor_disponibilidad);
 
             AbonoQuimicoRecomendacion aqr_cob = new AbonoQuimicoRecomendacion(null,r2,elemento_cob,
-                cob_disponibilidad,null);
+                cob_disponibilidad,null,bor_disponibilidad);
 
             abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_nit);
             abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_fos);
+            abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_pot);
+            abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_cal);
+            abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_mag);
+            abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_azu);
+
             abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_bor);
             abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_cob);
 
-            savedAnalisisSuelo = analisisSueloService.getAnalisisSueloById(savedAnalisisSuelo.getIdAnalisisSuelo());
+
+
+        savedAnalisisSuelo = analisisSueloService.getAnalisisSueloById(savedAnalisisSuelo.getIdAnalisisSuelo());
             savedAnalisisSuelo.setAnalisisSueloRelacionBaseEntities(
                     analisisSueloRelacionBaseService.getAllAnalisisSueloByAnalisisSuelo(savedAnalisisSuelo.getIdAnalisisSuelo())
             );

@@ -15,12 +15,14 @@ public class AbonoQuimicoRecomendacion {
     public AbonoQuimicoRecomendacion() {
     }
 
-    public AbonoQuimicoRecomendacion(Integer id, Recomendacion recomendacion, Elemento elemento, Float disponibilidad, Float eficiencia) {
+    public AbonoQuimicoRecomendacion(Integer id, Recomendacion recomendacion, Elemento elemento,
+                                     Float disponibilidad, Float eficiencia, Float dosis) {
         this.id = id;
         this.recomendacion = recomendacion;
         this.elemento = elemento;
         this.disponibilidad = disponibilidad;
         this.eficiencia = eficiencia;
+        this.dosis = dosis;
     }
 
     public Float getDosis() {

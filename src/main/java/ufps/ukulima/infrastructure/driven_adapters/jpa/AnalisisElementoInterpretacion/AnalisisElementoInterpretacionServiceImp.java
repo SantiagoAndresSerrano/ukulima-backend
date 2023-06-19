@@ -49,8 +49,7 @@ public class AnalisisElementoInterpretacionServiceImp implements AnalisisElement
 
     @Override
     public List<AnalisisElementosEntity> getElementosByInterpretacion(
-            float valorF, float valorP, float valorC, float valorM, float valorS, float valorA,float valorBo,
-            float valorCo,
+            float valorF, float valorP, float valorC, float valorM, float valorS, float valorA,float valorBo, float valorCo,
             int idF, int idP, int idC, int idM, int idS, int idA,int idBo,int idCo, int idAnalisisSuelo) {
 
         List<AnalisisElementosEntity> result = new ArrayList<>();
@@ -94,20 +93,20 @@ public class AnalisisElementoInterpretacionServiceImp implements AnalisisElement
                     getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
                             (sElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(
                                     valorS,"SODIO (Na)").getInterpretacion()))));
-            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorM,
+            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorA,
                     new AnalisisSueloEntity(idAnalisisSuelo),
                     aElementoEntity, analsisElementoRepository.
                     getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
                             (aElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(
                                     valorA,"AZUFRE (S)").getInterpretacion()))));
 
-            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorM,
+            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorBo,
                     new AnalisisSueloEntity(idAnalisisSuelo),
                     boElementoEntity, analsisElementoRepository.
                     getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
                             (boElementoEntity, analsisElementoRepository.obtenerInterpretacionVarias(
                                     valorBo,"BORO (B)").getInterpretacion()))));
-            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorM,
+            result.add(analisisElementoRepository.save(new AnalisisElementosEntity(null, valorCo,
                     new AnalisisSueloEntity(idAnalisisSuelo),
                     coElementoEntity, analsisElementoRepository.
                     getAnalisisElementoInterpretacionEntityByIdElementoAndInterpretacion
