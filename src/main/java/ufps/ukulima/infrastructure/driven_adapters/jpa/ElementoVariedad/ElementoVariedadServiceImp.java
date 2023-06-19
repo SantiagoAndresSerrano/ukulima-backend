@@ -24,6 +24,12 @@ public class ElementoVariedadServiceImp implements ElementoVariedadService {
     }
 
     @Override
+    public ElementoVariedad getElementoVariedadByVariedadRendimiento(int idVariedad, int rendimiento, String elemento) {
+        return elementoVariedadEntityMapper.toDomain(
+                elementoVariedadRepository.obtenerElementoVariedadPorElemento(elemento,idVariedad,rendimiento));
+    }
+
+    @Override
     public List<ElementoVariedad> getAllElementoVariedad() {
         return elementoVariedadEntityMapper.elementoVariedadToDomain(elementoVariedadRepository.findAll());
     }

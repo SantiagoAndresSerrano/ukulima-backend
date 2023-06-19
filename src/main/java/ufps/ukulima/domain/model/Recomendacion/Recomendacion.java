@@ -28,6 +28,9 @@ public class Recomendacion {
     private Integer id;
     private float cantidadEnmienda;
     private short preparacionSuelo;
+
+    private String labranza;
+
     private AnalisisSuelo idAnalisisSuelo;
     private Collection<AbonoOrganicoRecomendacion> abonoOrganicoRecomendacionCollection;
     private Collection<FuenteRecomendacion> fuenteRecomendacionCollection;
@@ -60,6 +63,14 @@ public class Recomendacion {
 
     public void setAbonoQuimicoRecomendacionEntities(Collection<AbonoQuimicoRecomendacion> abonoQuimicoRecomendacionEntities) {
         this.abonoQuimicoRecomendacionEntities = abonoQuimicoRecomendacionEntities;
+    }
+
+    public String getLabranza() {
+        return labranza;
+    }
+
+    public void setLabranza(String labranza) {
+        this.labranza = labranza;
     }
 
     public Collection<EnmiendaRecomendacion> getEnmiendaRecomendacionEntityCollection() {

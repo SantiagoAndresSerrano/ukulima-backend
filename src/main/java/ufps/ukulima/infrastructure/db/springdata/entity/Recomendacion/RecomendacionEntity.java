@@ -61,6 +61,10 @@ public class RecomendacionEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "preparacion_suelo")
     private short preparacionSuelo;
+
+    @Basic(optional = false)
+    @Column(name = "labranza")
+    private String labranza;
     @JoinColumn(name = "id_analisis_suelo", referencedColumnName = "id_analisis_suelo")
     @ManyToOne(optional = false)
     @JsonIgnore
@@ -86,11 +90,14 @@ public class RecomendacionEntity implements Serializable {
         this.id = id;
     }
 
-    public RecomendacionEntity(Integer id, float cantidadEnmienda, short preparacionSuelo, AnalisisSueloEntity idAnalisisSuelo) {
+    public RecomendacionEntity(Integer id, float cantidadEnmienda, short preparacionSuelo,
+                               AnalisisSueloEntity idAnalisisSuelo, String labranza) {
         this.id = id;
         this.cantidadEnmienda = cantidadEnmienda;
         this.preparacionSuelo = preparacionSuelo;
         this.idAnalisisSuelo = idAnalisisSuelo;
+        this.labranza = labranza;
+
     }
 
     public Collection<EnmiendaRecomendacionEntity> getEnmiendaRecomendacionEntityCollection() {
@@ -100,7 +107,13 @@ public class RecomendacionEntity implements Serializable {
     public void setEnmiendaRecomendacionEntityCollection(Collection<EnmiendaRecomendacionEntity> enmiendaRecomendacionEntityCollection) {
         this.enmiendaRecomendacionEntityCollection = enmiendaRecomendacionEntityCollection;
     }
+    public String getLabranza() {
+        return labranza;
+    }
 
+    public void setLabranza(String labranza) {
+        this.labranza = labranza;
+    }
     public Integer getId() {
         return id;
     }

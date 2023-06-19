@@ -43,6 +43,7 @@ import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Densidad.gateway.DensidadService;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Elemento.gateway.ElementoService;
+import ufps.ukulima.domain.model.ElementoVariedad.gateway.ElementoVariedadService;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
 import ufps.ukulima.domain.model.Enmienda.gateway.EnmiendaService;
 import ufps.ukulima.domain.model.EnmiendaRecomendacion.EnmiendaRecomendacion;
@@ -160,6 +161,9 @@ public class AnalisisSueloController {
 
     @Autowired
     AbonoQuimicoRecomendacionServicio abonoQuimicoRecomendacionServicio;
+
+    @Autowired
+    ElementoVariedadService elementoVariedadService;
 
     @Autowired
     LoteServicio loteServicio;
@@ -373,8 +377,67 @@ public class AnalisisSueloController {
                         new Response(200, "Analisis suelo agregado correctamente. (No se encontraron valores para Interpretación de la Disponibilidad de nutrientes)",
                                 savedAnalisisSuelo));
             }
+            String labranza ="";
+            if(grupoTextural.getNombre().equals(MUY_FINOS_INTERPRETACION)){
+                assert densidad != null;
+                if(densidad.getValor()<1.20){
+                    labranza="Labranza mecanizada reducida con rastrillo y nivelación en suelo medio seco";
+                }
+                if(densidad.getValor()>1.21){
+                    labranza="Labranza mínima mecanizada con arado cincel, rastrillo y nivelación en suelo\n" +
+                            "seco";
+                }
+
+            }
+
+        if(grupoTextural.getNombre().equals(FINOS_INTERPRETACION)){
+            assert densidad != null;
+            if(densidad.getValor()<1.30){
+                labranza="Labranza mecanizada reducida con rastrillo y nivelación en suelo medio seco";
+            }
+            if(densidad.getValor()>1.31){
+                labranza="Labranza mínima mecanizada con arado cincel, rastrillo y nivelación en suelo\n" +
+                        "seco";
+            }
+
+        }
+
+        if(grupoTextural.getNombre().equals(MODERADAMENTE_FINOS_INTERPRETACION)){
+            assert densidad != null;
+            if(densidad.getValor()<1.40){
+                labranza="Labranza mecanizada reducida con rastrillo y nivelación en suelo medio seco";
+            }
+            if(densidad.getValor()>1.41){
+                labranza="Labranza mínima mecanizada con arado cincel, rastrillo y nivelación en suelo\n" +
+                        "seco";
+            }
+
+        }
+
+        if(grupoTextural.getNombre().equals(MEDIOS_INTERPRETACION)){
+            if(densidad.getValor()<1.50){
+                labranza="Labranza mecanizada reducida con rastrillo y nivelación en suelo medio seco";
+            }
+            if(densidad.getValor()>1.51){
+                labranza="Labranza mínima mecanizada con arado cincel, rastrillo y nivelación en suelo\n" +
+                        "seco";
+            }
+
+        }
+
+        if(grupoTextural.getNombre().equals(MODERADAMENTE_GRUESOS_INTERPRETACION)){
+            assert densidad != null;
+            if(densidad.getValor()<1.60){
+                labranza="Labranza mecanizada con rastrillo y nivelación en suelo medio seco";
+            }
+            if(densidad.getValor()>1.61){
+                labranza="Labranza mecanizada con rastrillo y nivelación en suelo medio seco";
+            }
+
+        }
+
             RecomendacionEntity r = recomendacionService.saveRecomendacion(new RecomendacionEntity(null,0.0f,(short)0.0,
-                    analisisSueloEntityMapper.toEntity(savedAnalisisSuelo)));
+                    analisisSueloEntityMapper.toEntity(savedAnalisisSuelo),labranza));
             Recomendacion r2 = recomendacionEntityMapper.toDomain(r);
 
             //Guardar enmiendas
@@ -449,22 +512,36 @@ public class AnalisisSueloController {
             float pot_disponibilidad=0.0f;
             float cal_disponibilidad=0.0f;
             float mag_disponibilidad=0.0f;
+            float azu_disponibilidad=0.0f;
             float bor_disponibilidad=0.0f;
             float cob_disponibilidad=0.0f;
 
-            float nit_eficiencia=0.0f;
-            float fos_eficiencia=0.0f;
-            float pot_eficiencia=0.0f;
-            float cal_eficiencia=0.0f;
-            float mag_eficiencia=0.0f;
-            
-            float nit_requerimiento=0.0f;
-            float fos_requerimiento=0.0f;
-            float pot_requerimiento=0.0f;
-            float cal_requerimiento=0.0f;
-            float mag_requerimiento=0.0f;
+            float nit_eficiencia=1f;
+            float fos_eficiencia=1f;
+            float pot_eficiencia=1f;
+            float cal_eficiencia=1f;
+            float mag_eficiencia=1f;
+            float azu_eficiencia=1f;
 
-            float mo=savedAnalisisSuelo.getMateriaOrganica();
+            Cultivo cultivo = cultivoService.getCultivoBySuelo(savedAnalisisSuelo.getIdSuelo().getId());
+            int variedad = cultivo.getIdVariedad().getId();
+            int rendimiento =cultivo.getRendimiento();
+
+            float nit_requerimiento=elementoVariedadService.getElementoVariedadByVariedadRendimiento(
+                    variedad,rendimiento, "NITRÓGENO (N)").getValorOptimo();
+            float fos_requerimiento=elementoVariedadService.getElementoVariedadByVariedadRendimiento(
+                    variedad,rendimiento, "FÓSFORO (P)").getValorOptimo();
+            float pot_requerimiento=elementoVariedadService.getElementoVariedadByVariedadRendimiento(
+                    variedad,rendimiento, "POTASIO (K)").getValorOptimo();
+            float cal_requerimiento=elementoVariedadService.getElementoVariedadByVariedadRendimiento(
+                    variedad,rendimiento, "CALCIO (Ca)").getValorOptimo();
+            float mag_requerimiento=elementoVariedadService.getElementoVariedadByVariedadRendimiento(
+                    variedad,rendimiento, "MAGNESIO (Mg)").getValorOptimo();
+            float azu_requerimiento=elementoVariedadService.getElementoVariedadByVariedadRendimiento(
+                    variedad,rendimiento, "AZUFRE (S)").getValorOptimo();
+
+
+        float mo=savedAnalisisSuelo.getMateriaOrganica();
             if(clima.equals(CLIMA_CALIDO)){
                 if(mo>1.5f){
                     nit_disponibilidad=(float) (mo*0.02*(peso_suelo/2000));
@@ -707,22 +784,22 @@ public class AnalisisSueloController {
         }
 
             AbonoQuimicoRecomendacion aqr_nit = new AbonoQuimicoRecomendacion(null,r2,elemento_nit,
-                    nit_disponibilidad,nit_eficiencia,0.0f);
+                    nit_disponibilidad,nit_eficiencia,(nit_requerimiento-nit_disponibilidad)/nit_eficiencia);
 
             AbonoQuimicoRecomendacion aqr_fos = new AbonoQuimicoRecomendacion(null,r2,elemento_fos,
-                fos_disponibilidad,fos_eficiencia,0.0f);
+                fos_disponibilidad,fos_eficiencia,(fos_requerimiento-fos_disponibilidad)/fos_eficiencia);
 
             AbonoQuimicoRecomendacion aqr_pot = new AbonoQuimicoRecomendacion(null,r2,elemento_pot,
-                pot_disponibilidad,pot_eficiencia,0.0f);
+                pot_disponibilidad,pot_eficiencia,(pot_requerimiento-pot_disponibilidad)/pot_eficiencia);
 
             AbonoQuimicoRecomendacion aqr_cal = new AbonoQuimicoRecomendacion(null,r2,elemento_cal,
-                cal_disponibilidad,cal_eficiencia,0.0f);
+                cal_disponibilidad,cal_eficiencia,(cal_requerimiento-cal_disponibilidad)/cal_eficiencia);
 
             AbonoQuimicoRecomendacion aqr_mag = new AbonoQuimicoRecomendacion(null,r2,elemento_mag,
-                mag_disponibilidad,mag_eficiencia,0.0f);
+                mag_disponibilidad,mag_eficiencia,(mag_requerimiento-mag_disponibilidad)/mag_eficiencia);
 
             AbonoQuimicoRecomendacion aqr_azu = new AbonoQuimicoRecomendacion(null,r2,elemento_azu,
-                pot_disponibilidad,pot_eficiencia,0.0f);
+                azu_disponibilidad,azu_eficiencia,(azu_requerimiento-azu_disponibilidad)/azu_eficiencia);
 
             AbonoQuimicoRecomendacion aqr_bor = new AbonoQuimicoRecomendacion(null,r2,elemento_bor,
                 bor_disponibilidad,null,bor_disponibilidad);

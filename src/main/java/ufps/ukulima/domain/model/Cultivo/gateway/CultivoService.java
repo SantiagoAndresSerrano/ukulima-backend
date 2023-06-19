@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface CultivoService {
     public Cultivo getCultivoById(int idCultivo);
+
+    public Cultivo getCultivoBySuelo(int idSuelo);
+
     public List<Cultivo> getAllCultivo();
     public List<Cultivo> getAllCultivoByAgricultor(String nombreUsuario);
 

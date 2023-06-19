@@ -7,6 +7,7 @@ import ufps.ukulima.domain.model.Cultivo.Cultivo;
 import ufps.ukulima.domain.model.Cultivo.gateway.CultivoService;
 import ufps.ukulima.domain.model.Finca.Finca;
 import ufps.ukulima.infrastructure.db.springdata.entity.Finca.FincaEntity;
+import ufps.ukulima.infrastructure.driven_adapters.jpa.Suelo.SueloRepository;
 import ufps.ukulima.infrastructure.mapper.CultivoEntityMapper;
 import ufps.ukulima.infrastructure.mapper.FincaEntityMapper;
 
@@ -18,6 +19,10 @@ public class CultivoServiceImp implements CultivoService {
     CultivoRepository cultivoRepository;
 
     @Autowired
+    SueloRepository sueloRepository;
+
+
+    @Autowired
     CultivoEntityMapper cultivoEntityMapper;
 
     @Autowired
@@ -27,6 +32,11 @@ public class CultivoServiceImp implements CultivoService {
     @Transactional(readOnly = true)
     public Cultivo getCultivoById(int idCultivo) {
         return cultivoEntityMapper.toDomain(cultivoRepository.getById(idCultivo));
+    }
+
+    @Override
+    public Cultivo getCultivoBySuelo(int idSuelo) {
+        return cultivoEntityMapper.toDomain(cultivoRepository.getFirstByIdSuelo(sueloRepository.getById(idSuelo)));
     }
 
     @Override
