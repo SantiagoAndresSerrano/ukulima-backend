@@ -103,7 +103,42 @@
       <recent name="ufps.ukulima.domain.model.AbonoQuimicoRecomendacion" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.UkulimaApplication">
+    <configuration name="ukulima [clean]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </extension>
+      <method v="2" />
+    </configuration>
     <configuration name="UkulimaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="ukulima" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="ufps.ukulima.UkulimaApplication" />
@@ -185,7 +220,9 @@
       <workItem from="1686877674778" duration="12134000" />
       <workItem from="1686948657215" duration="605000" />
       <workItem from="1686957162335" duration="350000" />
-      <workItem from="1686966730793" duration="36870000" />
+      <workItem from="1686966730793" duration="37802000" />
+      <workItem from="1687285555276" duration="583000" />
+      <workItem from="1687412891003" duration="574000" />
     </task>
     <servers />
   </component>
