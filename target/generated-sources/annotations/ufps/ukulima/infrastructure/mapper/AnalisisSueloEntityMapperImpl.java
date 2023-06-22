@@ -17,7 +17,6 @@ import ufps.ukulima.domain.model.AnalisisSueloRelacionBase.AnalisisSueloRelacion
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
-import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Departamento.Departamento;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
@@ -49,7 +48,6 @@ import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBas
 import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
-import ufps.ukulima.infrastructure.db.springdata.entity.Densidad.DensidadEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.DepartamentoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
@@ -72,7 +70,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-19T01:41:48-0500",
+    date = "2023-06-22T13:15:26-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -106,7 +104,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         analisisSuelo.setRecomendacionCollection( recomendacionEntityCollectionToRecomendacionCollection( AnalisisSueloEntity.getRecomendacionCollection() ) );
         analisisSuelo.setAnalisisElementoCollection( analisisElementosEntityCollectionToAnalisisElementoCollection( AnalisisSueloEntity.getAnalisisElementoCollection() ) );
         analisisSuelo.setIdClaseTextural( claseTexturalEntityToClaseTextural( AnalisisSueloEntity.getIdClaseTextural() ) );
-        analisisSuelo.setIdDensidad( densidadEntityToDensidad( AnalisisSueloEntity.getIdDensidad() ) );
+        analisisSuelo.setIdDensidad( AnalisisSueloEntity.getIdDensidad() );
         analisisSuelo.setIdProfundidad( profundidadMuestraEntityToProfundidadMuestra( AnalisisSueloEntity.getIdProfundidad() ) );
         analisisSuelo.setIdGrupoTextural( grupoTexturalEntityToGrupoTextural( AnalisisSueloEntity.getIdGrupoTextural() ) );
 
@@ -142,7 +140,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         analisisSueloEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( AnalisisSuelo.getRecomendacionCollection() ) );
         analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( AnalisisSuelo.getAnalisisElementoCollection() ) );
         analisisSueloEntity.setIdClaseTextural( claseTexturalToClaseTexturalEntity( AnalisisSuelo.getIdClaseTextural() ) );
-        analisisSueloEntity.setIdDensidad( densidadToDensidadEntity( AnalisisSuelo.getIdDensidad() ) );
+        analisisSueloEntity.setIdDensidad( AnalisisSuelo.getIdDensidad() );
         analisisSueloEntity.setIdProfundidad( profundidadMuestraToProfundidadMuestraEntity( AnalisisSuelo.getIdProfundidad() ) );
 
         return analisisSueloEntity;
@@ -445,6 +443,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
 
         Recomendacion recomendacion = new Recomendacion();
 
+        recomendacion.setMateriaOrganica( recomendacionEntity.getMateriaOrganica() );
         recomendacion.setAbonoQuimicoRecomendacionEntities( abonoQuimicoRecomendacionEntityCollectionToAbonoQuimicoRecomendacionCollection( recomendacionEntity.getAbonoQuimicoRecomendacionEntities() ) );
         recomendacion.setLabranza( recomendacionEntity.getLabranza() );
         recomendacion.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection( recomendacionEntity.getEnmiendaRecomendacionEntityCollection() ) );
@@ -686,19 +685,6 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         claseTextural.setSigla( claseTexturalEntity.getSigla() );
 
         return claseTextural;
-    }
-
-    protected Densidad densidadEntityToDensidad(DensidadEntity densidadEntity) {
-        if ( densidadEntity == null ) {
-            return null;
-        }
-
-        Densidad densidad = new Densidad();
-
-        densidad.setIdDensidad( densidadEntity.getIdDensidad() );
-        densidad.setValor( densidadEntity.getValor() );
-
-        return densidad;
     }
 
     protected ProfundidadMuestra profundidadMuestraEntityToProfundidadMuestra(ProfundidadMuestraEntity profundidadMuestraEntity) {
@@ -1152,6 +1138,7 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
 
         RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
 
+        recomendacionEntity.setMateriaOrganica( recomendacion.getMateriaOrganica() );
         recomendacionEntity.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection( recomendacion.getEnmiendaRecomendacionEntityCollection() ) );
         recomendacionEntity.setLabranza( recomendacion.getLabranza() );
         recomendacionEntity.setId( recomendacion.getId() );
@@ -1220,19 +1207,6 @@ public class AnalisisSueloEntityMapperImpl implements AnalisisSueloEntityMapper 
         claseTexturalEntity.setSigla( claseTextural.getSigla() );
 
         return claseTexturalEntity;
-    }
-
-    protected DensidadEntity densidadToDensidadEntity(Densidad densidad) {
-        if ( densidad == null ) {
-            return null;
-        }
-
-        DensidadEntity densidadEntity = new DensidadEntity();
-
-        densidadEntity.setIdDensidad( densidad.getIdDensidad() );
-        densidadEntity.setValor( densidad.getValor() );
-
-        return densidadEntity;
     }
 
     protected ProfundidadMuestraEntity profundidadMuestraToProfundidadMuestraEntity(ProfundidadMuestra profundidadMuestra) {

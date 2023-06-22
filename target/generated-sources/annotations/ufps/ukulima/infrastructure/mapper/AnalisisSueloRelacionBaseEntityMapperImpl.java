@@ -17,7 +17,6 @@ import ufps.ukulima.domain.model.AnalisisSueloRelacionBase.AnalisisSueloRelacion
 import ufps.ukulima.domain.model.ClaseTextural.ClaseTextural;
 import ufps.ukulima.domain.model.ConductividadElectrica.ConductividadElectrica;
 import ufps.ukulima.domain.model.Corregimiento.Corregimiento;
-import ufps.ukulima.domain.model.Densidad.Densidad;
 import ufps.ukulima.domain.model.Departamento.Departamento;
 import ufps.ukulima.domain.model.Elemento.Elemento;
 import ufps.ukulima.domain.model.Enmienda.Enmienda;
@@ -49,7 +48,6 @@ import ufps.ukulima.infrastructure.db.springdata.entity.AnalisisSueloRelacionBas
 import ufps.ukulima.infrastructure.db.springdata.entity.ClaseTextural.ClaseTexturalEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.ConductividadElectrica.ConductividadElectricaEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Corregimiento.CorregimientoEntity;
-import ufps.ukulima.infrastructure.db.springdata.entity.Densidad.DensidadEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Departamento.DepartamentoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Elemento.ElementoEntity;
 import ufps.ukulima.infrastructure.db.springdata.entity.Enmienda.EnmiendaEntity;
@@ -72,7 +70,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Vereda.VeredaEntity;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-19T01:41:46-0500",
+    date = "2023-06-22T13:15:27-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -270,6 +268,7 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
 
         Recomendacion recomendacion = new Recomendacion();
 
+        recomendacion.setMateriaOrganica( recomendacionEntity.getMateriaOrganica() );
         recomendacion.setAbonoQuimicoRecomendacionEntities( abonoQuimicoRecomendacionEntityCollectionToAbonoQuimicoRecomendacionCollection( recomendacionEntity.getAbonoQuimicoRecomendacionEntities() ) );
         recomendacion.setLabranza( recomendacionEntity.getLabranza() );
         recomendacion.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection( recomendacionEntity.getEnmiendaRecomendacionEntityCollection() ) );
@@ -739,6 +738,7 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
 
         RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
 
+        recomendacionEntity.setMateriaOrganica( recomendacion.getMateriaOrganica() );
         recomendacionEntity.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection( recomendacion.getEnmiendaRecomendacionEntityCollection() ) );
         recomendacionEntity.setLabranza( recomendacion.getLabranza() );
         recomendacionEntity.setId( recomendacion.getId() );
@@ -809,19 +809,6 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
         return claseTexturalEntity;
     }
 
-    protected DensidadEntity densidadToDensidadEntity(Densidad densidad) {
-        if ( densidad == null ) {
-            return null;
-        }
-
-        DensidadEntity densidadEntity = new DensidadEntity();
-
-        densidadEntity.setIdDensidad( densidad.getIdDensidad() );
-        densidadEntity.setValor( densidad.getValor() );
-
-        return densidadEntity;
-    }
-
     protected ProfundidadMuestraEntity profundidadMuestraToProfundidadMuestraEntity(ProfundidadMuestra profundidadMuestra) {
         if ( profundidadMuestra == null ) {
             return null;
@@ -863,7 +850,7 @@ public class AnalisisSueloRelacionBaseEntityMapperImpl implements AnalisisSueloR
         analisisSueloEntity.setRecomendacionCollection( recomendacionCollectionToRecomendacionEntityCollection( analisisSuelo.getRecomendacionCollection() ) );
         analisisSueloEntity.setAnalisisElementoCollection( analisisElementoCollectionToAnalisisElementosEntityCollection( analisisSuelo.getAnalisisElementoCollection() ) );
         analisisSueloEntity.setIdClaseTextural( claseTexturalToClaseTexturalEntity( analisisSuelo.getIdClaseTextural() ) );
-        analisisSueloEntity.setIdDensidad( densidadToDensidadEntity( analisisSuelo.getIdDensidad() ) );
+        analisisSueloEntity.setIdDensidad( analisisSuelo.getIdDensidad() );
         analisisSueloEntity.setIdProfundidad( profundidadMuestraToProfundidadMuestraEntity( analisisSuelo.getIdProfundidad() ) );
 
         return analisisSueloEntity;

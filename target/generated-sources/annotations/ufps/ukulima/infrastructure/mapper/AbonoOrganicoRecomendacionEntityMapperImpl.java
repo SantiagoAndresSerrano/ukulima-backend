@@ -22,7 +22,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.Recomendac
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-19T01:42:00-0500",
+    date = "2023-06-22T13:15:29-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -220,6 +220,7 @@ public class AbonoOrganicoRecomendacionEntityMapperImpl implements AbonoOrganico
 
         RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
 
+        recomendacionEntity.setMateriaOrganica( recomendacion.getMateriaOrganica() );
         recomendacionEntity.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection( recomendacion.getEnmiendaRecomendacionEntityCollection() ) );
         recomendacionEntity.setLabranza( recomendacion.getLabranza() );
         recomendacionEntity.setId( recomendacion.getId() );

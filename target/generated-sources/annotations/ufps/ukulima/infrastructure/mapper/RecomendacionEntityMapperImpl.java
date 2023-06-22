@@ -26,7 +26,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.Recomendac
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-19T01:41:47-0500",
+    date = "2023-06-22T13:15:28-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -40,6 +40,7 @@ public class RecomendacionEntityMapperImpl implements RecomendacionEntityMapper 
 
         Recomendacion recomendacion = new Recomendacion();
 
+        recomendacion.setMateriaOrganica( RecomendacionEntity.getMateriaOrganica() );
         recomendacion.setAbonoQuimicoRecomendacionEntities( abonoQuimicoRecomendacionEntityCollectionToAbonoQuimicoRecomendacionCollection( RecomendacionEntity.getAbonoQuimicoRecomendacionEntities() ) );
         recomendacion.setLabranza( RecomendacionEntity.getLabranza() );
         recomendacion.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionEntityCollectionToEnmiendaRecomendacionCollection( RecomendacionEntity.getEnmiendaRecomendacionEntityCollection() ) );
@@ -59,6 +60,7 @@ public class RecomendacionEntityMapperImpl implements RecomendacionEntityMapper 
 
         RecomendacionEntity recomendacionEntity = new RecomendacionEntity();
 
+        recomendacionEntity.setMateriaOrganica( Recomendacion.getMateriaOrganica() );
         recomendacionEntity.setEnmiendaRecomendacionEntityCollection( enmiendaRecomendacionCollectionToEnmiendaRecomendacionEntityCollection( Recomendacion.getEnmiendaRecomendacionEntityCollection() ) );
         recomendacionEntity.setLabranza( Recomendacion.getLabranza() );
         recomendacionEntity.setId( Recomendacion.getId() );

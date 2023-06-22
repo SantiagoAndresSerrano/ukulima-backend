@@ -58,6 +58,10 @@ public class RecomendacionEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "cantidad_enmienda")
     private float cantidadEnmienda;
+
+    @Basic(optional = false)
+    @Column(name = "materia_organica")
+    private float materiaOrganica;
     @Basic(optional = false)
     @Column(name = "preparacion_suelo")
     private short preparacionSuelo;
@@ -98,6 +102,14 @@ public class RecomendacionEntity implements Serializable {
         this.idAnalisisSuelo = idAnalisisSuelo;
         this.labranza = labranza;
 
+    }
+
+    public float getMateriaOrganica() {
+        return materiaOrganica;
+    }
+
+    public void setMateriaOrganica(float materiaOrganica) {
+        this.materiaOrganica = materiaOrganica;
     }
 
     public Collection<EnmiendaRecomendacionEntity> getEnmiendaRecomendacionEntityCollection() {

@@ -54,7 +54,7 @@ public class AnalisisSuelo {
 
     private ClaseTextural idClaseTextural;
 
-    private Densidad idDensidad;
+    private float idDensidad;
     @NotNull(message = "Profundidad de muestra no puede ser vacío")
     private ProfundidadMuestra idProfundidad;
     @NotNull(message = "ph Suelo no puede ser vacío")
@@ -89,7 +89,7 @@ public class AnalisisSuelo {
 
     public AnalisisSuelo(Integer idAnalisisSuelo, float porcentArena,
                          float porcentLimos, float porcentArcilla, Date fecha,
-                         ClaseTextural idClaseTextural, Densidad idDensidad,
+                         ClaseTextural idClaseTextural, float idDensidad,
                          ProfundidadMuestra idProfundidad, float phSuelo, float aluminioIntercambiable,
                          float conductividadElectrica, float materiaOrganica, float intercambioCationico
                          , PhSuelo idPhSuelo, AluminioIntercambiable idAluminioIntercambiable,
@@ -278,11 +278,11 @@ public class AnalisisSuelo {
         this.idClaseTextural = idClaseTextural;
     }
 
-    public Densidad getIdDensidad() {
+    public float getIdDensidad() {
         return idDensidad;
     }
 
-    public void setIdDensidad(Densidad idDensidad) {
+    public void setIdDensidad(float idDensidad) {
         this.idDensidad = idDensidad;
     }
 

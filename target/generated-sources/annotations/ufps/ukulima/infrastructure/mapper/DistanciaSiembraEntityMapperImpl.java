@@ -9,7 +9,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.DistanciaSiembra.Distanc
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-19T01:41:46-0500",
+    date = "2023-06-22T13:15:26-0500",
     comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component

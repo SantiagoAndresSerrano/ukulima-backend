@@ -93,9 +93,9 @@ public class AnalisisSueloEntity implements Serializable {
     @JoinColumn(name = "id_clase_textural", referencedColumnName = "id_clase_textural")
     @ManyToOne(optional = false)
     private ClaseTexturalEntity idClaseTextural;
-    @JoinColumn(name = "id_densidad", referencedColumnName = "id_densidad")
-    @ManyToOne(optional = false)
-    private DensidadEntity idDensidad;
+    @Basic(optional = false)
+    @Column(name = "id_densidad")
+    private float idDensidad;
     @JoinColumn(name = "id_profundidad", referencedColumnName = "id_profundidad_muestra")
     @ManyToOne(optional = false)
     private ProfundidadMuestraEntity idProfundidad;
@@ -157,7 +157,7 @@ public class AnalisisSueloEntity implements Serializable {
 
     public AnalisisSueloEntity(Integer idAnalisisSuelo, float porcentArena, float porcentLimos,
                                float porcentArcilla, Date fecha, ClaseTexturalEntity idClaseTextural,
-                               DensidadEntity idDensidad, ProfundidadMuestraEntity idProfundidad,
+                               float idDensidad, ProfundidadMuestraEntity idProfundidad,
                                PhSueloEntity idPhSuelo, GrupoTexturalEntity idGrupoTextural,
                                AluminioIntercambiableEntity idAluminioIntercambiable,
                                ConductividadElectricaEntity idConductividadElectrica,
@@ -356,11 +356,11 @@ public class AnalisisSueloEntity implements Serializable {
         this.idClaseTextural = idClaseTextural;
     }
 
-    public DensidadEntity getIdDensidad() {
+    public float getIdDensidad() {
         return idDensidad;
     }
 
-    public void setIdDensidad(DensidadEntity idDensidad) {
+    public void setIdDensidad(float idDensidad) {
         this.idDensidad = idDensidad;
     }
 
