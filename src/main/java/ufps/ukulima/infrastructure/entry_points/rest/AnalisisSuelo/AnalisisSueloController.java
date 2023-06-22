@@ -262,9 +262,9 @@ public class AnalisisSueloController {
         GrupoTextural grupoTextural = grupoTexturalService.getGrupoTexturalByNombre(interpretacion);
 
         float densidad = 0;
-        try{
+
             densidad = analisisSuelo.getIdDensidad();
-        }catch (NullPointerException error){
+        if(densidad==0){
             if(grupoTextural.getNombre().equals("MUY FINOS")){
                 densidad = 1.1f;
             }
