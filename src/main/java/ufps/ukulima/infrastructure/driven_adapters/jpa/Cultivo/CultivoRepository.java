@@ -15,12 +15,8 @@ public interface CultivoRepository extends JpaRepository<CultivoEntity, Integer>
 
     CultivoEntity getFirstByIdSuelo(SueloEntity idSuelo);
 
-    @Query(value = "select c.* from cultivo c \n" +
-            "inner join suelo s on s.id = c.id_suelo \n" +
-            "inner join lote l on l.id = s.id_lote\n" +
-            "inner join finca f on f.id_finca = l.id_finca \n" +
-            "inner join agricultor a on a.identificacion = f.id_agricultor\n" +
-            "WHERE a.email = :idAgriltor or a.telefono = :idAgriltor", nativeQuery = true)
+    @Query(value = "select c from CultivoEntity c where c.idSuelo.idLote.idFinca.idAgricultor.email=:idAgricultor or " +
+            "c.idSuelo.idLote.idFinca.idAgricultor.telefono=:idAgricultor")
     List<CultivoEntity> getAllByAgricultor(@Param("idAgriltor") String idAgriltor);
 
 }
