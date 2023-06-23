@@ -15,8 +15,8 @@ public interface CultivoRepository extends JpaRepository<CultivoEntity, Integer>
 
     CultivoEntity getFirstByIdSuelo(SueloEntity idSuelo);
 
-    @Query(value = "select c from CultivoEntity c where c.idSuelo.idLote.idFinca.idAgricultor.email=:idAgricultor or " +
-            "c.idSuelo.idLote.idFinca.idAgricultor.telefono=:idAgricultor")
+    @Query(value = "select c from CultivoEntity c where c.idSuelo.idLote.idFinca.idAgricultor.email=:idAgriltor or " +
+            "c.idSuelo.idLote.idFinca.idAgricultor.telefono=:idAgriltor")
     List<CultivoEntity> getAllByAgricultor(@Param("idAgriltor") String idAgriltor);
 
 }
