@@ -786,29 +786,118 @@ public class AnalisisSueloController {
             }
         }
 
-        AbonoQuimicoRecomendacion aqr_nit = new AbonoQuimicoRecomendacion(null,r2,elemento_nit,
-                nit_disponibilidad,nit_eficiencia,(nit_requerimiento-nit_disponibilidad)/nit_eficiencia);
+        // aqr_nit
+        float resultado_nit = (nit_requerimiento - nit_disponibilidad) / nit_eficiencia;
+        if (resultado_nit <= 0) {
+            resultado_nit = 46;
+        }
+        AbonoQuimicoRecomendacion aqr_nit = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_nit,
+                nit_disponibilidad,
+                nit_eficiencia,
+                resultado_nit
+        );
 
-        AbonoQuimicoRecomendacion aqr_fos = new AbonoQuimicoRecomendacion(null,r2,elemento_fos,
-                fos_disponibilidad,fos_eficiencia,(fos_requerimiento-fos_disponibilidad)/fos_eficiencia);
+// aqr_fos
+        float resultado_fos = (fos_requerimiento - fos_disponibilidad) / fos_eficiencia;
+        if (resultado_fos < 0) {
+            resultado_fos = 0;
+        }
+        AbonoQuimicoRecomendacion aqr_fos = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_fos,
+                fos_disponibilidad,
+                fos_eficiencia,
+                resultado_fos
+        );
 
-        AbonoQuimicoRecomendacion aqr_pot = new AbonoQuimicoRecomendacion(null,r2,elemento_pot,
-                pot_disponibilidad,pot_eficiencia,(pot_requerimiento-pot_disponibilidad)/pot_eficiencia);
+// aqr_pot
+        float resultado_pot = (pot_requerimiento - pot_disponibilidad) / pot_eficiencia;
+        if (resultado_pot < 0) {
+            resultado_pot = 0;
+        }
+        AbonoQuimicoRecomendacion aqr_pot = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_pot,
+                pot_disponibilidad,
+                pot_eficiencia,
+                resultado_pot
+        );
 
-        AbonoQuimicoRecomendacion aqr_cal = new AbonoQuimicoRecomendacion(null,r2,elemento_cal,
-                cal_disponibilidad,cal_eficiencia,(cal_requerimiento-cal_disponibilidad)/cal_eficiencia);
+// aqr_cal
+        float resultado_cal = (cal_requerimiento - cal_disponibilidad) / cal_eficiencia;
+        if (resultado_cal < 0) {
+            resultado_cal = 0;
+        }
+        AbonoQuimicoRecomendacion aqr_cal = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_cal,
+                cal_disponibilidad,
+                cal_eficiencia,
+                resultado_cal
+        );
 
-        AbonoQuimicoRecomendacion aqr_mag = new AbonoQuimicoRecomendacion(null,r2,elemento_mag,
-                mag_disponibilidad,mag_eficiencia,(mag_requerimiento-mag_disponibilidad)/mag_eficiencia);
+// aqr_mag
+        float resultado_mag = (mag_requerimiento - mag_disponibilidad) / mag_eficiencia;
+        if (resultado_mag < 0) {
+            resultado_mag = 0;
+        }
+        AbonoQuimicoRecomendacion aqr_mag = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_mag,
+                mag_disponibilidad,
+                mag_eficiencia,
+                resultado_mag
+        );
 
-        AbonoQuimicoRecomendacion aqr_azu = new AbonoQuimicoRecomendacion(null,r2,elemento_azu,
-                azu_disponibilidad,azu_eficiencia,(azu_requerimiento-azu_disponibilidad)/azu_eficiencia);
+// aqr_azu
+        float resultado_azu = (azu_requerimiento - azu_disponibilidad) / azu_eficiencia;
+        if (resultado_azu < 0) {
+            resultado_azu = 0;
+        }
+        AbonoQuimicoRecomendacion aqr_azu = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_azu,
+                azu_disponibilidad,
+                azu_eficiencia,
+                resultado_azu
+        );
 
-        AbonoQuimicoRecomendacion aqr_bor = new AbonoQuimicoRecomendacion(null,r2,elemento_bor,
-                bor_disponibilidad,null,bor_disponibilidad);
+// aqr_bor
+        float resultado_bor = bor_disponibilidad;
+        if (resultado_bor < 0) {
+            resultado_bor = 0;
+        }
+        AbonoQuimicoRecomendacion aqr_bor = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_bor,
+                bor_disponibilidad,
+                null,
+                resultado_bor
+        );
 
-        AbonoQuimicoRecomendacion aqr_cob = new AbonoQuimicoRecomendacion(null,r2,elemento_cob,
-                cob_disponibilidad,null,bor_disponibilidad);
+// aqr_cob
+        float resultado_cob = cob_disponibilidad;
+        if (resultado_cob < 0) {
+            resultado_cob = 0;
+        }
+        AbonoQuimicoRecomendacion aqr_cob = new AbonoQuimicoRecomendacion(
+                null,
+                r2,
+                elemento_cob,
+                cob_disponibilidad,
+                null,
+                resultado_cob
+        );
+
 
         abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_nit);
         abonoQuimicoRecomendacionServicio.saveAbonoQuimicoRecomendacion(aqr_fos);

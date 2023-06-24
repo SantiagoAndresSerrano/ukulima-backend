@@ -40,6 +40,11 @@ public class CultivoServiceImp implements CultivoService {
     }
 
     @Override
+    public List<Cultivo> getAllCultivoBySuelo(int idSuelo) {
+        return cultivoEntityMapper.abonosOrganicosRecomendacionToDomain(cultivoRepository.getAllByIdSuelo(idSuelo));
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Cultivo> getAllCultivo() {
         return cultivoEntityMapper.abonosOrganicosRecomendacionToDomain(cultivoRepository.findAll());

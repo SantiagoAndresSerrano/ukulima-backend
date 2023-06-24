@@ -19,4 +19,7 @@ public interface CultivoRepository extends JpaRepository<CultivoEntity, Integer>
             ".idAgricultor.email=:idAgriltor")
     List<CultivoEntity> getAllByAgricultor(@Param("idAgriltor") String idAgriltor);
 
+    @Query(value = "select * from cultivo c where c.id_suelo=:idSuelo", nativeQuery = true)
+    List<CultivoEntity> getAllByIdSuelo(@Param("idSuelo") int idSuelo);
+
 }

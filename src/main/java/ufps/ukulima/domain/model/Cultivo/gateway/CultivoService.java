@@ -10,6 +10,9 @@ public interface CultivoService {
 
     public Cultivo getCultivoBySuelo(int idSuelo);
 
+    public List<Cultivo> getAllCultivoBySuelo(int idSuelo);
+
+
     public List<Cultivo> getAllCultivo();
     public List<Cultivo> getAllCultivoByAgricultor(String nombreUsuario);
 

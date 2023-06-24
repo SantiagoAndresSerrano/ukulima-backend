@@ -10,5 +10,6 @@ public interface SueloService {
     public List<Suelo> getSueloByLote(int id);
 
     public List<Suelo> getAllSuelos();
+
     public void saveSuelo(Suelo suelo);
 }
