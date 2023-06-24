@@ -370,23 +370,23 @@ public class AnalisisSueloController {
 
         if(valorM > 0){
             relacion_ca_mg = valorC/valorM;
-            relacionBaseCaMg = relacionBasesService.findRelacionCalMag(relacion_ca_mg,true);
+            relacionBaseCaMg = relacionBasesService.findRelacionCalMag(relacion_ca_mg,false);
         }else{
-            relacionBaseCaMg = relacionBasesService.findRelacionCalMag(0,false);
+            relacionBaseCaMg = relacionBasesService.findRelacionCalMag(0,true);
         }
 
         if(valorP >0){
             relacion_ca_k = valorC/valorP;
-            relacionBaseCaK = relacionBasesService.findRelacionCalPot(relacion_ca_k,true);
+            relacionBaseCaK = relacionBasesService.findRelacionCalPot(relacion_ca_k,false);
         }else{
-            relacionBaseCaK = relacionBasesService.findRelacionCalPot(0,false);
+            relacionBaseCaK = relacionBasesService.findRelacionCalPot(0,true);
         }
 
         if(valorP >0){
             relacion_ca_mg_k = (valorC+valorM)/valorP;
-            relacionBaseCaMgK = relacionBasesService.findRelacionBasesPrincipales(relacion_ca_mg_k,true);
+            relacionBaseCaMgK = relacionBasesService.findRelacionBasesPrincipales(relacion_ca_mg_k,false);
         }else{
-            relacionBaseCaMgK = relacionBasesService.findRelacionCalMag(0,false);
+            relacionBaseCaMgK = relacionBasesService.findRelacionCalMag(0,true);
         }
 
 
