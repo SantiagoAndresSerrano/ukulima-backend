@@ -359,13 +359,36 @@ public class AnalisisSueloController {
                         valorF, valorP, valorC, valorM, valorS, valorA,valorBo,valorCo,
                         idF, idP, idC, idM, idS, idA,idBo,idCo, savedAnalisisSuelo.getIdAnalisisSuelo()
                 );
-        float relacion_ca_mg = valorC/valorM;
-        float relacion_ca_k = valorC/valorP;
-        float relacion_ca_mg_k = (valorC+valorM)/valorP;
 
-        RelacionBase relacionBaseCaMg = relacionBasesService.findRelacionCalMag(relacion_ca_mg);
-        RelacionBase relacionBaseCaK = relacionBasesService.findRelacionCalPot(relacion_ca_k);
-        RelacionBase relacionBaseCaMgK = relacionBasesService.findRelacionBasesPrincipales(relacion_ca_mg_k);
+        RelacionBase relacionBaseCaMg = null;
+        RelacionBase relacionBaseCaK = null;
+        RelacionBase relacionBaseCaMgK = null;
+        float relacion_ca_mg = 0;
+        float relacion_ca_k = 0;
+        float relacion_ca_mg_k = 0;
+
+
+        if(valorM > 0){
+            relacion_ca_mg = valorC/valorM;
+            relacionBaseCaMg = relacionBasesService.findRelacionCalMag(relacion_ca_mg,true);
+        }else{
+            relacionBaseCaMg = relacionBasesService.findRelacionCalMag(0,false);
+        }
+
+        if(valorP >0){
+            relacion_ca_k = valorC/valorP;
+            relacionBaseCaK = relacionBasesService.findRelacionCalPot(relacion_ca_k,true);
+        }else{
+            relacionBaseCaK = relacionBasesService.findRelacionCalPot(0,false);
+        }
+
+        if(valorP >0){
+            relacion_ca_mg_k = (valorC+valorM)/valorP;
+            relacionBaseCaMgK = relacionBasesService.findRelacionBasesPrincipales(relacion_ca_mg_k,true);
+        }else{
+            relacionBaseCaMgK = relacionBasesService.findRelacionCalMag(0,false);
+        }
+
 
         analisisSueloRelacionBaseService.saveAnalisisSueloRelacionBase(new AnalisisSueloRelacionBase(null,
                 relacionBaseCaMg,savedAnalisisSuelo,relacion_ca_mg));

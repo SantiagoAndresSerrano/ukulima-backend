@@ -23,18 +23,24 @@ public class RelacionBaseServicioImp implements RelacionBaseServicio{
     }
 
     @Override
-    public RelacionBase findRelacionCalMag(float value) {
-        return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionCalMag(value));
+    public RelacionBase findRelacionCalMag(float value, boolean isWarning) {
+        if(!isWarning)
+            return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionCalMag(value));
+        return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionCalMagNull());
     }
 
     @Override
-    public RelacionBase findRelacionCalPot(float value) {
-        return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionCalPot(value));
+    public RelacionBase findRelacionCalPot(float value, boolean isWarning) {
+        if(!isWarning)
+            return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionCalPot(value));
+        return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionCalPotNull());
     }
 
     @Override
-    public RelacionBase findRelacionBasesPrincipales(float value) {
-        return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionBasesPrincipales(value));
+    public RelacionBase findRelacionBasesPrincipales(float value, boolean isWarning) {
+        if(!isWarning)
+            return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionBasesPrincipales(value));
+        return relacionBaseEntityMapper.toDomain(relacionBaseRepository.findRelacionBasesPrincipalesNull());
     }
 
     @Override

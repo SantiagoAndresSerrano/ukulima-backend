@@ -7,8 +7,8 @@ import java.util.List;
 public interface RelacionBaseServicio {
     public  void saveRelacionBase(RelacionBase relacionBase);
     public  RelacionBase findRelacionBaseById(int id);
-    public  RelacionBase findRelacionCalMag(float value);
-    public  RelacionBase findRelacionCalPot(float value);
-    public  RelacionBase findRelacionBasesPrincipales(float value);
+    public  RelacionBase findRelacionCalMag(float value, boolean isWarning);
+    public  RelacionBase findRelacionCalPot(float value, boolean isWarning);
+    public  RelacionBase findRelacionBasesPrincipales(float value, boolean isWarning);
     public List<RelacionBase> findByAllRelacionBase();
 }
