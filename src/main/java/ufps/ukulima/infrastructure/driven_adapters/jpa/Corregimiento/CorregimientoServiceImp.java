@@ -30,6 +30,11 @@ public class CorregimientoServiceImp implements CorregimientoService {
     }
 
     @Override
+    public List<Corregimiento> getAllCorregimientoByIdMunicipio(int idMunicipio) {
+        return corregimientoEntityMapper.abonosOrganicosRecomendacionToDomain(corregimientoRepository.getAllByIdMunicipio(idMunicipio));
+    }
+
+    @Override
     @Transactional
     public void saveCorregimiento(Corregimiento corregimiento) {
         corregimientoRepository.save(corregimientoEntityMapper.toEntity(corregimiento));

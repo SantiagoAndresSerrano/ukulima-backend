@@ -24,7 +24,7 @@ public class CorregimientoController {
 
     @GetMapping("/{idMunicipio}")
     public ResponseEntity<?> getCorregimientoByMunicipio(@PathVariable int idMunicipio){
-        return ResponseEntity.ok(municipioService.getMunicipioById(idMunicipio));
+        return ResponseEntity.ok(corregimientoService.getAllCorregimientoByIdMunicipio(idMunicipio));
     }
 
 
