@@ -6,6 +6,6 @@ import org.springframework.data.repository.query.Param;
 import ufps.ukulima.infrastructure.db.springdata.entity.GrupoTextural.GrupoTexturalEntity;
 
 public interface GrupoTexturalRepository extends JpaRepository<GrupoTexturalEntity, Integer> {
-    @Query(value = "SELECT * FROM grupo_textural gt where gt.nombre = :nombre", nativeQuery = true)
+    @Query(value = "SELECT * FROM grupo_textural gt where gt.nombre = :nombre limit 1", nativeQuery = true)
     GrupoTexturalEntity getGrupoTexturalByNombre(@Param("nombre") String nombre);
 }

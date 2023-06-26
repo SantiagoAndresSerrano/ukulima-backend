@@ -11,33 +11,33 @@ public interface RelacionBaseRepository extends JpaRepository<RelacionBaseEntity
             "from relacion_base rb \n" +
             " join elemento el on el.id = rb.id_elemento_1 and el.nombre = \"CALCIO (Ca)\"\n" +
             " join elemento el2 on el2.id = rb.id_elemento2  and el2.nombre = \"MAGNESIO (Mg)\"\n" +
-            "where rb.valor_min <= :value and rb.valor_max >= :value and rb.id_elemento_3 = 0",nativeQuery = true)
+            "where rb.valor_min <= :value and rb.valor_max >= :value and rb.id_elemento_3 = 0 limit 1",nativeQuery = true)
     RelacionBaseEntity findRelacionCalMag(@Param("value") float value);
 
     @Query(value = "select rb.interpretacion, rb.formula,rb.id,rb.valor_min ,rb.valor_max ,rb.id_elemento_1 ,rb.id_elemento2 ,rb.id_elemento_3\n" +
             "from relacion_base rb \n" +
             " join elemento el on el.id = rb.id_elemento_1 and el.nombre = \"CALCIO (Ca)\"\n" +
             " join elemento el2 on el2.id = rb.id_elemento2  and el2.nombre = \"MAGNESIO (Mg)\"\n" +
-            "where rb.valor_min = null and rb.valor_max = null and rb.id_elemento_3 = 0",nativeQuery = true)
+            "where rb.valor_min = null and rb.valor_max = null and rb.id_elemento_3 = 0 limit 1",nativeQuery = true)
     RelacionBaseEntity findRelacionCalMagNull();
     @Query(value = "select rb.interpretacion, rb.formula,rb.id,rb.valor_min ,rb.valor_max ,rb.id_elemento_1 ,rb.id_elemento2 ,rb.id_elemento_3\n" +
             "from relacion_base rb \n" +
             " join elemento el on el.id = rb.id_elemento_1 and el.nombre = \"CALCIO (Ca)\"\n" +
             " join elemento el2 on el2.id = rb.id_elemento2  and el2.nombre = \"POTASIO (K)\"\n" +
-            "where rb.valor_min <= :value and rb.valor_max >= :value and rb.id_elemento_3 = 0",nativeQuery = true)
+            "where rb.valor_min <= :value and rb.valor_max >= :value and rb.id_elemento_3 = 0 limit 1",nativeQuery = true)
     RelacionBaseEntity findRelacionCalPot(@Param("value") float value);
     @Query(value = "select rb.interpretacion, rb.formula,rb.id,rb.valor_min ,rb.valor_max ,rb.id_elemento_1 ,rb.id_elemento2 ,rb.id_elemento_3\n" +
             "from relacion_base rb \n" +
             " join elemento el on el.id = rb.id_elemento_1 and el.nombre = \"CALCIO (Ca)\"\n" +
             " join elemento el2 on el2.id = rb.id_elemento2  and el2.nombre = \"POTASIO (K)\"\n" +
-            "where rb.valor_min = null and rb.valor_max = null and rb.id_elemento_3 = 0",nativeQuery = true)
+            "where rb.valor_min = null and rb.valor_max = null and rb.id_elemento_3 = 0 limit 1",nativeQuery = true)
     RelacionBaseEntity findRelacionCalPotNull();
     @Query(value = "select rb.interpretacion, rb.formula,rb.id,rb.valor_min ,rb.valor_max ,rb.id_elemento_1 ,rb.id_elemento2 ,rb.id_elemento_3\n" +
             "    from relacion_base rb\n" +
             "    join elemento el on el.id = rb.id_elemento_1 and el.nombre = \"CALCIO (Ca)\"\n" +
             "    join elemento el2 on el2.id = rb.id_elemento2  and el2.nombre = \"MAGNESIO (Mg)\"\n" +
             "    join elemento el3 on el3.id = rb.id_elemento_3  and el3.nombre = \"POTASIO (K)\"\n" +
-            "    where rb.valor_min <= :value and rb.valor_max >= :value",nativeQuery = true)
+            "    where rb.valor_min <= :value and rb.valor_max >= :value limit 1",nativeQuery = true)
     RelacionBaseEntity findRelacionBasesPrincipales(@Param("value") float value);
 
     @Query(value = "select rb.interpretacion, rb.formula,rb.id,rb.valor_min ,rb.valor_max ,rb.id_elemento_1 ,rb.id_elemento2 ,rb.id_elemento_3\n" +
@@ -45,7 +45,7 @@ public interface RelacionBaseRepository extends JpaRepository<RelacionBaseEntity
             "    join elemento el on el.id = rb.id_elemento_1 and el.nombre = \"CALCIO (Ca)\"\n" +
             "    join elemento el2 on el2.id = rb.id_elemento2  and el2.nombre = \"MAGNESIO (Mg)\"\n" +
             "    join elemento el3 on el3.id = rb.id_elemento_3  and el3.nombre = \"POTASIO (K)\"\n" +
-            "    where rb.valor_min <= null and rb.valor_max >= null",nativeQuery = true)
+            "    where rb.valor_min <= null and rb.valor_max >= null limit 1",nativeQuery = true)
     RelacionBaseEntity findRelacionBasesPrincipalesNull();
 
 }

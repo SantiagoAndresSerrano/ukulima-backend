@@ -8,7 +8,7 @@ import ufps.ukulima.infrastructure.db.springdata.entity.PhSuelo.PhSueloEntity;
 
 public interface AluminioIntercambiableRepository extends JpaRepository<AluminioIntercambiableEntity, Integer> {
     @Query(value = "SELECT * FROM aluminio_intercambiable where aluminio_intercambiable.valor_min <= :aluminio_intercambiable and " +
-            "aluminio_intercambiable.valor_max >= :aluminio_intercambiable ;",nativeQuery = true)
+            "aluminio_intercambiable.valor_max >= :aluminio_intercambiable limit 1;",nativeQuery = true)
     AluminioIntercambiableEntity determinarAluminioIntercambiable(@Param("aluminio_intercambiable") float aluminio_intercambiable);
 
 }
