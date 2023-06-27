@@ -507,7 +507,7 @@ public class AnalisisSueloController {
             if(clima.equals(CLIMA_CALIDO))
                 total_clima=3;
             float diferencial_suelo=total_clima-savedAnalisisSuelo.getMateriaOrganica();
-            float materia_organica= (float) (peso_suelo*(diferencial_suelo/100));
+            float materia_organica= (float) (peso_suelo*(diferencial_suelo/100))/100;
 
             r.setMateriaOrganica(materia_organica);
             recomendacionService.saveRecomendacion(r);
