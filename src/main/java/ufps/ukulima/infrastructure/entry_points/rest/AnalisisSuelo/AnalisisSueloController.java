@@ -191,7 +191,10 @@ public class AnalisisSueloController {
                 .getClaseTexturalPorRangos(analisisSuelo.getPorcentArena()
                         , analisisSuelo.getPorcentLimos(), analisisSuelo.getPorcentArcilla());
 
-
+        if(claseTextural==null){
+            return new ResponseEntity<>(new Mensaje("No se pudo determinar la clase textural con los valores de %Arena, %Arcilla," +
+                    " %Limo proporcionados, porfavor ingresar otros nuevamente."),HttpStatus.BAD_REQUEST);
+        }
         Suelo suelo = sueloService.getSueloById(analisisSuelo.getIdSuelo().getId());
         PhSuelo phSuelo = phSueloService.getPhSueloByValor(analisisSuelo.getPhSuelo());
         AluminioIntercambiable aluminioIntercambiable =
