@@ -706,55 +706,49 @@ public class AnalisisSueloController {
             AnalisisElementosEntity analisisElementosEntity = analisisElementoEntityList.get(i);
             if (analisisElementosEntity.getIdElemento().getNombre().equals("FÓSFORO (P)")) {
                 if(!analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                        "ALTO")){
-                    fos_disponibilidad = (float) (analisisElementosEntity.getValor()*2.29*peso_suelo/1000000);
-                }
-            }
-            if (analisisElementosEntity.getIdElemento().getNombre().equals("FÓSFORO (P)")) {
-                if(!analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                        "ALTO")){
+                        "Alto")){
                     fos_disponibilidad = (float) (analisisElementosEntity.getValor()*2.29*peso_suelo/1000000);
                 }
             }
             if (analisisElementosEntity.getIdElemento().getNombre().equals("BORO (B)")) {
                 if(!analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                        "MUY ALTO")){
+                        "Muy Alto")){
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "ALTO")){
+                            "Alto")){
                         bor_disponibilidad = 1.1f;
                     }
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "MEDIO")){
-                        bor_disponibilidad = 1.1f;
+                            "Medio")){
+                        bor_disponibilidad = 3.4f;
                     }
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "BAJO")){
-                        bor_disponibilidad = 2.2f;
+                            "Bajo")){
+                        bor_disponibilidad = 4.5f;
                     }
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "MUY BAJO")){
-                        bor_disponibilidad = 2.2f;
+                            "Muy bajo")){
+                        bor_disponibilidad = 5.6f;
                     }
                 }
             }
 
             if (analisisElementosEntity.getIdElemento().getNombre().equals("COBRE (Cu)")) {
                 if(!analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                        "MUY ALTO")){
+                        "c")){
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "ALTO")){
+                            "Alto")){
                         cob_disponibilidad = 1.1f;
                     }
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "MEDIO")){
+                            "Medio")){
                         cob_disponibilidad = 3.4f;
                     }
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "BAJO")){
+                            "Bajo")){
                         cob_disponibilidad = 4.5f;
                     }
                     if(analisisElementosEntity.getIdAnalisisElementoInterpretacion().getInterpretacion().equals(
-                            "MUY BAJO")){
+                            "Muy bajo")){
                         cob_disponibilidad = 5.6f;
                     }
                 }
@@ -827,7 +821,7 @@ public class AnalisisSueloController {
         );
 
 // aqr_fos
-        float resultado_fos = (fos_requerimiento - fos_disponibilidad) / fos_eficiencia;
+        float resultado_fos = ((fos_requerimiento*2.29f) - fos_disponibilidad ) / fos_eficiencia;
         if (resultado_fos < 0) {
             resultado_fos = 0;
         }
@@ -841,7 +835,7 @@ public class AnalisisSueloController {
         );
 
 // aqr_pot
-        float resultado_pot = (pot_requerimiento - pot_disponibilidad) / pot_eficiencia;
+        float resultado_pot = ((pot_requerimiento*1.2f) - pot_disponibilidad) / pot_eficiencia;
         if (resultado_pot < 0) {
             resultado_pot = 0;
         }
@@ -855,7 +849,7 @@ public class AnalisisSueloController {
         );
 
 // aqr_cal
-        float resultado_cal = (cal_requerimiento - cal_disponibilidad) / cal_eficiencia;
+        float resultado_cal = ((cal_requerimiento*1.4f) - cal_disponibilidad) / cal_eficiencia;
         if (resultado_cal < 0) {
             resultado_cal = 0;
         }
@@ -869,7 +863,7 @@ public class AnalisisSueloController {
         );
 
 // aqr_mag
-        float resultado_mag = (mag_requerimiento - mag_disponibilidad) / mag_eficiencia;
+        float resultado_mag = ((mag_requerimiento*1.66f) - mag_disponibilidad) / mag_eficiencia;
         if (resultado_mag < 0) {
             resultado_mag = 0;
         }
@@ -898,9 +892,6 @@ public class AnalisisSueloController {
 
 // aqr_bor
         float resultado_bor = bor_disponibilidad;
-        if (resultado_bor < 0) {
-            resultado_bor = 0;
-        }
         AbonoQuimicoRecomendacion aqr_bor = new AbonoQuimicoRecomendacion(
                 null,
                 r2,
@@ -912,9 +903,6 @@ public class AnalisisSueloController {
 
 // aqr_cob
         float resultado_cob = cob_disponibilidad;
-        if (resultado_cob < 0) {
-            resultado_cob = 0;
-        }
         AbonoQuimicoRecomendacion aqr_cob = new AbonoQuimicoRecomendacion(
                 null,
                 r2,
