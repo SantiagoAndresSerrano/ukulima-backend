@@ -30,7 +30,7 @@ public class PasswordResetTokenServiceImp implements PasswordResetTokenService {
     @Override
     @Transactional(readOnly = true)
     public PasswordResetToken buscarToken(String token) {
-        return passwordResetTokenRepository.findPasswordResetTokenByToken(token);
+        return passwordResetTokenEntityMapper.toDomain(passwordResetTokenRepository.findPasswordResetTokenByToken(token));
     }
 
     @Override

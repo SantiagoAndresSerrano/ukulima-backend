@@ -95,7 +95,7 @@ public class AgricultorServiceImp implements AgricultorService {
 
     @Override
     public Agricultor findByResetPassword(String token) {
-        return null;
+        return agricultorEntityMapper.toDomain(this.agricultorRepository.getAgricultorByToken(token));
     }
 
     @Override

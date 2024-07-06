@@ -5,6 +5,7 @@
  */
 package ufps.ukulima.config.Spring.security.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,6 +49,7 @@ import java.util.*;
 @RestController
 @RequestMapping(value = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
 @CrossOrigin
+
 public class AuthController {
     private static Logger log = LoggerFactory.getLogger(AuthController.class);
 
@@ -76,6 +78,7 @@ public class AuthController {
 
     @Value("${urifrontend}")
     String urlFrontend;
+
 
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult)
@@ -194,10 +197,10 @@ public class AuthController {
                         +
                         "cambiar tu contraseña, <br> para cambiar tu contraseña ingresa al siguiente link:  \n" +
                         "            </p>\n" +
-                        "            <div style=\"margin: 2rem auto; width: 120px; background-color: #4f46e5; padding: 8px; border-radius: 6px; \">\n"
+                        "            <div style=\"margin: 2rem auto; width: 120px; background-color: #17a24a; padding: 8px; border-radius: 6px; \">\n"
                         +
                         "                <a style=\"color: #ffffff; text-decoration: none\" href=\"" + urlFrontend
-                        + "password-reset/confirmation/" + passwordResetToken.getToken() + "\">Continuar</a>\n" +
+                        + "change-password/" + passwordResetToken.getToken() + "\">Continuar</a>\n" +
                         "            </div>\n" +
                         "            <div style=\"width: 100%; border-top: 2px solid #a5b4fc; padding: 1rem 0\">\n" +
                         "                <p>Copyright © 2024 Ukulima <br> Todos los derechos reservados.</p>\n"
@@ -243,26 +246,8 @@ public class AuthController {
         if (passwordResetToken.getFechaExpiracion().before(new Date()))
             return new ResponseEntity<Mensaje>(new Mensaje("El token ha expirado"), HttpStatus.BAD_REQUEST);
 
-        loginUsuario.setEmailOrPhone(passwordResetToken.getAgricultor().getEmail());
-
-        Usuario u = usuarioService.findByEmail(loginUsuario.getEmailOrPhone());
-
-        if (u == null) {
-            return new ResponseEntity<Mensaje>(new Mensaje("El correo no existe"), HttpStatus.BAD_REQUEST);
-        }
-
-        if (uToken == null) {
-            return new ResponseEntity<Mensaje>(new Mensaje("El token no está asociado a ningun usuario"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        if (!u.getEmail().equals(uToken.getEmail())) {
-            return new ResponseEntity<Mensaje>(new Mensaje("El token se encuentra asociado a otro usuario"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        u.setPassword(passwordEncoder.encode(loginUsuario.getPassword()));
-        usuarioService.guardar(u);
+        uToken.setPassword(passwordEncoder.encode(loginUsuario.getPassword()));
+        agricultorService.save(uToken);
 
         emailServiceImp.enviarEmail("Contraseña actualizada",
                 "<!DOCTYPE html>\n" +
@@ -276,19 +261,19 @@ public class AuthController {
                         "</head>\n" +
                         "\n" +
                         "<body style=\"width: 800px\">\n" +
-                        "    <div style=\"background-color: #a5b4fc; width: 100%; padding: 3rem 0;\">\n" +
+                        "    <div style=\"background-color: #17a24a; width: 100%; padding: 3rem 0;\">\n" +
                         "        <div style=\"text-align: center; background-color: #ffffff; margin: 0 auto; width: 80%; border-radius: 8px;\">\n"
                         +
                         "            <img style=\"margin-top: 3rem; width: 190px\"\n" +
-                        "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n"
+                        "                src=\"http://3.132.1.53:3000/static/media/logo.f3a2e9639af7af3327ff.png\" alt=\"logo\">\n"
                         +
                         "            <p style=\"margin: 1rem 0; font-size: 25px;\">Cambio de contraseña</p>\n" +
-                        "            <p style=\"color: #424242;\">Hola, <b>" + u.getNombres()
+                        "            <p style=\"color: #424242;\">Hola, <b>" + uToken.getNombres()
                         + "</b>, se ha cambiado tu " +
                         "contraseña en el sistema.  \n" +
                         "            </p>\n" +
                         "            <div style=\"width: 100%; border-top: 2px solid #a5b4fc; padding: 1rem 0\">\n" +
-                        "                <p>Copyright © 2022 Analytic Hierarchy Process <br> Todos los derechos reservados.</p>\n"
+                        "                <p>Copyright © 2024 Ukulima <br> Todos los derechos reservados.</p>\n"
                         +
                         "            </div>\n" +
                         "        </div>\n" +
@@ -298,7 +283,7 @@ public class AuthController {
                         "</html>"
 
                 ,
-                u.getEmail());
+                uToken.getEmail());
         passwordResetTokenService.eliminarByToken(passwordResetToken.getToken());
 
         return ResponseEntity.ok(new Mensaje("Contraseña cambiada con exito"));

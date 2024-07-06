@@ -14,6 +14,7 @@ public interface AgricultorRepository extends JpaRepository<AgricultorEntity, In
     public AgricultorEntity findAgricultorByTelefono(String telefono);
     @Query(value = "select pr.agricultor from PasswordResetTokenEntity pr where pr.token=:token")
     public AgricultorEntity getAgricultorByToken(@Param("token") String token);
+
     @Modifying
     @Query(value = "INSERT INTO `agricultor` (`identificacion`, `nombres`, `apellidos`, `telefono`, `fecha_nacimiento`, `password`, `email`, `id_tipo_identificacion`, `confirmation_token`, `estado`) VALUES (:identificacion, :nombres, :apellidos, :telefono, :fecha_nacimiento, :password, :email, :id_tipo_identificacion, :confirmation_token, :estado);" , nativeQuery = true)
     public void saveAgricultorEntity(

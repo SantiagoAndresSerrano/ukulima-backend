@@ -9,7 +9,7 @@ import ufps.ukulima.domain.model.PasswordResetToken.PasswordResetToken;
 import ufps.ukulima.infrastructure.db.springdata.entity.PasswordResetToken.PasswordResetTokenEntity;
 
 public interface PasswordResetTokenRepository extends JpaRepository<PasswordResetTokenEntity, Integer> {
-    PasswordResetToken findPasswordResetTokenByToken(String token);
+    PasswordResetTokenEntity findPasswordResetTokenByToken(String token);
     @Modifying
     @Query("delete from PasswordResetTokenEntity prt where prt.token=:token")
     void deletePasswordResetTokenByToken(@Param("token") String token);
