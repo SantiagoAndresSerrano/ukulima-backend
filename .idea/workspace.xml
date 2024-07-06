@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="44e3a2ef-00f2-40c3-a558-18cecffaf338" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ufps/ukulima/config/Spring/security/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ufps/ukulima/config/Spring/security/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -245,7 +242,7 @@
       <workItem from="1686966730793" duration="37802000" />
       <workItem from="1687285555276" duration="583000" />
       <workItem from="1687412891003" duration="834000" />
-      <workItem from="1720241593975" duration="3496000" />
+      <workItem from="1720241593975" duration="4429000" />
     </task>
     <servers />
   </component>

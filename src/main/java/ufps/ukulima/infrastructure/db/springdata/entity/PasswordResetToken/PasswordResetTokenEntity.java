@@ -11,7 +11,7 @@ import java.util.UUID;
 @Table(name = "password_reset_token")
 public class PasswordResetTokenEntity {
     @Id
-    @Column(name = "id_password_reset", nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
