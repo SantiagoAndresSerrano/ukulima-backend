@@ -183,11 +183,11 @@ public class AuthController {
                         "</head>\n" +
                         "\n" +
                         "<body style=\"width: 800px\">\n" +
-                        "    <div style=\"background-color: #a5b4fc; width: 100%; padding: 3rem 0;\">\n" +
+                        "    <div style=\"background-color: #17a24a; width: 100%; padding: 3rem 0;\">\n" +
                         "        <div style=\"text-align: center; background-color: #ffffff; margin: 0 auto; width: 80%; border-radius: 8px;\">\n"
                         +
                         "            <img style=\"margin-top: 3rem; width: 190px\"\n" +
-                        "                src=\"https://master.d1oc2nyuhwk984.amplifyapp.com/assets/images/logo.png\" alt=\"logo\">\n"
+                        "                src=\"http://3.132.1.53:3000/static/media/logo.f3a2e9639af7af3327ff.png\" alt=\"logo\">\n"
                         +
                         "            <p style=\"margin: 1rem 0; font-size: 25px;\">Cambio de contraseña</p>\n" +
                         "            <p style=\"color: #424242;\">Hola, <b>" + u.getNombres() + "</b>, has solicitado "
@@ -200,7 +200,7 @@ public class AuthController {
                         + "password-reset/confirmation/" + passwordResetToken.getToken() + "\">Continuar</a>\n" +
                         "            </div>\n" +
                         "            <div style=\"width: 100%; border-top: 2px solid #a5b4fc; padding: 1rem 0\">\n" +
-                        "                <p>Copyright © 2022 Analytic Hierarchy Process <br> Todos los derechos reservados.</p>\n"
+                        "                <p>Copyright © 2024 Ukulima <br> Todos los derechos reservados.</p>\n"
                         +
                         "            </div>\n" +
                         "        </div>\n" +
