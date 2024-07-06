@@ -30,7 +30,7 @@ public interface AgricultorRepository extends JpaRepository<AgricultorEntity, In
         @Param("estado") Boolean estado
         );
 
-    @Query("SELECT a FROM AgricultorEntity a WHERE a.email=:usernameOrEmail OR a.telefono=:usernameOrEmail")
+    @Query("SELECT a FROM AgricultorEntity a WHERE a.email=:usernameOrEmail")
     AgricultorEntity findAgricultorsByTelefonoOrEmail(@Param("usernameOrEmail") String usernameOrEmail);
     public boolean existsAgricultorByEmail(String email);
     public boolean existsAgricultorByTelefono(String telefono);
