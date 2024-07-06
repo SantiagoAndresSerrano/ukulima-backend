@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="railway@containers-us-west-107.railway.app">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.41">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.52">
     <root id="1">
       <DefaultCasing>exact</DefaultCasing>
       <ServerVersion>8.0.33</ServerVersion>

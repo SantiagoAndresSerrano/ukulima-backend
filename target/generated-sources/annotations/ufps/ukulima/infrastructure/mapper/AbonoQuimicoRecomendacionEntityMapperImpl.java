@@ -26,8 +26,8 @@ import ufps.ukulima.infrastructure.db.springdata.entity.Recomendacion.Recomendac
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-22T13:15:29-0500",
-    comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.6 (Amazon.com Inc.)"
+    date = "2024-07-05T23:58:33-0500",
+    comments = "version: 1.4.1.Final, compiler: javac, environment: Java 17.0.11 (Amazon.com Inc.)"
 )
 @Component
 public class AbonoQuimicoRecomendacionEntityMapperImpl implements AbonoQuimicoRecomendacionEntityMapper {
